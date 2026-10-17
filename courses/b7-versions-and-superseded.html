@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 7 of 8. A policy assistant answers from an index that copies the document owner's version register. Why the register is the truth, why staff questions in old words pull old clauses, how one lost superseded flag produces a false GO, and a nightly register vs index diff in plain Python.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Versions and superseded policies - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 7 of 8. The version register vs the index flag, 6 and 7 stale citations before the version filter, and the SGD 50 per diem that a lost flag lets back in.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b7-versions-and-superseded.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Versions and superseded policies - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 7 of 8. The version register, stale citations and a nightly register vs index diff.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 7 · Versions and superseded policies - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 7 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 7 of 8</div>
+    <h1>Versions and <span class="accent">superseded policies</span></h1>
+    <p class="sub">A policy assistant that leaks nothing can still be wrong in a way nobody notices: it answers from last year's rule. Tidewell Freight, a constructed 1,200-person freight forwarder, keeps 7 superseded clause versions in its store on purpose. Tonight you separate the two records of which version is current, the owner's register and the index's copy of it, watch stale citations appear when the copy is trusted, and write the nightly diff that refuses to let one lost flag pass as a GO.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Builders, data and platform engineers</span>
+      <span class="chip audience">Policy and knowledge owners</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Register, old words, the diff</span>
+      <span class="a3" style="flex:4">20-42 · Build-along: the nightly diff</span>
+      <span class="a4" style="flex:1">42-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this session sits</h2>
+    </div>
+    <p class="lede">Session 1 gave every clause a version, an effective date and a superseded flag. Session 5 filtered by who may read. Tonight is the other filter: which version is allowed to answer, and who gets to say so. Everything here reads Tidewell's constructed store of 49 clause versions across 16 documents, 42 current and 7 superseded, and every bench number comes from the go/no-go bench in session 8.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A version register that the document owner keeps, a clear rule that the register is the truth and the index is a copy, the stale-citation counts for each rung of the bench, and a forty-line nightly diff in plain Python that fails the job on a lost flag, a missing version, an unregistered draft or an answer that cited a retired rule.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the version register and the index flag</span>
+      <h2>Register vs index</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">There are two places that say whether version 4 of Tidewell's expenses policy is still in force. One is the register the financial controller keeps when a rule changes. The other is the superseded flag the index copied when the clause was loaded. Every filter and every check in the pipeline reads the second, because it is fast. Only the first is the truth.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn tables side by side. Left, the version register kept by the document owner: FIN-EXP-2 v5 current, FIN-EXP-2 v4 superseded on 2026-02-01, FIN-EXP-1 v5 current, FIN-EXP-1 v4 superseded on 2026-02-01. Right, the index, holding the same four versions with the flag copied on load. An arrow from register to index says the import copies the flag. The owner edits the register; the filters and the citation check read the index. The FIN-EXP-2 v4 row in the register is highlighted.">
+        <defs>
+          <filter id="b7aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="71" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b7aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b7aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b7aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b7aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b7aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b7aA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b7aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b7aH" x="30" y="26">ONE FACT, TWO RECORDS OF IT</text>
+        <text class="b7aS" x="300" y="26">constructed Tidewell expenses policy · which version is in force</text>
+
+        <g filter="url(#b7aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="40" y="52" width="340" height="206" rx="12" transform="rotate(-0.4 210 155)" fill="#FFFFFF"/>
+          <rect x="50" y="137" width="320" height="24" rx="5" fill="#F4B63F"/>
+          <path d="M52 132 L368 132 M52 166 L368 166 M52 198 L368 198 M52 230 L368 230" stroke="#E2EEEE" stroke-width="1.5"/>
+          <path d="M346 66 L362 82 L356 88 L340 72 Z M340 72 L336 92 L356 88" stroke-width="1.6"/>
+          <rect x="500" y="52" width="340" height="206" rx="12" transform="rotate(0.4 670 155)" fill="#E8F6F6"/>
+          <path d="M512 132 L828 132 M512 166 L828 166 M512 198 L828 198 M512 230 L828 230" stroke="#C5DADB" stroke-width="1.5"/>
+          <path d="M388 172 L492 172" marker-end="url(#b7aAr)"/>
+        </g>
+
+        <text class="b7aH" x="60" y="80">VERSION REGISTER</text>
+        <text class="b7aS" x="60" y="98">kept by the document owner · the truth</text>
+        <text class="b7aA" x="62" y="122">version</text>
+        <text class="b7aA" x="196" y="122">status</text>
+        <text class="b7aL" x="62" y="153">FIN-EXP-2 v4</text>
+        <text class="b7aL" x="196" y="153">superseded 2026-02-01</text>
+        <text class="b7aL" x="62" y="186">FIN-EXP-2 v5</text>
+        <text class="b7aS" x="196" y="186">current</text>
+        <text class="b7aL" x="62" y="218">FIN-EXP-1 v4</text>
+        <text class="b7aS" x="196" y="218">superseded 2026-02-01</text>
+        <text class="b7aL" x="62" y="250">FIN-EXP-1 v5</text>
+        <text class="b7aS" x="196" y="250">current</text>
+
+        <text class="b7aH" x="520" y="80">INDEX</text>
+        <text class="b7aS" x="520" y="98">a copy, loaded with each clause · fast</text>
+        <text class="b7aA" x="522" y="122">version</text>
+        <text class="b7aA" x="680" y="122">superseded flag</text>
+        <text class="b7aL" x="522" y="153">FIN-EXP-2 v4</text>
+        <text class="b7aS" x="680" y="153">true</text>
+        <text class="b7aL" x="522" y="186">FIN-EXP-2 v5</text>
+        <text class="b7aS" x="680" y="186">false</text>
+        <text class="b7aL" x="522" y="218">FIN-EXP-1 v4</text>
+        <text class="b7aS" x="680" y="218">true</text>
+        <text class="b7aL" x="522" y="250">FIN-EXP-1 v5</text>
+        <text class="b7aS" x="680" y="250">false</text>
+
+        <text class="b7aS" x="440" y="162" text-anchor="middle">copies the flag</text>
+        <text class="b7aS" x="440" y="192" text-anchor="middle">on load</text>
+
+        <text class="b7aL" x="60" y="284">the owner edits here when a rule changes</text>
+        <text class="b7aL" x="520" y="284">filters and the citation check read here</text>
+
+        <text class="b7aN" x="30" y="316">Two copies of one fact. The pipeline can only be as right as the copy it reads, so something must compare them.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the highlighted row is the one fact that must be identical in both records</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Two records, two jobs<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The <strong>register</strong> is a short list the document owner keeps: for every clause version, whether it is current and, if not, the day it was retired. It changes when a rule changes, and only the owner changes it. The <strong>index</strong> is what retrieval reads: clause text, BM25 statistics and a copy of the superseded flag, so the current-version filter can drop old versions before ranking without a second lookup.</p>
+        <p>The copy is a cache, and a cache is right only until someone reloads it carelessly. Treat the register as the source of truth and the index flag as a fast, checkable copy of it. That one sentence decides every design choice below: which record the stale-citation check reads, who is paged when the two disagree, and what the go/no-go believes.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the register must hold<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Field</th><th>Example</th><th>Why it is there</th></tr></thead>
+          <tbody>
+            <tr><td><strong>clause id</strong></td><td>FIN-EXP-2@v4</td><td>Key plus version: grading by key alone cannot tell v4 from v5</td></tr>
+            <tr><td><strong>superseded</strong></td><td>true</td><td>The fact the index copies and the diff compares</td></tr>
+            <tr><td><strong>retired on</strong></td><td>2026-02-01</td><td>Answers what the rule was on a given day, and dates a stale answer</td></tr>
+            <tr><td><strong>owner</strong></td><td>Financial controller</td><td>Who is paged when the index disagrees</td></tr>
+          </tbody>
+        </table>
+        <p>Four fields, one row per version. It is deliberately smaller than the clause store: the register says nothing about text or access, only about time.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why not keep only the index?<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Because the index is rebuilt by machines and the register is written by the person who changed the policy. Importers drop fields, default booleans to false, and re-read old PDFs from shared folders. A single record that both the importer and the owner write has no way to say which of them was wrong. Two records that must agree turn a silent fault into a visible mismatch, which is the whole point of Part 3.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The property that makes RAG easy to update also makes it easy to break.</strong> Lewis and colleagues' 2020 paper that named retrieval-augmented generation showed that the model's knowledge "can be easily updated at test time" by replacing the retrieved index, with no retraining. That is why Tidewell can change its expenses rule overnight. It is also why one careless re-import can change the rule back overnight, with no model change for anyone to review. The register is the record that survives the swap.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers stale citations and the old vocabulary</span>
+      <h2>Old words, old answers</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Staff ask in the words of the rule they learned. Tidewell renamed "per diem" to "daily allowance", but a question about the per diem still contains "per diem", and so does version 4 of the clause. A keyword retriever does what it is built to do and ranks the old clause first. Without a version filter, the answer is last year's number, with a real citation attached.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top: golden question G41, a staff member asking what the per diem for meals when travelling is, points at two versions of the same clause. FIN-EXP-2 v4, superseded, says per diem for meals when travelling is SGD 50 and ranks first with no version filter. FIN-EXP-2 v5, current, says a daily allowance of SGD 60. Bottom: stale citations on the bench by rung. Rung 1, no filters: 6, questions G14, G36, G37, G38, G39 and G41. Rung 2, with the permission filter: 7, the same six plus G46. Rung 3, with the current-version filter: 0.">
+        <defs>
+          <filter id="b7bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="73" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b7bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b7bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b7bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b7bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b7bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b7bV { font: 800 18px Inter, sans-serif; fill: #0A5A60; }
+          .b7bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b7bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b7bH" x="30" y="26">THE QUESTION USES THE OLD WORDS, SO THE OLD CLAUSE WINS</text>
+
+        <g filter="url(#b7bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="40" y="56" width="360" height="62" rx="10" transform="rotate(-1 220 87)" fill="#FFFFFF"/>
+          <path d="M44 120 L36 134 L58 118" stroke-width="1.6"/>
+          <rect x="470" y="46" width="370" height="64" rx="8" transform="rotate(0.6 655 78)" fill="#F4B63F"/>
+          <rect x="470" y="124" width="370" height="64" rx="8" transform="rotate(-0.6 655 156)" fill="#FFFFFF"/>
+          <path d="M406 80 L462 78" marker-end="url(#b7bAr)" stroke-width="2.6"/>
+          <path d="M406 98 L462 150" marker-end="url(#b7bAr)" stroke-dasharray="4 5"/>
+          <path d="M30 208 L850 208" stroke="#E2EEEE" stroke-width="1.5"/>
+          <rect x="60" y="248" width="20" height="20" rx="3" transform="rotate(-3 70 258)" fill="url(#b7bHc)"/>
+          <rect x="86" y="248" width="20" height="20" rx="3" transform="rotate(2 96 258)" fill="url(#b7bHc)"/>
+          <rect x="112" y="248" width="20" height="20" rx="3" transform="rotate(-2 122 258)" fill="url(#b7bHc)"/>
+          <rect x="138" y="248" width="20" height="20" rx="3" transform="rotate(3 148 258)" fill="url(#b7bHc)"/>
+          <rect x="164" y="248" width="20" height="20" rx="3" transform="rotate(-1 174 258)" fill="url(#b7bHc)"/>
+          <rect x="190" y="248" width="20" height="20" rx="3" transform="rotate(2 200 258)" fill="url(#b7bHc)"/>
+          <rect x="320" y="248" width="20" height="20" rx="3" transform="rotate(-2 330 258)" fill="url(#b7bHc)"/>
+          <rect x="346" y="248" width="20" height="20" rx="3" transform="rotate(3 356 258)" fill="url(#b7bHc)"/>
+          <rect x="372" y="248" width="20" height="20" rx="3" transform="rotate(-1 382 258)" fill="url(#b7bHc)"/>
+          <rect x="398" y="248" width="20" height="20" rx="3" transform="rotate(2 408 258)" fill="url(#b7bHc)"/>
+          <rect x="424" y="248" width="20" height="20" rx="3" transform="rotate(-3 434 258)" fill="url(#b7bHc)"/>
+          <rect x="450" y="248" width="20" height="20" rx="3" transform="rotate(1 460 258)" fill="url(#b7bHc)"/>
+          <rect x="476" y="248" width="20" height="20" rx="3" transform="rotate(-2 486 258)" fill="#0A5A60"/>
+          <rect x="640" y="248" width="20" height="20" rx="3" stroke="#C5DADB" stroke-dasharray="3 4"/>
+        </g>
+
+        <text class="b7bA" x="56" y="78">G41 · staff · high risk</text>
+        <text class="b7bL" x="56" y="100">What is the per diem for meals when travelling?</text>
+
+        <text class="b7bH" x="486" y="68">FIN-EXP-2 v4 · superseded</text>
+        <text class="b7bL" x="486" y="86">Per diem for meals when travelling: SGD 50</text>
+        <text class="b7bL" x="486" y="102">ranks first with no version filter</text>
+        <text class="b7bH" x="486" y="146">FIN-EXP-2 v5 · current</text>
+        <text class="b7bS" x="486" y="164">a daily allowance of SGD 60 in Singapore</text>
+        <text class="b7bS" x="486" y="180">the rule today, in words staff do not use</text>
+
+        <text class="b7bV" x="60" y="238">6</text>
+        <text class="b7bL" x="82" y="236">rung 1 · no filters</text>
+        <text class="b7bS" x="60" y="290">G14 G36 G37 G38 G39 G41</text>
+        <text class="b7bS" x="60" y="306">old password, holiday, carry forward,</text>
+        <text class="b7bS" x="60" y="322">remote work, per diem</text>
+
+        <text class="b7bV" x="320" y="238">7</text>
+        <text class="b7bL" x="342" y="236">rung 2 · + permission filter</text>
+        <text class="b7bS" x="320" y="290">the same six, plus G46</text>
+        <text class="b7bA" x="476" y="290">G46</text>
+        <text class="b7bS" x="320" y="306">a restricted clause removed,</text>
+        <text class="b7bS" x="320" y="322">so the old password clause wins</text>
+
+        <text class="b7bV" x="640" y="238">0</text>
+        <text class="b7bL" x="662" y="236">rung 3 · + version filter</text>
+        <text class="b7bS" x="640" y="290">superseded versions removed</text>
+        <text class="b7bS" x="640" y="306">before ranking</text>
+
+        <text class="b7bN" x="30" y="348">Each square is one golden question answered from a superseded version on the go/no-go bench.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - filtering for access added a stale citation; only filtering for version removed them</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Six stale citations on rung 1<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On the bench's first rung, no filters at all, six golden questions are answered from a superseded version: G14, G36, G37, G38, G39 and G41. They cite the old password, holiday, carry forward, remote work and per diem versions. Every one of those citations is real: the clause exists, it is in the retrieved set, and it says what the answer says. It was simply retired.</p>
+        <p>Look at the words. G36 asks about "holiday entitlement", G37 about carrying "forward", G38 about "remote work days", G41 about the "per diem". Tidewell's current clauses say annual leave, carrying over, working from home and daily allowance. BM25 rewards the words that appear in both question and clause, and the old clause is the one that shares them.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The seventh, after the permission filter<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Rung 2 adds the permission filter from session 5. Leaks fall from 18 to 0, and stale citations rise from 6 to 7. The new one is G46: a staff member asks how long a performance improvement plan lasts. The clause that answers it is for managers only, so the filter removes it, and the best remaining match is the superseded IT-ACC-1 v3 password clause. A filter changes what wins, not only what is removed. That is why every filter is measured on the whole golden set, never on the questions it was written for.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why a key-only grade misses it<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Version 4 and version 5 of the meals rule share the key FIN-EXP-2. A grader that asks "did the answer cite the right clause?" by key alone marks the SGD 50 answer right. Stale is a property of the version, so the stale-citation check must compare the cited clause id, key and version together, against a record of which versions are retired. On rung 3, with the current-version filter on, stale citations drop to 0, MRR rises from 0.913 to 0.988 and correct answers reach 41 of 42 (97.6%).</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A stale answer reads exactly like a right one.</strong> NIST AI 600-1 defines confabulation as "The production of confidently stated but erroneous or false content", and notes that the risk arises when users believe false content, often because of the confident nature of the response. A stale citation is a cousin of that: the content was true once and is cited properly, so nothing on the screen signals a problem. In the constructed Tidewell case, a staff member asking G41 claims SGD 50 a day for meals and never learns the allowance is now SGD 60.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the break button and the scheduled register vs index check</span>
+      <h2>The nightly diff</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The current-version filter fixes stale citations only while the index flag is right. Somebody re-imports the old expenses PDF, the importer does not carry the superseded flag, and version 4 is current again in the index. The bench's break button does exactly that, and the go/no-go board turns green on an assistant that is wrong. Only a check that reads the register can see it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top row: the index after re-import, where FIN-EXP v4 lost its flag and reads current; a nightly diff in the middle comparing register and index for every version; and the version register, where FIN-EXP v4 is superseded on 2026-02-01. Bottom left, the pipeline view, which reads the index: 0 stale citations and a go/no-go of GO, which is false. Bottom right, the register view: 1 stale citation, G41 answered with the SGD 50 per diem instead of the SGD 60 daily allowance, and a verdict of NO-GO.">
+        <defs>
+          <filter id="b7cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="79" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b7cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b7cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b7cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b7cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b7cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b7cR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b7cV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .b7cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b7cH" x="30" y="26">ONE LOST FLAG, TWO VERDICTS</text>
+        <text class="b7cS" x="250" y="26">bench rung 4 with "Break it" pressed · constructed Tidewell store</text>
+
+        <g filter="url(#b7cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="40" y="56" width="220" height="92" rx="10" transform="rotate(-0.8 150 102)" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="330" y="56" width="220" height="92" rx="10" transform="rotate(0.5 440 102)" fill="#F4B63F"/>
+          <path d="M524 66 C514 70 514 86 524 90 C516 92 506 84 508 76 C510 68 518 64 524 66 Z" stroke-width="1.6"/>
+          <rect x="620" y="56" width="220" height="92" rx="10" transform="rotate(0.8 730 102)" fill="#FFFFFF"/>
+          <path d="M266 102 L322 102" marker-end="url(#b7cAr)"/>
+          <path d="M614 102 L558 102" marker-end="url(#b7cAr)"/>
+          <path d="M150 154 L150 194" marker-end="url(#b7cAr)"/>
+          <path d="M730 154 L730 194" marker-end="url(#b7cAr)"/>
+          <rect x="40" y="200" width="380" height="96" rx="10" transform="rotate(-0.4 230 248)" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="460" y="200" width="380" height="96" rx="10" transform="rotate(0.4 650 248)" fill="#E8F6F6"/>
+        </g>
+
+        <text class="b7cH" x="56" y="80">INDEX AFTER RE-IMPORT</text>
+        <text class="b7cL" x="56" y="102">FIN-EXP v4</text>
+        <text class="b7cR" x="56" y="122">flag lost: reads current</text>
+        <text class="b7cS" x="56" y="138">every pipeline check reads this</text>
+
+        <text class="b7cH" x="346" y="80">NIGHTLY DIFF</text>
+        <text class="b7cL" x="346" y="102">register vs index,</text>
+        <text class="b7cL" x="346" y="120">every version</text>
+        <text class="b7cL" x="346" y="138">mismatch: fail the job</text>
+
+        <text class="b7cH" x="636" y="80">VERSION REGISTER</text>
+        <text class="b7cL" x="636" y="102">FIN-EXP v4</text>
+        <text class="b7cS" x="636" y="122">superseded 2026-02-01</text>
+        <text class="b7cS" x="636" y="138">kept by the owner</text>
+
+        <text class="b7cH" x="56" y="224">PIPELINE VIEW · reads the index</text>
+        <text class="b7cV" x="56" y="250">0</text>
+        <text class="b7cL" x="74" y="249">stale citations</text>
+        <text class="b7cR" x="56" y="276">go/no-go: GO, and it is false</text>
+
+        <text class="b7cH" x="476" y="224">REGISTER VIEW · reads the owner's record</text>
+        <text class="b7cV" x="476" y="250">1</text>
+        <text class="b7cL" x="494" y="249">stale citation: G41, per diem SGD 50</text>
+        <text class="b7cS" x="476" y="268">the rule in force is the SGD 60 daily allowance</text>
+        <text class="b7cH" x="476" y="286">verdict: NO-GO</text>
+
+        <text class="b7cN" x="30" y="326">Same rung, same answers: correct 37 of 42 (88.1%), MRR 0.964. Only the record you read changes the verdict.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the pipeline grades itself against its own copy, so the diff has to read the owner's record</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Press the break button<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Open the bench in <a href="b8-the-go-no-go-bench.html">session 8</a>, go to rung 4 and press "Break it". The bench re-indexes version 4 of the expenses policy without its superseded flag. The pipeline verdict is GO. The register verdict is NO-GO: 1 answer cites a superseded version, G41, the SGD 50 per diem from v4 instead of the SGD 60 daily allowance in v5. The pipeline sees 0 stale citations. Correct answers fall to 37 of 42 (88.1%) and MRR to 0.964, but both still clear the bar.</p>
+        <p>Step down to rung 3 with the break still on: the register finds 2 stale citations, G38 and G41, both citing FIN-EXP-2 v4, and the pipeline again sees 0. At rung 4, G38 is one of the questions handed off, which is why only G41 shows there. Restore the flag before you leave.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Four things the diff compares<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Flag differs.</strong> The register says superseded, the index says current, or the reverse. The break button's fault.</li>
+          <li><strong>Registered, not indexed.</strong> A new current version the owner recorded but nobody loaded. Staff get the previous rule or a hand-off.</li>
+          <li><strong>Indexed, not registered.</strong> A draft or a stray file that answers questions and has no owner.</li>
+          <li><strong>An answer cited a retired version.</strong> Yesterday's answer log, checked against the register, dates any stale answer that already went out.</li>
+        </ul>
+        <p>Run it every night and on every load. On any problem the job fails, the owner is told, and the safe default holds: the version filter excludes whatever the register says is retired, whatever the index flag says.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where this stops<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This session takes one side: one register, one scheduled diff and one stale-citation check, in plain Python. The after-launch process around it, who reviews what each week and when a change reopens the go/no-go, belongs to the <a href="https://phoebefu6.github.io/learn-agent-launch-with-phoebe/courses/a6-after-launch.html">agent launch course's after-launch session</a>. Tracing, dashboards and alerting in production belong to the <a href="https://phoebefu6.github.io/learn-ai-observability-with-phoebe/">AI observability course</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Decide in advance whether a stale answer is an incident.</strong> Singapore's Model AI Governance Framework for Generative AI (IMDA and AI Verify Foundation, 2024) lists incident reporting among its nine dimensions and says that defining "severe AI incidents" or setting the materiality threshold for formal reporting "is therefore key". G41 is a high-risk question on Tidewell's constructed golden set. Whether one stale per diem answer is a fix-tomorrow or a report-today is Tidewell's call, and it should be written down before the diff first fails, not after.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>A register vs index diff that fails the night</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Plain Python, standard library only. A constructed register of seven clause versions, an index after a careless re-import with four faults planted on purpose, and a three-line answer log. The script must find every fault and exit with a failure so a scheduler can act on it. Run it from an empty scratch folder.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn flow. The register with 7 versions and the index with 7 entries feed four checks. Check 1, flag differs, catches FIN-EXP-1 v4 and FIN-EXP-2 v4. Check 2, registered but not indexed, catches HR-WFH-1 v2. Check 3, indexed but not registered, catches IT-ACC-1 v5. Check 4, an answer cites a retired version, catches G41 citing FIN-EXP-2 v4. Five problems make the script exit 1 and the nightly job fails.">
+        <defs>
+          <filter id="b7dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="83" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b7dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b7dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b7dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b7dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b7dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b7dR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b7dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b7dH" x="30" y="26">FOUR CHECKS, ONE EXIT CODE</text>
+        <text class="b7dS" x="250" y="26">nightly_diff.py · constructed data</text>
+
+        <g filter="url(#b7dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="170" height="62" rx="8" transform="rotate(-1.5 115 87)" fill="#FFFFFF"/>
+          <rect x="30" y="140" width="170" height="62" rx="8" transform="rotate(1.5 115 171)" fill="url(#b7dHc)"/>
+          <path d="M206 87 L224 87 L224 171 L206 171"/>
+          <path d="M224 129 L244 129" marker-end="url(#b7dAr)"/>
+          <rect x="250" y="46" width="520" height="38" rx="8" transform="rotate(-0.3 510 65)" fill="#FFFFFF"/>
+          <rect x="250" y="96" width="520" height="38" rx="8" transform="rotate(0.3 510 115)" fill="#FFFFFF"/>
+          <rect x="250" y="146" width="520" height="38" rx="8" transform="rotate(-0.3 510 165)" fill="#FFFFFF"/>
+          <rect x="250" y="196" width="520" height="38" rx="8" transform="rotate(0.3 510 215)" fill="#FFFFFF"/>
+          <path d="M510 236 L510 248" marker-end="url(#b7dAr)"/>
+          <rect x="250" y="252" width="520" height="34" rx="8" transform="rotate(-0.3 510 269)" fill="#F4B63F"/>
+        </g>
+
+        <text class="b7dH" x="44" y="82">REGISTER</text>
+        <text class="b7dS" x="44" y="100">7 versions, owner kept</text>
+        <text class="b7dH" x="44" y="222">INDEX</text>
+        <text class="b7dS" x="44" y="238">7 entries, re-imported</text>
+
+        <text class="b7dL" x="264" y="70">1 · flag differs</text>
+        <text class="b7dR" x="520" y="70">FIN-EXP-1@v4 and FIN-EXP-2@v4</text>
+        <text class="b7dL" x="264" y="120">2 · registered, not indexed</text>
+        <text class="b7dR" x="520" y="120">HR-WFH-1@v2</text>
+        <text class="b7dL" x="264" y="170">3 · indexed, not registered</text>
+        <text class="b7dR" x="520" y="170">IT-ACC-1@v5</text>
+        <text class="b7dL" x="264" y="220">4 · answer cites a retired version</text>
+        <text class="b7dR" x="520" y="220">G41 cited FIN-EXP-2@v4</text>
+
+        <text class="b7dH" x="264" y="274">5 problems · exit 1 · the nightly job fails and the owner is told</text>
+
+        <text class="b7dN" x="30" y="308">Each check catches one planted fault. A diff that has never failed has never been tested.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - check 1 is the one that turns session 8's false GO into a failed night</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Write the register the owner keeps.</strong> One row per clause version: the id (key plus version), whether it is superseded, and the day it was retired. Seven constructed rows from Tidewell's expenses, leave and hybrid work policies.</p>
+        <div class="prompt-box good"><span class="label">★ nightly_diff.py · part 1, the register (constructed)</span># The owner's version register: the truth (constructed)
+register = [
+    {"id": "FIN-EXP-1@v5", "superseded": False, "retired": None},
+    {"id": "FIN-EXP-1@v4", "superseded": True, "retired": "2026-02-01"},
+    {"id": "FIN-EXP-2@v5", "superseded": False, "retired": None},
+    {"id": "FIN-EXP-2@v4", "superseded": True, "retired": "2026-02-01"},
+    {"id": "HR-LV-1@v3", "superseded": False, "retired": None},
+    {"id": "HR-LV-1@v2", "superseded": True, "retired": "2026-01-01"},
+    {"id": "HR-WFH-1@v2", "superseded": False, "retired": None},
+]</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the index as last night's re-import left it.</strong> Four faults planted: both expenses v4 flags lost, the current hybrid work clause never loaded, and a password draft that nobody registered.</p>
+        <div class="prompt-box good"><span class="label">★ nightly_diff.py · part 2, the index (constructed)</span># What the index holds after last night's re-import (constructed)
+index = {
+    "FIN-EXP-1@v5": False,
+    "FIN-EXP-1@v4": False,   # flag lost on re-import
+    "FIN-EXP-2@v5": False,
+    "FIN-EXP-2@v4": False,   # flag lost on re-import
+    "HR-LV-1@v3": False,
+    "HR-LV-1@v2": True,
+    "IT-ACC-1@v5": False,    # a draft nobody registered
+}</div>
+      </div>
+      <div class="step">
+        <p><strong>Checks one to three: compare the two records both ways.</strong> Walk the register and look each version up in the index, then walk the index and look for anything the register has never heard of.</p>
+        <div class="prompt-box good"><span class="label">★ nightly_diff.py · part 3, register vs index</span>problems = []
+truth = {r["id"]: r for r in register}
+for cid, r in truth.items():
+    if cid not in index:
+        problems.append(f"{cid}: in register, missing from index")
+    elif index[cid] != r["superseded"]:
+        problems.append(f"{cid}: register superseded={r['superseded']}, index says {index[cid]}")
+for cid in index:
+    if cid not in truth:
+        problems.append(f"{cid}: in index, unknown to register")</div>
+      </div>
+      <div class="step">
+        <p><strong>Check four: did any answer already cite a retired version?</strong> Read the day's answer log, look each cited id up in the register, not the index, and exit non-zero on any problem so the scheduler marks the night failed.</p>
+        <div class="prompt-box good"><span class="label">★ nightly_diff.py · part 4, the answer log and the exit code</span># Today's answers and the clause each one cited (constructed log)
+answers = [("G36", "HR-LV-1@v3"), ("G41", "FIN-EXP-2@v4"), ("G40", "FIN-EXP-1@v5")]
+for qid, cid in answers:
+    r = truth.get(cid)
+    if r and r["superseded"]:
+        problems.append(f"{qid}: cited {cid}, retired {r['retired']}")
+
+print(len(register), "registered,", len(index), "indexed,", len(problems), "problems")
+for p in problems:
+    print("  " + p)
+raise SystemExit(1 if problems else 0)</div>
+      </div>
+      <div class="step">
+        <p><strong>Run it and read the five lines.</strong> <code>python3 nightly_diff.py; echo "exit $?"</code> printed exactly this. Fewer than five problems means a check is broken; more means a fault you did not plant. On your own register and index, your numbers will differ.</p>
+        <div class="prompt-box good"><span class="label">★ Output</span>7 registered, 7 indexed, 5 problems
+  FIN-EXP-1@v4: register superseded=True, index says False
+  FIN-EXP-2@v4: register superseded=True, index says False
+  HR-WFH-1@v2: in register, missing from index
+  IT-ACC-1@v5: in index, unknown to register
+  G41: cited FIN-EXP-2@v4, retired 2026-02-01
+exit 1</div>
+      </div>
+      <div class="step">
+        <p><strong>Fix the index, never the register.</strong> Restore both v4 flags from the register, load HR-WFH-1@v2, and remove IT-ACC-1@v5 until its owner registers it. Re-run: the four index problems clear. The G41 line stays, because that answer already went out; it goes to the expenses owner to decide whether to correct it. Then schedule the script nightly and as the last step of every load.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The re-import that loses the flag, and the check that trusts it</span>
+for clause in extract_clauses("expenses_policy_v4.pdf"):
+    index.add(clause, superseded=False)    # importer default, register never read
+stale = [a for a in answers if index.is_superseded(a.cited)]   # grades the copy against itself
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 8</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Pick three policies in your organisation that changed in the last two years. Write a register row for every version: id, superseded, retired on, owner. Note any version nobody could date.</li>
+      <li>For each old version, list the words staff still use from it. Write one golden question per policy in the old words and check which version your retriever ranks first.</li>
+      <li>Add a fifth check to the diff: a current version whose effective date is in the future, or a retired date earlier than the effective date.</li>
+      <li>Write down, with the owner of one high-risk policy, what happens when the diff fails at night: who is told, by when, and whether a stale answer that already went out is an incident.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 7 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Which record should decide whether a clause version may answer?</p>
+      <button class="qopt" type="button">A · The index flag, because every filter already reads it</button>
+      <button class="qopt" type="button">B · The newest effective date in the document file name</button>
+      <button class="qopt" type="button">C · The version register the document owner keeps, with the index flag treated as a checked copy of it</button>
+      <button class="qopt" type="button">D · Whichever version BM25 ranks first for the question</button>
+      <p class="qwhy">The index flag is fast, and it is exactly what a careless re-import breaks. The register is written by the person who changed the rule, so it is the truth the copy is checked against. D is how the SGD 50 per diem got cited in the first place.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · On the bench, stale citations go from 6 on rung 1 to 7 on rung 2. Why did adding the permission filter add one?</p>
+      <button class="qopt" type="button">A · Filtering out the managers-only clause for G46 left the superseded password clause as the best remaining match</button>
+      <button class="qopt" type="button">B · The permission filter marks restricted clauses as superseded</button>
+      <button class="qopt" type="button">C · The permission filter changes BM25's k1 and b</button>
+      <button class="qopt" type="button">D · Rung 2 adds a seventh superseded version to the store</button>
+      <p class="qwhy">A filter changes what wins, not only what is removed. The store still holds 7 superseded versions on every rung; what changed is which clause is left at the top for one staff question.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · After "Break it" at rung 4, the pipeline says GO with 0 stale citations. What catches the G41 answer?</p>
+      <button class="qopt" type="button">A · The thumbs-up rate, because staff dislike old answers</button>
+      <button class="qopt" type="button">B · The golden set graded by clause key, because v4 is the wrong key</button>
+      <button class="qopt" type="button">C · Raising the abstain threshold above 3.0</button>
+      <button class="qopt" type="button">D · A check that reads the owner's register, run as a scheduled diff against the index</button>
+      <p class="qwhy">v4 and v5 share the key FIN-EXP-2, so a key-only grade passes the SGD 50 answer, and staff cannot see that a confident answer is stale. Only the register knows v4 was retired on 2026-02-01.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The version register vs the index flag</span><span class="note">Taught as a design; Tidewell's 49 clause versions and 7 superseded versions are constructed</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Stale citations by rung: 6, 7 and 0</span><span class="note">Measured by the go/no-go bench in session 8 and matched by a Python reference</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The break button: GO in the pipeline, NO-GO in the register</span><span class="note">Measured by the bench; G41, SGD 50 vs SGD 60, correct 37 of 42, MRR 0.964</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Updating knowledge by swapping the index</span><span class="note">Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confabulation and confident responses</span><span class="note">NIST AI 600-1 Generative AI Profile (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Incident reporting and the materiality threshold</span><span class="note">IMDA and AI Verify Foundation (2024), Model AI Governance Framework for Generative AI, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">A nightly register vs index diff with planted faults</span><span class="note">Run from a scratch folder; the printed output is shown exactly</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The after-launch review process</span><span class="note">Not taught here; the agent launch course owns after launch</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Production monitoring, tracing and alerting</span><span class="note">Not taught here; the AI observability course owns them</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 7 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The register is the truth</b><span>The owner keeps it. The index flag is a fast copy that must be checked.</span></div>
+      <div class="cheat-item"><b>Old words pull old clauses</b><span>Staff ask "per diem"; the retired clause says "per diem". BM25 ranks it first.</span></div>
+      <div class="cheat-item"><b>6, then 7, then 0</b><span>Stale citations on rungs 1, 2 and 3. A filter changes what wins.</span></div>
+      <div class="cheat-item"><b>Grade the version, not the key</b><span>v4 and v5 share FIN-EXP-2. A key-only grade passes SGD 50.</span></div>
+      <div class="cheat-item"><b>One lost flag, a false GO</b><span>The pipeline sees 0 stale; the register sees G41. Read the register.</span></div>
+      <div class="cheat-item"><b>Diff every night</b><span>Flag differs, not indexed, not registered, retired citation: exit 1.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>Every part is built. Session 8 runs them together on the go/no-go bench: four rungs from 18 leaks to GO, a thumbs-up grade that passes the unsafe assistant, and the break button you just learned to catch.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 7 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b6-open-the-ticket.html">← Prev: One tool: open the ticket</a> &nbsp;·&nbsp; <a href="b8-the-go-no-go-bench.html">Next: The go/no-go bench →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

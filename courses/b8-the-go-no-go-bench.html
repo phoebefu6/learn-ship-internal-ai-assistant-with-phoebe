@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 8 of 8. The go/no-go bench: BM25 retrieval, permission and version filters, abstain-and-hand-off and a go/no-go board, computed live in your browser over Tidewell Freight's constructed policy store and 54 golden questions.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The go/no-go bench - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 8 of 8. Four rungs from 18 leaks to GO, a thumbs-up grade that passes the unsafe assistant, and a break button that produces a GO the version register contradicts.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b8-the-go-no-go-bench.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The go/no-go bench - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 8 of 8. The whole assistant on one bench, computed in your browser.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 8 · The go/no-go bench - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 8 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 8 of 8</div>
+    <h1>The <span class="accent">go/no-go bench</span></h1>
+    <p class="sub">Every build step of the track, on one screen and computed in your browser. Tidewell Freight, a constructed 1,200-person freight forwarder, wants to ship a policy and ops helpdesk that answers staff from HR, IT and finance policy, cites the clause, and opens a ticket when it cannot answer. The bench ranks Tidewell's 49 clause versions with BM25 for each of 54 golden questions, applies the permission and version filters, decides when to hand off, scores every rung against the golden set and reads Tidewell's go/no-go policy. Then it shows you two ways to get a GO you should not believe.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Capstone</span>
+      <span class="chip audience">Builders and platform leads</span>
+      <span class="chip audience">Anyone signing the go/no-go</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:3">3-14 · What the bench measures</span>
+      <span class="a3" style="flex:6">14-40 · Build-along: the ladder</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we end up</h2>
+    </div>
+    <p class="lede">Sessions 1 to 7 built the parts one at a time: the clause store with its metadata, BM25 by hand, the golden set from the ticket log, grounded answers, the permission filter, the one tool call that opens a ticket, and the version register. Here they run together. What is computed: every retrieval, every filter, every score and the verdict. What is pre-written: the answer text, one constructed sentence per clause, because a browser cannot run a language model. What is assumed: token counts and prices. What is Tidewell's own choice: the go/no-go thresholds. Tidewell Freight and all its policies are constructed.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">measured = computed live from the store</span>
+      <span class="pill">constructed = invented for Tidewell</span>
+      <span class="pill">assumption = a stated input you can argue with</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A go/no-go board for an internal assistant that you can defend line by line: four rungs from 18 leaking questions to a GO, the reason each rung fails, and two traps the board must survive. A thumbs-up grade passes the assistant that leaks. An index that lost one version flag produces a GO the version register contradicts. You will know which signal each check reads, and why that is the whole question.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers what the bench computes and where it can be fooled</span>
+      <h2>One question, five steps, one board</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Each golden question travels the same path. The asker's group rides along with it, because who is asking decides what may be retrieved. Every step is code you can read in <code>assist-live.js</code>, and the Python reference reproduces all 269 numbers the ladder prints.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn pipeline. A question with its asker group enters a store of 49 clause versions, 7 of them superseded. Two filters keep only clauses the asker may read and current versions. BM25 ranks the rest and keeps the top 3. If the top score is under 3.0 the assistant hands off and opens one ticket; otherwise it answers from the top clause and cites it. Fifty-four golden questions score every rung on hit rate, MRR, leaks, stale citations, wrong answers by risk tier and right hand-offs, and the board says go or no-go.">
+        <defs>
+          <filter id="b8aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="81" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b8aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b8aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b8aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b8aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b8aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b8aB { font: 800 11px Inter, sans-serif; fill: #6B4A00; }
+          .b8aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b8aH" x="30" y="26">ONE GOLDEN QUESTION THROUGH THE ASSISTANT</text>
+        <text class="b8aS" x="360" y="26">constructed store and questions · every step below runs in your browser</text>
+
+        <g filter="url(#b8aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="140" height="78" rx="10" transform="rotate(-0.6 100 95)" fill="#FFFFFF"/>
+          <rect x="200" y="56" width="140" height="78" rx="10" transform="rotate(0.5 270 95)" fill="#E8F6F6"/>
+          <rect x="370" y="56" width="140" height="78" rx="10" transform="rotate(-0.4 440 95)" fill="#FFFFFF"/>
+          <rect x="540" y="56" width="120" height="78" rx="10" transform="rotate(0.4 600 95)" fill="#FFFFFF"/>
+          <rect x="690" y="56" width="160" height="78" rx="10" transform="rotate(-0.5 770 95)" fill="#F4B63F"/>
+          <path d="M172 95 L196 95" marker-end="url(#b8aAr)"/>
+          <path d="M342 95 L366 95" marker-end="url(#b8aAr)"/>
+          <path d="M512 95 L536 95" marker-end="url(#b8aAr)"/>
+          <path d="M662 95 L686 95" marker-end="url(#b8aAr)"/>
+          <path d="M730 136 L600 170" marker-end="url(#b8aAr)"/>
+          <path d="M790 136 L780 170" marker-end="url(#b8aAr)"/>
+          <rect x="30" y="172" width="440" height="60" rx="10" transform="rotate(0.3 250 202)" fill="#F8FCFC"/>
+          <rect x="500" y="172" width="170" height="60" rx="10" transform="rotate(-0.5 585 202)" fill="#FFFFFF" stroke="#0E8086"/>
+          <rect x="690" y="172" width="160" height="60" rx="10" transform="rotate(0.5 770 202)" fill="#FEF5E0"/>
+          <path d="M585 234 L585 254" marker-end="url(#b8aAr)"/>
+          <path d="M770 234 L770 254" marker-end="url(#b8aAr)"/>
+          <rect x="30" y="258" width="820" height="40" rx="10" transform="rotate(-0.2 440 278)" fill="#E8F6F6"/>
+          <!-- doodle: a ticket stub -->
+          <path d="M820 180 L846 180 L846 186 C842 187 842 191 846 192 L846 198 L820 198 Z" stroke="#0A5A60"/>
+        </g>
+
+        <text class="b8aH" x="44" y="80">QUESTION</text>
+        <text class="b8aS" x="44" y="98">asker group rides</text>
+        <text class="b8aS" x="44" y="115">with the question</text>
+
+        <text class="b8aH" x="214" y="80">THE STORE</text>
+        <text class="b8aS" x="214" y="98">49 clause versions</text>
+        <text class="b8aS" x="214" y="115">7 superseded</text>
+
+        <text class="b8aH" x="384" y="80">FILTERS</text>
+        <text class="b8aS" x="384" y="98">1 asker may read</text>
+        <text class="b8aS" x="384" y="115">2 current version</text>
+
+        <text class="b8aH" x="552" y="80">BM25 TOP-3</text>
+        <text class="b8aS" x="552" y="98">k1 1.2, b 0.75</text>
+        <text class="b8aS" x="552" y="115">rank, keep 3</text>
+
+        <text class="b8aH" x="704" y="80">TOP SCORE ≥ 3.0?</text>
+        <text class="b8aL" x="704" y="98">under it: say so</text>
+        <text class="b8aL" x="704" y="115">and hand off</text>
+
+        <text class="b8aS" x="628" y="150">yes</text>
+        <text class="b8aS" x="796" y="156">no</text>
+
+        <text class="b8aL" x="44" y="196">live: retrieval, both filters, every score</text>
+        <text class="b8aS" x="44" y="215">pre-written: one constructed answer per clause</text>
+        <text class="b8aL" x="514" y="196">answer from clause</text>
+        <text class="b8aS" x="514" y="215">cites HR-LV-1@v3</text>
+        <text class="b8aL" x="704" y="196">open one ticket</text>
+        <text class="b8aS" x="704" y="215">question + top 3</text>
+
+        <text class="b8aH" x="44" y="283">54 GOLDEN QUESTIONS</text>
+        <text class="b8aS" x="200" y="283">hit rate · MRR · leaks · stale citations · wrong by risk tier · right hand-offs → go/no-go</text>
+
+        <text class="b8aN" x="30" y="324">Every box is computed except the answer text: a browser cannot generate it, so each clause carries one.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the asker's group travels with the question; the filters act before ranking, never on the answer</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>BM25, exactly as the bench computes it<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>For each distinct word in the question, a clause earns <strong>tf / (k1 x ((1 - b) + b x dl / avdl) + tf) x log((N - n + 0.5) / (n + 0.5))</strong>, and its score is the sum. tf is how often the word appears in the clause, dl the clause's length in words, avdl the average length (21.76 words here), N the number of clause versions in the store (49), n how many contain the word. It is equation 3.15 of Robertson and Zaragoza's 2009 review with the IDF of their equation 3.3. They suggest 1.2 &lt; k1 &lt; 2 and 0.5 &lt; b &lt; 0.8 as "reasonably good in many circumstances" and say the model gives no guidance on setting them; the bench uses k1 = 1.2 and b = 0.75.</p>
+        <p>Words are lower-cased, split on anything that is not a letter or digit, a short stopword list is dropped and a trailing "s" comes off words longer than three letters. There is no stemming and no synonym list, which is why "salary is paid" and "salaries are paid" can miss each other. That is a real property of lexical retrieval, and the reason session 2 links to dense and hybrid retrieval in the RAG course rather than pretending BM25 is enough.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the answers are pre-written, and why that does not weaken the bench<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A browser cannot run a language model, so each clause carries one constructed answer sentence and the assistant gives the answer of the clause it ranked first. That makes the bench an upper bound on generation quality: a real model can only add errors on top of the right clause. Everything the go/no-go reads, which clause was retrieved, whether the asker may read it, whether it is current, whether the assistant should have answered at all, is computed, and none of it depends on the wording of the answer.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The self-test, and the fault it is built to catch<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On load the bench checks five properties: the permission filter removes every leak, the version filter removes every stale citation, the full ladder ends in GO and the bare one in NO-GO, the break button produces a GO the register contradicts, and the thumbs grade passes the unsafe rung. Then it runs itself again with the permission filter switched off, a planted fault, and confirms the first property fails. A self-test that cannot fail measures nothing; the widget prints both results under the board.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="bench">
+    <div class="section-kicker">
+      <span class="klabel">Build-along · the bench</span>
+      <h2>Climb the ladder, then try to fool it</h2>
+      <span class="tag demo">★ 26 min · the main event</span>
+    </div>
+    <p class="lede">Click the rungs in order and say out loud which check fails before you read the board. The bench recomputes every number from the store on each click. Your numbers will match these, because nothing here is random: the store, the golden set and the thumbs signal are fixed constructed data.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn staircase of four rungs, each keeping what the rung below added. Rung 1, no filter, NO-GO with 18 leaks. Rung 2 adds the permission filter, NO-GO with 7 stale citations. Rung 3 adds the current-version filter, NO-GO because it hands off only 8.3 percent of the questions it should not answer. Rung 4 adds abstain and hand off below a top score of 3.0, GO with 0 leaks and 0 stale citations.">
+        <defs>
+          <filter id="b8dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="84" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <marker id="b8dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b8dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b8dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b8dR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b8dG { font: 800 11px Inter, sans-serif; fill: #13292C; }
+          .b8dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b8dH" x="30" y="26">THE LADDER, ONE RUNG AT A TIME</text>
+        <text class="b8dS" x="270" y="26">each rung keeps everything the rung below added · verdicts as the bench prints them</text>
+
+        <g filter="url(#b8dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="200" width="190" height="72" rx="10" transform="rotate(-0.6 125 236)" fill="#FFFFFF"/>
+          <rect x="235" y="156" width="190" height="72" rx="10" transform="rotate(0.5 330 192)" fill="#FFFFFF"/>
+          <rect x="440" y="112" width="190" height="72" rx="10" transform="rotate(-0.4 535 148)" fill="#FFFFFF"/>
+          <rect x="645" y="68" width="205" height="72" rx="10" transform="rotate(0.4 747 104)" fill="#F4B63F"/>
+          <path d="M222 214 L233 200" marker-end="url(#b8dAr)"/>
+          <path d="M427 170 L438 156" marker-end="url(#b8dAr)"/>
+          <path d="M632 126 L643 112" marker-end="url(#b8dAr)"/>
+          <!-- doodle: a flag on the top step -->
+          <path d="M836 64 L836 40 M836 40 L852 46 L836 52"/>
+        </g>
+
+        <text class="b8dH" x="44" y="222">1 · NO FILTER</text>
+        <text class="b8dS" x="44" y="240">every clause, every version</text>
+        <text class="b8dR" x="44" y="259">NO-GO · 18 leaks</text>
+
+        <text class="b8dH" x="249" y="178">2 · + PERMISSION</text>
+        <text class="b8dS" x="249" y="196">only what the asker may read</text>
+        <text class="b8dR" x="249" y="215">NO-GO · 7 stale</text>
+
+        <text class="b8dH" x="454" y="134">3 · + CURRENT VERSION</text>
+        <text class="b8dS" x="454" y="152">only what the register keeps</text>
+        <text class="b8dR" x="454" y="171">NO-GO · 8.3% hand-offs</text>
+
+        <text class="b8dH" x="659" y="90">4 · + ABSTAIN</text>
+        <text class="b8dG" x="659" y="108">top score under 3.0: ticket</text>
+        <text class="b8dG" x="659" y="127">GO · 0 leaks, 0 stale</text>
+
+        <text class="b8dN" x="30" y="296">Rung 5 is not a filter. It is reading the board and signing GO or NO-GO, with the reasons.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three of the four rungs fail for a different reason, and each fix is a different build step</figcaption>
+    </figure>
+
+    <div id="tw-bench"></div>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Read the ticket log first.</strong> 600 constructed tickets in a quarter: 333 (55.5%) answered by pointing at a clause, 223 that needed a person to do something, 44 that nobody had written down. The assistant is for the first kind, opens tickets for the second, and must recognise the third. The golden set covers the topics of 100.0% of the policy-answerable tickets.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rung 1, no permission filter.</strong> Top-3 hit rate 100.0%, MRR 0.913, and 18 leaks: eighteen questions pull a clause into the retrieved set that the asker may not read, such as the HR-only salary bands. Six answers cite a superseded version. Right hand-offs 0.0%, because nothing ever hands off. NO-GO, with six reasons.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rung 2, add the permission filter.</strong> Leaks fall to 0. Stale citations rise from 6 to 7: when the managers-only improvement-plan clause is filtered out of a staff member's question (G46), the best remaining match is the superseded password clause. A filter changes what wins, not only what is removed. Still NO-GO.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rung 3, add the current-version filter.</strong> Stale citations 0, MRR up to 0.988, correct answers 97.6%. And still NO-GO: medium-risk confident wrong 31.6%, low-risk 35.7%, right hand-offs 8.3%. The assistant answers the dog question, the birthday question and the staff party question with whatever clause scored highest.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rung 4, add abstain and hand off.</strong> With the threshold at 3.0: GO. 0 leaks, 0 stale, confident wrong 0.0% · 0.0% · 7.1%, right hand-offs 91.7%, correct answers 90.5%. Pick G54 in the question box: the staff party question still scores 3.71 against the annual leave clause and gets a confident wrong answer, inside the low-risk limit. Pick G07: a real question about pay day, handed off at 2.77. Safe, and a miss.</p>
+      </div>
+      <div class="step">
+        <p><strong>Move the threshold.</strong> Drag "Abstain below" down to 0 and back up past 6. Low, and it behaves like rung 3. High, and coverage collapses until the board fails on correct answers. The threshold is a product decision with a measured price on both sides.</p>
+      </div>
+      <div class="step">
+        <p><strong>Press "Grade by thumbs-up instead" and go back to rung 1.</strong> 90.7% of questions got a thumbs-up, the bar is 75.0%: the thumbs grade prints GO on the assistant with 18 leaks and 6 stale citations. On rung 4 the rate drops to 81.5%, because staff thumb down hand-offs. The safer the assistant, the worse it grades. Switch the grade back.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rung 4, press "Break it".</strong> The bench re-indexes version 4 of the expenses policy without its superseded flag. The board says GO, and it is false: the register shows 1 answer citing a superseded version while the pipeline sees 0. Pick G41 to see it: the SGD 50 per diem from version 4, not the SGD 60 daily allowance. Restore the flag before you leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers what each rung fixes and what it leaves</span>
+      <h2>The board, rung by rung</h2>
+      <span class="tag concept">4 min live</span>
+    </div>
+    <p class="lede">Read the board as six independent checks. Each rung clears some and leaves others, and no single number on it tells you whether to ship. All values measured by the bench at the default threshold of 3.0.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn board of four rungs by six checks and a verdict. Rung 1: 18 leaks, 6 stale, wrong 23.8, 36.8 and 50.0 percent for high, medium and low risk, right hand-offs 0.0 percent, NO-GO. Rung 2: 0 leaks, 7 stale, the same wrong rates, 0.0 percent hand-offs, NO-GO. Rung 3: 0 leaks, 0 stale, wrong 4.8, 31.6 and 35.7 percent, 8.3 percent hand-offs, NO-GO. Rung 4: 0, 0, 0.0, 0.0, 7.1 percent, 91.7 percent hand-offs, GO. Failing cells are marked red.">
+        <defs>
+          <filter id="b8bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="87" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+        </defs>
+        <style>
+          .b8bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b8bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b8bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b8bC { font: 700 11px Inter, sans-serif; fill: #13292C; }
+          .b8bP { font: 800 12px Inter, sans-serif; fill: #0A5A60; }
+          .b8bF { font: 800 12px Inter, sans-serif; fill: #991B1B; }
+          .b8bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b8bH" x="30" y="26">THE GO/NO-GO BOARD</text>
+        <text class="b8bS" x="200" y="26">measured on the bench · red = over Tidewell's limit · the limits are its policy choice, not a standard</text>
+
+        <text class="b8bC" x="246" y="54" text-anchor="middle">Leaks</text>
+        <text class="b8bC" x="338" y="54" text-anchor="middle">Stale cites</text>
+        <text class="b8bC" x="430" y="54" text-anchor="middle">Wrong high</text>
+        <text class="b8bC" x="522" y="54" text-anchor="middle">Wrong med</text>
+        <text class="b8bC" x="614" y="54" text-anchor="middle">Wrong low</text>
+        <text class="b8bC" x="706" y="54" text-anchor="middle">Hand-offs</text>
+        <text class="b8bC" x="798" y="54" text-anchor="middle">Verdict</text>
+        <text class="b8bS" x="246" y="70" text-anchor="middle">limit 0</text>
+        <text class="b8bS" x="338" y="70" text-anchor="middle">limit 0</text>
+        <text class="b8bS" x="430" y="70" text-anchor="middle">at most 5%</text>
+        <text class="b8bS" x="522" y="70" text-anchor="middle">at most 10%</text>
+        <text class="b8bS" x="614" y="70" text-anchor="middle">at most 20%</text>
+        <text class="b8bS" x="706" y="70" text-anchor="middle">at least 80%</text>
+
+        <g filter="url(#b8bSk)" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- row 1 -->
+          <rect x="202" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="294" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="386" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="478" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="570" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="662" y="82" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="754" y="82" width="88" height="40" rx="6" fill="#FFFFFF" stroke="#991B1B"/>
+          <!-- row 2 -->
+          <rect x="202" y="130" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="294" y="130" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="386" y="130" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="478" y="130" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="570" y="130" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="662" y="130" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="754" y="130" width="88" height="40" rx="6" fill="#FFFFFF" stroke="#991B1B"/>
+          <!-- row 3 -->
+          <rect x="202" y="178" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="294" y="178" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="386" y="178" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="478" y="178" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="570" y="178" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="662" y="178" width="88" height="40" rx="6" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="754" y="178" width="88" height="40" rx="6" fill="#FFFFFF" stroke="#991B1B"/>
+          <!-- row 4 -->
+          <rect x="202" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="294" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="386" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="478" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="570" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="662" y="226" width="88" height="40" rx="6" fill="#E8F6F6"/>
+          <rect x="754" y="226" width="88" height="40" rx="6" fill="#F4B63F"/>
+        </g>
+
+        <text class="b8bL" x="190" y="107" text-anchor="end">1 · no filter</text>
+        <text class="b8bL" x="190" y="155" text-anchor="end">2 · + permission</text>
+        <text class="b8bL" x="190" y="203" text-anchor="end">3 · + current version</text>
+        <text class="b8bL" x="190" y="251" text-anchor="end">4 · + abstain at 3.0</text>
+
+        <text class="b8bF" x="246" y="107" text-anchor="middle">18</text>
+        <text class="b8bF" x="338" y="107" text-anchor="middle">6</text>
+        <text class="b8bF" x="430" y="107" text-anchor="middle">23.8%</text>
+        <text class="b8bF" x="522" y="107" text-anchor="middle">36.8%</text>
+        <text class="b8bF" x="614" y="107" text-anchor="middle">50.0%</text>
+        <text class="b8bF" x="706" y="107" text-anchor="middle">0.0%</text>
+        <text class="b8bF" x="798" y="107" text-anchor="middle">NO-GO</text>
+
+        <text class="b8bP" x="246" y="155" text-anchor="middle">0</text>
+        <text class="b8bF" x="338" y="155" text-anchor="middle">7</text>
+        <text class="b8bF" x="430" y="155" text-anchor="middle">23.8%</text>
+        <text class="b8bF" x="522" y="155" text-anchor="middle">36.8%</text>
+        <text class="b8bF" x="614" y="155" text-anchor="middle">50.0%</text>
+        <text class="b8bF" x="706" y="155" text-anchor="middle">0.0%</text>
+        <text class="b8bF" x="798" y="155" text-anchor="middle">NO-GO</text>
+
+        <text class="b8bP" x="246" y="203" text-anchor="middle">0</text>
+        <text class="b8bP" x="338" y="203" text-anchor="middle">0</text>
+        <text class="b8bP" x="430" y="203" text-anchor="middle">4.8%</text>
+        <text class="b8bF" x="522" y="203" text-anchor="middle">31.6%</text>
+        <text class="b8bF" x="614" y="203" text-anchor="middle">35.7%</text>
+        <text class="b8bF" x="706" y="203" text-anchor="middle">8.3%</text>
+        <text class="b8bF" x="798" y="203" text-anchor="middle">NO-GO</text>
+
+        <text class="b8bP" x="246" y="251" text-anchor="middle">0</text>
+        <text class="b8bP" x="338" y="251" text-anchor="middle">0</text>
+        <text class="b8bP" x="430" y="251" text-anchor="middle">0.0%</text>
+        <text class="b8bP" x="522" y="251" text-anchor="middle">0.0%</text>
+        <text class="b8bP" x="614" y="251" text-anchor="middle">7.1%</text>
+        <text class="b8bP" x="706" y="251" text-anchor="middle">91.7%</text>
+        <text class="b8bH" x="798" y="251" text-anchor="middle">GO</text>
+
+        <text class="b8bN" x="30" y="294">Correct answers never fail here (83.3%, 83.3%, 97.6%, 90.5% against a 70% floor). The rung that answers most is not the one to ship.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - rung 3 answers the most questions correctly and still fails, because it answers the ones it should hand off</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Four readings worth taking into the meeting<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ol>
+          <li><strong>Retrieval quality was never the problem.</strong> Top-3 hit rate is 100.0% on every rung. A retrieval metric alone would have called rung 1 ready. The failures are about what the assistant was allowed to retrieve and what it did with a weak match.</li>
+          <li><strong>The permission filter belongs before ranking.</strong> On rung 1, 7 of the 18 leaking questions are answered from the clause the asker may not read. Filtering the answer afterwards would still have put that clause in front of the model.</li>
+          <li><strong>Staff ask in the old policy's words.</strong> Seven golden questions use superseded vocabulary: "holiday entitlement", "carry forward", "per diem", "remote work days". BM25 rewards the old wording, so without the version filter the old clause wins.</li>
+          <li><strong>The hand-off is what turns rung 3 into rung 4.</strong> Correct answers drop from 97.6% to 90.5%, and the board goes from NO-GO to GO. Answering less is the fix.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the risk tiers do, and where they come from<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell put each golden question in a tier by the cost of a confident wrong answer: pay, leave entitlements, conduct, security and expense limits are high (21 questions); hybrid work, purchasing, travel and the like are medium (19); how-to questions are low (14). The limits, 5%, 10% and 20%, are Tidewell's policy choice. They are not taken from any standard, and a bank or a hospital would set them lower. For how to derive a bar from the blast radius, the <a href="https://phoebefu6.github.io/learn-agent-launch-with-phoebe/courses/a5-risk-tiers-and-the-gate.html">agent launch course on risk tiers</a> goes further.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the two false GOs</span>
+      <h2>A GO you should not believe</h2>
+      <span class="tag concept">4 min live</span>
+    </div>
+    <p class="lede">A go/no-go is only as good as the signals its checks read. The bench builds two failures in which the board says GO and the assistant is not safe, and both have the same shape: the check reads a signal that the failure does not move.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn panels. Left, graded by thumbs-up: on rung 1, which leaks on 18 questions and cites 6 superseded versions, 90.7 percent of questions get a thumbs-up against a 75 percent bar, so the thumbs grade says GO; rung 4 scores lower at 81.5 percent because staff dislike hand-offs. Right, an index that lost a version flag: the version register says expenses policy version 4 is superseded, the index says it is current, the citation check reads the index and passes, the pipeline verdict is GO, and the register finds 1 answer citing the retired SGD 50 per diem.">
+        <defs>
+          <filter id="b8cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="91" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <marker id="b8cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b8cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b8cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b8cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b8cR { font: 800 12px Inter, sans-serif; fill: #991B1B; }
+          .b8cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b8cH" x="30" y="26">TWO WAYS TO GET A FALSE GO</text>
+        <text class="b8cS" x="240" y="26">both measured on the bench · both pass a check that reads the wrong signal</text>
+
+        <g filter="url(#b8cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="400" height="208" rx="12" transform="rotate(-0.3 230 148)" fill="#FFFFFF" stroke="#FCA5A5"/>
+          <rect x="450" y="44" width="400" height="208" rx="12" transform="rotate(0.3 650 148)" fill="#FFFFFF" stroke="#FCA5A5"/>
+          <!-- thumbs gauge -->
+          <rect x="48" y="104" width="360" height="22" rx="8" fill="#E2EEEE" stroke="#C5DADB"/>
+          <rect x="48" y="104" width="327" height="22" rx="8" fill="#F4B63F"/>
+          <path d="M318 96 L318 134" stroke="#991B1B" stroke-dasharray="4 3"/>
+          <!-- register and index -->
+          <rect x="468" y="84" width="170" height="56" rx="8" transform="rotate(-0.8 553 112)" fill="#E8F6F6"/>
+          <rect x="660" y="84" width="172" height="56" rx="8" transform="rotate(0.8 746 112)" fill="#F4B63F"/>
+          <path d="M746 142 L746 158" marker-end="url(#b8cAr)"/>
+        </g>
+
+        <text class="b8cH" x="48" y="70">✗ GRADED BY THUMBS-UP</text>
+        <text class="b8cS" x="48" y="90">the signal: did staff like the answer</text>
+        <text class="b8cL" x="58" y="120">90.7% thumbs-up</text>
+        <text class="b8cS" x="318" y="150" text-anchor="middle">bar 75%</text>
+        <text class="b8cL" x="48" y="176">rung 1: 18 leaks, 6 stale citations</text>
+        <text class="b8cR" x="48" y="196">the thumbs grade says GO</text>
+        <text class="b8cS" x="48" y="218">staff thumb up sure answers, thumb down hand-offs</text>
+        <text class="b8cS" x="48" y="236">rung 4, the safe one, scores lower: 81.5%</text>
+
+        <text class="b8cH" x="468" y="70">✗ AN INDEX THAT LOST A FLAG</text>
+        <text class="b8cL" x="480" y="106">version register</text>
+        <text class="b8cS" x="480" y="124">FIN-EXP v4 superseded</text>
+        <text class="b8cL" x="672" y="106">index metadata</text>
+        <text class="b8cL" x="672" y="124">FIN-EXP v4 current</text>
+        <text class="b8cL" x="468" y="178">citation check reads the index: pass</text>
+        <text class="b8cR" x="468" y="198">pipeline verdict: GO</text>
+        <text class="b8cS" x="468" y="218">register: 1 answer cites the SGD 50 per diem,</text>
+        <text class="b8cS" x="468" y="236">retired on 2026-02-01, so the truth is NO-GO</text>
+
+        <text class="b8cN" x="30" y="278">Both checks read a signal the failure does not move. The fix is a check on the truth, not a better grade.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - satisfaction and index metadata are both inputs the failure leaves untouched</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The thumbs-up trap, and its honest limit<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The thumbs signal is constructed, and constructed to make a point: Tidewell's staff mostly thumb up answers and mostly thumb down hand-offs, whatever the answer says. Nobody can tell from a confident sentence that it came from a superseded clause or a document they were never meant to see. NIST's Generative AI Profile names this risk directly: confabulation does harm "when users believe false content - often due to the confident nature of the response". OWASP calls the user side of it overreliance (LLM09).</p>
+        <p>The honest limit: satisfaction is a real signal for tone, speed and whether the hand-off was graceful, and a team should collect it. It cannot be the go/no-go, because the failures that matter most, leaks and stale answers, look exactly like good answers to the person reading them.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The lost flag, and why the register must be the truth<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Somebody re-imports the old expenses PDF and the importer does not carry the superseded flag. Every check the pipeline runs reads the index, so every check passes, and the golden set grades the answer as right because it cites the right clause key, FIN-EXP-2. Only the version register, kept by the document owner, knows version 4 was retired on 2026-02-01. The bench keeps the two apart on purpose: the pipeline view and the register view agree on every rung until you press the button.</p>
+        <p>The fix is session 7's: the version check reads the owner's register, and a nightly job diffs the index against it. Lewis and colleagues' original RAG paper sells exactly this property, knowledge "can be easily updated at test time" by swapping the index. The same property means an index can be quietly wrong without retraining anything.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>After the track</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Take twenty tickets from your own helpdesk and label each as policy, action or no-policy. Compare your share with Tidewell's 55.5%, and write down the three no-policy topics that came up most.</li>
+      <li>For your own assistant, list which signal each go/no-go check reads. Circle any check that reads a signal written by the same pipeline it is checking.</li>
+      <li>Move the bench's threshold until the board fails on coverage, and note the value. Then write one sentence for your leadership on what that trade is worth in tickets.</li>
+      <li>Write the go/no-go policy for your assistant on one page: the checks, the limits by risk tier, who signs, and who may change a limit.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 8 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · On rung 3 the assistant answers 97.6% of answerable questions correctly with no leaks and no stale citations. Why is the board still NO-GO?</p>
+      <button class="qopt" type="button">A · Its top-3 hit rate is below the limit</button>
+      <button class="qopt" type="button">B · The permission filter is switched off on rung 3</button>
+      <button class="qopt" type="button">C · It answers the questions it should hand off: right hand-offs 8.3%, and confident wrong answers over the medium and low limits</button>
+      <button class="qopt" type="button">D · The thumbs-up rate is under 75%</button>
+      <p class="qwhy">Rung 3 has no abstain step, so the dog, birthday and staff party questions get the best-scoring clause as an answer. Hit rate is 100.0% on every rung, and thumbs-up is 90.7% on rung 3, so A and D are wrong. Rung 4's hand-off is the fix.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Graded by thumbs-up, rung 1 passes and rung 4 scores lower. What does that show?</p>
+      <button class="qopt" type="button">A · The grade reads a signal that leaks and stale answers do not move, and that hand-offs push down</button>
+      <button class="qopt" type="button">B · Rung 4 is less useful to staff, so rung 1 should ship</button>
+      <button class="qopt" type="button">C · The 75% bar is set too low</button>
+      <button class="qopt" type="button">D · Satisfaction data should never be collected</button>
+      <p class="qwhy">Staff cannot see from a confident answer that it is stale or leaked, and they dislike hand-offs. Raising the bar (C) only reorders rungs on the same blind signal. D overstates it: satisfaction is a real signal for tone and hand-off quality, just not for the go/no-go.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · After "Break it", the pipeline verdict is GO and the register finds 1 stale citation. What should the version check read?</p>
+      <button class="qopt" type="button">A · The index's superseded flag, re-imported more carefully</button>
+      <button class="qopt" type="button">B · The golden set's gold clause keys</button>
+      <button class="qopt" type="button">C · Whichever version scores higher in BM25</button>
+      <button class="qopt" type="button">D · The document owner's version register, with the index diffed against it on a schedule</button>
+      <p class="qwhy">The index flag is exactly what broke, and the golden set grades by clause key, so both pass the stale answer. The register is the record the policy owner keeps; checking against it is what makes the false GO visible.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">BM25 term weighting and parameter ranges</span><span class="note">Robertson and Zaragoza (2009), The Probabilistic Relevance Framework: BM25 and Beyond, eq. 3.3 and 3.15, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Permission-aware retrieval</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM08 Vector and Embedding Weaknesses and LLM02, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confident wrong answers and overreliance</span><span class="note">NIST AI 600-1 Generative AI Profile, confabulation; OWASP LLM09 Misinformation; both read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Updating knowledge by swapping the index</span><span class="note">Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The whole ladder, the anti-lever and the break button</span><span class="note">Computed in the browser and matched by a Python reference over 269 values; Tidewell's store, questions and thumbs signal are constructed</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Risk tiers and launch gates in depth</span><span class="note">Owned by the agent launch course; the thresholds here are Tidewell's policy choice</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Model prices</span><span class="note">Not claimed. The cost panel uses an assumed range, not any provider's price list</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 8 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Filters before ranking</b><span>Asker may read it, version is current. Then BM25, then top-3.</span></div>
+      <div class="cheat-item"><b>Six checks, one verdict</b><span>Leaks, stale, wrong by tier, hand-offs, coverage. No single number ships it.</span></div>
+      <div class="cheat-item"><b>Answering less is the fix</b><span>Rung 3 to rung 4: correct 97.6% to 90.5%, NO-GO to GO.</span></div>
+      <div class="cheat-item"><b>Thumbs are not a gate</b><span>Rung 1 grades 90.7% with 18 leaks. The safe rung grades lower.</span></div>
+      <div class="cheat-item"><b>Check the truth</b><span>A lost index flag gives a GO the register contradicts. Version checks read the register.</span></div>
+      <div class="cheat-item"><b>The hand-off costs more</b><span>Model SGD 0.25 to 8.53 a month; hand-off tickets SGD 6,000. Price the ticket.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>That is the end of the builder track. If you have not done the leader track, start at <a href="a1-what-staff-actually-ask.html">Leader session 1</a>: the same assistant without code, from the ticket log to the decision to launch and keep it true. If you have, put the board, your threshold and your go/no-go policy on one page, and that page is the launch decision.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 8 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b7-versions-and-superseded.html">← Prev: Versions and superseded policies</a> &nbsp;·&nbsp; <a href="../index.html">Course home</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/assist-data.js?v=1"></script>
+<script src="../assets/assist-live.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

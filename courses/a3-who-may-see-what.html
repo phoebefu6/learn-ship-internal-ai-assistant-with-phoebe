@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 3 of 6. An internal assistant that ranks every clause for every asker will put the salary bands in front of the wrong person. Count the leaks, filter inside retrieval before ranking, and let each clause's owner set who may read it.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Who may see what - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Leader session 3 of 6. 18 leaking questions, 7 answered from the clause the asker may not read, and one filter that has to sit before the ranking.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/a3-who-may-see-what.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Who may see what - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Leader session 3 of 6. Permissions belong inside retrieval, set by the clause's owner, never redacted from the answer afterwards.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 3 · Who may see what - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Leader session 3 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Leader session 3 of 6</div>
+    <h1>Who may <span class="accent">see what</span></h1>
+    <p class="sub">A policy assistant reads every clause it is given, for whoever is asking. Tidewell Freight, a constructed 1,200-person freight forwarder, keeps salary bands, spending limits and improvement-plan procedure in the same store as the leave policy. Run its golden questions with no permission filter and 18 of them pull a clause into the answer that the asker may not read. Tonight is the leader's half of that problem: count the leaks, decide where the filter sits, and decide who sets access. You leave with an access matrix your HR, IT and finance owners have signed.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Core</span>
+      <span class="chip audience">HR, IT and finance operations leaders</span>
+      <span class="chip audience">Security and data protection leads</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Leaks, filters, owners</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: the access matrix</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this session sits</h2>
+    </div>
+    <p class="lede">Session 1 gave you the scope sentence; session 2 found that the parts you cannot buy are the documents, their owners and who may read what. Tonight takes the third of those. The running example is <strong>Tidewell Freight</strong>, constructed for these pages: 49 clause versions across 16 HR, IT and finance documents, five access groups (all staff, managers, HR only, finance only, IT only), and 54 golden questions, each tagged with the group of the person asking. Every leak count below is measured on the bench in Builder session 8, on those constructed questions.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A one-page access matrix: five kinds of asker across every restricted clause, each row signed by the clause's owner, one test question per row written by someone who must NOT get the answer, and a single line for the build team: "filter inside retrieval, before ranking; zero leaks on the golden set". Builder session 5 turns that line into code.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers what a leak is and how many a plain retriever produces</span>
+      <h2>Leaks, counted</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">A retriever ranks clauses by how well their words match the question. It has no idea who is asking. So a staff member's question that happens to share words with a managers-only clause gets that clause in its top three, and the answer is written from what was retrieved.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn path for one constructed Tidewell question with no permission filter. A staff member asks how long a performance improvement plan lasts, golden question G46. The retriever searches all 49 clause versions, 9 of them restricted to a group. The top match is the performance improvement plan clause, which only managers and HR may read, and the answer quotes it. Across the 54 golden questions, 18 have a forbidden clause in their top 3, and 7 of those are answered from it.">
+        <defs>
+          <filter id="a3aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a3aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a3aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a3aV { font: 800 18px Inter, sans-serif; fill: #0A5A60; }
+          .a3aR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a3aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a3aH" x="30" y="26">ONE QUESTION, NO PERMISSION FILTER</text>
+        <text class="a3aS" x="330" y="26">constructed Tidewell store · rung 1 of the bench · counts as the bench prints them</text>
+
+        <g filter="url(#a3aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="62" width="190" height="112" rx="10" transform="rotate(-1.5 125 118)" fill="#FFFFFF"/>
+          <path d="M224 118 L254 118" marker-end="url(#a3aAr)"/>
+          <rect x="260" y="56" width="160" height="124" rx="10" transform="rotate(0.5 340 118)" fill="url(#a3aHc)"/>
+          <path d="M424 118 L454 118" marker-end="url(#a3aAr)"/>
+          <rect x="460" y="54" width="220" height="38" rx="6" transform="rotate(-1 570 73)" fill="#F4B63F"/>
+          <rect x="460" y="100" width="220" height="34" rx="6" transform="rotate(0.8 570 117)" fill="#FFFFFF"/>
+          <rect x="460" y="142" width="220" height="34" rx="6" transform="rotate(-0.6 570 159)" fill="#FFFFFF"/>
+          <path d="M684 73 L714 100" marker-end="url(#a3aAr)"/>
+          <rect x="720" y="62" width="140" height="112" rx="10" transform="rotate(1.2 790 118)" fill="#FFFFFF" stroke="#991B1B"/>
+          <rect x="30" y="214" width="380" height="76" rx="10" transform="rotate(-0.4 220 252)" fill="#E8F6F6"/>
+          <rect x="440" y="214" width="420" height="76" rx="10" transform="rotate(0.4 650 252)" fill="#FFFFFF" stroke="#991B1B"/>
+          <path d="M44 150 C52 140 60 160 68 150 C76 140 84 160 92 150"/>
+        </g>
+
+        <text class="a3aH" x="44" y="86">STAFF MEMBER · G46</text>
+        <text class="a3aL" x="44" y="106">"How long does a</text>
+        <text class="a3aL" x="44" y="122">performance improvement</text>
+        <text class="a3aL" x="44" y="138">plan last?"</text>
+        <text class="a3aS" x="104" y="155">group: all staff</text>
+
+        <text class="a3aH" x="274" y="82">THE WHOLE STORE</text>
+        <text class="a3aL" x="274" y="104">49 clause versions</text>
+        <text class="a3aL" x="274" y="122">9 restricted</text>
+        <text class="a3aL" x="274" y="140">to a group</text>
+        <text class="a3aS" x="274" y="162">ranked for anyone</text>
+
+        <text class="a3aL" x="472" y="72">#1 Performance improvement</text>
+        <text class="a3aL" x="472" y="87">plan · managers and HR only</text>
+        <text class="a3aS" x="472" y="121">#2 a clause staff may read</text>
+        <text class="a3aS" x="472" y="163">#3 a clause staff may read</text>
+
+        <text class="a3aH" x="734" y="86">THE ANSWER</text>
+        <text class="a3aS" x="734" y="106">quotes the plan</text>
+        <text class="a3aS" x="734" y="122">clause to a staff</text>
+        <text class="a3aS" x="734" y="138">member</text>
+        <text class="a3aR" x="734" y="160">LEAKED</text>
+
+        <text class="a3aV" x="46" y="246">18 of 54</text>
+        <text class="a3aL" x="140" y="244">questions have a forbidden</text>
+        <text class="a3aL" x="140" y="260">clause in their top 3</text>
+        <text class="a3aS" x="46" y="278">only 6 were written as restricted questions</text>
+
+        <text class="a3aV" x="456" y="246">7 of 18</text>
+        <text class="a3aL" x="540" y="244">answered FROM the clause the</text>
+        <text class="a3aL" x="540" y="260">asker may not read</text>
+        <text class="a3aR" x="456" y="278">the other 11 still put it in front of the generator</text>
+
+        <text class="a3aN" x="30" y="322">The retriever saw the right words. It never saw who was asking, because nobody gave it that field.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a leak happens at retrieval, before a single word of the answer is written</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What counts as a leak, so two people count the same way<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Count</th><th>The test</th><th>Tidewell, rung 1</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Leak</strong></td><td>A clause the asker's group may not read is in the retrieved top 3</td><td>18 of 54 golden questions</td></tr>
+            <tr><td><strong>Leaked answer</strong></td><td>The answer itself is written from that clause</td><td>7 of those 18</td></tr>
+            <tr><td><strong>Restricted question</strong></td><td>A clause answers it, but the asker may not read the clause</td><td>6 of 54 by design</td></tr>
+          </tbody>
+        </table>
+        <p>Read the first column carefully. Only 6 golden questions were written to probe restricted clauses, yet 18 leak. The rest are ordinary questions whose wording happens to overlap a restricted clause: a word like "plan", "approve" or "limit" is enough. You cannot list the dangerous questions in advance, which is why the count has to come from running the whole golden set, every time anything changes.</p>
+        <p>Count the leak, not just the leaked answer. The other 11 questions were answered from a clause the asker could read, but the forbidden one was still handed to the generator. Whether it surfaces depends on the phrasing and the next model update, and you will not be told when that changes.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the quality numbers cannot see a leak<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Compare rung 1 (no permission filter) with rung 2 (permission filter on) on the bench. Correct answers: 35 of 42 on both. Top-3 hit rate: 100.0% on both. Thumbs-up: 90.7% on both. Leaks: 18, then 0. The filter moves none of the numbers a demo or a satisfaction survey reports, and it is the difference between an assistant you can launch and one you cannot.</p>
+        <p>That is also why the person who receives a leaked answer will not report it. A staff member told how long an improvement plan lasts got a fluent, cited, correct-looking answer. Nothing in the reply says "you were not supposed to see this". Leaks are found by counting against an access matrix, never by waiting for complaints.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>OWASP lists it second.</strong> The OWASP Top 10 for LLM Applications 2025 puts Sensitive Information Disclosure at LLM02. Among its prevention steps: limit access to sensitive data "based on the principle of least privilege". For a policy assistant, least privilege has a concrete meaning: the assistant may only retrieve, on a person's behalf, what that person could already open themselves.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers where the permission filter must sit and what it changes</span>
+      <h2>Filter before ranking</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">There are two places a team can try to stop a leak. One is inside retrieval: remove every clause the asker may not read before anything is ranked. The other is at the end: let the assistant answer, then scan the answer and redact. Only the first one works, and the reason is mechanical, not a matter of taste.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn pipelines. Top, filter inside retrieval: the question and the asker's group go to a filter that keeps only clauses the asker may read, then BM25 ranks what is left, the top 3 are all readable, and the answer is written from them. Bottom, redact the answer: BM25 ranks all 49 clauses, the top 3 may include a forbidden clause, the generator reads it, and a redaction step scans the finished answer, which is too late. On the bench the filter takes leaks from 18 to 0.">
+        <defs>
+          <filter id="a3bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="37" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a3bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a3bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a3bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a3bR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a3bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a3bH" x="30" y="26">TWO PLACES TO STOP A LEAK</text>
+        <text class="a3bS" x="250" y="26">constructed Tidewell store · leak counts measured on the bench, rungs 1 and 2</text>
+
+        <text class="a3bA" x="30" y="56">FILTER INSIDE RETRIEVAL · 0 leaks</text>
+        <text class="a3bA" x="30" y="196">REDACT THE ANSWER · 18 leaks reach the generator</text>
+
+        <g filter="url(#a3bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="68" width="150" height="72" rx="8" transform="rotate(-0.8 105 104)" fill="#FFFFFF"/>
+          <path d="M184 104 L196 104" marker-end="url(#a3bAr)"/>
+          <rect x="200" y="68" width="150" height="72" rx="8" transform="rotate(0.6 275 104)" fill="#F4B63F"/>
+          <path d="M354 104 L366 104" marker-end="url(#a3bAr)"/>
+          <rect x="370" y="68" width="150" height="72" rx="8" transform="rotate(-0.5 445 104)" fill="url(#a3bHc)"/>
+          <path d="M524 104 L536 104" marker-end="url(#a3bAr)"/>
+          <rect x="540" y="68" width="150" height="72" rx="8" transform="rotate(0.7 615 104)" fill="#FFFFFF"/>
+          <path d="M694 104 L706 104" marker-end="url(#a3bAr)"/>
+          <rect x="710" y="68" width="150" height="72" rx="8" transform="rotate(-0.6 785 104)" fill="#E8F6F6" stroke="#0E8086"/>
+
+          <rect x="30" y="208" width="150" height="72" rx="8" transform="rotate(0.7 105 244)" fill="#FFFFFF"/>
+          <path d="M184 244 L196 244" marker-end="url(#a3bAr)"/>
+          <rect x="200" y="208" width="150" height="72" rx="8" transform="rotate(-0.6 275 244)" fill="url(#a3bHc)"/>
+          <path d="M354 244 L366 244" marker-end="url(#a3bAr)"/>
+          <rect x="370" y="208" width="150" height="72" rx="8" transform="rotate(0.5 445 244)" fill="#FFFFFF" stroke="#991B1B"/>
+          <path d="M524 244 L536 244" marker-end="url(#a3bAr)"/>
+          <rect x="540" y="208" width="150" height="72" rx="8" transform="rotate(-0.7 615 244)" fill="#FFFFFF" stroke="#991B1B"/>
+          <path d="M694 244 L706 244" marker-end="url(#a3bAr)"/>
+          <rect x="710" y="208" width="150" height="72" rx="8" transform="rotate(0.6 785 244)" fill="#FEF2F2" stroke="#991B1B"/>
+          <path d="M760 168 L810 168 M766 160 L772 176 M786 160 L792 176"/>
+        </g>
+
+        <text class="a3bL" x="42" y="92">Question plus</text>
+        <text class="a3bL" x="42" y="108">the asker's group</text>
+        <text class="a3bS" x="42" y="126">staff, manager ...</text>
+
+        <text class="a3bH" x="212" y="92">KEEP ONLY WHAT</text>
+        <text class="a3bH" x="212" y="108">THEY MAY READ</text>
+        <text class="a3bL" x="212" y="126">before any ranking</text>
+
+        <text class="a3bL" x="382" y="92">BM25 ranks</text>
+        <text class="a3bL" x="382" y="108">what is left</text>
+
+        <text class="a3bL" x="552" y="92">Top 3, every one</text>
+        <text class="a3bL" x="552" y="108">readable by the</text>
+        <text class="a3bL" x="552" y="124">asker</text>
+
+        <text class="a3bL" x="722" y="92">Answer from</text>
+        <text class="a3bL" x="722" y="108">what they could</text>
+        <text class="a3bL" x="722" y="124">already open</text>
+
+        <text class="a3bL" x="42" y="232">Question, no</text>
+        <text class="a3bL" x="42" y="248">group attached</text>
+
+        <text class="a3bL" x="212" y="232">BM25 ranks all</text>
+        <text class="a3bL" x="212" y="248">49 clauses</text>
+
+        <text class="a3bL" x="382" y="232">Top 3 may hold</text>
+        <text class="a3bL" x="382" y="248">a forbidden clause</text>
+
+        <text class="a3bL" x="552" y="232">The generator</text>
+        <text class="a3bL" x="552" y="248">has read it</text>
+
+        <text class="a3bL" x="722" y="232">Scan the answer,</text>
+        <text class="a3bL" x="722" y="248">redact matches</text>
+        <text class="a3bR" x="722" y="268">too late, and leaky</text>
+
+        <text class="a3bN" x="30" y="312">G46: once the filter removes the plan clause, the superseded password clause becomes the best match.</text>
+        <text class="a3bS" x="30" y="330">A filter changes what wins, not only what is removed. Stale citations go from 6 to 7 at rung 2.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the filter has to act on the candidates, because the answer is made of whatever survives</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why redacting the answer fails<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Redaction works on the finished text. To catch a leak there, the scanner has to recognise restricted content after it has been paraphrased, summarised or blended with a readable clause. "Grade 7 sits between two numbers" can be reworded in many ways; a pattern that catches one misses the next. And in 11 of Tidewell's 18 leaking questions the forbidden clause shaped nothing visible in the answer at all, so there is nothing to redact and nothing to log.</p>
+        <p>The filter inside retrieval asks a much simpler question, once per clause: may this person read this? The answer is a lookup against the asker's group and the clause's access field, not a judgement about prose. That is why it can be tested to exactly zero. On the bench, adding it takes leaks from 18 to 0 and leaked answers from 7 to 0, with no change to the 35 correct answers.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>A filter changes what wins<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Turning the filter on is not free of side effects. Take G46 again, the staff member asking how long an improvement plan lasts. With the managers-only clause gone, the best remaining match is the superseded IT password clause, an old version still sitting in the store. Stale citations rise from 6 at rung 1 to 7 at rung 2.</p>
+        <p>The leader lesson: every filter you add reorders the survivors, so every filter change needs the whole golden set rerun, not a spot check of the question that prompted it. The next rung on the bench adds a current-version filter and the stale count falls to 0. Session 6 returns to keeping versions true after launch.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Which side of the line this page takes<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This page takes the decision and the count: where the filter sits, and that the golden set must show zero leaks. Access models themselves (roles, attributes, row-level rules) belong to the <a href="https://phoebefu6.github.io/learn-data-access-control-with-phoebe/courses/a1-who-can-see-what.html">data access control course</a>, with the mechanism in its <a href="https://phoebefu6.github.io/learn-data-access-control-with-phoebe/courses/b3-row-level-security.html">row-level security session</a>. A poisoned policy document is a different attack, indirect prompt injection; OWASP notes under LLM01 that RAG and fine-tuning "do not fully mitigate prompt injection vulnerabilities", and the <a href="https://phoebefu6.github.io/learn-ai-red-team-with-phoebe/courses/b3-prompt-injection.html">AI red team course</a> owns it. Builder session 5 writes the filter as code.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>OWASP's wording is a specification.</strong> Under LLM08, Vector and Embedding Weaknesses, the OWASP Top 10 for LLM Applications 2025 lists as a prevention step: "Implement fine-grained access controls and permission-aware vector and embedding stores." Permission-aware means the store knows who is asking when it returns results. A store that returns everything and trusts a later step to tidy up is exactly what that line warns against.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers who decides each clause's access group, and why per clause</span>
+      <h2>Who sets access</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">A filter is only as right as the access field it reads. The usual shortcut is to inherit access from wherever the document is stored. Policies are not written in folder-sized pieces: one document can hold a clause every employee needs and a clause only HR may read.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn panels for Tidewell's constructed pay and grading policy, owned by the reward manager. Left, access inherited from the folder: all four clauses get HR only, so staff can no longer ask about pay day or overtime. Right, access set by the owner per clause: pay day and overtime for all staff, salary review for managers and HR, salary bands for HR only. Salary bands is highlighted.">
+        <defs>
+          <filter id="a3cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a3cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a3cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a3cB { font: 800 11px Inter, sans-serif; fill: #6B4A00; }
+          .a3cA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a3cR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a3cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a3cH" x="30" y="26">ONE DOCUMENT, FOUR CLAUSES, THREE GROUPS</text>
+        <text class="a3cS" x="350" y="26">constructed Tidewell pay and grading policy · owner: reward manager</text>
+
+        <g filter="url(#a3cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="400" height="236" rx="12" transform="rotate(-0.3 230 162)" fill="#FFFFFF" stroke="#991B1B"/>
+          <path d="M50 74 L50 66 L110 66 L120 76 L200 76 L200 104 L50 104 Z" fill="url(#a3cHc)"/>
+          <path d="M210 90 L240 90" marker-end="url(#a3cAr)"/>
+          <rect x="50" y="122" width="360" height="30" rx="6" transform="rotate(0.6 230 137)" fill="#FEF2F2"/>
+          <rect x="50" y="158" width="360" height="30" rx="6" transform="rotate(-0.5 230 173)" fill="#FFFFFF"/>
+          <rect x="50" y="194" width="360" height="30" rx="6" transform="rotate(0.5 230 209)" fill="#FEF2F2"/>
+          <rect x="50" y="230" width="360" height="30" rx="6" transform="rotate(-0.6 230 245)" fill="#FFFFFF"/>
+
+          <rect x="450" y="44" width="400" height="236" rx="12" transform="rotate(0.3 650 162)" fill="#E8F6F6" stroke="#0E8086"/>
+          <path d="M478 96 L530 72 L536 78 L484 102 Z M478 96 L474 106 L484 102"/>
+          <rect x="470" y="122" width="360" height="30" rx="6" transform="rotate(-0.5 650 137)" fill="#FFFFFF"/>
+          <rect x="470" y="158" width="360" height="30" rx="6" transform="rotate(0.6 650 173)" fill="#F4B63F"/>
+          <rect x="470" y="194" width="360" height="30" rx="6" transform="rotate(-0.4 650 209)" fill="#FFFFFF"/>
+          <rect x="470" y="230" width="360" height="30" rx="6" transform="rotate(0.5 650 245)" fill="#FFFFFF"/>
+        </g>
+
+        <text class="a3cR" x="48" y="62">ACCESS INHERITED FROM THE FOLDER</text>
+        <text class="a3cS" x="62" y="96">HR folder</text>
+        <text class="a3cL" x="250" y="88">every clause</text>
+        <text class="a3cL" x="250" y="104">becomes HR only</text>
+
+        <text class="a3cL" x="64" y="142">Pay day</text>
+        <text class="a3cR" x="250" y="142">HR only · staff lose it</text>
+        <text class="a3cL" x="64" y="178">Salary bands</text>
+        <text class="a3cS" x="250" y="178">HR only</text>
+        <text class="a3cL" x="64" y="214">Overtime</text>
+        <text class="a3cR" x="250" y="214">HR only · staff lose it</text>
+        <text class="a3cL" x="64" y="250">Salary review</text>
+        <text class="a3cS" x="250" y="250">HR only · not managers</text>
+
+        <text class="a3cA" x="468" y="62">ACCESS SET BY THE OWNER, PER CLAUSE</text>
+        <text class="a3cL" x="548" y="88">the reward manager signs</text>
+        <text class="a3cL" x="548" y="104">one group per clause</text>
+
+        <text class="a3cL" x="484" y="142">Pay day</text>
+        <text class="a3cS" x="670" y="142">all staff</text>
+        <text class="a3cH" x="484" y="178">Salary bands</text>
+        <text class="a3cH" x="670" y="178">HR only</text>
+        <text class="a3cL" x="484" y="214">Overtime</text>
+        <text class="a3cS" x="670" y="214">all staff</text>
+        <text class="a3cL" x="484" y="250">Salary review</text>
+        <text class="a3cS" x="670" y="250">managers and HR</text>
+
+        <text class="a3cN" x="30" y="306">Inherit one group and you either hide pay day from staff or show salary bands to everyone.</text>
+        <text class="a3cB" x="30" y="322">Every Tidewell clause carries its own owner and access group, set by that owner.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - access is a property of the clause, so the person who wrote the clause sets it</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Owner-set per clause, never folder-inherited<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's constructed store gives every clause a stable key, a version, an effective date, a superseded flag, an owner and an access group. The owner is a named role: the reward manager for pay, the IT security manager for privileged access, the chief financial officer for spending limits. That owner, not the IT team and not the build team, says which group may read each clause, because the owner is the only person who knows why the clause is restricted.</p>
+        <p>Folder inheritance fails in both directions. Make the pay folder HR only and staff can no longer ask about pay day or overtime; make it all staff and the salary bands go with it. Either way, nobody decided; the storage layout decided. A shared-drive permission was set for people browsing files, not for an assistant that quotes one paragraph out of a document to whoever asks.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Five groups, nine restricted clauses<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Group</th><th>Who it covers</th><th>Tidewell's restricted clauses</th></tr></thead>
+          <tbody>
+            <tr><td><strong>All staff</strong></td><td>Everyone</td><td>The other 40 clause versions</td></tr>
+            <tr><td><strong>Managers</strong></td><td>Managers and HR</td><td>Salary review, performance improvement plan, opening a vacancy, spending limits</td></tr>
+            <tr><td><strong>HR only</strong></td><td>HR</td><td>Salary bands</td></tr>
+            <tr><td><strong>Finance only</strong></td><td>Finance</td><td>Supplier payment terms, month-end close</td></tr>
+            <tr><td><strong>IT only</strong></td><td>IT</td><td>Local admin rights, firewall exceptions</td></tr>
+          </tbody>
+        </table>
+        <p>Keep the number of groups small. Every new group is a new column in the matrix you build tonight and a new set of test questions. If an owner asks for a group of one person, the clause probably does not belong in a staff assistant at all.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Where the law comes in, and where it does not<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's policies are constructed and are not legal advice. Whether a clause must be restricted because it holds personal data is a question for your data protection lead and the law that applies to you; the <a href="https://phoebefu6.github.io/learn-pdpa-dnc-with-phoebe/">PDPA course</a> and the <a href="https://phoebefu6.github.io/learn-gdpr-with-phoebe/">GDPR course</a> own that. Most restrictions in a policy store are not legal at all: they are business confidentiality, like spending limits and supplier terms. The owner decides those, and the matrix records the decision.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A constructed Tidewell case: the reorganised drive.</strong> In this constructed story, IT tidies the shared drive and moves the pay and grading policy into an HR-only folder. An assistant that inherited folder access starts answering "I cannot find a policy on that" to staff asking about pay day, and the helpdesk tickets come back. Nobody changed a policy; somebody moved a file. Per-clause access, signed by the reward manager, would not have moved.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>An access matrix for five askers and nine restricted clauses</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">You need the list of policy documents in your scope sentence from session 1 and a name for each owner. No data to hand? Build Tidewell's matrix from the tables on this page; it is constructed, and your numbers will differ. The matrix is the artifact the build team tests against.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn access matrix for Tidewell's nine constructed restricted clauses against five kinds of asker: staff, manager, HR, finance and IT. Salary bands: HR only. Salary review, performance improvement plan, opening a vacancy and spending limits: managers and HR. Local admin rights and firewall exceptions: IT only. Supplier payment terms and month-end close: finance only. The staff cell for the performance improvement plan is highlighted as golden question G46.">
+        <defs>
+          <filter id="a3dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a3dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a3dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a3dY { font: 800 12px Inter, sans-serif; fill: #0A5A60; }
+          .a3dA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a3dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a3dH" x="30" y="26">THE ACCESS MATRIX · WHO MAY READ EACH RESTRICTED CLAUSE</text>
+        <text class="a3dS" x="470" y="26">constructed Tidewell store · one row per clause, signed by its owner</text>
+
+        <g filter="url(#a3dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="820" height="290" rx="10" transform="rotate(-0.2 440 189)" fill="#FFFFFF"/>
+          <rect x="350" y="44" width="500" height="34" rx="0" fill="url(#a3dHc)"/>
+          <path d="M30 78 L850 78"/>
+          <path d="M350 44 L350 334 M450 44 L450 334 M550 44 L550 334 M650 44 L650 334 M750 44 L750 334" stroke="#C5DADB"/>
+          <path d="M30 106 L850 106 M30 134 L850 134 M30 162 L850 162 M30 190 L850 190 M30 218 L850 218 M30 246 L850 246 M30 274 L850 274 M30 302 L850 302" stroke="#E2EEEE"/>
+          <rect x="356" y="139" width="88" height="18" rx="4" transform="rotate(-1 400 148)" fill="#F4B63F"/>
+          <path d="M210 352 L236 352" marker-end="url(#a3dAr)"/>
+        </g>
+
+        <text class="a3dA" x="44" y="66">CLAUSE · OWNER</text>
+        <text class="a3dH" x="400" y="66" text-anchor="middle">staff</text>
+        <text class="a3dH" x="500" y="66" text-anchor="middle">manager</text>
+        <text class="a3dH" x="600" y="66" text-anchor="middle">HR</text>
+        <text class="a3dH" x="700" y="66" text-anchor="middle">finance</text>
+        <text class="a3dH" x="800" y="66" text-anchor="middle">IT</text>
+
+        <text class="a3dL" x="44" y="96">Salary bands</text>
+        <text class="a3dS" x="196" y="96">reward manager</text>
+        <text class="a3dS" x="400" y="96" text-anchor="middle">no</text>
+        <text class="a3dS" x="500" y="96" text-anchor="middle">no</text>
+        <text class="a3dY" x="600" y="96" text-anchor="middle">yes</text>
+        <text class="a3dS" x="700" y="96" text-anchor="middle">no</text>
+        <text class="a3dS" x="800" y="96" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="124">Salary review</text>
+        <text class="a3dS" x="196" y="124">reward manager</text>
+        <text class="a3dS" x="400" y="124" text-anchor="middle">no</text>
+        <text class="a3dY" x="500" y="124" text-anchor="middle">yes</text>
+        <text class="a3dY" x="600" y="124" text-anchor="middle">yes</text>
+        <text class="a3dS" x="700" y="124" text-anchor="middle">no</text>
+        <text class="a3dS" x="800" y="124" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="152">Improvement plan</text>
+        <text class="a3dS" x="196" y="152">HR partner lead</text>
+        <text class="a3dL" x="400" y="152" text-anchor="middle">no · G46</text>
+        <text class="a3dY" x="500" y="152" text-anchor="middle">yes</text>
+        <text class="a3dY" x="600" y="152" text-anchor="middle">yes</text>
+        <text class="a3dS" x="700" y="152" text-anchor="middle">no</text>
+        <text class="a3dS" x="800" y="152" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="180">Opening a vacancy</text>
+        <text class="a3dS" x="196" y="180">talent lead</text>
+        <text class="a3dS" x="400" y="180" text-anchor="middle">no</text>
+        <text class="a3dY" x="500" y="180" text-anchor="middle">yes</text>
+        <text class="a3dY" x="600" y="180" text-anchor="middle">yes</text>
+        <text class="a3dS" x="700" y="180" text-anchor="middle">no</text>
+        <text class="a3dS" x="800" y="180" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="208">Spending limits</text>
+        <text class="a3dS" x="196" y="208">CFO</text>
+        <text class="a3dS" x="400" y="208" text-anchor="middle">no</text>
+        <text class="a3dY" x="500" y="208" text-anchor="middle">yes</text>
+        <text class="a3dY" x="600" y="208" text-anchor="middle">yes</text>
+        <text class="a3dS" x="700" y="208" text-anchor="middle">no</text>
+        <text class="a3dS" x="800" y="208" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="236">Local admin rights</text>
+        <text class="a3dS" x="196" y="236">IT security mgr</text>
+        <text class="a3dS" x="400" y="236" text-anchor="middle">no</text>
+        <text class="a3dS" x="500" y="236" text-anchor="middle">no</text>
+        <text class="a3dS" x="600" y="236" text-anchor="middle">no</text>
+        <text class="a3dS" x="700" y="236" text-anchor="middle">no</text>
+        <text class="a3dY" x="800" y="236" text-anchor="middle">yes</text>
+
+        <text class="a3dL" x="44" y="264">Firewall exceptions</text>
+        <text class="a3dS" x="196" y="264">IT security mgr</text>
+        <text class="a3dS" x="400" y="264" text-anchor="middle">no</text>
+        <text class="a3dS" x="500" y="264" text-anchor="middle">no</text>
+        <text class="a3dS" x="600" y="264" text-anchor="middle">no</text>
+        <text class="a3dS" x="700" y="264" text-anchor="middle">no</text>
+        <text class="a3dY" x="800" y="264" text-anchor="middle">yes</text>
+
+        <text class="a3dL" x="44" y="292">Supplier payments</text>
+        <text class="a3dS" x="196" y="292">AP lead</text>
+        <text class="a3dS" x="400" y="292" text-anchor="middle">no</text>
+        <text class="a3dS" x="500" y="292" text-anchor="middle">no</text>
+        <text class="a3dS" x="600" y="292" text-anchor="middle">no</text>
+        <text class="a3dY" x="700" y="292" text-anchor="middle">yes</text>
+        <text class="a3dS" x="800" y="292" text-anchor="middle">no</text>
+
+        <text class="a3dL" x="44" y="320">Month-end close</text>
+        <text class="a3dS" x="196" y="320">AP lead</text>
+        <text class="a3dS" x="400" y="320" text-anchor="middle">no</text>
+        <text class="a3dS" x="500" y="320" text-anchor="middle">no</text>
+        <text class="a3dS" x="600" y="320" text-anchor="middle">no</text>
+        <text class="a3dY" x="700" y="320" text-anchor="middle">yes</text>
+        <text class="a3dS" x="800" y="320" text-anchor="middle">no</text>
+
+        <text class="a3dN" x="30" y="356">Every "no" cell</text>
+        <text class="a3dN" x="244" y="356">gets one test question in that asker's words; the golden set must show 0 leaks.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - each "no" is a promise, and each promise gets a test question</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>List every clause that is not for all staff.</strong> Work from the documents named in your scope sentence. For each restricted clause write its key, a short title and its owner by role. A clause with no owner cannot be restricted correctly, so it goes on the waiting list with session 2's unowned topics.</p>
+        <div class="prompt-box good"><span class="label">★ Block 1 · restricted clauses, Tidewell style</span>key         title                          owner
+HR-PAY-2    Salary bands                   Reward manager
+HR-PERF-1   Performance improvement plan   HR business partner lead
+FIN-DOA-1   Spending limits                Chief financial officer
+IT-ADM-1    Local admin rights             IT security manager</div>
+      </div>
+      <div class="step">
+        <p><strong>Pick the groups, and keep them few.</strong> Start from the groups your HR system already knows: all staff, managers, and one per function that holds confidential procedure. Tidewell uses five. Write who each group covers in one line, including whether HR sits inside "managers".</p>
+      </div>
+      <div class="step">
+        <p><strong>Have each owner fill their own rows.</strong> Send each owner only their clauses and the group list. The owner picks one group per clause and signs the row. Where an owner hesitates, ask the question that settles it: would you hand this paragraph to a new joiner who asked?</p>
+        <div class="prompt-box good"><span class="label">★ Block 2 · one signed row per clause</span>clause              group              staff manager HR  finance IT   signed
+Salary bands        HR only            no    no      yes no      no   Reward manager
+Improvement plan    managers and HR    no    yes     yes no      no   HR partner lead
+Supplier payments   finance only       no    no      no  yes     no   AP lead</div>
+      </div>
+      <div class="step">
+        <p><strong>Write one test question for every "no" that matters.</strong> Write it in the words of someone who must not get the answer, the way G46 asks "how long does a performance improvement plan last?" as a staff member. These join the golden set as restricted questions. Add a few ordinary questions that share words with a restricted clause, because that is where most of Tidewell's 18 leaks came from.</p>
+        <div class="prompt-box good"><span class="label">★ Block 3 · restricted test questions</span>asker    question                                               must not cite
+staff    How long does a performance improvement plan last?     HR-PERF-1
+staff    What spending limit does a director have?              FIN-DOA-1
+staff    How do I get local admin rights on my laptop?          IT-ADM-1</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the line for the build team.</strong> One sentence, no options. The zero is Tidewell's policy choice, not an industry standard; set yours deliberately and write down who chose it.</p>
+        <div class="prompt-box good"><span class="label">★ The decision line</span>The assistant filters clauses by the asker's group inside retrieval, before ranking.
+Access is set per clause by the clause owner, recorded in the access matrix.
+The golden set, including one restricted question per "no" cell, must show 0 leaks
+before launch and after every change to the store, the filter or the matrix.</div>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The version that sounds secure and decides nothing</span>
+The assistant respects existing shared-drive permissions and redacts
+confidential information such as salaries from its answers.
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 4</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li>Finish the matrix for every restricted clause in your scope and get each row signed by its owner. Bring the count of clauses, groups and unsigned rows.</li>
+      <li>Find one policy document in your organisation that mixes all-staff clauses with restricted ones. Write down what folder-inherited access would do to it.</li>
+      <li>Write five ordinary staff questions that share words with a restricted clause, like "plan", "limit" or "approve". These are the questions most likely to leak.</li>
+      <li>Ask whoever is building or buying your assistant one question: "where does the permission filter run, before ranking or after the answer?" Write down the answer verbatim.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Leader session 3 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · On Tidewell's bench with no permission filter, 18 of 54 golden questions leak, but only 7 are answered from the forbidden clause. Why count all 18?</p>
+      <button class="qopt" type="button">A · Because the other 11 answers are wrong</button>
+      <button class="qopt" type="button">B · Because OWASP requires a count of 18</button>
+      <button class="qopt" type="button">C · Because in all 18 the forbidden clause was handed to the generator, and whether it surfaces depends on phrasing you do not control</button>
+      <button class="qopt" type="button">D · Because only restricted questions can leak, and there are 18 of them</button>
+      <p class="qwhy">A leak is a retrieval event, not an answer event. D is the trap: only 6 golden questions were written as restricted, so most leaks came from ordinary questions that share words with a restricted clause.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · A supplier proposes to scan every answer and redact salary figures before it reaches the user. What is the problem?</p>
+      <button class="qopt" type="button">A · The generator has already read the forbidden clause, and a scanner must recognise restricted content after paraphrase, so it cannot be tested to zero the way a filter before ranking can</button>
+      <button class="qopt" type="button">B · Redaction makes answers too short for staff to like them</button>
+      <button class="qopt" type="button">C · Nothing, as long as the redaction list covers every salary figure</button>
+      <button class="qopt" type="button">D · Redaction is fine but costs more tokens than filtering</button>
+      <p class="qwhy">The filter inside retrieval asks one checkable question per clause: may this person read it? OWASP LLM08 asks for permission-aware stores for that reason. C assumes you can list every way a figure can be reworded.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · Tidewell's pay and grading policy holds pay day, overtime, salary review and salary bands. Who should set each clause's access group?</p>
+      <button class="qopt" type="button">A · IT, from the folder the document is stored in</button>
+      <button class="qopt" type="button">B · The build team, by reading the clause</button>
+      <button class="qopt" type="button">C · Nobody; everything in the HR folder should be HR only</button>
+      <button class="qopt" type="button">D · The clause's owner, the reward manager, one group per clause, signed in the matrix</button>
+      <p class="qwhy">Folder inheritance either hides pay day from staff or shows salary bands to everyone. Only the owner knows why a clause is restricted, so the owner signs the row.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Sensitive information disclosure and least privilege</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM02, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Permission-aware retrieval, filter before ranking</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM08 Vector and Embedding Weaknesses, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Leaks counted: 18 to 0, 7 leaked answers, G46 changes what wins</span><span class="note">Measured on the bench in Builder session 8; Tidewell's store, groups and questions are constructed</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Owner-set access per clause</span><span class="note">Taught as a method on Tidewell's constructed store; the zero-leak line is Tidewell's policy choice</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Access models and row-level security</span><span class="note">Linked, not retaught; the data access control course owns them</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Prompt injection through a poisoned document</span><span class="note">Named via OWASP LLM01 only; the AI red team course owns it</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Personal data law</span><span class="note">Not covered; the PDPA and GDPR courses own it, and Tidewell's policies are not legal advice</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Leader session 3 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>A leak is a retrieval event</b><span>A forbidden clause in the top 3 counts, whether or not the answer used it.</span></div>
+      <div class="cheat-item"><b>Tidewell, no filter</b><span>18 of 54 questions leak; 7 are answered from the forbidden clause.</span></div>
+      <div class="cheat-item"><b>Filter before ranking</b><span>One lookup per clause: may this person read it? Testable to zero.</span></div>
+      <div class="cheat-item"><b>Redaction is too late</b><span>The generator already read it, and paraphrase slips past a scanner.</span></div>
+      <div class="cheat-item"><b>A filter changes what wins</b><span>G46: stale citations rise from 6 to 7. Rerun the whole golden set.</span></div>
+      <div class="cheat-item"><b>Owner sets access</b><span>Per clause, signed in the matrix. Never inherited from a folder.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>The assistant now only reads what the asker may read. Session 4 asks what it says when nothing it may read answers the question, and why rung 3 on the bench, 97.6% correct with no leaks, is still a NO-GO.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Leader session 3 of 6 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a2-buy-build-or-wait.html">← Prev: Buy, build or wait</a> &nbsp;·&nbsp; <a href="a4-when-it-does-not-know.html">Next: What it says when it doesn't know →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

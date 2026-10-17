@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 1 of 8. An internal policy assistant is only as good as its store of clauses. The clause as the unit of retrieval and citation, the eight fields every clause carries, why superseded versions stay in the store, and a validator that catches the metadata faults before any model sees them.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The corpus is the product - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 1 of 8. Eight fields per clause, old versions kept and flagged, access written on every clause. The model is replaceable; the store is not.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b1-the-corpus-is-the-product.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The corpus is the product - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 1 of 8. The clause schema, the version history and a metadata validator.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 1 · The corpus is the product - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 1 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 1 of 8</div>
+    <h1>The corpus is <span class="accent">the product</span></h1>
+    <p class="sub">An assistant that answers from policy can only be as right, as current and as discreet as the store it reads. Tidewell Freight, a constructed 1,200-person freight forwarder, keeps 16 HR, IT and finance policy documents. Tonight you turn them into the thing every later session reads: clauses, each carrying eight fields that decide what may be retrieved, what is current, who answers for it and what the assistant cites. Then you write the validator that refuses a store with a missing owner or two current versions of one rule.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Foundational</span>
+      <span class="chip audience">Builders, data and platform engineers</span>
+      <span class="chip audience">Policy and knowledge owners</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Clause, versions, access</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: the validator</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>How the builder track works</h2>
+    </div>
+    <p class="lede">Eight sessions, plain Python and the browser. You build Tidewell's policy assistant one part at a time, in the order the data flows: the clause store tonight, BM25 retrieval in session 2, the golden questions from the ticket log in session 3, grounded answers with citations in session 4, the permission filter in session 5, the one tool that opens a ticket in session 6, versions and superseded policies in session 7, and in session 8 the go/no-go bench that runs it all at once. Tidewell Freight and every clause in its store are constructed; no real company's policy is shown.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A clause schema with eight fields and the reason for each, a version history that keeps old rules without letting them answer, and a twenty-line validator that fails the store on a missing owner, an unknown access group or two current versions of the same clause. Run it before anything else in the pipeline, every time the store changes.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the clause as the unit of retrieval and citation</span>
+      <h2>A clause, not a document</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">A forty-page expenses policy cannot be cited usefully, and it cannot be permissioned finer than "all of it". One clause can: it answers one kind of question, it has one version history, and one person owns it. So the unit Tidewell stores, retrieves and cites is the clause, and every field on it is there because a later step reads it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One hand-drawn clause card from Tidewell's constructed store, FIN-EXP-2 version 5, with eight fields: key, version, effective date, superseded flag, owner, access group, title and text. Arrows show which step reads each field: the key is what answers are cited and graded by, the version fields keep answers current, the owner is who fixes it, the access group decides who may read it, and the title and text are what BM25 ranks. The superseded flag is highlighted.">
+        <defs>
+          <filter id="b1aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <marker id="b1aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b1aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b1aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b1aF { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b1aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b1aH" x="30" y="26">ONE CLAUSE, EIGHT FIELDS, AND WHO READS EACH</text>
+        <text class="b1aS" x="400" y="26">constructed Tidewell clause · every field feeds a later build step</text>
+
+        <g filter="url(#b1aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="280" y="48" width="300" height="266" rx="12" transform="rotate(-0.4 430 181)" fill="#FFFFFF"/>
+          <rect x="288" y="157" width="284" height="23" rx="5" fill="#F4B63F"/>
+          <path d="M290 86 L570 86 M290 118 L570 118 M290 150 L570 150 M290 182 L570 182 M290 214 L570 214 M290 246 L570 246 M290 278 L570 278" stroke="#E2EEEE" stroke-width="1.5"/>
+          <path d="M246 70 L276 70" marker-end="url(#b1aAr)"/>
+          <path d="M272 96 L264 96 L264 180 L272 180"/>
+          <path d="M584 198 L614 198" marker-end="url(#b1aAr)"/>
+          <path d="M584 232 L614 246" marker-end="url(#b1aAr)"/>
+          <path d="M588 256 L596 256 L596 304 L588 304"/>
+          <path d="M598 282 L614 290" marker-end="url(#b1aAr)"/>
+        </g>
+
+        <text class="b1aF" x="296" y="74">key</text>
+        <text class="b1aL" x="380" y="74">FIN-EXP-2</text>
+        <text class="b1aF" x="296" y="106">version</text>
+        <text class="b1aL" x="380" y="106">v5</text>
+        <text class="b1aF" x="296" y="138">effective</text>
+        <text class="b1aL" x="380" y="138">2026-02-01</text>
+        <text class="b1aF" x="296" y="173">superseded</text>
+        <text class="b1aL" x="380" y="173">false</text>
+        <text class="b1aF" x="296" y="202">owner</text>
+        <text class="b1aL" x="380" y="202">Financial controller</text>
+        <text class="b1aF" x="296" y="234">access</text>
+        <text class="b1aL" x="380" y="234">all staff</text>
+        <text class="b1aF" x="296" y="266">title</text>
+        <text class="b1aL" x="380" y="266">Meals when travelling</text>
+        <text class="b1aF" x="296" y="298">text</text>
+        <text class="b1aS" x="380" y="298">daily allowance SGD 60 ...</text>
+
+        <text class="b1aL" x="240" y="74" text-anchor="end">cite it and grade it</text>
+        <text class="b1aS" x="240" y="90" text-anchor="end">builder sessions 3 and 4</text>
+        <text class="b1aL" x="254" y="134" text-anchor="end">keep it true</text>
+        <text class="b1aS" x="254" y="150" text-anchor="end">builder session 7</text>
+
+        <text class="b1aL" x="622" y="202">who fixes it</text>
+        <text class="b1aS" x="622" y="218">leader session 6</text>
+        <text class="b1aL" x="622" y="250">who may read it</text>
+        <text class="b1aS" x="622" y="266">builder session 5</text>
+        <text class="b1aL" x="622" y="294">what BM25 ranks</text>
+        <text class="b1aS" x="622" y="310">builder session 2</text>
+
+        <text class="b1aN" x="30" y="342">Six of the eight fields are metadata. The assistant's safety lives in them, not in the text the model reads.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the highlighted flag is the one field that, when wrong, lets an old rule answer as if it were new</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The eight fields, and the step that reads each<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Field</th><th>Example</th><th>Read by</th><th>If it is wrong</th></tr></thead>
+          <tbody>
+            <tr><td><strong>key</strong></td><td>FIN-EXP-2</td><td>Citations and golden-set grading</td><td>Two rules share a key, or one rule gets two, and grading lies</td></tr>
+            <tr><td><strong>version</strong></td><td>v5</td><td>The version register</td><td>Nobody can say which text answered on a given day</td></tr>
+            <tr><td><strong>effective</strong></td><td>2026-02-01</td><td>The register; audits</td><td>A rule applies before it was agreed</td></tr>
+            <tr><td><strong>superseded</strong></td><td>false</td><td>The current-version filter</td><td>An old rule answers as if it were new</td></tr>
+            <tr><td><strong>owner</strong></td><td>Financial controller</td><td>Staleness checks, corrections</td><td>A wrong answer has nobody to fix it</td></tr>
+            <tr><td><strong>access</strong></td><td>all staff</td><td>The permission filter</td><td>The salary bands reach a staff member</td></tr>
+            <tr><td><strong>title</strong>, <strong>text</strong></td><td>Meals when travelling</td><td>BM25 ranking, the answer</td><td>The right clause is never found</td></tr>
+          </tbody>
+        </table>
+        <p>Tidewell's constructed store holds 49 clause versions across 16 documents: 42 current and 7 superseded. Of the current ones, 33 are readable by all staff and 9 are restricted. The bench in session 8 prints the same counts from the same file.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>How big is a clause?<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Big enough to answer one kind of question on its own, small enough that a citation points at something a person can read in ten seconds. Tidewell's clauses average 21.76 tokens, title included, once stopwords are removed. That is a choice about this corpus, not a rule: policy text is already written in numbered clauses, so the authors have done the chunking. For documents that are not, chunking strategies and their trade-offs belong to the <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/courses/b2-chunking.html">RAG course's chunking session</a>, and this track does not reteach them.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Why the store, not the model, is the asset.</strong> The paper that named retrieval-augmented generation, Lewis and colleagues in 2020, described it as combining "parametric and non-parametric memory", and showed that knowledge can be updated by replacing the retrieved index rather than retraining the model. For a policy assistant that is the whole design: when HR changes the leave policy, you change the store. The same paper calls providing provenance an open problem, which is why the citation and its metadata are built here, not assumed.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers keeping superseded versions without letting them answer</span>
+      <h2>Old rules stay in the store</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Deleting the old leave policy feels tidy and is wrong. HR will be asked what the policy said on the day an employee booked their leave, and the answer is the old version. So old versions stay, flagged superseded, and the assistant is never allowed to answer from them. Two facts make the flag matter more than it looks.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn timeline of six constructed Tidewell clause versions. Hybrid work version 1, three remote days, from 2022-03-01. Leave version 2, 18 holiday days, from 2023-04-01. Expenses version 4, per diem SGD 50, from 2024-01-01. Hybrid work version 2, home 2 days a week, from 2025-07-01. Leave version 3, annual leave 20 days, from 2026-01-01. Expenses version 5, daily allowance SGD 60, from 2026-02-01. The first three are superseded, the last three current, and arcs join each old version to the one that replaced it.">
+        <defs>
+          <filter id="b1bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="37" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <marker id="b1bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#0A5A60" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b1bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b1bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b1bD { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b1bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b1bH" x="30" y="26">THREE RULES, SIX VERSIONS, ONE STORE</text>
+        <text class="b1bS" x="320" y="26">constructed Tidewell history · arcs join each old version to its replacement</text>
+
+        <g filter="url(#b1bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M40 112 L840 112"/>
+          <circle cx="70" cy="112" r="6" fill="#FFFFFF"/>
+          <circle cx="218" cy="112" r="6" fill="#FFFFFF"/>
+          <circle cx="366" cy="112" r="6" fill="#FFFFFF"/>
+          <circle cx="514" cy="112" r="6" fill="#0E8086" stroke="#0E8086"/>
+          <circle cx="662" cy="112" r="6" fill="#0E8086" stroke="#0E8086"/>
+          <circle cx="810" cy="112" r="6" fill="#0E8086" stroke="#0E8086"/>
+          <rect x="25" y="176" width="90" height="20" rx="10" fill="#FFFFFF" stroke="#4D6466"/>
+          <rect x="173" y="176" width="90" height="20" rx="10" fill="#FFFFFF" stroke="#4D6466"/>
+          <rect x="321" y="176" width="90" height="20" rx="10" fill="#FFFFFF" stroke="#4D6466"/>
+          <rect x="469" y="176" width="90" height="20" rx="10" fill="#F4B63F"/>
+          <rect x="617" y="176" width="90" height="20" rx="10" fill="#F4B63F"/>
+          <rect x="765" y="176" width="90" height="20" rx="10" fill="#F4B63F"/>
+          <path d="M70 202 C70 240 514 240 514 204" stroke="#0A5A60" stroke-width="1.6" marker-end="url(#b1bAr)"/>
+          <path d="M218 202 C218 250 662 250 662 204" stroke="#0A5A60" stroke-width="1.6" marker-end="url(#b1bAr)"/>
+          <path d="M366 202 C366 260 810 260 810 204" stroke="#0A5A60" stroke-width="1.6" marker-end="url(#b1bAr)"/>
+        </g>
+
+        <text class="b1bD" x="70" y="96" text-anchor="middle">2022-03-01</text>
+        <text class="b1bD" x="218" y="96" text-anchor="middle">2023-04-01</text>
+        <text class="b1bD" x="366" y="96" text-anchor="middle">2024-01-01</text>
+        <text class="b1bD" x="514" y="96" text-anchor="middle">2025-07-01</text>
+        <text class="b1bD" x="662" y="96" text-anchor="middle">2026-01-01</text>
+        <text class="b1bD" x="810" y="96" text-anchor="middle">2026-02-01</text>
+
+        <text class="b1bL" x="70" y="140" text-anchor="middle">HR-WFH-1 v1</text>
+        <text class="b1bS" x="70" y="157" text-anchor="middle">3 remote days</text>
+        <text class="b1bL" x="218" y="140" text-anchor="middle">HR-LV-1 v2</text>
+        <text class="b1bS" x="218" y="157" text-anchor="middle">18 holiday days</text>
+        <text class="b1bL" x="366" y="140" text-anchor="middle">FIN-EXP-2 v4</text>
+        <text class="b1bS" x="366" y="157" text-anchor="middle">per diem SGD 50</text>
+        <text class="b1bL" x="514" y="140" text-anchor="middle">HR-WFH-1 v2</text>
+        <text class="b1bS" x="514" y="157" text-anchor="middle">home 2 days a week</text>
+        <text class="b1bL" x="662" y="140" text-anchor="middle">HR-LV-1 v3</text>
+        <text class="b1bS" x="662" y="157" text-anchor="middle">annual leave 20</text>
+        <text class="b1bL" x="810" y="140" text-anchor="middle">FIN-EXP-2 v5</text>
+        <text class="b1bS" x="810" y="157" text-anchor="middle">allowance SGD 60</text>
+
+        <text class="b1bS" x="70" y="190" text-anchor="middle">superseded</text>
+        <text class="b1bS" x="218" y="190" text-anchor="middle">superseded</text>
+        <text class="b1bS" x="366" y="190" text-anchor="middle">superseded</text>
+        <text class="b1bL" x="514" y="190" text-anchor="middle">current</text>
+        <text class="b1bL" x="662" y="190" text-anchor="middle">current</text>
+        <text class="b1bL" x="810" y="190" text-anchor="middle">current</text>
+
+        <text class="b1bN" x="30" y="280">The old versions use the words staff still say: "holiday", "per diem", "remote". That is why they win a keyword search.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - each old version is kept for the record and flagged, because staff still ask in its words</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Staff ask in the words of the version they learned<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell renamed "holiday entitlement" to "annual leave", "per diem" to "daily allowance" and "remote work" to "working from home". Staff did not. Seven of the 54 golden questions in session 3 use the old vocabulary, and on the bench in session 8 a retriever without the version filter cites a superseded clause for five of them. Keyword retrieval rewards the old wording, because the old clause literally contains the words in the question.</p>
+        <p>The fix is not to delete the old clause or to rewrite the question. It is a filter that removes superseded versions before ranking, built in session 7, and new text that bridges the vocabulary: Tidewell's current leave clause opens "Annual leave, formerly called holiday entitlement".</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Two current versions of one rule<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The quietest fault in a policy store is a new version loaded without the old one being flagged. Both say "current", both get retrieved, and the assistant's answer depends on which one BM25 happens to rank first for that question's wording. Session 8's break button builds exactly this fault on the expenses policy and shows the go/no-go passing it. The validator below catches it at load time, which is cheaper than catching it at launch.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers access written on every clause</span>
+      <h2>Who may read it is part of the clause</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Most of a policy store is for everyone. The rest is the reason the permission filter exists, and it has to be written on the clause by the person who owns it, not inferred later from which folder the document came from.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn grid of Tidewell's 42 current clauses by domain and access group. HR: 15 all staff, 3 managers, 1 HR only. IT: 10 all staff, 2 IT only. Finance: 8 all staff, 1 managers, 2 finance only. Darker cells hold more clauses. Nine clauses in all are restricted.">
+        <defs>
+          <filter id="b1cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+        </defs>
+        <style>
+          .b1cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b1cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b1cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b1cC { font: 700 11px Inter, sans-serif; fill: #13292C; }
+          .b1cK { font: 800 13px Inter, sans-serif; fill: #13292C; }
+          .b1cW { font: 800 13px Inter, sans-serif; fill: #FFFFFF; }
+          .b1cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b1cH" x="30" y="26">42 CURRENT CLAUSES, BY WHO MAY READ THEM</text>
+        <text class="b1cS" x="360" y="26">constructed Tidewell store · the bench prints the same counts</text>
+
+        <text class="b1cC" x="248" y="58" text-anchor="middle">all staff</text>
+        <text class="b1cC" x="344" y="58" text-anchor="middle">managers</text>
+        <text class="b1cC" x="440" y="58" text-anchor="middle">HR only</text>
+        <text class="b1cC" x="536" y="58" text-anchor="middle">finance only</text>
+        <text class="b1cC" x="632" y="58" text-anchor="middle">IT only</text>
+        <text class="b1cC" x="748" y="58" text-anchor="middle">current</text>
+
+        <g filter="url(#b1cSk)" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="202" y="70" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".9"/>
+          <rect x="298" y="70" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".38"/>
+          <rect x="394" y="70" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".15"/>
+          <rect x="490" y="70" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="586" y="70" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="202" y="118" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".62"/>
+          <rect x="298" y="118" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="394" y="118" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="490" y="118" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="586" y="118" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".15"/>
+          <rect x="202" y="166" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".62"/>
+          <rect x="298" y="166" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".15"/>
+          <rect x="394" y="166" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <rect x="490" y="166" width="92" height="40" rx="6" fill="#0A5A60" fill-opacity=".15"/>
+          <rect x="586" y="166" width="92" height="40" rx="6" fill="#FFFFFF"/>
+          <path d="M296 218 L296 226 L676 226 L676 218" stroke="#F4B63F" stroke-width="3"/>
+          <!-- legend chips -->
+          <rect x="202" y="262" width="22" height="14" rx="3" fill="#FFFFFF"/>
+          <rect x="282" y="262" width="22" height="14" rx="3" fill="#0A5A60" fill-opacity=".15"/>
+          <rect x="362" y="262" width="22" height="14" rx="3" fill="#0A5A60" fill-opacity=".38"/>
+          <rect x="442" y="262" width="22" height="14" rx="3" fill="#0A5A60" fill-opacity=".62"/>
+          <rect x="522" y="262" width="22" height="14" rx="3" fill="#0A5A60" fill-opacity=".9"/>
+        </g>
+
+        <text class="b1cL" x="190" y="95" text-anchor="end">HR</text>
+        <text class="b1cL" x="190" y="143" text-anchor="end">IT</text>
+        <text class="b1cL" x="190" y="191" text-anchor="end">Finance</text>
+
+        <text class="b1cW" x="248" y="95" text-anchor="middle">15</text>
+        <text class="b1cK" x="344" y="95" text-anchor="middle">3</text>
+        <text class="b1cK" x="440" y="95" text-anchor="middle">1</text>
+        <text class="b1cK" x="248" y="143" text-anchor="middle">10</text>
+        <text class="b1cK" x="632" y="143" text-anchor="middle">2</text>
+        <text class="b1cK" x="248" y="191" text-anchor="middle">8</text>
+        <text class="b1cK" x="344" y="191" text-anchor="middle">1</text>
+        <text class="b1cK" x="536" y="191" text-anchor="middle">2</text>
+
+        <text class="b1cL" x="748" y="95" text-anchor="middle">19</text>
+        <text class="b1cL" x="748" y="143" text-anchor="middle">12</text>
+        <text class="b1cL" x="748" y="191" text-anchor="middle">11</text>
+
+        <text class="b1cS" x="486" y="244" text-anchor="middle">9 restricted clauses: the permission filter exists for these</text>
+
+        <text class="b1cS" x="230" y="273">0</text>
+        <text class="b1cS" x="310" y="273">1-2</text>
+        <text class="b1cS" x="390" y="273">3</text>
+        <text class="b1cS" x="470" y="273">8-10</text>
+        <text class="b1cS" x="550" y="273">15</text>
+
+        <text class="b1cN" x="30" y="304">Restricted clauses are few, and they are the salary bands, the admin procedure and the close timetable.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - nine restricted clauses out of 42 carry most of the assistant's leak risk</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Five groups, and the rule that reads them<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every clause names exactly one access group: <strong>all</strong> (everyone), <strong>managers</strong> (managers and HR), <strong>hr</strong>, <strong>finance</strong> or <strong>it</strong>. Every asker belongs to one group: staff, manager, hr, finance or it. A clause may be read when the asker's group is in the clause's list. That is the whole rule, and it is deliberately boring: session 5 runs it inside retrieval, before anything is ranked, and the bench counts every question whose retrieved set breaks it. Richer models, roles, attributes and row-level rules, belong to the <a href="https://phoebefu6.github.io/learn-data-access-control-with-phoebe/courses/a1-who-can-see-what.html">data access control course</a>.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the owner sets the access, not the folder<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Access inherited from a shared drive folder is access nobody decided. One HR folder at Tidewell holds the public leave policy and the salary bands side by side; inherit the folder and both are "HR". OWASP's Top 10 for LLM applications (2025) asks for "fine-grained access controls and permission-aware vector and embedding stores" under LLM08, and limiting sensitive data "based on the principle of least privilege" under LLM02. Fine-grained means per clause, written by the person who can say why.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>A validator that refuses a bad store</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">Plain Python, no libraries. Four constructed clauses, three of them with a fault planted on purpose, and a check that must find all three. Run it from an empty scratch folder, then point it at your own clause file.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn validator with three gates in a row. Four clause cards enter. Gate one checks that all eight fields are present and catches FIN-EXP-2 version 5 with no owner. Gate two checks the access group is one of five and catches version 4 with the group everyone. Gate three checks each key has exactly one current version and catches FIN-EXP-2 with two. The store is refused until all three gates pass.">
+        <defs>
+          <filter id="b1dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b1dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b1dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b1dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b1dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b1dR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b1dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b1dH" x="30" y="26">THREE GATES BEFORE ANY CLAUSE IS INDEXED</text>
+
+        <g filter="url(#b1dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="110" height="120" rx="8" transform="rotate(-1 85 116)" fill="url(#b1dHc)"/>
+          <path d="M146 116 L186 116" marker-end="url(#b1dAr)"/>
+          <rect x="192" y="56" width="200" height="120" rx="10" transform="rotate(0.5 292 116)" fill="#FFFFFF"/>
+          <path d="M398 116 L418 116" marker-end="url(#b1dAr)"/>
+          <rect x="424" y="56" width="200" height="120" rx="10" transform="rotate(-0.5 524 116)" fill="#FFFFFF"/>
+          <path d="M630 116 L650 116" marker-end="url(#b1dAr)"/>
+          <rect x="656" y="56" width="194" height="120" rx="10" transform="rotate(0.5 753 116)" fill="#F4B63F"/>
+        </g>
+
+        <text class="b1dL" x="40" y="196">4 clauses in</text>
+        <text class="b1dH" x="206" y="80">1 · EIGHT FIELDS</text>
+        <text class="b1dS" x="206" y="100">every field present,</text>
+        <text class="b1dS" x="206" y="117">none empty</text>
+        <text class="b1dR" x="206" y="150">FIN-EXP-2@v5: owner</text>
+        <text class="b1dH" x="438" y="80">2 · KNOWN GROUP</text>
+        <text class="b1dS" x="438" y="100">access is one of all,</text>
+        <text class="b1dS" x="438" y="117">managers, hr, finance, it</text>
+        <text class="b1dR" x="438" y="150">FIN-EXP-2@v4: everyone</text>
+        <text class="b1dH" x="670" y="80">3 · ONE CURRENT</text>
+        <text class="b1dL" x="670" y="100">each key has exactly</text>
+        <text class="b1dL" x="670" y="117">one current version</text>
+        <text class="b1dR" x="670" y="150">FIN-EXP-2: v5 and v4</text>
+
+        <text class="b1dN" x="30" y="232">Each gate catches one planted fault. A validator that catches none of them has not been tested.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - gate three is the one that would have stopped session 8's false GO</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Write four clauses as plain records.</strong> Two versions of the leave rule, correctly flagged, and two of the meals rule with three faults planted: a blank owner on version 5, an unknown access group on version 4, and version 4 not flagged superseded.</p>
+        <div class="prompt-box good"><span class="label">★ validate.py · part 1, the clauses (constructed)</span>clauses = [
+    {"key": "HR-LV-1", "version": "v3", "effective": "2026-01-01", "superseded": False,
+     "owner": "HR policy lead", "access": "all", "title": "Annual leave",
+     "text": "Full-time staff earn 20 days of annual leave each calendar year."},
+    {"key": "HR-LV-1", "version": "v2", "effective": "2023-04-01", "superseded": True,
+     "owner": "HR policy lead", "access": "all", "title": "Holiday entitlement",
+     "text": "Every employee receives 18 days holiday entitlement each year."},
+    {"key": "FIN-EXP-2", "version": "v5", "effective": "2026-02-01", "superseded": False,
+     "owner": "", "access": "all", "title": "Meals when travelling",
+     "text": "Meals are covered by a daily allowance of SGD 60 in Singapore."},
+    {"key": "FIN-EXP-2", "version": "v4", "effective": "2024-01-01", "superseded": False,
+     "owner": "Financial controller", "access": "everyone", "title": "Per diem",
+     "text": "Per diem for meals: SGD 50 per day in Singapore."},
+]</div>
+      </div>
+      <div class="step">
+        <p><strong>Gates one and two: every field present, and a known access group.</strong> An empty string counts as missing; an owner of "" is no owner.</p>
+        <div class="prompt-box good"><span class="label">★ validate.py · part 2, fields and groups</span>GROUPS = {"all", "managers", "hr", "finance", "it"}
+REQUIRED = ["key", "version", "effective", "superseded", "owner", "access", "title", "text"]
+
+problems = []
+for c in clauses:
+    cid = c["key"] + "@" + c["version"]
+    for f in REQUIRED:
+        if c.get(f) in (None, ""):
+            problems.append(f"{cid}: missing {f}")
+    if c["access"] not in GROUPS:
+        problems.append(f"{cid}: unknown access group {c['access']!r}")</div>
+      </div>
+      <div class="step">
+        <p><strong>Gate three: exactly one current version per key.</strong> Group the current versions by key and complain about any key with more or fewer than one.</p>
+        <div class="prompt-box good"><span class="label">★ validate.py · part 3, one current version</span>current = {}
+for c in clauses:
+    if not c["superseded"]:
+        current.setdefault(c["key"], []).append(c["version"])
+for key, versions in sorted(current.items()):
+    if len(versions) != 1:
+        problems.append(f"{key}: {len(versions)} current versions {versions}")
+
+print(len(clauses), "clauses,", len(problems), "problems")
+for p in problems:
+    print("  " + p)</div>
+      </div>
+      <div class="step">
+        <p><strong>Run it and read the three lines.</strong> <code>python3 validate.py</code> prints exactly this. If you see fewer than three problems, a gate is broken; if you see more, a clause has a fault you did not plant.</p>
+        <div class="prompt-box good"><span class="label">★ Output</span>4 clauses, 3 problems
+  FIN-EXP-2@v5: missing owner
+  FIN-EXP-2@v4: unknown access group 'everyone'
+  FIN-EXP-2: 2 current versions ['v5', 'v4']</div>
+      </div>
+      <div class="step">
+        <p><strong>Fix the store, not the validator.</strong> Give version 5 its owner, set version 4's access to "all" and its superseded flag to True, and run again: <code>4 clauses, 0 problems</code>. Then make the validator the first step of every load, and fail the load on any problem.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The load step that lets every fault through</span>
+for path in glob("policies/*.pdf"):
+    index.add(extract_text(path))   # no clause, no version, no owner, no access
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 2</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Take one real policy document from your organisation and split it into clauses. Fill the eight fields for each; leave a field blank rather than guess.</li>
+      <li>Find a policy that changed in the last two years. Write both versions as clauses, flag the old one, and note which words staff still use from it.</li>
+      <li>For every clause in your sample, write the access group and the name of the person who decided it. Count how many you could not name.</li>
+      <li>Add a fourth gate to the validator: an effective date in the future, or a superseded version with a later effective date than the current one.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 1 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Why does Tidewell store and cite clauses rather than whole documents?</p>
+      <button class="qopt" type="button">A · Because the model cannot read long documents</button>
+      <button class="qopt" type="button">B · Because shorter chunks always retrieve better</button>
+      <button class="qopt" type="button">C · Because a clause answers one kind of question and carries its own version, owner and access group, so it can be cited, kept current and permissioned on its own</button>
+      <button class="qopt" type="button">D · Because policy documents have no titles</button>
+      <p class="qwhy">The clause is the smallest unit that can be cited usefully and permissioned finely; the salary bands and the pay-day rule live in one pay policy but have different readers. B is a claim about chunking that depends on the corpus, which the RAG course covers.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2 · HR replaced the leave policy. What should happen to the old version in the store?</p>
+      <button class="qopt" type="button">A · Delete it, so it can never be retrieved</button>
+      <button class="qopt" type="button">B · Keep it, flagged superseded, so the record survives and the version filter keeps it out of answers</button>
+      <button class="qopt" type="button">C · Keep it unflagged, so staff who use the old words still get an answer</button>
+      <button class="qopt" type="button">D · Merge the old and new text into one clause</button>
+      <p class="qwhy">Somebody will need to know what the rule said on a given day, so the old version stays. C is exactly the fault that lets "holiday entitlement" questions get the old 18 days. A loses the record; D makes both rules wrong.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · The validator reports "FIN-EXP-2: 2 current versions". Which later failure does this gate prevent?</p>
+      <button class="qopt" type="button">A · A leak of a restricted clause</button>
+      <button class="qopt" type="button">B · A clause that BM25 can never find</button>
+      <button class="qopt" type="button">C · A question with no written answer</button>
+      <button class="qopt" type="button">D · An old rule answering as if it were current, past every check that reads the superseded flag</button>
+      <p class="qwhy">With two versions marked current, the version filter keeps both, and which one answers depends on the question's wording. Session 8's break button builds this on the same rule and the go/no-go passes it. Access faults are gate two's job.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The clause schema and what reads each field</span><span class="note">Taught as a design; Tidewell's 49 clause versions are constructed and printed by the bench in session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Retrieval-augmented generation and updating knowledge through the index</span><span class="note">Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Fine-grained, permission-aware stores and least privilege</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM08 and LLM02, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">A metadata validator with planted faults</span><span class="note">Run from a scratch folder; the printed output is shown exactly</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Chunking strategies for unstructured documents</span><span class="note">Not taught here; the RAG course owns chunking</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Access models beyond one group per clause</span><span class="note">Not taught here; the data access control course owns roles, attributes and row-level rules</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The clause is the unit</b><span>Stored, retrieved, cited and permissioned one clause at a time.</span></div>
+      <div class="cheat-item"><b>Eight fields</b><span>key, version, effective, superseded, owner, access, title, text.</span></div>
+      <div class="cheat-item"><b>Keep old versions, flagged</b><span>The record survives; the version filter keeps them out of answers.</span></div>
+      <div class="cheat-item"><b>Staff use the old words</b><span>Old clauses win keyword search on old vocabulary. Bridge it in the new text.</span></div>
+      <div class="cheat-item"><b>Access on every clause</b><span>Set by the owner, never inherited from a folder.</span></div>
+      <div class="cheat-item"><b>Validate first</b><span>Missing field, unknown group, two current versions: fail the load.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You have a clean store. Session 2 indexes it: one clause per chunk, BM25 computed by hand on three clauses, top-3 retrieval, and the first look at why the best match is not always a good one.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 1 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← Course home</a> &nbsp;·&nbsp; <a href="b2-chunk-index-retrieve.html">Next: Chunk, index, retrieve →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

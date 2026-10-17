@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 1 of 6. Before choosing a model, read the tickets. Three kinds of question reach an internal helpdesk: the ones a policy clause answers, the ones that need a person to act, and the ones nobody wrote down. Scope an internal AI assistant from that split.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="What staff actually ask - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Leader session 1 of 6. 600 tickets, three bins, one scope sentence. The dangerous bin is the smallest one.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/a1-what-staff-actually-ask.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What staff actually ask - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Leader session 1 of 6. Scope an internal assistant from the ticket log, not from the demo.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 1 · What staff actually ask - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Leader session 1 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Leader session 1 of 6</div>
+    <h1>What staff <span class="accent">actually ask</span></h1>
+    <p class="sub">Every internal assistant project starts with a demo that answers a question somebody chose. Tonight starts somewhere less flattering: the helpdesk's own tickets. Tidewell Freight, a constructed 1,200-person freight forwarder, logged 600 HR, IT and finance tickets in one quarter. Sorted by what it took to close them, they fall into three bins, and each bin asks for a different behaviour from an assistant. You leave with the split for your own helpdesk and a one-sentence scope you can defend.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Foundational</span>
+      <span class="chip audience">HR, IT and finance operations leaders</span>
+      <span class="chip audience">Anyone funding an internal assistant</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Three bins of tickets</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: your scope</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>How the leader track works</h2>
+    </div>
+    <p class="lede">Six sessions, no code. The artifact you build across them is a <strong>one-page launch decision</strong> for an internal policy assistant: what it answers, what it may see, what it says when it does not know, what it costs, and the go/no-go you would sign. Tonight is scope, from the tickets. Session 2 is buy, build or wait. Session 3 is who may see what. Session 4 is the hand-off. Session 5 is run cost. Session 6 is the launch decision and keeping the answers true afterwards. The running example is <strong>Tidewell Freight</strong>, constructed for these pages: 1,200 staff, an HR, IT and finance helpdesk, and an assistant that must answer from policy, cite the clause, and open a ticket when it cannot.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Your helpdesk split into three bins with counts and minutes, the three topics with no written answer, and one scope sentence: "the assistant answers these topics from these documents, opens a ticket for these actions, and says it does not know for everything else". Every later session in both tracks builds on that sentence.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the three kinds of helpdesk ticket</span>
+      <h2>Three bins, three behaviours</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Sort tickets by what it took to close them, not by department. A ticket closed by pasting a policy link is a different job from one closed by resetting a token, and both differ from one closed by a manager making a rule up on the spot.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn pile of 600 constructed Tidewell tickets sorted into three bins. Policy lookup, 333 tickets and 3,707 minutes: the assistant answers and cites the clause. Needed a person, 223 tickets and 9,064 minutes: the assistant can only open the ticket. No written answer, 44 tickets and 666 minutes: the assistant must say it does not know, or it invents a rule.">
+        <defs>
+          <filter id="a1aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="13" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a1aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a1aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a1aV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .a1aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a1aH" x="30" y="26">ONE QUARTER OF TICKETS, SORTED BY WHAT CLOSED THEM</text>
+        <text class="a1aS" x="430" y="26">constructed Tidewell ticket log · counts and minutes as the bench prints them</text>
+
+        <g filter="url(#a1aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="116" width="150" height="110" rx="8" transform="rotate(-1 105 171)" fill="url(#a1aHc)"/>
+          <path d="M184 150 L256 86" marker-end="url(#a1aAr)"/>
+          <path d="M184 172 L256 174" marker-end="url(#a1aAr)"/>
+          <path d="M184 194 L256 262" marker-end="url(#a1aAr)"/>
+          <rect x="262" y="48" width="270" height="74" rx="10" transform="rotate(-0.5 397 85)" fill="#FFFFFF"/>
+          <rect x="262" y="138" width="270" height="74" rx="10" transform="rotate(0.4 397 175)" fill="#FFFFFF"/>
+          <rect x="262" y="228" width="270" height="74" rx="10" transform="rotate(-0.4 397 265)" fill="#F4B63F"/>
+          <path d="M536 85 L566 85" marker-end="url(#a1aAr)"/>
+          <path d="M536 175 L566 175" marker-end="url(#a1aAr)"/>
+          <path d="M536 265 L566 265" marker-end="url(#a1aAr)"/>
+          <rect x="572" y="52" width="278" height="66" rx="10" transform="rotate(0.5 711 85)" fill="#E8F6F6" stroke="#0E8086"/>
+          <rect x="572" y="142" width="278" height="66" rx="10" transform="rotate(-0.5 711 175)" fill="#FFFFFF"/>
+          <rect x="572" y="232" width="278" height="66" rx="10" transform="rotate(0.5 711 265)" fill="#FFFFFF" stroke="#991B1B"/>
+        </g>
+
+        <text class="a1aV" x="30" y="90">600 tickets</text>
+        <text class="a1aS" x="30" y="108">one quarter, constructed</text>
+        <text class="a1aS" x="30" y="250">226 HR · 248 IT</text>
+        <text class="a1aS" x="30" y="266">126 finance</text>
+
+        <text class="a1aH" x="276" y="72">POLICY LOOKUP · 333</text>
+        <text class="a1aS" x="276" y="91">closed by pointing at a clause</text>
+        <text class="a1aS" x="276" y="108">3,707 minutes</text>
+        <text class="a1aH" x="276" y="162">NEEDED A PERSON · 223</text>
+        <text class="a1aS" x="276" y="181">reset, repair, fix a payroll error</text>
+        <text class="a1aS" x="276" y="198">9,064 minutes</text>
+        <text class="a1aH" x="276" y="252">NO WRITTEN ANSWER · 44</text>
+        <text class="a1aL" x="276" y="271">nobody wrote the rule down</text>
+        <text class="a1aL" x="276" y="288">666 minutes</text>
+
+        <text class="a1aL" x="586" y="80">assistant answers, cites clause</text>
+        <text class="a1aS" x="586" y="99">the job it is built for</text>
+        <text class="a1aL" x="586" y="170">assistant opens the ticket</text>
+        <text class="a1aS" x="586" y="189">it cannot do the action itself</text>
+        <text class="a1aL" x="586" y="260">assistant must say so</text>
+        <text class="a1aS" x="586" y="279">or it invents a rule</text>
+
+        <text class="a1aN" x="30" y="326">The smallest bin is the dangerous one: a question with no written answer still gets a confident one.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - each bin needs a different behaviour, and only the first is "answer the question"</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The three bins, defined so two people sort the same way<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Bin</th><th>The test</th><th>Tidewell examples</th><th>What the assistant does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Policy lookup</strong></td><td>The agent who closed it pasted or paraphrased a written clause</td><td>Sick leave days, hotel cap, MFA on the VPN</td><td>Answers from the clause and cites it</td></tr>
+            <tr><td><strong>Needed a person</strong></td><td>Somebody changed something in a system or made a judgement</td><td>Token reset, broken laptop, payroll error</td><td>Opens the ticket with the details attached</td></tr>
+            <tr><td><strong>No written answer</strong></td><td>The agent had to ask someone, or made a call that is written nowhere</td><td>Dogs in the office, meeting rooms, a birthday day off</td><td>Says it does not know and opens a ticket</td></tr>
+          </tbody>
+        </table>
+        <p>Tidewell's constructed quarter: 333 policy lookups (55.5%), 223 that needed a person, 44 with no written answer. Sort a sample of your own before you trust any split, including this one: the bins depend on how well your policies are written, which is exactly what you are trying to find out.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the second bin is not the assistant's job yet<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>An assistant that resets passwords or edits payroll is an agent with write access to systems, which is a different risk class with its own course. Tidewell's assistant takes exactly one action: it opens a ticket. That keeps the second bin on the people who own those systems, and the assistant's contribution there is a well-formed ticket: the question, who asked, and the clauses it looked at. Session 6 of the builder track builds that one tool; the <a href="https://phoebefu6.github.io/learn-ai-agents-with-phoebe/">AI agents course</a> owns everything beyond it.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The deflection number nobody can source.</strong> Internal helpdesk assistants are usually sold on a "deflection rate", the share of questions that never became a ticket. No credible public benchmark for it was found for these pages; the figures in circulation are vendor-reported. Deflection also counts a person who gave up as a success. Measure the first bin's resolution instead, and whether the same person opened a ticket on the same topic soon after.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers why the no-written-answer bin is the dangerous one</span>
+      <h2>A ranking always has a winner</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">An assistant that answers from documents first ranks the documents against the question. A ranking of 49 clauses always has a first place, even when no clause is about the question. Unless someone builds a rule for "the best match is not good enough", the assistant answers from it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn bars of the top retrieval score for four golden questions, measured on the bench. Account locked scores 9.19 against the account lockout clause. Sick leave scores 6.67 against the sick leave clause. The staff party question, which no policy answers, scores 3.71 against the annual leave clause. Bring my dog scores 1.70 against the disciplinary hearing clause. A dashed hand-off line sits at 3.0.">
+        <defs>
+          <filter id="a1bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="17" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+        </defs>
+        <style>
+          .a1bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a1bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a1bW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a1bK { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1bR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a1bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a1bH" x="30" y="26">THE BEST MATCH, EVEN WHEN NOTHING MATCHES</text>
+        <text class="a1bS" x="370" y="26">top BM25 score per question · measured on the bench · bar length = score, 0 to 10</text>
+
+        <g filter="url(#a1bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M260 60 L260 262"/>
+          <rect x="260" y="70" width="441" height="30" rx="4" fill="#0A5A60" stroke="#0A5A60"/>
+          <rect x="260" y="122" width="320" height="30" rx="4" fill="#0A5A60" stroke="#0A5A60"/>
+          <rect x="260" y="174" width="178" height="30" rx="4" fill="#F4B63F"/>
+          <rect x="260" y="226" width="82" height="30" rx="4" fill="#F4B63F"/>
+          <path d="M404 58 L404 266" stroke="#991B1B" stroke-dasharray="6 5"/>
+        </g>
+
+        <text class="a1bR" x="414" y="58">hand-off line 3.0</text>
+
+        <text class="a1bL" x="240" y="86" text-anchor="end">account locked (G16)</text>
+        <text class="a1bS" x="240" y="101" text-anchor="end">top: Account lockout and reset</text>
+        <text class="a1bL" x="240" y="138" text-anchor="end">sick leave (G01)</text>
+        <text class="a1bS" x="240" y="153" text-anchor="end">top: Sick leave</text>
+        <text class="a1bL" x="240" y="190" text-anchor="end">staff party (G54)</text>
+        <text class="a1bS" x="240" y="205" text-anchor="end">top: Annual leave</text>
+        <text class="a1bL" x="240" y="242" text-anchor="end">bring my dog (G49)</text>
+        <text class="a1bS" x="240" y="257" text-anchor="end">top: Disciplinary hearing</text>
+
+        <text class="a1bW" x="272" y="90">9.19</text>
+        <text class="a1bW" x="272" y="142">6.67</text>
+        <text class="a1bK" x="272" y="194">3.71</text>
+        <text class="a1bK" x="352" y="246">1.70</text>
+
+        <text class="a1bN" x="30" y="290">Without a hand-off line all four are answered; the dog question gets the disciplinary procedure.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a ranking cannot say "none of these"; only a rule on top of it can</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why a fluent wrong answer is worse than no answer<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>NIST's Generative AI Profile calls this risk <strong>confabulation</strong>: "the production of confidently stated but erroneous or false content", and it locates the harm where users believe it, "often due to the confident nature of the response". An internal assistant makes this worse in one specific way: it cites a real clause. The staff party answer would cite Tidewell's annual leave policy, correctly quoted and irrelevant. A citation that exists is not a citation that answers.</p>
+        <p>The fix is a leader decision before it is a technical one: the assistant is allowed, and expected, to say "I cannot answer that from policy" and open a ticket. Session 4 is about that sentence. On the bench the hand-off line sits at a top score of 3.0; G54 still clears it with 3.71 and gets a confident wrong answer, which is why the line is a trade, not a cure.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The third bin is also a to-do list for policy owners<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Forty-four tickets with no written answer is 44 times a person made a rule up, probably not the same rule each time. Some of those topics deserve a policy (meeting rooms, guests, a birthday day off if staff keep asking). Others deserve a sentence on the intranet saying there is no policy. Either way, the list of no-written-answer topics is a by-product of scoping an assistant that is worth more than the assistant to some organisations.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers where the helpdesk minutes go and what an answering assistant can reach</span>
+      <h2>Count minutes, not tickets</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The first bin has the most tickets. It does not have the most minutes. Before anyone promises a saving, put the minutes next to the counts and draw a line round what an assistant that only answers can reach.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn bars of helpdesk minutes in Tidewell's constructed quarter, 13,437 minutes in total. Policy lookups 3,707 minutes, needed a person 9,064 minutes, no written answer 666 minutes. A bracket marks the policy lookups as the only minutes an answering assistant can take over; the other two still end in a ticket.">
+        <defs>
+          <filter id="a1cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="19" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+        </defs>
+        <style>
+          .a1cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a1cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a1cK { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1cD { font: 800 12px Inter, sans-serif; fill: #0A5A60; }
+          .a1cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a1cH" x="30" y="26">13,437 HELPDESK MINUTES IN ONE QUARTER</text>
+        <text class="a1cS" x="330" y="26">constructed Tidewell ticket log · bar length = minutes · 9,064 minutes = 480px</text>
+
+        <g filter="url(#a1cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M260 60 L260 216"/>
+          <rect x="260" y="70" width="196" height="30" rx="4" fill="#F4B63F"/>
+          <rect x="260" y="122" width="480" height="30" rx="4" fill="url(#a1cHc)"/>
+          <rect x="260" y="174" width="35" height="30" rx="4" fill="#E8F6F6"/>
+          <path d="M470 66 C480 66 482 74 482 85 C482 96 480 104 470 104" stroke="#0A5A60"/>
+        </g>
+
+        <text class="a1cL" x="240" y="90" text-anchor="end">policy lookup · 333</text>
+        <text class="a1cL" x="240" y="142" text-anchor="end">needed a person · 223</text>
+        <text class="a1cL" x="240" y="194" text-anchor="end">no written answer · 44</text>
+
+        <text class="a1cK" x="272" y="90">3,707</text>
+        <text class="a1cK" x="752" y="142">9,064</text>
+        <text class="a1cK" x="305" y="194">666</text>
+
+        <text class="a1cD" x="494" y="82">what an answering</text>
+        <text class="a1cD" x="494" y="98">assistant can reach</text>
+
+        <text class="a1cS" x="30" y="240">The other two bins still end in a ticket: the assistant can write a better one, not close it.</text>
+        <text class="a1cN" x="30" y="266">Promise savings against the first bar only, and only once session 4's hand-offs are counted back in.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the biggest bin by tickets is not the biggest by minutes</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What to put on the business case, and what to leave off<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On Tidewell's constructed quarter, policy lookups took 3,707 of 13,437 helpdesk minutes. That is the ceiling for an assistant that answers questions, before you subtract the questions it should hand off and the ones it gets wrong. The 9,064 minutes of action tickets are untouched by answering, whatever the demo suggested.</p>
+        <p>The published evidence on AI help for support work does not settle the size of the prize either. In one field study of 5,179 customer support agents, Brynjolfsson, Li and Raymond (NBER Working Paper 31161) found issues resolved per hour rose 14% on average, 34% for novice and low-skilled workers, with minimal impact on the most experienced. A study of 25,000 Danish workers in exposed occupations by Humlum and Vestergaard (BFI Working Paper 2025-56) found average time savings of 3% and no measurable effect on earnings or recorded hours. Different settings, outcomes and horizons; session 6 takes the disagreement apart. Neither tells you Tidewell's number. Your ticket log does.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Topics, and why the top five are not the scope<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's biggest topics in the quarter were access (98 tickets), leave (95), expenses (75), devices (74), software (65) and pay (51). Access and devices are mostly action tickets: resets and broken hardware. Leave and expenses are mostly lookups. A scope written as "the top five topics" would promise the assistant a job it cannot do on two of them. Scope by bin first, then by topic inside the first bin.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Your scope sentence, from fifty tickets</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">You need an export of recent tickets with the subject, the team and how each was closed; fifty is enough to see the shape. No data to hand? Use Tidewell's numbers on this page and write the sentence for Tidewell. Your numbers will differ, which is the point.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The scoping sheet as a hand-drawn page. A strip of tickets on the left, each tagged P for policy, A for action or N for no written answer. A tally block counts tickets and minutes per tag. A topic list ranks the P tickets by topic. At the bottom a scope sentence with three blanks: answers these topics, opens a ticket for these actions, says it does not know for the rest.">
+        <defs>
+          <filter id="a1dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="23" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <marker id="a1dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a1dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a1dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a1dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a1dH" x="30" y="26">THE SCOPING SHEET, FOUR BLOCKS</text>
+
+        <g filter="url(#a1dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="200" height="30" rx="6" transform="rotate(-1 130 59)" fill="#FFFFFF"/>
+          <rect x="30" y="80" width="200" height="30" rx="6" transform="rotate(0.8 130 95)" fill="#FFFFFF"/>
+          <rect x="30" y="116" width="200" height="30" rx="6" transform="rotate(-0.6 130 131)" fill="#FFFFFF"/>
+          <rect x="30" y="152" width="200" height="30" rx="6" transform="rotate(0.7 130 167)" fill="#FFFFFF"/>
+          <path d="M236 112 L276 112" marker-end="url(#a1dAr)"/>
+          <rect x="282" y="44" width="250" height="138" rx="10" transform="rotate(0.4 407 113)" fill="#E8F6F6"/>
+          <path d="M538 112 L578 112" marker-end="url(#a1dAr)"/>
+          <rect x="584" y="44" width="266" height="138" rx="10" transform="rotate(-0.4 717 113)" fill="#FFFFFF"/>
+          <rect x="30" y="196" width="820" height="40" rx="10" transform="rotate(-0.2 440 216)" fill="#F4B63F"/>
+        </g>
+
+        <text class="a1dL" x="44" y="64">P · hotel cap in Asia</text>
+        <text class="a1dL" x="44" y="100">A · laptop will not boot</text>
+        <text class="a1dL" x="44" y="136">P · sick leave, certificate</text>
+        <text class="a1dL" x="44" y="172">N · dog in the office</text>
+
+        <text class="a1dH" x="296" y="68">1-2 · TAG, THEN TALLY</text>
+        <text class="a1dS" x="296" y="90">P policy: count and minutes</text>
+        <text class="a1dS" x="296" y="110">A action: count and minutes</text>
+        <text class="a1dS" x="296" y="130">N no written answer: count</text>
+        <text class="a1dS" x="296" y="150">and the topics, by name</text>
+
+        <text class="a1dH" x="598" y="68">3 · P TOPICS, RANKED</text>
+        <text class="a1dS" x="598" y="90">leave, expenses, travel ...</text>
+        <text class="a1dS" x="598" y="110">each with its source document</text>
+        <text class="a1dS" x="598" y="130">and that document's owner</text>
+        <text class="a1dS" x="598" y="150">a topic with no owner waits</text>
+
+        <text class="a1dH" x="44" y="221">4 · THE SENTENCE: answers [topics] from [documents], tickets [actions], says "I don't know" for the rest</text>
+
+        <text class="a1dN" x="30" y="252">Tag each ticket by what closed it, not by which team owned it.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - four blocks, and the sentence at the bottom is the scope</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Pull fifty recent tickets across HR, IT and finance.</strong> Take them from one ordinary month, not a launch or a payroll incident. Keep subject, team, how it was closed and minutes spent if your tool records them.</p>
+      </div>
+      <div class="step">
+        <p><strong>Tag every ticket P, A or N.</strong> P if a written clause closed it. A if someone had to do something in a system or make a judgement. N if the answer exists nowhere in writing. Disagree with a colleague on five of them and settle the rule; the disagreements are where your policies are vague.</p>
+        <div class="prompt-box good"><span class="label">★ Block 1 · the tags, Tidewell style</span>P  "How many days sick leave before I need a certificate?"   HR    8 min
+A  "Laptop will not boot after update"                       IT   45 min
+P  "Hotel limit for the Jakarta trip?"                        Fin   7 min
+N  "Can I bring my dog on Fridays?"                           HR   12 min</div>
+      </div>
+      <div class="step">
+        <p><strong>Tally counts and minutes per tag.</strong> Then put the P minutes over the total. That fraction is the most an answering assistant can take over, before any hand-offs.</p>
+      </div>
+      <div class="step">
+        <p><strong>Rank the P topics and name the source document and owner for each.</strong> A topic whose policy has no named owner goes on a waiting list: an assistant that cites a document nobody maintains will be quoting it long after it stops being true, which is session 6's problem.</p>
+      </div>
+      <div class="step">
+        <p><strong>Write the sentence.</strong> Read it to the heads of HR, IT and finance. If any of them says "it should also do X", ask which bin X lives in.</p>
+        <div class="prompt-box good"><span class="label">★ The scope sentence</span>The assistant answers staff questions on [leave, hybrid work, expenses, travel]
+from [the leave, hybrid work, expenses and travel policies], citing the clause.
+It opens a ticket for [resets, repairs and payroll corrections],
+and says it cannot answer from policy, and opens a ticket, for everything else.</div>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The version that sounds like a strategy and scopes nothing</span>
+An AI-powered employee experience assistant that answers any question about
+HR, IT and finance, available 24/7, reducing helpdesk tickets.
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 2</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li>Finish tagging fifty tickets and bring the three counts, the three minute totals and your P share of minutes.</li>
+      <li>List your N topics. For each, write whether it deserves a policy or a sentence saying there is none.</li>
+      <li>For your top five P topics, name the source document, its owner and the date it last changed. Mark any older than two years.</li>
+      <li>Find the last business case or vendor pitch for an internal assistant in your organisation. Underline the savings claim and write which bin it assumed.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Leader session 1 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · A ticket reads "laptop will not boot after the update" and was closed by an IT engineer reimaging the machine. Which bin is it, and what does the assistant do?</p>
+      <button class="qopt" type="button">A · Policy lookup; the assistant answers from the devices standard</button>
+      <button class="qopt" type="button">B · Needed a person; the assistant opens a ticket with the details attached</button>
+      <button class="qopt" type="button">C · No written answer; the assistant says it does not know</button>
+      <button class="qopt" type="button">D · Out of scope; the assistant ignores it</button>
+      <p class="qwhy">Someone had to act on a system, so it is an action ticket. The assistant's one tool is opening a ticket, and its value here is a well-formed one. A is the trap: a devices clause exists, but no clause boots a laptop.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · Why is the no-written-answer bin the most dangerous, though it is the smallest?</p>
+      <button class="qopt" type="button">A · Because those tickets take the most minutes</button>
+      <button class="qopt" type="button">B · Because those questions come from senior staff</button>
+      <button class="qopt" type="button">C · Because retrieval cannot find any clause for them</button>
+      <button class="qopt" type="button">D · Because a ranking always returns a best match, so without a hand-off rule the assistant answers them confidently from an unrelated clause</button>
+      <p class="qwhy">C is the intuition and it is wrong: retrieval finds something for almost every question. The dog question's best match is the disciplinary hearing clause. NIST calls the result confabulation, and the harm comes from the confidence.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Policy lookups are 333 of Tidewell's 600 tickets but 3,707 of 13,437 minutes. What should the business case claim?</p>
+      <button class="qopt" type="button">A · At most the policy lookup minutes, less what the assistant hands off or gets wrong</button>
+      <button class="qopt" type="button">B · 55.5% of all helpdesk time, because that is the ticket share</button>
+      <button class="qopt" type="button">C · All 13,437 minutes, because the assistant opens every ticket</button>
+      <button class="qopt" type="button">D · The vendor's published deflection rate</button>
+      <p class="qwhy">Ticket share is not time share: action tickets are fewer and longer. Opening a ticket does not close it. And no credible public deflection benchmark was found; the figures in circulation are vendor-reported.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Scoping from the ticket log: policy, action, no written answer</span><span class="note">Taught as a method; Tidewell's 600 tickets are constructed and printed by the bench in Builder session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confabulation and why confident answers do harm</span><span class="note">NIST AI 600-1, Generative AI Profile (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">A ranking always has a first place</span><span class="note">Top BM25 scores for four golden questions, measured on the bench</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Field evidence on AI help for support work, as a disagreement</span><span class="note">Brynjolfsson, Li and Raymond, NBER WP 31161, and Humlum and Vestergaard, BFI WP 2025-56; both read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Helpdesk deflection rates</span><span class="note">Not claimed. No credible public benchmark was found; vendor-reported figures are not used</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Assistants that take actions in systems</span><span class="note">Out of scope; the AI agents course owns multi-step agents</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Leader session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Three bins</b><span>Policy lookup, needed a person, no written answer. Sort by what closed the ticket.</span></div>
+      <div class="cheat-item"><b>Three behaviours</b><span>Answer and cite. Open the ticket. Say "I don't know" and open the ticket.</span></div>
+      <div class="cheat-item"><b>A ranking has a winner</b><span>Every question gets a best match. Only a hand-off rule says "not good enough".</span></div>
+      <div class="cheat-item"><b>Minutes, not tickets</b><span>Tidewell: lookups are 333 of 600 tickets, 3,707 of 13,437 minutes.</span></div>
+      <div class="cheat-item"><b>No owner, no scope</b><span>A topic whose policy has no named owner waits.</span></div>
+      <div class="cheat-item"><b>Deflection is contested</b><span>No credible public benchmark. Measure resolution and repeat tickets instead.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You have the scope sentence. Session 2 asks whether to buy an assistant, build one or wait, and finds that the parts you cannot buy are the ones this session uncovered: the documents, their owners, and who may read what.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Leader session 1 of 6 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← Course home</a> &nbsp;·&nbsp; <a href="a2-buy-build-or-wait.html">Next: Buy, build or wait →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

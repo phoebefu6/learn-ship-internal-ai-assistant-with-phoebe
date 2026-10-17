@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 4 of 8. A policy assistant answers only from the clauses it retrieved and cites the one it used. The answer contract, the citation check the bench computes (in the retrieved set, current, readable by the asker), the dog question that passes it anyway, and a citation checker in plain Python.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Grounded answers with citations - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 4 of 8. Answer only from what was retrieved, check every citation is retrieved and current, and learn why a real citation can still fail to answer.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b4-grounded-answers.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grounded answers with citations - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 4 of 8. The answer contract, the citation check and a checker in Python.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 4 · Grounded answers with citations - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 4 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 4 of 8</div>
+    <h1>Grounded answers <span class="accent">with citations</span></h1>
+    <p class="sub">A staff member who asks about the meal allowance deserves the rule in force today, from a clause they are allowed to read, with its id attached so they can check it. Tidewell Freight, a constructed 1,200-person freight forwarder, wants exactly that from its policy assistant. Tonight you write the answer contract that keeps the answer inside the retrieved clauses, the citation check the bench runs on every answer, and the honest limit of that check: a citation can be real, current and readable, and still not answer the question.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Builders, data and platform engineers</span>
+      <span class="chip audience">Policy and knowledge owners</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Contract, check, limit</span>
+      <span class="a3" style="flex:4">20-42 · Build-along: the checker</span>
+      <span class="a4" style="flex:1">42-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits in the build</h2>
+    </div>
+    <p class="lede">Session 1 gave you a store of clauses with eight fields each, session 2 ranked them with BM25, and session 3 drew 54 golden questions from the ticket log. Tonight the retrieved clauses become an answer, and the answer carries the id of the clause it came from. Every number below is either printed by the bench in session 8 or labelled constructed; Tidewell Freight, its clauses and its questions are constructed, and the bench's answers are pre-written per clause, so no language model runs anywhere on these pages.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> An answer contract you can paste into any generation step, a citation check with three tests (retrieved, current, readable) that matches what the bench computes, and a thirty-line checker that fails a stale citation, a leaked one and an invented one, then grades the survivors against the golden set so you can see the one failure the check cannot catch.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers answering only from the retrieved clauses</span>
+      <h2>Answer from retrieved</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">The generation step gets the question and the top-3 clauses, and nothing else is allowed to become a policy answer. Not what the model remembers about per diems in general, not last year's rule, not a sensible guess. If the retrieved clauses do not say it, the assistant does not say it either. That one constraint is what makes a citation possible at all: every sentence has a clause behind it, so every sentence has an id to show.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn pipeline for golden question G41, a staff member asking for the meal per diem when travelling. The question goes into the store of 49 clause versions, which is filtered and ranked with BM25. Only two current clauses come out: FIN-EXP-2 version 5, meals when travelling, scoring 3.72, and FIN-EXP-3 version 5, client entertainment, scoring 1.13. That context box is highlighted. The answer below quotes the daily allowance of SGD 60 in Singapore and cites FIN-EXP-2 version 5. A dashed line from what the model remembers is crossed out: it is never a source.">
+        <defs>
+          <filter id="b4aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b4aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b4aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b4aH { font: 800 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4aL { font: 600 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4aS { font: 400 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+          .b4aB { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #6B4A00; }
+          .b4aR { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #991B1B; }
+          .b4aN { font: 400 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b4aH" x="30" y="26">ANSWER ONLY FROM WHAT WAS RETRIEVED</text>
+        <text class="b4aS" x="330" y="26">G41 at rung 3, scores as the bench prints them · Tidewell is constructed</text>
+
+        <g filter="url(#b4aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="60" width="190" height="90" rx="10" transform="rotate(-1.5 125 105)" fill="#FFFFFF"/>
+          <path d="M226 105 L264 105" marker-end="url(#b4aAr)"/>
+          <rect x="272" y="56" width="176" height="100" rx="10" transform="rotate(0.8 360 106)" fill="url(#b4aHc)"/>
+          <path d="M454 105 L496 105" marker-end="url(#b4aAr)"/>
+          <rect x="504" y="46" width="346" height="132" rx="10" transform="rotate(-0.5 677 112)" fill="#F4B63F"/>
+          <path d="M677 184 L677 214" marker-end="url(#b4aAr)"/>
+          <rect x="420" y="220" width="430" height="80" rx="10" transform="rotate(0.4 635 260)" fill="#FFFFFF"/>
+          <path d="M210 262 L360 262" stroke="#4D6466" stroke-dasharray="6 6"/>
+          <path d="M372 252 L392 272 M392 252 L372 272" stroke="#991B1B" stroke-width="2.4"/>
+        </g>
+
+        <text class="b4aL" x="44" y="88">G41 · staff asks</text>
+        <text class="b4aS" x="44" y="110">What is the per diem for</text>
+        <text class="b4aS" x="44" y="127">meals when travelling?</text>
+
+        <text class="b4aL" x="282" y="178">49 clause versions</text>
+        <text class="b4aS" x="282" y="194">filtered, then BM25 top-3</text>
+
+        <text class="b4aH" x="522" y="72">CONTEXT: ONLY THESE CLAUSES</text>
+        <text class="b4aL" x="522" y="100">3.72  FIN-EXP-2@v5  Meals when travelling</text>
+        <text class="b4aL" x="522" y="124">1.13  FIN-EXP-3@v5  Client entertainment</text>
+        <text class="b4aL" x="522" y="158">nothing else reaches the answer step</text>
+
+        <text class="b4aS" x="436" y="244">Meals on business travel are covered by a daily allowance</text>
+        <text class="b4aS" x="436" y="262">of SGD 60 in Singapore, up to SGD 90 abroad.</text>
+        <text class="b4aB" x="436" y="286">cites FIN-EXP-2@v5</text>
+
+        <text class="b4aL" x="30" y="240">what the model remembers</text>
+        <text class="b4aR" x="30" y="284">never a source for policy</text>
+
+        <text class="b4aN" x="30" y="318">The answer step sees only the retrieved clauses, so every claim it makes has a clause to point at.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the highlighted box is the whole of what the answer may draw on; it is also the list every citation is checked against</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The answer contract<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Write the rule down where the generation step reads it, and make it testable: one id format, one place the id goes, one exact sentence for "not in the clauses". A hosted model API, an on-premises model or a template that fills in pre-written answers all sit behind the same contract, which is why the bench can use pre-written answers and still test the parts that matter.</p>
+        <div class="prompt-box good"><span class="label">★ The answer contract (constructed for Tidewell)</span>You answer Tidewell staff questions about HR, IT and finance policy.
+Use ONLY the clauses below. Each clause starts with its id, like [FIN-EXP-2@v5].
+After every sentence that uses a clause, put that clause's id in square brackets.
+Cite only ids that appear below. Never cite a document, a page or a memory.
+If the clauses below do not answer the question, reply exactly:
+"I can't answer that from Tidewell policy, so I've opened a ticket."
+
+Clauses:
+[FIN-EXP-2@v5] Meals when travelling. When travelling on business, meals are covered
+by a daily allowance of SGD 60 in Singapore and up to SGD 90 abroad ...
+[FIN-EXP-3@v5] Client entertainment. Client entertainment up to SGD 150 per guest ...
+
+Question (asker group: staff): What is the per diem for meals when travelling?</div>
+        <p>Two details carry weight. The id includes the version, so a citation says which text answered, not only which rule. And the "cannot answer" line is fixed text, so the hand-off in session 6 can detect it without parsing prose.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why not let it answer from memory?<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Because memory has no version and no owner. G41 asks about the "per diem", a word that only appears in Tidewell's superseded expenses clause, FIN-EXP-2 v4, which paid SGD 50 a day. The current clause, v5, says "daily allowance" and SGD 60. A model answering from general knowledge of per diems has no way to know that Tidewell changed the rule on 2026-02-01, and nothing to cite if it guesses right. The retrieved clause knows both.</p>
+        <p>Grounding and citation formats in depth, faithfulness scoring and long-document grounding belong to the <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/courses/b7-grounding-citations.html">RAG course's grounding and citations session</a>. This page takes the narrow side: one clause id per sentence, and a mechanical check on that id.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Retrieval reduces the problem; it does not remove it.</strong> Singapore's Model AI Governance Framework for Generative AI (IMDA and AI Verify Foundation, 2024) names retrieval-augmented generation among techniques "commonly used to reduce hallucinations and improve accuracy". Reduce, not remove. And the 2020 paper that named the approach, Lewis and colleagues, lists "providing provenance for their decisions" as an open research problem. Provenance is not a side effect of retrieval; you have to build it, and then check it.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the citation check: in the retrieved set and current</span>
+      <h2>The citation check</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Every answered question has one cited clause. The bench runs three tests on that id, in this order: was it in the retrieved set, is it the current version, and may this asker read it. Any failure means the answer must not go out. The counts below are what the bench prints when the filters that should prevent each failure are missing.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn citation check with three gates in a row: retrieved, current, readable. Three citations pass through. FIN-EXP-2 version 5 for G41 at rung 3 passes all three and is cited. FIN-EXP-2 version 4 for G41 at rung 1 passes retrieved and fails current: a stale citation. HR-PERF-1 version 2 for G46 at rung 1 passes retrieved and current and fails readable: a leaked answer. Under the gates: the retrieved gate never fails on the bench because it cites the top clause; the current gate fails 6 times at rung 1 and 7 at rung 2; the readable gate fails 7 times at rung 1. The current gate is highlighted.">
+        <defs>
+          <filter id="b4bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="59" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b4bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b4bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b4bH { font: 800 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4bL { font: 600 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4bS { font: 400 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+          .b4bA { font: 700 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #0A5A60; }
+          .b4bR { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #991B1B; }
+          .b4bN { font: 400 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b4bH" x="30" y="26">THE CITATION CHECK, AS THE BENCH COMPUTES IT</text>
+        <text class="b4bS" x="400" y="26">runs on the cited clause of every answered question</text>
+
+        <g filter="url(#b4bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="110" width="200" height="40" rx="8" transform="rotate(-1.5 130 130)" fill="#E8F6F6"/>
+          <rect x="30" y="160" width="200" height="40" rx="8" transform="rotate(1 130 180)" fill="#FFFFFF"/>
+          <rect x="30" y="210" width="200" height="40" rx="8" transform="rotate(-1 130 230)" fill="#FFFFFF"/>
+          <rect x="290" y="56" width="140" height="210" rx="10" transform="rotate(0.4 360 161)" fill="#FFFFFF"/>
+          <rect x="450" y="56" width="140" height="210" rx="10" transform="rotate(-0.4 520 161)" fill="#F4B63F"/>
+          <rect x="610" y="56" width="140" height="210" rx="10" transform="rotate(0.4 680 161)" fill="#FFFFFF"/>
+          <path d="M240 78 L282 78" marker-end="url(#b4bAr)"/>
+        </g>
+
+        <text class="b4bS" x="30" y="82">cited id in</text>
+        <text class="b4bS" x="30" y="98">question, rung</text>
+
+        <text class="b4bL" x="44" y="128">FIN-EXP-2@v5</text>
+        <text class="b4bS" x="44" y="143">G41, rung 3</text>
+        <text class="b4bL" x="44" y="178">FIN-EXP-2@v4</text>
+        <text class="b4bS" x="44" y="193">G41, rung 1</text>
+        <text class="b4bL" x="44" y="228">HR-PERF-1@v2</text>
+        <text class="b4bS" x="44" y="243">G46, rung 1</text>
+
+        <text class="b4bH" x="304" y="80">1 · RETRIEVED?</text>
+        <text class="b4bS" x="304" y="98">id in the top-3 set</text>
+        <text class="b4bH" x="464" y="80">2 · CURRENT?</text>
+        <text class="b4bL" x="464" y="98">not superseded</text>
+        <text class="b4bH" x="624" y="80">3 · READABLE?</text>
+        <text class="b4bS" x="624" y="98">asker may read it</text>
+
+        <text class="b4bA" x="360" y="134" text-anchor="middle">pass</text>
+        <text class="b4bL" x="520" y="134" text-anchor="middle">pass</text>
+        <text class="b4bA" x="680" y="134" text-anchor="middle">pass</text>
+        <text class="b4bA" x="360" y="184" text-anchor="middle">pass</text>
+        <text class="b4bH" x="520" y="184" text-anchor="middle">FAIL</text>
+        <text class="b4bS" x="680" y="184" text-anchor="middle">not reached</text>
+        <text class="b4bA" x="360" y="234" text-anchor="middle">pass</text>
+        <text class="b4bL" x="520" y="234" text-anchor="middle">pass</text>
+        <text class="b4bR" x="680" y="234" text-anchor="middle">FAIL</text>
+
+        <text class="b4bA" x="772" y="134">cite it</text>
+        <text class="b4bR" x="772" y="184">stale</text>
+        <text class="b4bR" x="772" y="234">leaked</text>
+
+        <text class="b4bS" x="360" y="288" text-anchor="middle">0 fails: cites the top</text>
+        <text class="b4bS" x="520" y="288" text-anchor="middle">6 at rung 1, 7 at rung 2</text>
+        <text class="b4bS" x="680" y="288" text-anchor="middle">7 at rung 1</text>
+
+        <text class="b4bN" x="30" y="322">The filters remove both failures before ranking. The check is the alarm that proves they held.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - gate two is the one the old vocabulary keeps tripping: six stale citations without filters, seven once the permission filter changes what wins</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Three tests on one id<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Test</th><th>Reads</th><th>Bench count when it fails</th><th>What the failure is</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Retrieved</strong></td><td>The top-3 list for this question</td><td>0 on every rung</td><td>An invented citation: the id was never in front of the answer step</td></tr>
+            <tr><td><strong>Current</strong></td><td>The superseded flag on the cited version</td><td>6 at rung 1, 7 at rung 2, 0 at rung 3</td><td>A stale citation: an old rule answering as if it were new</td></tr>
+            <tr><td><strong>Readable</strong></td><td>The clause's access group and the asker's group</td><td>7 at rung 1, 0 from rung 2</td><td>A leaked answer: the asker was told what they may not read</td></tr>
+          </tbody>
+        </table>
+        <p>The first row is honest about the bench: it always cites its top-ranked clause, so test one cannot fail there. A real generation step writes its own brackets and can cite an id it was never shown, which is why the test exists and why the build-along plants one. The six stale citations at rung 1 are G14, G36, G37, G38, G39 and G41, all questions worded in the old policy's vocabulary. Rung 2 adds G46: once the managers-only improvement plan clause is filtered out, the best remaining match is the superseded password clause.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The check reads the index, so the index must be true<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Test two reads the superseded flag where the pipeline can see it: on the indexed clause. Session 8's break button re-imports the expenses policy without that flag. On rung 4 the pipeline then sees 0 stale citations and prints GO, while the version register, kept by the document owner, finds 1: G41 answered with the SGD 50 per diem from v4 instead of the SGD 60 daily allowance in v5. The check did its job on the data it was given. Keeping that data true is session 7's register-versus-index diff.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>A check is not a filter, and you want both<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The permission filter (session 5) and the current-version filter (session 7) run before ranking and stop the bad clause from being retrieved at all. The citation check runs after the answer and only counts. At rung 3 both filters are on and the check finds 0 leaks and 0 stale citations, which is the point: it proves the filters held on all 54 questions. Remove a filter in a later refactor and the check is what turns red, before a member of staff quotes the wrong allowance back to finance.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A citation raises trust, so it has to be right.</strong> OWASP's Top 10 for LLM Applications (2025) describes overreliance under LLM09 Misinformation as users who "place excessive trust in LLM-generated content", and lists human oversight for critical information among the preventions. A bracketed clause id is exactly the kind of detail that makes a reader stop checking. In a constructed Tidewell case, a staff member claims SGD 50 a day for meals because the assistant said so and cited FIN-EXP-2; finance rejects the claim against v5, and the assistant's credibility pays for a version flag nobody checked.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers why a passing citation can still be a wrong answer</span>
+      <h2>A real citation that does not answer</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">G49 is a staff member asking "Can I bring my dog to the office?". Tidewell has no policy on dogs. BM25 still finds something, because "bring" appears in the disciplinary hearing clause, where an employee "may bring a colleague or union representative". The cited clause was retrieved, is current and is readable by staff. Every test passes. The answer is still wrong.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn trace of golden question G49 at rung 3. A staff member asks whether they can bring a dog to the office, a low-risk question. BM25 retrieves HR-PERF-2 version 2, disciplinary hearing, scoring 1.70, and HR-WFH-1 version 2, working from home, scoring 1.46. The citation check passes: retrieved, current, readable by staff; that box is highlighted. The pre-written answer gives 5 working days' notice and says the employee may bring a colleague or union representative, citing HR-PERF-2 version 2. The golden set says no policy answers this question, so the answer is graded confident and wrong. At rung 4 the top score of 1.70 is under the 3.0 line, and the question is handed off.">
+        <defs>
+          <filter id="b4cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="61" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b4cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b4cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b4cH { font: 800 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4cL { font: 600 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4cS { font: 400 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+          .b4cB { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #6B4A00; }
+          .b4cR { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #991B1B; }
+          .b4cN { font: 400 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b4cH" x="30" y="26">A REAL CITATION THAT DOES NOT ANSWER</text>
+        <text class="b4cS" x="330" y="26">G49 on the bench at rung 3 · constructed question, measured scores</text>
+
+        <g filter="url(#b4cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="54" width="200" height="80" rx="10" transform="rotate(-2 130 94)" fill="#FFFFFF"/>
+          <path d="M236 94 L276 94" marker-end="url(#b4cAr)"/>
+          <rect x="284" y="50" width="250" height="96" rx="10" transform="rotate(0.6 409 98)" fill="#FFFFFF"/>
+          <path d="M540 94 L592 94" marker-end="url(#b4cAr)"/>
+          <rect x="600" y="50" width="250" height="96" rx="10" transform="rotate(-0.6 725 98)" fill="#F4B63F"/>
+          <path d="M725 152 L725 176" marker-end="url(#b4cAr)"/>
+          <rect x="440" y="182" width="410" height="64" rx="10" transform="rotate(0.4 645 214)" fill="#FFFFFF"/>
+          <path d="M434 214 L398 214" marker-end="url(#b4cAr)"/>
+          <rect x="30" y="182" width="360" height="64" rx="10" transform="rotate(-0.5 210 214)" fill="#FEF2F2" stroke="#991B1B"/>
+          <path d="M36 274 L300 274" stroke="#0E8086" stroke-dasharray="7 5"/>
+        </g>
+
+        <text class="b4cL" x="44" y="80">G49 · staff · low risk</text>
+        <text class="b4cS" x="44" y="102">Can I bring my dog to</text>
+        <text class="b4cS" x="44" y="119">the office?</text>
+
+        <text class="b4cL" x="298" y="76">1.70  HR-PERF-2@v2</text>
+        <text class="b4cS" x="298" y="92">Disciplinary hearing</text>
+        <text class="b4cL" x="298" y="118">1.46  HR-WFH-1@v2</text>
+        <text class="b4cS" x="298" y="134">Working from home</text>
+
+        <text class="b4cH" x="616" y="76">CITATION CHECK: PASS</text>
+        <text class="b4cL" x="616" y="102">retrieved, current,</text>
+        <text class="b4cL" x="616" y="122">readable by staff</text>
+
+        <text class="b4cS" x="456" y="206">You get 5 working days' written notice and may bring</text>
+        <text class="b4cS" x="456" y="224">a colleague or union representative.</text>
+        <text class="b4cB" x="456" y="240">cites HR-PERF-2@v2</text>
+
+        <text class="b4cR" x="46" y="208">GOLDEN SET: no policy answers this</text>
+        <text class="b4cS" x="46" y="230">graded confident and wrong</text>
+
+        <text class="b4cL" x="312" y="278">rung 4: top score 1.70 is under the 3.0 line, so it is handed off</text>
+
+        <text class="b4cN" x="30" y="304">The check proves the citation exists and may be read. Only the golden set says whether it answers.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the highlighted pass is the trap: three true tests on a clause about something else</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the check can and cannot know<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>All three tests are about the clause: where it came from, which version, who may read it. None is about the relation between the clause and the question, and a mechanical check on an id cannot be. The bench's grade for "correct" asks one more thing that only the golden set knows: is the cited key one of the clauses that answers this question for this asker? For G49 that list is empty, so any answer is confident and wrong.</p>
+        <p>This is why rung 3 is NO-GO even with 0 leaks, 0 stale citations and 41 of 42 answerable questions right (97.6%). It answers the questions nobody should answer: confident wrong answers on 31.6% of medium-risk and 35.7% of low-risk questions, and right hand-offs on only 8.3% of the 12 questions it should not answer.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Where G49 actually gets caught<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Twice, in two different places. Before launch, the golden set grades it wrong, which is what the bench's wrong-by-risk-tier numbers count. In production, where no golden set exists, the abstain rule does the work: G49's top score is 1.70, under Tidewell's 3.0 line, so rung 4 hands it off and opens a ticket. That rule is session 6.</p>
+        <p>Neither is complete. G54, "When is the annual staff party this year?", scores 3.71 against the annual leave clause and is still answered at rung 4; it is the one confident wrong answer left on the GO rung, at low risk. The citation passes, the threshold passes, and only the golden set knows.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Can a second model judge relevance?<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A common next step is to ask a second model whether the cited clause answers the question. How far that grader can be trusted, and how to calibrate it, is metric design, and it belongs to the <a href="https://phoebefu6.github.io/learn-ai-evals-with-phoebe/courses/b5-llm-as-judge.html">AI evals course's LLM-as-judge session</a>. This track takes the cheaper, inspectable side: gold keys on every golden question, written by a person who read the policy, and a threshold you can move and watch. No relevance-judging rate is quoted here, because none was read at source.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Confidence is where the harm lands.</strong> NIST's Generative AI Profile (NIST AI 600-1, 2024) defines confabulation as "the production of confidently stated but erroneous or false content", and places the risk where users believe false content, "often due to the confident nature of the response". It also names Information Integrity among its 12 risks. An internal assistant adds a twist: the wrong answer to G49 is quoted correctly from a real clause, with a real id. Nothing in the reply looks invented, which is what makes it believable.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>A citation checker in Python</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Plain Python 3, standard library only. Nine clause versions from Tidewell's constructed store, five draft answers, the three tests from Part 2 and a grade against the golden set. Four of the drafts use the exact retrieved lists the bench produces; the third is constructed, a draft that cites a clause it was never shown. Run it from an empty scratch folder.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn flow of five draft citations through one checker. G41 citing FIN-EXP-2 version 5 passes and the grader marks it right. G41 citing FIN-EXP-2 version 4 fails as superseded. G41 citing FIN-EXP-1 version 5 fails as not retrieved. G46 citing HR-PERF-1 version 2 fails because the asker may not read it. G49 citing HR-PERF-2 version 2 passes, and the grader marks it confident and wrong; that pass is highlighted.">
+        <defs>
+          <filter id="b4dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="67" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b4dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b4dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b4dH { font: 800 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4dL { font: 600 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #13292C; }
+          .b4dS { font: 400 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+          .b4dA { font: 700 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #0A5A60; }
+          .b4dB { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #6B4A00; }
+          .b4dR { font: 800 11px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #991B1B; }
+          .b4dN { font: 400 12px Inter, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b4dH" x="30" y="26">FIVE DRAFTS, ONE CHECKER, ONE GRADER</text>
+        <text class="b4dS" x="330" y="26">printed by check_citations.py · constructed data</text>
+
+        <g filter="url(#b4dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="52" width="230" height="30" rx="7" transform="rotate(-1.5 145 67)" fill="#FFFFFF"/>
+          <rect x="30" y="92" width="230" height="30" rx="7" transform="rotate(1 145 107)" fill="#FFFFFF"/>
+          <rect x="30" y="132" width="230" height="30" rx="7" transform="rotate(-1 145 147)" fill="#FFFFFF"/>
+          <rect x="30" y="172" width="230" height="30" rx="7" transform="rotate(1.5 145 187)" fill="#FFFFFF"/>
+          <rect x="30" y="212" width="230" height="30" rx="7" transform="rotate(-1 145 227)" fill="#FFFFFF"/>
+          <path d="M268 147 L314 147" marker-end="url(#b4dAr)"/>
+          <rect x="320" y="52" width="180" height="190" rx="10" transform="rotate(0.5 410 147)" fill="url(#b4dHc)"/>
+          <path d="M506 147 L546 147" marker-end="url(#b4dAr)"/>
+          <rect x="552" y="214" width="70" height="26" rx="6" transform="rotate(-2 587 227)" fill="#F4B63F"/>
+          <path d="M626 227 L664 227" marker-end="url(#b4dAr)"/>
+          <path d="M626 67 L664 67" marker-end="url(#b4dAr)"/>
+        </g>
+
+        <text class="b4dL" x="44" y="72">G41 cites FIN-EXP-2@v5</text>
+        <text class="b4dL" x="44" y="112">G41 cites FIN-EXP-2@v4</text>
+        <text class="b4dL" x="44" y="152">G41 cites FIN-EXP-1@v5</text>
+        <text class="b4dL" x="44" y="192">G46 cites HR-PERF-1@v2</text>
+        <text class="b4dL" x="44" y="232">G49 cites HR-PERF-2@v2</text>
+
+        <text class="b4dH" x="334" y="264">check()</text>
+        <text class="b4dS" x="334" y="282">retrieved · current · readable</text>
+
+        <text class="b4dA" x="560" y="72">pass</text>
+        <text class="b4dR" x="560" y="112">FAIL superseded version</text>
+        <text class="b4dR" x="560" y="152">FAIL not in the retrieved set</text>
+        <text class="b4dR" x="560" y="192">FAIL asker may not read it</text>
+        <text class="b4dL" x="564" y="232">pass</text>
+
+        <text class="b4dA" x="672" y="72">graded: right</text>
+        <text class="b4dB" x="672" y="224">graded: confident</text>
+        <text class="b4dB" x="672" y="240">and wrong</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three failures the check catches, and one pass only the golden set can overturn</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Write the store slice and who may read each group.</strong> Nine clause versions copied from Tidewell's constructed store, keyed by the same <code>KEY@version</code> id the answer contract uses. Only three fields matter to the check: the key, the superseded flag and the access group.</p>
+        <div class="prompt-box good"><span class="label">★ check_citations.py · part 1, the store (constructed)</span>store = {
+    "FIN-EXP-2@v5": {"key": "FIN-EXP-2", "superseded": False, "access": "all"},
+    "FIN-EXP-2@v4": {"key": "FIN-EXP-2", "superseded": True,  "access": "all"},
+    "FIN-EXP-3@v5": {"key": "FIN-EXP-3", "superseded": False, "access": "all"},
+    "FIN-EXP-1@v5": {"key": "FIN-EXP-1", "superseded": False, "access": "all"},
+    "HR-WFH-1@v1":  {"key": "HR-WFH-1",  "superseded": True,  "access": "all"},
+    "HR-WFH-1@v2":  {"key": "HR-WFH-1",  "superseded": False, "access": "all"},
+    "HR-PERF-1@v2": {"key": "HR-PERF-1", "superseded": False, "access": "managers"},
+    "HR-PERF-2@v2": {"key": "HR-PERF-2", "superseded": False, "access": "all"},
+    "IT-ACC-1@v3":  {"key": "IT-ACC-1",  "superseded": True,  "access": "all"},
+}
+READERS = {"all": {"staff", "manager", "hr", "finance", "it"},
+           "managers": {"manager", "hr"}, "hr": {"hr"}, "finance": {"finance"}, "it": {"it"}}</div>
+      </div>
+      <div class="step">
+        <p><strong>Write five draft answers as records.</strong> Each has the question id, the asker's group, the id it cites and the list that was retrieved. The first, second, fourth and fifth retrieved lists are what the bench retrieves for G41 at rungs 3 and 1, G46 at rung 1 and G49 at rung 3. The third is constructed: a draft that cites the claims-deadline clause it was never shown.</p>
+        <div class="prompt-box good"><span class="label">★ check_citations.py · part 2, five drafts</span>drafts = [
+    {"q": "G41", "asker": "staff", "cites": "FIN-EXP-2@v5",
+     "retrieved": ["FIN-EXP-2@v5", "FIN-EXP-3@v5"]},
+    {"q": "G41", "asker": "staff", "cites": "FIN-EXP-2@v4",
+     "retrieved": ["FIN-EXP-2@v4", "FIN-EXP-2@v5", "HR-WFH-1@v1"]},
+    {"q": "G41", "asker": "staff", "cites": "FIN-EXP-1@v5",
+     "retrieved": ["FIN-EXP-2@v5", "FIN-EXP-3@v5"]},
+    {"q": "G46", "asker": "staff", "cites": "HR-PERF-1@v2",
+     "retrieved": ["HR-PERF-1@v2", "IT-ACC-1@v3"]},
+    {"q": "G49", "asker": "staff", "cites": "HR-PERF-2@v2",
+     "retrieved": ["HR-PERF-2@v2", "HR-WFH-1@v2"]},
+]</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the check, in the bench's order.</strong> Retrieved first, because an id that was never retrieved may not even exist in the store. Then current, then readable. Return on the first failure so each draft gets one reason.</p>
+        <div class="prompt-box good"><span class="label">★ check_citations.py · part 3, the check</span>def check(d):
+    cid = d["cites"]
+    if cid not in d["retrieved"]:
+        return "FAIL not in the retrieved set"
+    c = store[cid]
+    if c["superseded"]:
+        return "FAIL superseded version"
+    if d["asker"] not in READERS[c["access"]]:
+        return "FAIL asker may not read it"
+    return "pass"
+
+
+passed = []
+for d in drafts:
+    result = check(d)
+    print(d["q"], d["cites"].ljust(13), result)
+    if result == "pass":
+        passed.append(d)</div>
+      </div>
+      <div class="step">
+        <p><strong>Grade the survivors against the golden set.</strong> Gold keys come from session 3. An empty set means no Tidewell policy answers the question, so any answer to it is confident and wrong.</p>
+        <div class="prompt-box good"><span class="label">★ check_citations.py · part 4, the grade</span>GOLD = {"G41": {"FIN-EXP-2"}, "G49": set()}   # empty set: no policy answers it
+
+print("graded against the golden set:")
+for d in passed:
+    key = store[d["cites"]]["key"]
+    if key in GOLD[d["q"]]:
+        print(" ", d["q"], "right")
+    else:
+        print(" ", d["q"], "confident and wrong")</div>
+      </div>
+      <div class="step">
+        <p><strong>Run it and read every line.</strong> <code>python3 check_citations.py</code> prints exactly this. Three FAIL lines means each test caught its planted case; the last line is the one the check could not catch.</p>
+        <div class="prompt-box good"><span class="label">★ Output</span>G41 FIN-EXP-2@v5  pass
+G41 FIN-EXP-2@v4  FAIL superseded version
+G41 FIN-EXP-1@v5  FAIL not in the retrieved set
+G46 HR-PERF-1@v2  FAIL asker may not read it
+G49 HR-PERF-2@v2  pass
+graded against the golden set:
+  G41 right
+  G49 confident and wrong</div>
+      </div>
+      <div class="step">
+        <p><strong>Wire it where it belongs.</strong> In production, a FAIL means the answer is not sent: the assistant uses the fixed "cannot answer" line and opens a ticket, which session 6 builds. The grade never runs in production, because there is no golden set for a new question; it runs on every change before launch, and its wrong-by-risk-tier counts feed the go/no-go in session 8.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The answer step with no check</span>
+answer = generate(question, top_clauses)
+return answer   # cites whatever it likes; nobody reads the brackets
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 5</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Write the answer contract for your own assistant: the id format, where the id goes, and the exact "cannot answer" sentence. Show it to one person who will read the answers and ask whether they could check a citation in ten seconds.</li>
+      <li>Add a fourth test to the checker: every number in the answer must appear in the cited clause's text. Plant a draft that cites FIN-EXP-2@v5 but says SGD 50, and make the test catch it.</li>
+      <li>Take five questions your helpdesk gets that no policy answers. Run them through any keyword search over your own documents and write down which clause each one would cite. Count how many pass all three tests.</li>
+      <li>Find one place in your current documentation where a rule changed but the old wording is still what people use. Write the pair as clauses with ids, and decide which one a citation should point at.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 4 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · What does the bench's citation check test on the cited clause of an answered question?</p>
+      <button class="qopt" type="button">A · That the answer text quotes the clause word for word</button>
+      <button class="qopt" type="button">B · That the clause was in the retrieved set, is the current version, and may be read by the asker</button>
+      <button class="qopt" type="button">C · That the clause has the highest BM25 score in the whole store</button>
+      <button class="qopt" type="button">D · That a second model agrees the clause answers the question</button>
+      <p class="qwhy">Retrieved, current, readable: three facts about the clause. A is a stricter grounding test the homework adds; D is an LLM-as-judge question that belongs to the AI evals course. C ignores the filters, which is exactly how a superseded clause wins.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · At rung 3, G49 ("Can I bring my dog to the office?") cites the disciplinary hearing clause and passes every test. What catches it?</p>
+      <button class="qopt" type="button">A · A stricter citation check that also tests the access group twice</button>
+      <button class="qopt" type="button">B · Retrieving the top 5 instead of the top 3</button>
+      <button class="qopt" type="button">C · The thumbs-up rate, which is 90.7% at rung 3</button>
+      <button class="qopt" type="button">D · The golden set before launch, which says no policy answers it, and the 3.0 abstain line in production, which its top score of 1.70 falls under</button>
+      <p class="qwhy">The check is about the clause, not the clause's relation to the question, so no version of it catches G49. A bigger top-k changes nothing about the top clause. The thumbs grade passes rung 3, which the board rejects.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · After session 8's break button, the old expenses version is indexed as current and G41 cites FIN-EXP-2 v4. What does the citation check report?</p>
+      <button class="qopt" type="button">A · Pass, because it reads the superseded flag from the index, and the index lost it; only the version register knows</button>
+      <button class="qopt" type="button">B · FAIL superseded version, because the check always knows the true history</button>
+      <button class="qopt" type="button">C · FAIL not in the retrieved set, because old versions are never retrieved</button>
+      <button class="qopt" type="button">D · FAIL asker may not read it, because finance clauses are finance only</button>
+      <p class="qwhy">The pipeline sees 0 stale citations and prints GO; the register finds 1, the SGD 50 per diem. A check is only as true as the metadata it reads, which is why session 7 diffs the register against the index. FIN-EXP-2 is readable by all staff, so D is wrong.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Answering only from retrieved clauses, with provenance built in</span><span class="note">Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, read at source; IMDA and AI Verify Foundation (2024), Model AI Governance Framework for Generative AI, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The citation check: retrieved, current, readable</span><span class="note">Taught as the bench computes it; counts measured on Tidewell's constructed store and printed in session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Overreliance and misinformation</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM09, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confabulation and information integrity</span><span class="note">NIST AI 600-1 Generative AI Profile (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">A citation checker and grader with planted faults</span><span class="note">Run from a scratch folder; the printed output is shown exactly</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Grounding methods and citation formats in depth</span><span class="note">Not taught here; the RAG course's grounding and citations session owns them</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Judging answer relevance with a second model</span><span class="note">Not taught here; the AI evals course owns LLM-as-judge</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 4 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Answer from retrieved</b><span>Only the top-3 clauses may become an answer. Memory has no version and no owner.</span></div>
+      <div class="cheat-item"><b>Cite the version</b><span>KEY@version after every sentence, so the citation says which text answered.</span></div>
+      <div class="cheat-item"><b>Three tests</b><span>In the retrieved set, current, readable by the asker. Any FAIL: do not send.</span></div>
+      <div class="cheat-item"><b>The check is an alarm</b><span>Filters remove bad clauses before ranking; the check proves they held.</span></div>
+      <div class="cheat-item"><b>It reads the index</b><span>A lost superseded flag passes the check. The register is the truth (session 7).</span></div>
+      <div class="cheat-item"><b>Real is not relevant</b><span>G49's dog question cites a real clause and passes. The golden set and the 3.0 line catch it.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>The readable test caught 7 leaked answers at rung 1, after the fact. Session 5 moves the permission rule inside retrieval, before ranking, counts leaks from 18 to 0, and shows with G46 that a filter changes what wins, not only what is removed.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 4 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b3-golden-questions.html">← Prev: Golden questions from the ticket log</a> &nbsp;·&nbsp; <a href="b5-permissions-inside-retrieval.html">Next: Permissions inside retrieval →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 2 of 6. You can buy a model, a search engine and a chat window. You cannot buy your policy clauses, their owners, who may read them, or the ticket the assistant opens when it cannot answer. Decide buy, build or wait one layer at a time.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Buy, build or wait - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Leader session 2 of 6. Buy the model, build what is yours, and wait when the corpus is not ready. One verdict per layer.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/a2-buy-build-or-wait.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Buy, build or wait - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Leader session 2 of 6. The parts of an internal assistant you cannot buy are the ones that decide whether it is safe.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 2 · Buy, build or wait - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Leader session 2 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Leader session 2 of 6</div>
+    <h1>Buy, build <span class="accent">or wait</span></h1>
+    <p class="sub">The pitch for an internal assistant usually arrives as a product: a model, a search box, a chat window, ready in weeks. All three are real and most of it is worth buying. What the pitch leaves out is the part that decides whether the assistant is right and safe: your policy clauses, the people who own them, who may read each one, and the ticket it opens when it cannot answer. Tidewell Freight, a constructed 1,200-person freight forwarder, is the running case. You leave with one verdict per layer, and a test for when the honest answer is "not yet".</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Core</span>
+      <span class="chip audience">HR, IT and finance operations leaders</span>
+      <span class="chip audience">Anyone signing an assistant purchase</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Buy, build, wait by layer</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: your sheet</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where this session sits</h2>
+    </div>
+    <p class="lede">Session 1 ended with a scope sentence: the topics the assistant answers, the documents it answers from, and the actions it hands to a ticket. Tonight takes that sentence to the buying decision. The general question, whether a use case deserves buying, building or nothing at all, has its own home in the <a href="https://phoebefu6.github.io/learn-ship-playbook-with-phoebe/courses/02-the-four-way-verdict.html">ship playbook's four-way verdict</a>. Here we take the narrower side: for THIS assistant, which layers you can buy, which you must build, and what has to be true before either is worth the money. <strong>Tidewell Freight</strong> is constructed for these pages; its numbers come from the bench in Builder session 8.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A one-page buy/build/wait sheet with five rows: the model, retrieval and chat, the corpus, access groups and the ticket hand-off. Each row carries a verdict, a tool class (never a vendor), an owner and the condition that would make you wait. Session 3 picks up the access row; session 6 signs the whole page.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the layers that stay yours whatever you buy</span>
+      <h2>What you cannot buy</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Split the assistant in two. On one side, the machinery: a model that writes a sentence, a retriever that finds the best clause, a window where staff type. On the other, three layers that only your organisation can supply. The machinery is for sale. The layers are not, and the machinery is only as good as what it reads.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn split of an internal assistant. On the left the bought product: a hosted model API that writes the sentence, retrieval and ranking that finds the best clause, and a chat window where staff ask. Arrows run right into three layers that stay yours. Layer 1, the corpus: 49 constructed clause versions in 16 documents, each with a named owner. Layer 2, access groups: 5 groups, one on every clause. Layer 3, the hand-off: a ticket in your ticketing system with the question and the clauses it looked at.">
+        <defs>
+          <filter id="a2aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="29" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a2aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a2aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a2aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a2aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a2aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a2aA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a2aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a2aH" x="30" y="26">WHAT A PRODUCT BRINGS, AND WHAT IT PLUGS INTO</text>
+        <text class="a2aS" x="430" y="26">constructed Tidewell layers · counts from the source map</text>
+
+        <g filter="url(#a2aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="48" width="300" height="236" rx="10" transform="rotate(-0.4 180 166)" fill="#FFFFFF"/>
+          <rect x="48" y="88" width="264" height="52" rx="8" transform="rotate(-1 180 114)" fill="#E8F6F6"/>
+          <rect x="48" y="152" width="264" height="52" rx="8" transform="rotate(0.8 180 178)" fill="#E8F6F6"/>
+          <rect x="48" y="216" width="264" height="52" rx="8" transform="rotate(-0.6 180 242)" fill="#E8F6F6"/>
+          <path d="M336 100 L488 100" marker-end="url(#a2aAr)"/>
+          <path d="M336 170 L488 170" marker-end="url(#a2aAr)"/>
+          <path d="M336 240 L488 240" marker-end="url(#a2aAr)"/>
+          <rect x="496" y="56" width="354" height="68" rx="10" transform="rotate(-0.5 673 90)" fill="#F4B63F"/>
+          <rect x="496" y="136" width="354" height="68" rx="10" transform="rotate(0.4 673 170)" fill="#E8F6F6"/>
+          <rect x="496" y="216" width="354" height="68" rx="10" transform="rotate(-0.4 673 250)" fill="#FFFFFF"/>
+          <circle cx="820" cy="158" r="7"/>
+          <path d="M827 158 L842 158 M838 158 L838 165"/>
+        </g>
+
+        <text class="a2aH" x="46" y="72">THE BOUGHT PRODUCT</text>
+        <text class="a2aL" x="62" y="110">a hosted model API</text>
+        <text class="a2aS" x="62" y="128">writes the sentence</text>
+        <text class="a2aL" x="62" y="174">retrieval and ranking</text>
+        <text class="a2aS" x="62" y="192">finds the best clause</text>
+        <text class="a2aL" x="62" y="238">a chat window</text>
+        <text class="a2aS" x="62" y="256">where staff ask</text>
+
+        <text class="a2aA" x="350" y="92">reads</text>
+        <text class="a2aA" x="350" y="162">filters by</text>
+        <text class="a2aA" x="350" y="232">hands off to</text>
+
+        <text class="a2aH" x="512" y="80">1 · THE CORPUS</text>
+        <text class="a2aL" x="512" y="99">49 clause versions in 16 documents</text>
+        <text class="a2aL" x="512" y="116">every clause has a named owner</text>
+        <text class="a2aH" x="512" y="160">2 · ACCESS GROUPS</text>
+        <text class="a2aS" x="512" y="179">5 groups, one on every clause</text>
+        <text class="a2aS" x="512" y="196">who may read which clause</text>
+        <text class="a2aH" x="512" y="240">3 · THE HAND-OFF</text>
+        <text class="a2aS" x="512" y="259">a ticket in your ticketing system</text>
+        <text class="a2aS" x="512" y="276">with the question and the clauses</text>
+
+        <text class="a2aN" x="30" y="312">A product can deliver the left column in weeks. Nobody can sell you the right one.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the product reads, filters and hands off; what it reads, filters by and hands off to is yours</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The three layers, and what each one is made of<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Layer</th><th>What it is</th><th>Tidewell (constructed)</th><th>Why no product supplies it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>The corpus</strong></td><td>Your policies cut into clauses, each with a stable key, version, effective date, superseded flag and owner</td><td>49 clause versions across 16 documents: 6 HR, 5 IT, 5 finance; 42 current, 7 superseded still in the store</td><td>Only your organisation knows which version is in force and who keeps it true</td></tr>
+            <tr><td><strong>Access groups</strong></td><td>An access group on every clause, so the assistant can filter before it ranks</td><td>All staff, managers (managers and HR), HR only, finance only, IT only</td><td>A product can enforce groups; it cannot decide them</td></tr>
+            <tr><td><strong>The hand-off</strong></td><td>The ticket the assistant opens when it should not answer, routed to the right team</td><td>One action only: open a ticket with the question, the asker's group and the clauses it looked at</td><td>The queue, the teams and the routing rules are yours</td></tr>
+          </tbody>
+        </table>
+        <p>Notice that none of the three is software. They are data and decisions. That is why "buy" sounds like a short project and is not: the purchase is quick, and the work it depends on is the work you would have had to do anyway.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What "retrieval-augmented" means for the buyer<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Most internal assistants are built on retrieval-augmented generation. Lewis et al. (2020) defined it as models "which combine pre-trained parametric and non-parametric memory for language generation": the model is the parametric part, and the index of documents it retrieves from is the non-parametric part. For a buyer that sentence is the whole point. The model is a commodity you rent. The non-parametric memory is your corpus, and the vendor ships it empty.</p>
+        <p>Singapore's IMDA framework for generative AI names retrieval-augmented generation among techniques "commonly used to reduce hallucinations and improve accuracy". Commonly used is not guaranteed: it reduces wrong answers only as far as the documents it retrieves are current, permitted and on topic. Those three conditions are the three layers above.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The memory you can swap without retraining.</strong> Lewis et al. showed that a retrieval-augmented model's knowledge "can be easily updated at test time" by replacing its document index, with no retraining. It is a useful property and a clear warning. The same swap that lets you correct the assistant overnight lets a stale or mislabelled document change its answers overnight too. Whoever owns the index owns the answers, and that is you, not the seller.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the buy, build or wait verdict for each layer</span>
+      <h2>Build what is yours</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Do not decide buy or build for "the assistant". Decide it five times, once per layer, and name each answer as a tool class rather than a vendor. Prices change monthly; the split between what you rent and what you own does not.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn verdict table, one row per layer. The language model: buy, a hosted model API, SGD 0.25 to 8.53 a month in model cost on the bench's assumption range. Retrieval and chat: buy or build small, an enterprise search product or a document store with access control. The corpus: build, your clauses with key, version, effective date and owner. Access groups: build, an access group on every clause set by its owner. Ticket hand-off: build thin, a connector to your ticketing system with one action.">
+        <defs>
+          <filter id="a2bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a2bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a2bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a2bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a2bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a2bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a2bW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a2bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a2bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a2bH" x="30" y="26">ONE VERDICT PER LAYER, NAMED AS A TOOL CLASS</text>
+        <text class="a2bS" x="400" y="26">Tidewell, constructed · cost is the bench's assumption range</text>
+        <text class="a2bA" x="30" y="50">layer</text>
+        <text class="a2bA" x="270" y="50">verdict</text>
+        <text class="a2bA" x="400" y="50">tool class, never a vendor</text>
+
+        <g filter="url(#a2bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="270" y="60" width="110" height="34" rx="6" transform="rotate(-0.6 325 77)" fill="#0A5A60" stroke="#0A5A60"/>
+          <rect x="270" y="106" width="110" height="34" rx="6" transform="rotate(0.5 325 123)" fill="#E8F6F6"/>
+          <rect x="270" y="152" width="110" height="34" rx="6" transform="rotate(-0.4 325 169)" fill="#F4B63F"/>
+          <rect x="270" y="198" width="110" height="34" rx="6" transform="rotate(0.6 325 215)" fill="#0A5A60" stroke="#0A5A60"/>
+          <rect x="270" y="244" width="110" height="34" rx="6" transform="rotate(-0.5 325 261)" fill="#0A5A60" stroke="#0A5A60"/>
+          <path d="M30 146 L850 146" stroke="#C5DADB" stroke-dasharray="5 5"/>
+          <path d="M862 152 C870 152 872 160 872 214 C872 270 870 278 862 278"/>
+        </g>
+
+        <text class="a2bL" x="30" y="82">the language model</text>
+        <text class="a2bL" x="30" y="128">retrieval and chat</text>
+        <text class="a2bL" x="30" y="174">the corpus</text>
+        <text class="a2bL" x="30" y="220">access groups</text>
+        <text class="a2bL" x="30" y="266">ticket hand-off</text>
+
+        <text class="a2bW" x="284" y="82">BUY</text>
+        <text class="a2bL" x="284" y="128">BUY OR BUILD</text>
+        <text class="a2bH" x="284" y="174">BUILD</text>
+        <text class="a2bW" x="284" y="220">BUILD</text>
+        <text class="a2bW" x="284" y="266">BUILD THIN</text>
+
+        <text class="a2bS" x="400" y="82">a hosted model API · SGD 0.25 to 8.53 a month, assumption</text>
+        <text class="a2bS" x="400" y="128">an enterprise search product or a document store with access control</text>
+        <text class="a2bL" x="400" y="174">your clauses: key, version, effective date, owner</text>
+        <text class="a2bS" x="400" y="220">an access group on every clause, set by its owner</text>
+        <text class="a2bS" x="400" y="266">a connector to your ticketing system, one action</text>
+
+        <text class="a2bN" x="30" y="304">Above the dashed line you rent. Below it you own, whichever product you pick.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the cheap line is the one you buy; the corpus is the one you cannot</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the model is the easy row<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On the bench, the shipped assistant reads about 465 input tokens per answer. Priced across the bench's assumed range, that is USD 0.00011 to 0.0036 per answer, or SGD 0.25 to 8.53 in model cost for a month of 2,400 questions. The hand-off tickets the same assistant opens cost SGD 6,000 a month at Tidewell's assumed SGD 9 a ticket. Every input here is an assumption, labelled as one, and session 5 takes the sheet apart. The shape survives any reasonable price: the model is the small line.</p>
+        <p>So spend the selection effort where the risk is. A model choice that is wrong costs a few dollars to reverse. A corpus that cites a superseded policy, or an access layer that lets a staff member read a managers-only clause, costs trust that a cheaper model cannot buy back.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Retrieval and chat: buy, or build small<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This is the one row with a real choice. An enterprise search product brings connectors and a chat window; a document store with access control plus a thin page of your own brings less, but every step stays inspectable. Either is reasonable. The test for both is the same, and it comes from OWASP's 2025 list for LLM applications: under LLM08, "Implement fine-grained access controls and permission-aware vector and embedding stores." Ask the seller, or your own team, to show the filter running before ranking, on your access groups, with a question a staff member must not get answered. Session 3 builds that test.</p>
+        <p>Which retrieval method to use, chunking, embeddings and reranking, is not a leader decision and is not taught here: the <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/">RAG course</a> owns it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>How this connects to the playbook's verdict and data gate<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The <a href="https://phoebefu6.github.io/learn-ship-playbook-with-phoebe/courses/02-the-four-way-verdict.html">four-way verdict</a> decides whether a use case is worth pursuing at all and in what form, and the <a href="https://phoebefu6.github.io/learn-ship-playbook-with-phoebe/courses/04-the-data-gate.html">data gate</a> checks whether the data can carry it. Run those first if nobody has. This session assumes the answer was "yes, an assistant", and applies the same discipline one level down: a verdict per layer, and a data check that is specific to policy documents, which Part 3 turns into the wait test.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A permission layer is not a feature you tick.</strong> On the bench, Tidewell's first rung has no permission filter. Retrieval is perfect by its own measure, every answerable question finds its clause in the top three, and 18 questions still leak a clause the asker may not read; 7 of them are answered from that clause. The bought machinery worked exactly as designed. The access layer was missing, and only the organisation could have supplied it. Tidewell is constructed; the leak count is measured on its bench.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the conditions under which the right answer is to wait</span>
+      <h2>When to wait</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Wait is a verdict, not a failure. If the corpus cannot carry an assistant, buying one only makes the gaps answer back in a confident voice. Three checks decide it, and failing any one of them means wait and fix the corpus first.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn wait test. Tidewell's constructed corpus passes through three checks in turn. Check 1, owners: every document named to a person who keeps it; Tidewell yes, on every clause. Check 2, access metadata: an access group on every clause, set by its owner; Tidewell yes, 5 groups. Check 3, written answers: wait if more than half of asked topics are unwritten; Tidewell passes, 44 of 600 tickets had no written answer. The verdict: go ahead, but first retire the 7 superseded versions still in the store.">
+        <defs>
+          <filter id="a2cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="37" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a2cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a2cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a2cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a2cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a2cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a2cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a2cH" x="30" y="26">THE WAIT TEST: THREE CHECKS, ANY FAILURE MEANS WAIT</text>
+        <text class="a2cS" x="460" y="26">Tidewell's corpus, constructed</text>
+
+        <g filter="url(#a2cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="80" width="140" height="120" rx="8" transform="rotate(-1.5 100 140)" fill="url(#a2cHc)"/>
+          <path d="M174 140 L194 140" marker-end="url(#a2cAr)"/>
+          <rect x="200" y="80" width="200" height="120" rx="10" transform="rotate(0.4 300 140)" fill="#FFFFFF"/>
+          <path d="M404 140 L424 140" marker-end="url(#a2cAr)"/>
+          <rect x="430" y="80" width="200" height="120" rx="10" transform="rotate(-0.4 530 140)" fill="#FFFFFF"/>
+          <path d="M634 140 L654 140" marker-end="url(#a2cAr)"/>
+          <rect x="660" y="80" width="190" height="120" rx="10" transform="rotate(0.4 755 140)" fill="#FFFFFF"/>
+          <path d="M755 204 L755 216" marker-end="url(#a2cAr)"/>
+          <rect x="200" y="222" width="650" height="40" rx="10" transform="rotate(-0.2 525 242)" fill="#F4B63F"/>
+        </g>
+
+        <text class="a2cL" x="30" y="66">Tidewell's corpus</text>
+        <text class="a2cS" x="30" y="222">16 documents</text>
+        <text class="a2cS" x="30" y="238">49 clause versions</text>
+
+        <text class="a2cH" x="214" y="104">1 · OWNERS</text>
+        <text class="a2cS" x="214" y="124">every document named</text>
+        <text class="a2cS" x="214" y="141">to a person who keeps it</text>
+        <text class="a2cL" x="214" y="168">Tidewell: yes</text>
+        <text class="a2cS" x="214" y="186">on every clause</text>
+
+        <text class="a2cH" x="444" y="104">2 · ACCESS METADATA</text>
+        <text class="a2cS" x="444" y="124">an access group on every</text>
+        <text class="a2cS" x="444" y="141">clause, set by its owner</text>
+        <text class="a2cL" x="444" y="168">Tidewell: yes</text>
+        <text class="a2cS" x="444" y="186">5 groups</text>
+
+        <text class="a2cH" x="674" y="104">3 · WRITTEN ANSWERS</text>
+        <text class="a2cS" x="674" y="124">wait if more than half</text>
+        <text class="a2cS" x="674" y="141">of asked topics unwritten</text>
+        <text class="a2cL" x="674" y="168">Tidewell: passes</text>
+        <text class="a2cS" x="674" y="186">44 of 600 had no answer</text>
+
+        <text class="a2cL" x="216" y="247">Verdict: go ahead, but first retire the 7 superseded versions still in the store.</text>
+
+        <text class="a2cN" x="30" y="286">Fail any one check and the answer is wait: fix the corpus, not the model.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - Tidewell passes all three checks and still has cleaning to do before launch</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The three checks, and why each one is a stop<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Check</th><th>Wait if</th><th>Why it stops the purchase</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Owners</strong></td><td>Documents with no named person who keeps them current</td><td>An assistant quotes an orphaned policy with the same confidence as a maintained one, long after it stopped being true</td></tr>
+            <tr><td><strong>Access metadata</strong></td><td>Clauses with no access group, or groups inherited from a folder nobody reviewed</td><td>No product can filter on a label that does not exist; it will either show everything or hide everything</td></tr>
+            <tr><td><strong>Written answers</strong></td><td>More than half the topics staff ask about have no written policy</td><td>The assistant spends most of its time on questions it should hand off, and a ranking always finds a best match to answer from anyway</td></tr>
+          </tbody>
+        </table>
+        <p>The half line is a judgement for your organisation, not a published standard. Tidewell's constructed quarter sits far below it: 44 of 600 tickets had no written answer anywhere. Use session 1's tally to place your own.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Waiting is work, not a pause<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A wait verdict comes with a to-do list: name an owner for every document, have each owner set an access group per clause, write the missing policies or a sentence saying there is none, and retire superseded versions from the store. Every item is useful even if the assistant never ships, because the same gaps already cost the helpdesk minutes today. Set a date to rerun the three checks, and treat the list as the project plan.</p>
+        <p>Who should set access, and why it should be per clause rather than inherited from a folder, is session 3. The access model itself belongs to the <a href="https://phoebefu6.github.io/learn-data-access-control-with-phoebe/courses/a1-who-can-see-what.html">data access control course</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A constructed case: the old expenses policy, indexed as current.</strong> On Tidewell's bench there is a button that indexes the superseded expenses policy (FIN-EXP v4) as if it were in force. The shipped assistant's own checks still say GO and see 0 stale citations. Read against the version register, the verdict is NO-GO: one answer quotes a per diem of SGD 50 from v4 instead of the SGD 60 daily allowance in v5. No product would have caught it, because the only record of which version is current was the organisation's own register. Tidewell is constructed; the result is measured on its bench in Builder session 8.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Your buy, build or wait sheet</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">One page, five rows, one verdict per row and one overall call. Bring your scope sentence from session 1. No data to hand? Fill it in for Tidewell from the numbers on this page; your numbers will differ, and the rows will not.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The buy, build or wait sheet as a hand-drawn page with five columns: layer, verdict, tool class, owner and wait if. Rows: model, buy, hosted model API, owner IT, no wait condition. Retrieval and chat, buy, search product, owner IT, no wait condition. Corpus, build, your clauses, each document owner, wait if no owners; this row is highlighted. Access groups, build, groups on clauses, each document owner, wait if no metadata. Ticket hand-off, build thin, ticketing connector, helpdesk lead, wait if no ticket queue. A signature line runs along the bottom.">
+        <defs>
+          <filter id="a2dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a2dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a2dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a2dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a2dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a2dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a2dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a2dH" x="30" y="26">THE SHEET, FIVE ROWS AND A SIGNATURE</text>
+
+        <g filter="url(#a2dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="820" height="196" rx="10" transform="rotate(-0.2 440 142)" fill="#FFFFFF"/>
+          <rect x="36" y="138" width="808" height="24" rx="4" fill="#F4B63F"/>
+          <path d="M36 80 L844 80"/>
+          <path d="M222 52 L222 214"/>
+          <path d="M352 52 L352 214"/>
+          <path d="M572 52 L572 214"/>
+          <path d="M692 52 L692 214"/>
+          <path d="M36 214 L844 214" stroke="#C5DADB"/>
+        </g>
+
+        <text class="a2dH" x="46" y="70">LAYER</text>
+        <text class="a2dH" x="232" y="70">VERDICT</text>
+        <text class="a2dH" x="362" y="70">TOOL CLASS</text>
+        <text class="a2dH" x="582" y="70">OWNER</text>
+        <text class="a2dH" x="702" y="70">WAIT IF</text>
+
+        <text class="a2dL" x="46" y="102">model</text>
+        <text class="a2dS" x="232" y="102">buy</text>
+        <text class="a2dS" x="362" y="102">hosted model API</text>
+        <text class="a2dS" x="582" y="102">IT</text>
+        <text class="a2dS" x="702" y="102">none</text>
+
+        <text class="a2dL" x="46" y="128">retrieval and chat</text>
+        <text class="a2dS" x="232" y="128">buy</text>
+        <text class="a2dS" x="362" y="128">search product</text>
+        <text class="a2dS" x="582" y="128">IT</text>
+        <text class="a2dS" x="702" y="128">no access filter</text>
+
+        <text class="a2dL" x="46" y="154">corpus</text>
+        <text class="a2dL" x="232" y="154">build</text>
+        <text class="a2dL" x="362" y="154">your clauses</text>
+        <text class="a2dL" x="582" y="154">each doc owner</text>
+        <text class="a2dL" x="702" y="154">no owners</text>
+
+        <text class="a2dL" x="46" y="180">access groups</text>
+        <text class="a2dS" x="232" y="180">build</text>
+        <text class="a2dS" x="362" y="180">groups on clauses</text>
+        <text class="a2dS" x="582" y="180">each doc owner</text>
+        <text class="a2dS" x="702" y="180">no metadata</text>
+
+        <text class="a2dL" x="46" y="206">ticket hand-off</text>
+        <text class="a2dS" x="232" y="206">build thin</text>
+        <text class="a2dS" x="362" y="206">ticketing connector</text>
+        <text class="a2dS" x="582" y="206">helpdesk lead</text>
+        <text class="a2dS" x="702" y="206">no ticket queue</text>
+
+        <text class="a2dL" x="46" y="232">Overall: buy / build / wait · signed ________ · rerun the checks on ________</text>
+
+        <text class="a2dN" x="30" y="264">The verdict is per layer; the decision to wait is for the whole assistant.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the highlighted row is the one no seller can fill in for you</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Copy the five rows.</strong> Model, retrieval and chat, corpus, access groups, ticket hand-off. Do not add a vendor column. If a seller is already in the room, their product goes in the tool-class cell as a class: "an enterprise search product".</p>
+        <div class="prompt-box good"><span class="label">★ The empty sheet</span>LAYER               VERDICT      TOOL CLASS                  OWNER          WAIT IF
+model               ________     ________________________    ____________   ____________
+retrieval and chat  ________     ________________________    ____________   ____________
+corpus              ________     ________________________    ____________   ____________
+access groups       ________     ________________________    ____________   ____________
+ticket hand-off     ________     ________________________    ____________   ____________</div>
+      </div>
+      <div class="step">
+        <p><strong>Fill the corpus row from your scope sentence.</strong> List the documents the sentence names. For each, write the owner and the date it last changed. Count how many have no owner. That count, not the vendor shortlist, decides whether the overall call can be anything but wait.</p>
+      </div>
+      <div class="step">
+        <p><strong>Fill the access row.</strong> For each document, write which groups may read it. If the honest answer is "it inherits from the shared drive", write that down; it is a wait condition, and session 3 explains why.</p>
+      </div>
+      <div class="step">
+        <p><strong>Fill the hand-off row.</strong> Name the ticket queue each kind of hand-off goes to and the person who owns that queue. An assistant whose hand-offs land nowhere has turned a safe answer into a lost question.</p>
+      </div>
+      <div class="step">
+        <p><strong>Run the three checks and write the overall call.</strong> Owners, access metadata, written answers. Pass all three and the call is buy or build by row. Fail one and the call is wait, with the fix list and a date to rerun.</p>
+        <div class="prompt-box good"><span class="label">★ The overall call, Tidewell (constructed)</span>Overall: proceed. Buy the model and the retrieval layer as tool classes;
+build the corpus, access groups and ticket connector ourselves.
+Owners: yes, on every clause. Access metadata: yes, 5 groups.
+Written answers: 44 of 600 tickets had none, well under half.
+Before launch: retire the 7 superseded versions still in the store.
+Rerun the checks before session 6's go/no-go.</div>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The version that buys a product and calls it a plan</span>
+Recommendation: procure [AI assistant platform] for HR, IT and finance.
+It connects to our shared drives out of the box and will be live in six weeks.
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 3</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li>Finish the sheet for your own scope sentence, with an owner named in every row.</li>
+      <li>For every document in your corpus row, write the owner and last-changed date, and count how many have neither.</li>
+      <li>Pick the two most sensitive documents in scope and write, clause by clause, which groups may read them. Bring the list to session 3.</li>
+      <li>If anyone has already pitched a product, rewrite its claims as tool classes and mark which of your three layers the pitch assumed you already had.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Leader session 2 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · A seller offers an assistant that "connects to all your documents out of the box". Which part of Tidewell's assistant does that purchase actually supply?</p>
+      <button class="qopt" type="button">A · The corpus, because the connector reads every document</button>
+      <button class="qopt" type="button">B · The access groups, because the product respects folder permissions</button>
+      <button class="qopt" type="button">C · The machinery: model, retrieval and chat; the corpus, access groups and hand-off stay Tidewell's to build</button>
+      <button class="qopt" type="button">D · Everything, so the only remaining decision is price</button>
+      <p class="qwhy">Reading every document is not the same as knowing which version is current, who owns it, or who may see each clause. A and B are the pitch's assumptions. Lewis et al. describe the document index as the model's non-parametric memory; the product ships it empty.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · On the bench, model cost for a month of 2,400 questions is SGD 0.25 to 8.53 (assumption) and hand-off tickets are SGD 6,000. What should that do to the buying conversation?</p>
+      <button class="qopt" type="button">A · Spend less effort choosing the model and more on the corpus and access layers, where a mistake is expensive</button>
+      <button class="qopt" type="button">B · Pick the cheapest model, since cost is the main risk</button>
+      <button class="qopt" type="button">C · Drop the hand-off to save SGD 6,000 a month</button>
+      <button class="qopt" type="button">D · Delay the purchase until model prices fall</button>
+      <p class="qwhy">The model is the small line and easy to swap. C is the trap: hand-offs are what stop the assistant answering questions it should not, and session 5 shows the cheapest rung is the one you must not ship.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · A department's policies have no named owners and inherit access from shared folders, but fewer than half its asked topics are unwritten. What is the verdict?</p>
+      <button class="qopt" type="button">A · Buy, because the written-answers check passed</button>
+      <button class="qopt" type="button">B · Build, because building gives you more control than buying</button>
+      <button class="qopt" type="button">C · Buy now and fix owners after launch</button>
+      <button class="qopt" type="button">D · Wait: two of the three checks fail, so fix owners and per-clause access first</button>
+      <p class="qwhy">Failing any one check means wait. Building instead of buying does not create owners or access groups; both options read the same missing labels. Fixing after launch means staff are already getting answers from unowned, unfiltered clauses.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Buy, build or wait per layer: the three layers you cannot buy</span><span class="note">Taught as a method; Tidewell's corpus of 49 clause versions in 16 documents is constructed</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Retrieval-augmented generation and the swappable index</span><span class="note">Lewis et al. (2020), NeurIPS 2020, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Permission-aware stores as a buying test</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM08, read at source; 18 leaks on rung 1 measured on the bench</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The model is the small line</span><span class="note">Bench cost canon, every price and token count labelled assumption</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">A superseded policy indexed as current</span><span class="note">The bench's break button, measured; IMDA's framework on retrieval as a common accuracy technique, read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The general use-case verdict and data gate</span><span class="note">Linked, not retaught: the ship playbook owns both</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Vendor and model selection, price lists</span><span class="note">Deliberately not covered; tool classes only</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Leader session 2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Two halves</b><span>Machinery you can buy: model, retrieval, chat. Layers you cannot: corpus, access groups, hand-off.</span></div>
+      <div class="cheat-item"><b>Five verdicts, not one</b><span>Decide buy, build or wait per layer, named as a tool class, never a vendor.</span></div>
+      <div class="cheat-item"><b>The model is the small line</b><span>Bench assumption: SGD 0.25 to 8.53 a month in model cost against SGD 6,000 of hand-off tickets.</span></div>
+      <div class="cheat-item"><b>Ask for the filter</b><span>Permission-aware stores (OWASP LLM08): see it run before ranking, on your groups.</span></div>
+      <div class="cheat-item"><b>The wait test</b><span>No owners, no access metadata, or more than half the asked topics unwritten: wait.</span></div>
+      <div class="cheat-item"><b>Whoever owns the index owns the answers</b><span>Swap a document and the answers change overnight, for better or worse.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>Your sheet has an access row with a verdict of build. Session 3 fills it in: how 18 leaks on the bench became 0, why the filter has to run before ranking rather than on the answer, and who should set access for each clause.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Leader session 2 of 6 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a1-what-staff-actually-ask.html">← Prev: What staff actually ask</a> &nbsp;·&nbsp; <a href="a3-who-may-see-what.html">Next: Who may see what →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 4 of 6. An internal assistant that answers 97.6% of answerable questions correctly can still be a no-go, because it also answers the questions it should hand off. Design the hand-off as a product and pick the threshold that triggers it, with a measured price on both sides.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="What it says when it doesn't know - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Leader session 4 of 6. 97.6% correct and still NO-GO. The fix is answering less, and saying so well.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/a4-when-it-does-not-know.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What it says when it doesn't know - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Leader session 4 of 6. The hand-off is a product, not an error message. Design it and pick its threshold.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 4 · What it says when it doesn't know - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Leader session 4 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Leader session 4 of 6</div>
+    <h1>What it says when it <span class="accent">doesn't know</span></h1>
+    <p class="sub">By the end of session 3, Tidewell Freight's assistant (a constructed 1,200-person freight forwarder) leaks nothing and cites only current policy. It answers 97.6% of the answerable questions correctly, and the go/no-go board still says NO-GO. The reason is the other twelve questions: the ones it should not answer at all. Tonight is about what the assistant says then, what it opens, and where the line sits that makes it stop. You leave with a hand-off message, a ticket template and a threshold decision note.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">HR, IT and finance operations leaders</span>
+      <span class="chip audience">Product owners of an internal assistant</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Wrong, hand-off, threshold</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: the hand-off</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where the leader track stands</h2>
+    </div>
+    <p class="lede">Session 1 gave you the scope sentence, including its last clause: "says it does not know for everything else". Session 2 sorted what you buy from what stays yours. Session 3 kept every answer inside what the asker may read. Tonight makes the last clause of the scope sentence real. The numbers come from the go/no-go bench in Builder session 8, run over <strong>Tidewell Freight</strong>, constructed for these pages: 54 golden questions, of which 42 a policy clause answers for the asker, 6 are restricted and 6 have no policy at all. The bench's answers are pre-written; the scores, filters and verdicts are computed.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Three short documents for Tidewell, or for your own assistant: the hand-off message staff will read, the ticket the assistant opens when it hands off, and a one-paragraph threshold decision note that names the line, who chose it, what it misses and what still slips past it. Session 6 staples all three into the launch decision.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers why a highly accurate assistant can still be a no-go</span>
+      <h2>Confident and wrong</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Rung 3 of the bench is the assistant most demos show: permission filter on, superseded versions out, top three clauses retrieved, an answer every time. Its accuracy on the answerable questions is the best on the ladder. Its behaviour on the other twelve is the reason it does not ship.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 322" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn report cards from the bench. Rung 3, current versions only: correct answers 97.6 percent of 42, right hand-offs 8.3 percent of 12, confident wrong answers 31.6 percent of medium-risk and 35.7 percent of low-risk and 4.8 percent of high-risk questions, verdict NO-GO. A saffron step labelled plus abstain below 3.0 leads to rung 4: correct answers 90.5 percent, right hand-offs 91.7 percent, confident wrong 0.0, 7.1 and 0.0 percent, verdict GO.">
+        <defs>
+          <filter id="a4aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a4aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a4aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a4aV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .a4aR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a4aX { font: 800 16px Inter, sans-serif; fill: #991B1B; }
+          .a4aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a4aH" x="30" y="26">SAME RETRIEVAL, ONE RULE APART</text>
+        <text class="a4aS" x="300" y="26">measured on the bench · constructed Tidewell golden set · threshold 3.0</text>
+
+        <g filter="url(#a4aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="340" height="232" rx="10" transform="rotate(-0.4 200 160)" fill="#FFFFFF" stroke="#991B1B"/>
+          <path d="M374 160 L392 160" marker-end="url(#a4aAr)"/>
+          <rect x="396" y="118" width="92" height="84" rx="8" transform="rotate(-2 442 160)" fill="#F4B63F"/>
+          <path d="M490 160 L506 160" marker-end="url(#a4aAr)"/>
+          <rect x="510" y="44" width="340" height="232" rx="10" transform="rotate(0.4 680 160)" fill="#E8F6F6" stroke="#0E8086"/>
+          <ellipse cx="808" cy="250" rx="34" ry="17"/>
+        </g>
+
+        <text class="a4aH" x="46" y="68">RUNG 3 · CURRENT VERSIONS ONLY</text>
+        <text class="a4aL" x="46" y="98">correct answers, of 42</text>
+        <text class="a4aV" x="354" y="98" text-anchor="end">97.6%</text>
+        <text class="a4aL" x="46" y="128">right hand-offs, of 12</text>
+        <text class="a4aX" x="354" y="128" text-anchor="end">8.3%</text>
+        <text class="a4aL" x="46" y="158">confident wrong, medium risk</text>
+        <text class="a4aX" x="354" y="158" text-anchor="end">31.6%</text>
+        <text class="a4aL" x="46" y="188">confident wrong, low risk</text>
+        <text class="a4aX" x="354" y="188" text-anchor="end">35.7%</text>
+        <text class="a4aL" x="46" y="218">confident wrong, high risk</text>
+        <text class="a4aV" x="354" y="218" text-anchor="end">4.8%</text>
+        <text class="a4aR" x="46" y="256">NO-GO · answers what it should hand off</text>
+
+        <text class="a4aH" x="406" y="146">+ ABSTAIN</text>
+        <text class="a4aL" x="406" y="166">below 3.0</text>
+        <text class="a4aL" x="406" y="186">hand off</text>
+
+        <text class="a4aH" x="526" y="68">RUNG 4 · + ABSTAIN AND HAND OFF</text>
+        <text class="a4aL" x="526" y="98">correct answers, of 42</text>
+        <text class="a4aV" x="834" y="98" text-anchor="end">90.5%</text>
+        <text class="a4aL" x="526" y="128">right hand-offs, of 12</text>
+        <text class="a4aV" x="834" y="128" text-anchor="end">91.7%</text>
+        <text class="a4aL" x="526" y="158">confident wrong, medium risk</text>
+        <text class="a4aV" x="834" y="158" text-anchor="end">0.0%</text>
+        <text class="a4aL" x="526" y="188">confident wrong, low risk</text>
+        <text class="a4aV" x="834" y="188" text-anchor="end">7.1%</text>
+        <text class="a4aL" x="526" y="218">confident wrong, high risk</text>
+        <text class="a4aV" x="834" y="218" text-anchor="end">0.0%</text>
+        <text class="a4aS" x="526" y="256">answers less, ships</text>
+        <text class="a4aV" x="808" y="256" text-anchor="middle">GO</text>
+
+        <text class="a4aN" x="30" y="304">Correct answers go down by seven points and the verdict flips: answering less is the fix, not the cost.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the best accuracy on the ladder belongs to an assistant that does not ship</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Read the two cards row by row<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's go/no-go policy (its own choice, not a standard) asks for correct answers on at least 70% of the answerable questions, right hand-offs on at least 80% of the twelve it should not answer, and confident wrong answers on at most 5% of high-risk, 10% of medium-risk and 20% of low-risk questions. Rung 3 clears the accuracy bar with room to spare at 41 of 42. It fails three other lines at once, and the bench prints all three reasons: medium-risk 31.6% over 10.0%, low-risk 35.7% over 20.0%, hands off 8.3% where 80.0% is needed.</p>
+        <p>Rung 4 changes nothing about retrieval. It adds one rule: if the best clause scores below 3.0, do not answer; say so and open a ticket. Correct answers fall to 38 of 42 (90.5%), right hand-offs rise to 11 of 12 (91.7%), and the board says GO.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why "accuracy" hides the failure<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Accuracy is measured on the questions that have an answer. The dangerous questions are the ones that do not: the six restricted ones, where a clause exists but the asker may not read it, and the six with no policy anywhere. A ranking of clauses always has a first place, so an assistant without a hand-off rule answers all of them, citing a real clause that does not answer the question. That is why a single accuracy number on a vendor slide tells you nothing about whether to ship.</p>
+        <p>NIST's Generative AI Profile (NIST AI 600-1) names the risk <strong>confabulation</strong>: "the production of confidently stated but erroneous or false content". OWASP's Top 10 for LLM Applications 2025 names the human side under LLM09 Misinformation: overreliance, when users "place excessive trust in LLM-generated content". An internal assistant invites both, because staff are inclined to trust anything that quotes their own company's policy.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Grounding reduces this, it does not remove it<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Singapore's Model AI Governance Framework for Generative AI (IMDA and AI Verify Foundation, 2024) lists retrieval-augmented generation among techniques "commonly used to reduce hallucinations and improve accuracy". Rung 3 is a fully grounded assistant, and it still produces confident wrong answers on 31.6% of medium-risk questions, because grounding constrains what it answers from, not whether it should answer. Only a hand-off rule does that. No hallucination rate is quoted here for any assistant or model: none read at source would transfer to your corpus, and Tidewell's numbers are a constructed demonstration of the mechanism.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Where NIST puts the harm.</strong> The Generative AI Profile does not locate the risk in the wrong sentence itself. It locates it in belief: risk arises "when users believe false content - often due to the confident nature of the response". That changes what you design. A wrong answer phrased with a citation is believed more, not less. The counter-move is an assistant that is visibly willing to say "not from policy", so that staff learn its confident answers mean something.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the hand-off as a product: what it says and what it opens</span>
+      <h2>The hand-off</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Most teams write the hand-off last, as an error string. It is the opposite of an error: it is the behaviour that makes the board say GO. On rung 4 the assistant hands off 15 of 54 golden questions. That is the share of conversations where staff meet the hand-off, so it deserves the same design care as the answer.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn flow. A staff question about pay day, G07, gets a top retrieval score of 2.77. A check asks whether the top score is under 3.0; it is, so the assistant hands off. Two outputs leave the check. The saffron one is what staff read: it says it cannot answer from policy, shows what it looked at and why that is not enough, and says who now has the question and the ticket number. The other is the one ticket it opens: the question and asker group, the top three clauses and their scores, the reason it handed off, routed to the owning team.">
+        <defs>
+          <filter id="a4bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a4bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a4bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a4bV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .a4bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a4bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a4bH" x="30" y="26">ONE HAND-OFF, TWO PRODUCTS</text>
+        <text class="a4bS" x="250" y="26">G07 measured on the bench · message and ticket wording are a constructed Tidewell design</text>
+
+        <g filter="url(#a4bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="118" width="190" height="84" rx="8" transform="rotate(-2 125 160)" fill="#FFFFFF"/>
+          <path d="M224 160 L250 160" marker-end="url(#a4bAr)"/>
+          <rect x="254" y="122" width="170" height="76" rx="10" transform="rotate(0.6 339 160)" fill="#E8F6F6"/>
+          <path d="M428 146 C440 120 444 98 456 98" marker-end="url(#a4bAr)"/>
+          <path d="M428 176 C440 204 444 236 456 236" marker-end="url(#a4bAr)"/>
+          <rect x="460" y="44" width="390" height="112" rx="10" transform="rotate(-0.4 655 100)" fill="#F4B63F"/>
+          <rect x="460" y="180" width="390" height="112" rx="10" transform="rotate(0.4 655 236)" fill="url(#a4bHc)"/>
+          <path d="M60 246 L176 246 L176 258 C170 258 170 270 176 270 L176 282 L60 282 L60 270 C66 270 66 258 60 258 Z"/>
+          <path d="M150 246 L150 282" stroke-dasharray="3 4"/>
+        </g>
+
+        <text class="a4bS" x="44" y="140">G07 · staff asker</text>
+        <text class="a4bL" x="44" y="160">a question about pay day</text>
+        <text class="a4bS" x="44" y="180">top score</text>
+        <text class="a4bV" x="110" y="182">2.77</text>
+
+        <text class="a4bL" x="268" y="148">top score under 3.0?</text>
+        <text class="a4bS" x="268" y="168">yes: do not answer</text>
+        <text class="a4bS" x="268" y="186">hand off instead</text>
+
+        <text class="a4bH" x="476" y="68">WHAT STAFF READ</text>
+        <text class="a4bL" x="476" y="92">1 · it cannot answer this from policy</text>
+        <text class="a4bL" x="476" y="114">2 · what it looked at, and why that is not enough</text>
+        <text class="a4bL" x="476" y="136">3 · who has the question now, and the ticket number</text>
+
+        <text class="a4bH" x="476" y="204">WHAT IT OPENS · ONE TICKET</text>
+        <text class="a4bL" x="476" y="226">question, asker group</text>
+        <text class="a4bL" x="476" y="246">top 3 clauses and their scores</text>
+        <text class="a4bL" x="476" y="266">why: top score 2.77, under the 3.0 line</text>
+        <text class="a4bA" x="476" y="284">routed to the owning team's queue</text>
+
+        <text class="a4bA" x="68" y="300">one ticket, one tool</text>
+
+        <text class="a4bN" x="30" y="320">Both halves are the product. G07 is a real question the bench hands off: safe, a miss, and a person still answers it.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the hand-off speaks to the asker and to the team that will answer, in the same moment</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the message says, in three moves<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>It says plainly that it cannot answer from policy.</strong> Not "I'm not sure", which invites a rephrase that games the score, and not "please contact HR", which sends staff back to the queue they came from. <strong>It shows what it looked at.</strong> Naming the closest clause and why it falls short tells the asker the assistant did search, and tells the policy owner later which document nearly answered. <strong>It says who has it now.</strong> A team name and a ticket number turn a dead end into a queue position.</p>
+        <p>The test of a good hand-off: the person reading it knows what happens next without asking anyone. The test of a bad one: they open a ticket by hand, retyping the question the assistant already had.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What it opens: one ticket, and only one tool<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The assistant's only action is opening a ticket in the ticketing system. The ticket carries the question, the asker's group, the top three clauses it found with their scores, and the reason it handed off. The helpdesk agent who picks it up starts where the assistant stopped, not from zero. For the restricted questions, the asker group is what lets a manager or HR see a question the asker could not have answered alone.</p>
+        <p>This page takes the leader side: what the ticket must contain and who receives it. Builder session 6 writes the abstain rule and the ticket payload as code. Assistants that go on to act in other systems are multi-step agents, owned by the <a href="https://phoebefu6.github.io/learn-ai-agents-with-phoebe/">AI agents course</a>.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why satisfaction scores punish a good hand-off<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On the bench, the constructed thumbs-up rate is 90.7% on rungs 1 to 3 and falls to 81.5% on rung 4, because staff thumb down hand-offs. The rung with zero confident wrong high-risk answers grades worse than the rung that leaks. If your launch dashboard leads with satisfaction, the hand-off will look like the problem, and someone will propose lowering the threshold to fix the score.</p>
+        <p>Keep the thumbs signal for what it can see: tone, speed, and whether the hand-off message was useful. Read hand-off thumbs separately from answer thumbs, and judge the message by whether the ticket was resolved without a second ticket from the same person. The go/no-go itself stays on the board.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The thumbs drop at Tidewell (constructed).</strong> On the bench, adding the hand-off moves Tidewell's thumbs-up rate from 90.7% to 81.5%, still over its 75% bar. The thumbs signal is constructed to make a point: staff mostly like confident sentences and mostly dislike being told "not from policy", whatever the sentence actually says. OWASP's prevention advice for LLM09 runs the other way: human oversight for critical information. The hand-off is that oversight, delivered as a ticket.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers choosing the abstain threshold as a product decision</span>
+      <h2>Pick a threshold</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The hand-off fires when the best clause scores under a line. On the bench the line sits at 3.0. That number is not a law of retrieval; it is a decision Tidewell made, and it has a measured price on both sides. Two questions on either side of it show the price.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn number line of top retrieval scores from 0 to 10, measured on the bench. G49, bring my dog, scores 1.70 and is handed off, rightly. G07, pay day, scores 2.77 and is handed off, a safe miss. The line sits at 3.0. G54, staff party, scores 3.71 and is answered, confidently and wrongly. G01 sick leave at 6.67 and G16 account locked at 9.19 are answered. Moving the line lower answers more and lets more wrong answers through; moving it higher hands off more until coverage fails.">
+        <defs>
+          <filter id="a4cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="47" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a4cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a4cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a4cA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a4cR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a4cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a4cH" x="30" y="26">WHERE THE LINE FALLS</text>
+        <text class="a4cS" x="200" y="26">top BM25 score per golden question · measured on the bench · 70px = 1 point</text>
+
+        <g filter="url(#a4cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="120" y="160" width="210" height="20" rx="4" fill="url(#a4cHc)" stroke="#0E8086"/>
+          <path d="M120 170 L824 170"/>
+          <path d="M120 164 L120 176"/>
+          <path d="M470 164 L470 176"/>
+          <path d="M820 164 L820 176"/>
+          <rect x="282" y="46" width="96" height="30" rx="6" transform="rotate(-1.5 330 61)" fill="#F4B63F"/>
+          <path d="M330 80 L330 252" stroke="#0A5A60" stroke-dasharray="7 5"/>
+          <circle cx="239" cy="170" r="7" fill="#FFFFFF"/>
+          <circle cx="314" cy="170" r="7" fill="#FFFFFF"/>
+          <circle cx="380" cy="170" r="7" fill="#FFFFFF" stroke="#991B1B"/>
+          <circle cx="587" cy="170" r="7" fill="#E8F6F6"/>
+          <circle cx="763" cy="170" r="7" fill="#E8F6F6"/>
+          <path d="M239 178 L234 206"/>
+          <path d="M312 162 L304 136"/>
+          <path d="M382 178 L390 206"/>
+          <path d="M585 162 L578 136"/>
+          <path d="M763 162 L770 136"/>
+          <path d="M318 268 L132 268" marker-end="url(#a4cAr)"/>
+          <path d="M342 268 L612 268" marker-end="url(#a4cAr)"/>
+        </g>
+
+        <text class="a4cH" x="296" y="66">LINE · 3.0</text>
+
+        <text class="a4cS" x="120" y="196" text-anchor="middle">0</text>
+        <text class="a4cS" x="470" y="196" text-anchor="middle">5</text>
+        <text class="a4cS" x="820" y="196" text-anchor="middle">10</text>
+        <text class="a4cA" x="126" y="152">handed off</text>
+
+        <text class="a4cL" x="230" y="222" text-anchor="end">G49 dog · 1.70</text>
+        <text class="a4cS" x="230" y="238" text-anchor="end">handed off, rightly</text>
+
+        <text class="a4cL" x="306" y="114" text-anchor="end">G07 pay day · 2.77</text>
+        <text class="a4cS" x="306" y="130" text-anchor="end">handed off: safe, a miss</text>
+
+        <text class="a4cL" x="392" y="222">G54 staff party · 3.71</text>
+        <text class="a4cR" x="392" y="238">answered: confident, wrong</text>
+
+        <text class="a4cL" x="594" y="114" text-anchor="end">G01 sick leave · 6.67</text>
+        <text class="a4cS" x="594" y="130" text-anchor="end">answered</text>
+
+        <text class="a4cL" x="820" y="114" text-anchor="end">G16 account locked · 9.19</text>
+        <text class="a4cS" x="820" y="130" text-anchor="end">answered</text>
+
+        <text class="a4cS" x="318" y="290" text-anchor="end">lower: fewer tickets, more confident wrong</text>
+        <text class="a4cS" x="342" y="290">higher: fewer wrong, coverage falls until it fails</text>
+
+        <text class="a4cN" x="30" y="318">No line hands off G54 and answers G07: 3.71 sits above 2.77, so the line is a trade, never a cure.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - every position of the line has a question on the wrong side of it</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The two questions that price the line<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>G54, the staff party question.</strong> No Tidewell policy covers it. Its best match is the annual leave clause at 3.71, which clears the 3.0 line, so rung 4 answers it confidently and wrongly. It is low risk, and the low-risk limit is 20%, so rung 4 still passes at 7.1%. That pass is a policy choice: Tidewell decided one wrong answer about a party is tolerable.</p>
+        <p><strong>G07, the pay day question.</strong> A policy does answer it, but the best clause scores 2.77 and the assistant hands off. Safe, and a miss: a person answers a question the assistant could have. G07 is one of four such misses on the bench, with G17 laptop refresh, G37 carry forward and G38 remote days. They are why correct answers fall from 97.6% to 90.5%.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Move it both ways before you sign it<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>On the bench in Builder session 8, drag "Abstain below" down towards 0 and the assistant behaves like rung 3 again: fewer tickets, and the confident wrong answers come back. Drag it up past 6 and coverage collapses until the board fails on correct answers. Somewhere between, Tidewell picked 3.0. To hand off G54 you would have to raise the line above 3.71, and every question that scores between 3.0 and your new line would hand off with it; the bench prints which. To answer G07 you would have to drop below 2.77, and every question in that band would be answered.</p>
+        <p>The decision belongs to the person who owns the go/no-go, written down with the numbers that justified it. Risk tiers in depth, and how a tier changes the tolerance, live in the agent launch course's <a href="https://phoebefu6.github.io/learn-agent-launch-with-phoebe/courses/a5-risk-tiers-and-the-gate.html">risk tiers page</a>; this page takes the single threshold and its trade.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The line is tied to this corpus, not portable<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A BM25 score depends on the clause lengths, the vocabulary and how many clauses share a word. Tidewell's 3.0 means something on 49 clause versions with an average length of 21.76 tokens; it means nothing on your corpus, or on Tidewell's after a large policy rewrite. Re-pick the line whenever the store changes shape, and re-run the golden questions when you do. Scoring methods beyond hit rate and MRR, and grading answer quality with a model, belong to the <a href="https://phoebefu6.github.io/learn-ai-evals-with-phoebe/">AI evals course</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>What each hand-off costs Tidewell (constructed).</strong> Every hand-off is a helpdesk ticket, priced by assumption at 12 minutes and SGD 45 an hour, so SGD 9 each. At rung 4 the hand-off tickets come to SGD 6,000 a month on an assumed 2,400 questions, against a model cost of SGD 0.25 to 8.53. Raising the line is cheap in model terms and expensive in tickets. Session 5 builds that sheet; tonight, just know that the threshold is also a budget line.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Tidewell's hand-off message and threshold note</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">You write three short documents: what staff read, what the ticket carries, and the paragraph that records the threshold decision. Use your own assistant if you have one in pilot; otherwise write them for Tidewell with the numbers on this page. Tidewell is constructed, and your numbers will differ.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The build-along sheet as three hand-drawn blocks joined by arrows. Block 1, saffron, what staff read: cannot answer from policy, what it looked at, who has it now, the ticket number. Block 2, what it opens: question and asker group, top 3 clauses with scores, why it handed off, the owning team's queue. Block 3, the threshold note: the line and who chose it, what it misses such as G07, what slips past such as G54, when to move it and who decides.">
+        <defs>
+          <filter id="a4dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a4dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a4dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a4dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a4dH" x="30" y="26">THE HAND-OFF PACK, THREE BLOCKS</text>
+
+        <g filter="url(#a4dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="250" height="150" rx="10" transform="rotate(-0.6 155 119)" fill="#F4B63F"/>
+          <path d="M284 119 L306 119" marker-end="url(#a4dAr)"/>
+          <rect x="310" y="44" width="250" height="150" rx="10" transform="rotate(0.5 435 119)" fill="#FFFFFF"/>
+          <path d="M564 119 L586 119" marker-end="url(#a4dAr)"/>
+          <rect x="590" y="44" width="260" height="150" rx="10" transform="rotate(-0.5 720 119)" fill="#E8F6F6"/>
+          <path d="M832 36 L832 64 C832 72 820 72 820 64 L820 42 C820 38 826 38 826 42 L826 60"/>
+        </g>
+
+        <text class="a4dH" x="46" y="70">1 · WHAT STAFF READ</text>
+        <text class="a4dL" x="46" y="96">cannot answer from policy</text>
+        <text class="a4dL" x="46" y="118">what it looked at, why not</text>
+        <text class="a4dL" x="46" y="140">who has it now</text>
+        <text class="a4dL" x="46" y="162">the ticket number</text>
+
+        <text class="a4dH" x="326" y="70">2 · WHAT IT OPENS</text>
+        <text class="a4dS" x="326" y="96">question and asker group</text>
+        <text class="a4dS" x="326" y="118">top 3 clauses, with scores</text>
+        <text class="a4dS" x="326" y="140">why: score under the line</text>
+        <text class="a4dS" x="326" y="162">the owning team's queue</text>
+
+        <text class="a4dH" x="606" y="70">3 · THE THRESHOLD NOTE</text>
+        <text class="a4dS" x="606" y="96">the line, and who chose it</text>
+        <text class="a4dS" x="606" y="118">what it misses: G07 at 2.77</text>
+        <text class="a4dS" x="606" y="140">what slips past: G54 at 3.71</text>
+        <text class="a4dS" x="606" y="162">when to move it, who decides</text>
+
+        <text class="a4dN" x="30" y="226">Write block 1 for the asker, block 2 for the agent who answers, block 3 for whoever signs the go/no-go.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three readers, three documents, one hand-off</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>List the questions your assistant should not answer.</strong> Two kinds: restricted (a clause answers it, but this asker may not read it) and no policy at all. Tidewell's golden set has six of each. Take yours from session 1's N tickets and session 3's access matrix. Give each a risk tier: high, medium or low.</p>
+      </div>
+      <div class="step">
+        <p><strong>Write the message staff read.</strong> Three moves, plain words, no apology spiral. Read it aloud; if it sounds like an error page, rewrite it.</p>
+        <div class="prompt-box good"><span class="label">★ Block 1 · the hand-off message, Tidewell style</span>I can't answer that from Tidewell's policies.
+The closest I found was [clause title, document], but it covers [what it covers], not your question.
+I've opened ticket [number] with [owning team], including your question and what I found.
+You'll hear from them in [service time]. You don't need to raise it again.</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the ticket template.</strong> Every field is something the agent who answers would otherwise ask for. If a field would never change what they do, drop it.</p>
+        <div class="prompt-box good"><span class="label">★ Block 2 · the ticket the assistant opens</span>Title:       Assistant hand-off: [first 60 characters of the question]
+Asker group: [all staff | managers | HR only | finance only | IT only]
+Question:    [verbatim]
+Top clauses: [key v.version, title, score] x 3
+Why:         top score [2.77] under the line [3.0]
+Route to:    [owner team of the top clause, else the helpdesk]
+Feedback:    after answering, mark: policy exists | policy missing | restricted</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the threshold decision note.</strong> One paragraph, numbers from the bench or your own run, and a name. A threshold with no owner drifts the first time someone dislikes the thumbs-up rate.</p>
+        <div class="prompt-box good"><span class="label">★ Block 3 · the threshold decision note</span>Decision: the assistant hands off when its best clause scores below 3.0.
+Chosen by: [name, role], on [date], on the constructed Tidewell golden set (54 questions).
+At 3.0: right hand-offs 91.7%, correct answers 90.5%, confident wrong 0.0% high,
+0.0% medium, 7.1% low risk. Board: GO.
+What it misses: 4 answerable questions are handed off (G07, G17, G37, G38).
+What slips past: G54 (staff party, low risk) is answered wrongly at 3.71.
+Why not higher: every question between 3.0 and the new line would hand off too.
+Why not lower: the assistant drifts back towards rung 3, which is NO-GO.
+Review: whenever the policy store changes shape, and before any change to the line.</div>
+      </div>
+      <div class="step">
+        <p><strong>Read all three to the helpdesk lead who will receive the tickets.</strong> Ask one question: "If fifteen of every fifty-four questions arrived like this, would your team answer faster or slower than today?" Their answer goes into session 5's cost sheet.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The hand-off written as an error message</span>
+Sorry, I couldn't find an answer to your question.
+Please try rephrasing, or contact HR, IT or Finance directly.
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 5</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li>Finish the three blocks for your own assistant, or Tidewell's, and get the hand-off message read by two staff who do not work on the project. Note where they hesitated.</li>
+      <li>Count how many of your should-not-answer questions are restricted and how many have no policy. For each no-policy one, write whether it deserves a policy or a one-line "there is no policy" answer.</li>
+      <li>If you have a pilot or a vendor demo, ask it three of your no-policy questions. Write down what it said and which clause, if any, it cited.</li>
+      <li>Find out how your satisfaction score is collected. Write one sentence on how you would report hand-off thumbs separately from answer thumbs.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Leader session 4 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Rung 3 answers 41 of 42 answerable questions correctly (97.6%). Why does the board still say NO-GO?</p>
+      <button class="qopt" type="button">A · It still leaks restricted clauses to staff</button>
+      <button class="qopt" type="button">B · It cites superseded policy versions</button>
+      <button class="qopt" type="button">C · It answers the questions it should hand off: right hand-offs 8.3%, and confident wrong answers over the medium and low limits</button>
+      <button class="qopt" type="button">D · Its accuracy is below Tidewell's 70% bar</button>
+      <p class="qwhy">Rung 3 has 0 leaks and 0 stale citations, so A and B are fixed already, and 97.6% is far above 70%. What it lacks is a rule for "the best match is not good enough", so the restricted and no-policy questions get confident answers.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · After adding the hand-off, Tidewell's thumbs-up rate falls from 90.7% to 81.5%. A stakeholder proposes lowering the threshold to win the thumbs back. What do you say?</p>
+      <button class="qopt" type="button">A · The drop comes from staff disliking hand-offs; improve the hand-off message and report its thumbs separately, but keep the go/no-go on the board</button>
+      <button class="qopt" type="button">B · Agree: thumbs-up is the clearest signal of whether staff are served</button>
+      <button class="qopt" type="button">C · Remove the thumbs button so the number cannot fall</button>
+      <button class="qopt" type="button">D · Raise the 75% bar so the drop looks worse and forces a rebuild</button>
+      <p class="qwhy">Lowering the line moves the assistant back towards rung 3, which grades better on thumbs and fails the board. Thumbs are a real signal for tone and hand-off quality, so keep them (not C), but they cannot see a confident wrong answer, so they cannot be the verdict.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · G54, the staff party question, is answered wrongly at a top score of 3.71. Someone wants to raise the line from 3.0 to 4.0 to catch it. What must happen before that ships?</p>
+      <button class="qopt" type="button">A · Nothing; a higher line is always safer</button>
+      <button class="qopt" type="button">B · Retrain the model on the staff party question</button>
+      <button class="qopt" type="button">C · Add a staff party clause to the annual leave policy</button>
+      <button class="qopt" type="button">D · Re-run the golden questions: every question scoring between 3.0 and 4.0 now hands off too, so correct answers and ticket volume must be re-checked against the board</button>
+      <p class="qwhy">The line is a trade: catching G54 also hands off whatever else scores in that band, and coverage can fall below the 70% bar. A ignores that cost. B misreads the mechanism: the line sits on retrieval scores, not on the model. C would make the assistant cite a party rule inside a leave policy.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confabulation, and why confident answers do harm</span><span class="note">NIST AI 600-1, Generative AI Profile (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Overreliance and human oversight for critical information</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM09 Misinformation, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Rung 3 vs rung 4: accurate and NO-GO, answering less and GO</span><span class="note">Measured on the bench over the constructed Tidewell golden set; Builder session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The threshold trade: G07 at 2.77 missed, G54 at 3.71 answered wrongly</span><span class="note">Measured on the bench; the 3.0 line and the gate limits are Tidewell's policy choice</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Grounding reduces wrong answers but does not decide when to answer</span><span class="note">IMDA and AI Verify Foundation, Model AI Governance Framework for Generative AI (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The hand-off message and ticket wording</span><span class="note">Taught as practice; Tidewell's message and the thumbs signal are constructed</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Risk tiers in depth, and grading answer quality</span><span class="note">Owned by the agent launch and AI evals courses; linked, not re-taught</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Hallucination rates for assistants or models</span><span class="note">Not claimed. None read at source would transfer to your corpus</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Leader session 4 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Accurate is not shippable</b><span>Rung 3: 97.6% correct, 8.3% right hand-offs, NO-GO.</span></div>
+      <div class="cheat-item"><b>Answering less is the fix</b><span>Rung 4 adds one rule and goes GO at 90.5% correct, 91.7% right hand-offs.</span></div>
+      <div class="cheat-item"><b>The hand-off is a product</b><span>Says it cannot answer, shows what it looked at, says who has it now.</span></div>
+      <div class="cheat-item"><b>One ticket, one tool</b><span>Question, asker group, top 3 clauses with scores, why, routed to the owner.</span></div>
+      <div class="cheat-item"><b>The line is a trade</b><span>At 3.0: G07 (2.77) handed off, G54 (3.71) answered wrongly. No line fixes both.</span></div>
+      <div class="cheat-item"><b>Thumbs punish hand-offs</b><span>90.7% falls to 81.5%. Report hand-off thumbs apart; never grade the go/no-go on them.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You know what the assistant says when it does not know, and that every hand-off is a ticket. Session 5 prices both lines: the model tokens, which turn out small, and the hand-off tickets, which do not.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Leader session 4 of 6 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a3-who-may-see-what.html">← Prev: Who may see what</a> &nbsp;·&nbsp; <a href="a5-what-it-costs-to-run.html">Next: What it costs to run →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,4720 @@
+{
+ "constructed": true,
+ "company": "Tidewell Freight (constructed)",
+ "clauses": [
+  {
+   "id": "HR-LV-1@v3",
+   "key": "HR-LV-1",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Annual leave",
+   "text": "Annual leave, formerly called holiday entitlement: full-time staff earn 20 days of annual leave each calendar year. Part-time staff earn annual leave pro rata to contracted hours.",
+   "answer": "Full-time staff earn 20 days of annual leave a year; part-time staff earn it pro rata."
+  },
+  {
+   "id": "HR-LV-1@v2",
+   "key": "HR-LV-1",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2023-04-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Holiday entitlement",
+   "text": "Holiday entitlement: every employee receives 18 days holiday entitlement each year. Holiday entitlement days are added on 1 April.",
+   "answer": "Every employee receives 18 days of holiday entitlement a year, added on 1 April.",
+   "retiredOn": "2026-01-01"
+  },
+  {
+   "id": "HR-LV-2@v3",
+   "key": "HR-LV-2",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Carrying leave over",
+   "text": "Up to 5 unused annual leave days carry over into the next calendar year and must be taken by 31 March. Days above 5 lapse unless HR agrees an exception in writing.",
+   "answer": "Up to 5 unused days carry over and must be taken by 31 March; the rest lapse."
+  },
+  {
+   "id": "HR-LV-2@v2",
+   "key": "HR-LV-2",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2023-04-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Carry forward",
+   "text": "Unused holiday can be carried forward: up to 10 unused holiday days carry forward to the next year and must be used by 30 June.",
+   "answer": "Up to 10 unused holiday days carry forward and must be used by 30 June.",
+   "retiredOn": "2026-01-01"
+  },
+  {
+   "id": "HR-LV-3@v3",
+   "key": "HR-LV-3",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Sick leave",
+   "text": "Staff receive 14 days of paid sick leave each calendar year. A medical certificate is required for any sickness absence longer than 2 consecutive working days.",
+   "answer": "You get 14 days of paid sick leave a year; a medical certificate is needed after 2 consecutive working days."
+  },
+  {
+   "id": "HR-LV-4@v3",
+   "key": "HR-LV-4",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Parental leave",
+   "text": "The primary caregiver receives 16 weeks of paid parental leave after a birth or adoption. The secondary caregiver receives 4 weeks of paid parental leave, taken within 12 months.",
+   "answer": "Primary caregivers get 16 weeks of paid parental leave, secondary caregivers 4 weeks within 12 months."
+  },
+  {
+   "id": "HR-LV-5@v3",
+   "key": "HR-LV-5",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Compassionate leave",
+   "text": "Compassionate leave of 3 paid days is granted on the death of an immediate family member: spouse, child, parent or sibling. Managers may grant 2 further days.",
+   "answer": "You get 3 paid days of compassionate leave for an immediate family bereavement; your manager may add 2."
+  },
+  {
+   "id": "HR-LV-6@v3",
+   "key": "HR-LV-6",
+   "doc": "HR-LV",
+   "docTitle": "Leave policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2026-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Requesting leave",
+   "text": "Request leave in the HR portal. Requests for more than 3 consecutive days must be made at least 10 working days ahead, and your line manager approves or declines within 3 working days.",
+   "answer": "Request leave in the HR portal; blocks over 3 days need 10 working days' notice and manager approval."
+  },
+  {
+   "id": "HR-WFH-1@v2",
+   "key": "HR-WFH-1",
+   "doc": "HR-WFH",
+   "docTitle": "Hybrid work policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2025-07-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Working from home",
+   "text": "Staff may work from home up to 2 days a week with their line manager's agreement. Core hours are 10:00 to 16:00 Singapore time on every working day, at home or in the office.",
+   "answer": "You may work from home up to 2 days a week with your manager's agreement; core hours are 10:00 to 16:00."
+  },
+  {
+   "id": "HR-WFH-1@v1",
+   "key": "HR-WFH-1",
+   "doc": "HR-WFH",
+   "docTitle": "Hybrid work policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v1",
+   "effective": "2022-03-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Remote work",
+   "text": "Remote work: employees may take up to 3 remote work days per week. Remote work days are agreed with the team each month.",
+   "answer": "You may take up to 3 remote work days per week, agreed with your team monthly.",
+   "retiredOn": "2025-07-01"
+  },
+  {
+   "id": "HR-WFH-2@v2",
+   "key": "HR-WFH-2",
+   "doc": "HR-WFH",
+   "docTitle": "Hybrid work policy",
+   "owner": "HR policy lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2025-07-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Working abroad",
+   "text": "Working temporarily from another country needs written HR approval before travel, and is limited to 10 working days in a calendar year because of tax and immigration rules.",
+   "answer": "Working from another country needs HR approval first and is capped at 10 working days a year."
+  },
+  {
+   "id": "HR-PAY-1@v4",
+   "key": "HR-PAY-1",
+   "doc": "HR-PAY",
+   "docTitle": "Pay and grading policy",
+   "owner": "Reward manager",
+   "domain": "HR",
+   "version": "v4",
+   "effective": "2025-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Pay day",
+   "text": "Salary is paid monthly on the 25th. When the 25th falls on a weekend or public holiday, salary is paid on the previous working day. Payslips are published in the HR portal.",
+   "answer": "Salaries are paid on the 25th, or the working day before; payslips are in the HR portal."
+  },
+  {
+   "id": "HR-PAY-2@v4",
+   "key": "HR-PAY-2",
+   "doc": "HR-PAY",
+   "docTitle": "Pay and grading policy",
+   "owner": "Reward manager",
+   "domain": "HR",
+   "version": "v4",
+   "effective": "2025-01-01",
+   "superseded": false,
+   "access": "hr",
+   "title": "Salary bands",
+   "text": "Salary bands by grade, 2025: grade 5 SGD 48,000 to 62,000; grade 6 SGD 60,000 to 78,000; grade 7 SGD 76,000 to 98,000; grade 8 SGD 95,000 to 125,000 base salary a year.",
+   "answer": "Grade 7 base salary band is SGD 76,000 to 98,000 a year."
+  },
+  {
+   "id": "HR-PAY-3@v4",
+   "key": "HR-PAY-3",
+   "doc": "HR-PAY",
+   "docTitle": "Pay and grading policy",
+   "owner": "Reward manager",
+   "domain": "HR",
+   "version": "v4",
+   "effective": "2025-01-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Overtime",
+   "text": "Non-exempt staff are paid overtime at 1.5 times the hourly rate for hours above 44 a week. Overtime must be approved by the line manager in advance and is paid with the next month's salary.",
+   "answer": "Non-exempt staff get 1.5x for hours above 44 a week, approved in advance and paid next month."
+  },
+  {
+   "id": "HR-PAY-4@v4",
+   "key": "HR-PAY-4",
+   "doc": "HR-PAY",
+   "docTitle": "Pay and grading policy",
+   "owner": "Reward manager",
+   "domain": "HR",
+   "version": "v4",
+   "effective": "2025-01-01",
+   "superseded": false,
+   "access": "managers",
+   "title": "Salary review",
+   "text": "Managers submit salary increase recommendations in the annual review cycle in March. Off-cycle increases need HR business partner and finance approval with a written business case.",
+   "answer": "Salary increases go through the March review; off-cycle increases need HR and finance approval."
+  },
+  {
+   "id": "HR-PERF-1@v2",
+   "key": "HR-PERF-1",
+   "doc": "HR-PERF",
+   "docTitle": "Performance and conduct procedure",
+   "owner": "HR business partner lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2025-05-01",
+   "superseded": false,
+   "access": "managers",
+   "title": "Performance improvement plan",
+   "text": "Before starting a performance improvement plan, the manager must consult the HR business partner. A performance improvement plan lasts 8 weeks with fortnightly written reviews.",
+   "answer": "Consult your HR business partner first; a performance improvement plan lasts 8 weeks with fortnightly reviews."
+  },
+  {
+   "id": "HR-PERF-2@v2",
+   "key": "HR-PERF-2",
+   "doc": "HR-PERF",
+   "docTitle": "Performance and conduct procedure",
+   "owner": "HR business partner lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2025-05-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Disciplinary hearing",
+   "text": "An employee invited to a disciplinary hearing receives written notice 5 working days before, and may bring a colleague or union representative as a companion.",
+   "answer": "You get 5 working days' written notice and may bring a colleague or union representative."
+  },
+  {
+   "id": "HR-PERF-3@v2",
+   "key": "HR-PERF-3",
+   "doc": "HR-PERF",
+   "docTitle": "Performance and conduct procedure",
+   "owner": "HR business partner lead",
+   "domain": "HR",
+   "version": "v2",
+   "effective": "2025-05-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Probation",
+   "text": "New employees serve a probation period of 3 months. The notice period during probation is 1 week from either side; after confirmation it follows the employment contract.",
+   "answer": "Probation is 3 months with 1 week's notice; after confirmation your contract's notice applies."
+  },
+  {
+   "id": "HR-REC-1@v1",
+   "key": "HR-REC-1",
+   "doc": "HR-REC",
+   "docTitle": "Recruitment and referral policy",
+   "owner": "Talent acquisition lead",
+   "domain": "HR",
+   "version": "v1",
+   "effective": "2024-09-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Employee referral bonus",
+   "text": "Staff who refer a candidate who is hired receive a referral bonus of SGD 1,000, paid after the new hire completes probation. Hiring managers are not eligible for their own vacancies.",
+   "answer": "A successful referral earns SGD 1,000, paid once the new hire completes probation."
+  },
+  {
+   "id": "HR-REC-2@v1",
+   "key": "HR-REC-2",
+   "doc": "HR-REC",
+   "docTitle": "Recruitment and referral policy",
+   "owner": "Talent acquisition lead",
+   "domain": "HR",
+   "version": "v1",
+   "effective": "2024-09-01",
+   "superseded": false,
+   "access": "managers",
+   "title": "Opening a vacancy",
+   "text": "To open a new headcount vacancy, the hiring manager submits a requisition with a finance sign-off. Replacement vacancies need only the department head's approval.",
+   "answer": "New headcount needs a requisition with finance sign-off; replacements need the department head."
+  },
+  {
+   "id": "HR-CON-1@v3",
+   "key": "HR-CON-1",
+   "doc": "HR-CON",
+   "docTitle": "Code of conduct",
+   "owner": "General counsel",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2025-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Gifts and hospitality",
+   "text": "Gifts or hospitality from customers or suppliers worth more than SGD 100 must be declared in the gifts register within 5 working days. Cash gifts must always be refused.",
+   "answer": "Declare gifts or hospitality over SGD 100 within 5 working days; never accept cash."
+  },
+  {
+   "id": "HR-CON-2@v3",
+   "key": "HR-CON-2",
+   "doc": "HR-CON",
+   "docTitle": "Code of conduct",
+   "owner": "General counsel",
+   "domain": "HR",
+   "version": "v3",
+   "effective": "2025-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Conflicts of interest",
+   "text": "Declare any conflict of interest, such as a family member (spouse, parent, brother or sister) who works for a supplier, or a second job, to your manager and in the conflicts register before taking part in the related decision.",
+   "answer": "Declare conflicts of interest to your manager and in the register before the related decision."
+  },
+  {
+   "id": "IT-ACC-1@v4",
+   "key": "IT-ACC-1",
+   "doc": "IT-ACC",
+   "docTitle": "Access and password standard",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v4",
+   "effective": "2026-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Passwords",
+   "text": "Passwords must be at least 14 characters. Passwords no longer expire on a schedule; change your password only if you suspect it is compromised, and never reuse a work password elsewhere.",
+   "answer": "Use at least 14 characters; passwords do not expire, change it only if you suspect compromise."
+  },
+  {
+   "id": "IT-ACC-1@v3",
+   "key": "IT-ACC-1",
+   "doc": "IT-ACC",
+   "docTitle": "Access and password standard",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v3",
+   "effective": "2023-06-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Password change",
+   "text": "Change your password every 90 days. Passwords must be at least 12 characters and the system blocks your last 5 passwords.",
+   "answer": "Change your password every 90 days; at least 12 characters.",
+   "retiredOn": "2026-03-01"
+  },
+  {
+   "id": "IT-ACC-2@v4",
+   "key": "IT-ACC-2",
+   "doc": "IT-ACC",
+   "docTitle": "Access and password standard",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v4",
+   "effective": "2026-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Multi-factor authentication",
+   "text": "Multi-factor authentication is required for email, the VPN and every finance system. Register the authenticator app on your phone; lost phones are reported to the IT service desk.",
+   "answer": "MFA is required for email, VPN and finance systems; register the authenticator app."
+  },
+  {
+   "id": "IT-ACC-3@v4",
+   "key": "IT-ACC-3",
+   "doc": "IT-ACC",
+   "docTitle": "Access and password standard",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v4",
+   "effective": "2026-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Account lockout and reset",
+   "text": "After 5 failed sign-in attempts your account locks for 15 minutes. Reset a forgotten password yourself in the self-service password portal, or call the IT service desk.",
+   "answer": "Accounts lock for 15 minutes after 5 failures; reset in the self-service password portal."
+  },
+  {
+   "id": "IT-DEV-1@v2",
+   "key": "IT-DEV-1",
+   "doc": "IT-DEV",
+   "docTitle": "Devices standard",
+   "owner": "IT operations manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-04-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Laptop refresh",
+   "text": "Company laptops are refreshed every 4 years. Request an earlier replacement through an IT ticket if the laptop fails or no longer runs required software.",
+   "answer": "Laptops are refreshed every 4 years; raise an IT ticket for an early replacement."
+  },
+  {
+   "id": "IT-DEV-2@v2",
+   "key": "IT-DEV-2",
+   "doc": "IT-DEV",
+   "docTitle": "Devices standard",
+   "owner": "IT operations manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-04-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Lost or stolen devices",
+   "text": "Report a lost or stolen laptop or phone to IT security within 1 hour on the security hotline, so the device can be locked and wiped remotely.",
+   "answer": "Report a lost or stolen device to IT security within 1 hour on the security hotline."
+  },
+  {
+   "id": "IT-DEV-3@v2",
+   "key": "IT-DEV-3",
+   "doc": "IT-DEV",
+   "docTitle": "Devices standard",
+   "owner": "IT operations manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-04-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Personal phones",
+   "text": "Personal phones may access company email and chat only after the device management app is installed. Company files must not be stored on personal devices.",
+   "answer": "Personal phones can use email and chat only with the device management app installed."
+  },
+  {
+   "id": "IT-SW-1@v3",
+   "key": "IT-SW-1",
+   "doc": "IT-SW",
+   "docTitle": "Software and AI tools standard",
+   "owner": "IT operations manager",
+   "domain": "IT",
+   "version": "v3",
+   "effective": "2026-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Installing software",
+   "text": "Install software only from the company software catalogue. For anything not in the catalogue, raise an IT ticket with a business justification; IT security reviews it within 5 working days.",
+   "answer": "Install only from the software catalogue; request anything else by IT ticket with a justification."
+  },
+  {
+   "id": "IT-SW-2@v3",
+   "key": "IT-SW-2",
+   "doc": "IT-SW",
+   "docTitle": "Software and AI tools standard",
+   "owner": "IT operations manager",
+   "domain": "IT",
+   "version": "v3",
+   "effective": "2026-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "External AI tools",
+   "text": "Do not paste confidential or restricted data, including customer shipment records, into external AI tools. Public information may be used in the approved AI tools listed in the catalogue.",
+   "answer": "Never paste confidential data, such as shipment records, into external AI tools; use the approved ones."
+  },
+  {
+   "id": "IT-INC-1@v2",
+   "key": "IT-INC-1",
+   "doc": "IT-INC",
+   "docTitle": "Security incident procedure",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-08-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Phishing",
+   "text": "Report a suspicious email with the Report phishing button in your mail client. Do not click links or open attachments; if you already clicked, call the security hotline at once.",
+   "answer": "Use the Report phishing button; if you already clicked, call the security hotline."
+  },
+  {
+   "id": "IT-INC-2@v2",
+   "key": "IT-INC-2",
+   "doc": "IT-INC",
+   "docTitle": "Security incident procedure",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-08-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Data breach",
+   "text": "If you suspect personal data has been lost or exposed, report it to the data protection officer within 24 hours. The data protection officer decides whether regulators must be notified.",
+   "answer": "Report a suspected personal data breach to the data protection officer within 24 hours."
+  },
+  {
+   "id": "IT-ADM-1@v2",
+   "key": "IT-ADM-1",
+   "doc": "IT-ADM",
+   "docTitle": "Privileged access procedure",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-10-01",
+   "superseded": false,
+   "access": "it",
+   "title": "Local admin rights",
+   "text": "Local administrator rights on a laptop are granted for 24 hours through a privileged access request, approved by the IT security manager, and every session is logged.",
+   "answer": "Local admin rights are granted for 24 hours via a privileged access request approved by IT security."
+  },
+  {
+   "id": "IT-ADM-2@v2",
+   "key": "IT-ADM-2",
+   "doc": "IT-ADM",
+   "docTitle": "Privileged access procedure",
+   "owner": "IT security manager",
+   "domain": "IT",
+   "version": "v2",
+   "effective": "2025-10-01",
+   "superseded": false,
+   "access": "it",
+   "title": "Firewall exceptions",
+   "text": "Firewall rule exceptions need a change request, a named business owner and an expiry date no later than 90 days, reviewed at the weekly change board.",
+   "answer": "Firewall exceptions need a change request, an owner and an expiry within 90 days."
+  },
+  {
+   "id": "FIN-EXP-1@v5",
+   "key": "FIN-EXP-1",
+   "doc": "FIN-EXP",
+   "docTitle": "Expenses policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v5",
+   "effective": "2026-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Submitting expense claims",
+   "text": "Submit expense claims in the expenses app within 30 days of the expense date, with an itemised receipt for every item over SGD 25. Late claims need the financial controller's approval.",
+   "answer": "Submit claims within 30 days with itemised receipts over SGD 25; late claims need approval."
+  },
+  {
+   "id": "FIN-EXP-1@v4",
+   "key": "FIN-EXP-1",
+   "doc": "FIN-EXP",
+   "docTitle": "Expenses policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v4",
+   "effective": "2024-01-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Expense claim deadline",
+   "text": "Expense claims must be submitted within 60 days. Attach a receipt for each expense claim item over SGD 50.",
+   "answer": "Submit expense claims within 60 days, with receipts over SGD 50.",
+   "retiredOn": "2026-02-01"
+  },
+  {
+   "id": "FIN-EXP-2@v5",
+   "key": "FIN-EXP-2",
+   "doc": "FIN-EXP",
+   "docTitle": "Expenses policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v5",
+   "effective": "2026-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Meals when travelling",
+   "text": "When travelling on business, meals are covered by a daily allowance of SGD 60 in Singapore and up to SGD 90 abroad, claimed without receipts. Alcohol is never reimbursed.",
+   "answer": "Meals on business travel are covered by a daily allowance of SGD 60 in Singapore, up to SGD 90 abroad."
+  },
+  {
+   "id": "FIN-EXP-2@v4",
+   "key": "FIN-EXP-2",
+   "doc": "FIN-EXP",
+   "docTitle": "Expenses policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v4",
+   "effective": "2024-01-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Per diem",
+   "text": "Per diem for meals when travelling: SGD 50 per day in Singapore and SGD 70 per day abroad. Keep the per diem receipts.",
+   "answer": "The meal per diem is SGD 50 a day in Singapore and SGD 70 abroad.",
+   "retiredOn": "2026-02-01"
+  },
+  {
+   "id": "FIN-EXP-3@v5",
+   "key": "FIN-EXP-3",
+   "doc": "FIN-EXP",
+   "docTitle": "Expenses policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v5",
+   "effective": "2026-02-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Client entertainment",
+   "text": "Client entertainment up to SGD 150 per guest needs no approval in advance. Above that, get your director's approval first and list every guest's name and company on the claim.",
+   "answer": "Client entertainment up to SGD 150 per guest is fine; above that, get director approval first."
+  },
+  {
+   "id": "FIN-TRV-1@v3",
+   "key": "FIN-TRV-1",
+   "doc": "FIN-TRV",
+   "docTitle": "Travel policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v3",
+   "effective": "2025-09-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Flight class",
+   "text": "Book economy class for flights under 6 hours. Business class is allowed for flights of 6 hours or more with director approval. All flights are booked through the travel desk.",
+   "answer": "Economy under 6 hours; business class from 6 hours with director approval, via the travel desk."
+  },
+  {
+   "id": "FIN-TRV-1@v2",
+   "key": "FIN-TRV-1",
+   "doc": "FIN-TRV",
+   "docTitle": "Travel policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2022-01-01",
+   "superseded": true,
+   "access": "all",
+   "title": "Business class",
+   "text": "Business class flights are permitted when the flight is longer than 8 hours. Book business class flights through the travel agent.",
+   "answer": "Business class is permitted on flights longer than 8 hours.",
+   "retiredOn": "2025-09-01"
+  },
+  {
+   "id": "FIN-TRV-2@v3",
+   "key": "FIN-TRV-2",
+   "doc": "FIN-TRV",
+   "docTitle": "Travel policy",
+   "owner": "Financial controller",
+   "domain": "FIN",
+   "version": "v3",
+   "effective": "2025-09-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Hotels",
+   "text": "Hotel rates are capped at SGD 250 a night in Asia and SGD 350 a night elsewhere, booked through the travel desk. Staying with friends earns no allowance.",
+   "answer": "Hotels are capped at SGD 250 a night in Asia and SGD 350 elsewhere, via the travel desk."
+  },
+  {
+   "id": "FIN-PRO-1@v2",
+   "key": "FIN-PRO-1",
+   "doc": "FIN-PRO",
+   "docTitle": "Procurement policy",
+   "owner": "Procurement manager",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2025-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Quotes for purchases",
+   "text": "Purchases over SGD 5,000 need three written quotes from different suppliers. Purchases over SGD 50,000 go to a tender run by procurement.",
+   "answer": "Over SGD 5,000 you need three written quotes; over SGD 50,000 procurement runs a tender."
+  },
+  {
+   "id": "FIN-PRO-2@v2",
+   "key": "FIN-PRO-2",
+   "doc": "FIN-PRO",
+   "docTitle": "Procurement policy",
+   "owner": "Procurement manager",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2025-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Purchase orders",
+   "text": "Raise a purchase order in the finance system before the supplier starts work. Invoices without a matching purchase order are returned to the supplier unpaid.",
+   "answer": "Raise a purchase order before the supplier starts work; invoices without one are returned."
+  },
+  {
+   "id": "FIN-PRO-3@v2",
+   "key": "FIN-PRO-3",
+   "doc": "FIN-PRO",
+   "docTitle": "Procurement policy",
+   "owner": "Procurement manager",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2025-03-01",
+   "superseded": false,
+   "access": "all",
+   "title": "Corporate cards",
+   "text": "Corporate cards are for business expenses only, never personal use. Reconcile your corporate card statement in the expenses app by the 5th of each month.",
+   "answer": "Corporate cards are business-only; reconcile your statement by the 5th of each month."
+  },
+  {
+   "id": "FIN-DOA-1@v6",
+   "key": "FIN-DOA-1",
+   "doc": "FIN-DOA",
+   "docTitle": "Delegation of authority",
+   "owner": "Chief financial officer",
+   "domain": "FIN",
+   "version": "v6",
+   "effective": "2025-11-01",
+   "superseded": false,
+   "access": "managers",
+   "title": "Spending limits",
+   "text": "Delegated spending limits: team managers approve spend up to SGD 10,000; directors up to SGD 100,000; the chief financial officer up to SGD 500,000; above that, the board.",
+   "answer": "Managers approve up to SGD 10,000, directors SGD 100,000, the CFO SGD 500,000, above that the board."
+  },
+  {
+   "id": "FIN-AP-1@v2",
+   "key": "FIN-AP-1",
+   "doc": "FIN-AP",
+   "docTitle": "Supplier payments procedure",
+   "owner": "Accounts payable lead",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2025-06-01",
+   "superseded": false,
+   "access": "finance",
+   "title": "Supplier payment terms",
+   "text": "Suppliers are paid 30 days after the end of the invoice month. Early payment of a supplier invoice needs the chief financial officer's approval and a recorded reason.",
+   "answer": "Suppliers are paid 30 days after month end; early payment needs CFO approval."
+  },
+  {
+   "id": "FIN-AP-2@v2",
+   "key": "FIN-AP-2",
+   "doc": "FIN-AP",
+   "docTitle": "Supplier payments procedure",
+   "owner": "Accounts payable lead",
+   "domain": "FIN",
+   "version": "v2",
+   "effective": "2025-06-01",
+   "superseded": false,
+   "access": "finance",
+   "title": "Month-end close",
+   "text": "Month-end close timetable: accruals posted by working day 3, intercompany balances agreed by working day 4, and management accounts issued on working day 6.",
+   "answer": "Accruals by working day 3, intercompany by day 4, management accounts on day 6."
+  }
+ ],
+ "golden": [
+  {
+   "id": "G01",
+   "asker": "staff",
+   "q": "How many days of sick leave do I get, and when do I need a medical certificate?",
+   "gold": [
+    "HR-LV-3"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G02",
+   "asker": "staff",
+   "q": "How much paid parental leave does the primary caregiver get?",
+   "gold": [
+    "HR-LV-4"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G03",
+   "asker": "staff",
+   "q": "My grandmother died. How many days of compassionate leave can I take?",
+   "gold": [
+    "HR-LV-5"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G04",
+   "asker": "staff",
+   "q": "How far ahead must I request leave for a two week trip?",
+   "gold": [
+    "HR-LV-6"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G05",
+   "asker": "staff",
+   "q": "Can I work from another country for a few weeks?",
+   "gold": [
+    "HR-WFH-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "hybrid",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G06",
+   "asker": "staff",
+   "q": "What are the core hours when working from home?",
+   "gold": [
+    "HR-WFH-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "hybrid",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G07",
+   "asker": "staff",
+   "q": "Which day is salary paid this month?",
+   "gold": [
+    "HR-PAY-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "pay",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G08",
+   "asker": "staff",
+   "q": "How is overtime paid and who approves it?",
+   "gold": [
+    "HR-PAY-3"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "pay",
+   "thumbsAnswer": false,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G09",
+   "asker": "staff",
+   "q": "What notice do I get before a disciplinary hearing, and can I bring someone?",
+   "gold": [
+    "HR-PERF-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G10",
+   "asker": "staff",
+   "q": "How long is probation and what is the notice period during it?",
+   "gold": [
+    "HR-PERF-3"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G11",
+   "asker": "staff",
+   "q": "Is there a bonus for referring a friend who gets hired?",
+   "gold": [
+    "HR-REC-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "recruiting",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G12",
+   "asker": "staff",
+   "q": "A supplier sent me a hamper worth about SGD 200. Do I need to declare it?",
+   "gold": [
+    "HR-CON-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G13",
+   "asker": "staff",
+   "q": "My brother works at one of our suppliers. What do I need to do?",
+   "gold": [
+    "HR-CON-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G14",
+   "asker": "staff",
+   "q": "How many characters must a password have?",
+   "gold": [
+    "IT-ACC-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G15",
+   "asker": "staff",
+   "q": "Is multi-factor authentication needed for the VPN?",
+   "gold": [
+    "IT-ACC-2"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G16",
+   "asker": "staff",
+   "q": "My account is locked after failed sign-in attempts. How do I reset it?",
+   "gold": [
+    "IT-ACC-3"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G17",
+   "asker": "staff",
+   "q": "When will my laptop be replaced with a new one?",
+   "gold": [
+    "IT-DEV-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "devices",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G18",
+   "asker": "staff",
+   "q": "I lost my laptop in a taxi. Who do I report it to, and how fast?",
+   "gold": [
+    "IT-DEV-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "devices",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G19",
+   "asker": "staff",
+   "q": "Can I read work email on my personal phone?",
+   "gold": [
+    "IT-DEV-3"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "devices",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G20",
+   "asker": "staff",
+   "q": "How do I get software installed that is not in the catalogue?",
+   "gold": [
+    "IT-SW-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "software",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G21",
+   "asker": "staff",
+   "q": "Can I paste customer shipment records into an external AI tool to summarise them?",
+   "gold": [
+    "IT-SW-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "software",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G22",
+   "asker": "staff",
+   "q": "I clicked a link in a suspicious phishing email. What now?",
+   "gold": [
+    "IT-INC-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "security",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G23",
+   "asker": "staff",
+   "q": "I think customer personal data was exposed by mistake. Who do I report it to?",
+   "gold": [
+    "IT-INC-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "security",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G24",
+   "asker": "staff",
+   "q": "What is the hotel limit per night in Asia?",
+   "gold": [
+    "FIN-TRV-2"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "travel",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G25",
+   "asker": "staff",
+   "q": "How much can I spend per guest on client entertainment without approval?",
+   "gold": [
+    "FIN-EXP-3"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "expenses",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G26",
+   "asker": "staff",
+   "q": "How many quotes do I need for a purchase of SGD 8,000?",
+   "gold": [
+    "FIN-PRO-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G27",
+   "asker": "staff",
+   "q": "Do I need a purchase order before the supplier starts work?",
+   "gold": [
+    "FIN-PRO-2"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G28",
+   "asker": "staff",
+   "q": "When do I reconcile my corporate card statement?",
+   "gold": [
+    "FIN-PRO-3"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "expenses",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G29",
+   "asker": "manager",
+   "q": "What must I do before starting a performance improvement plan?",
+   "gold": [
+    "HR-PERF-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "conduct",
+   "thumbsAnswer": false,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G30",
+   "asker": "manager",
+   "q": "How do I open a new headcount vacancy?",
+   "gold": [
+    "HR-REC-2"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "recruiting",
+   "thumbsAnswer": false,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G31",
+   "asker": "manager",
+   "q": "Up to what amount can I approve spend as a team manager?",
+   "gold": [
+    "FIN-DOA-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G32",
+   "asker": "manager",
+   "q": "Can I give someone an off-cycle salary increase?",
+   "gold": [
+    "HR-PAY-4"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "pay",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G33",
+   "asker": "hr",
+   "q": "What is the salary band for grade 7?",
+   "gold": [
+    "HR-PAY-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "pay",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G34",
+   "asker": "finance",
+   "q": "When are suppliers paid, and who approves early payment?",
+   "gold": [
+    "FIN-AP-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G35",
+   "asker": "it",
+   "q": "How are local admin rights granted on a laptop?",
+   "gold": [
+    "IT-ADM-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G36",
+   "asker": "staff",
+   "q": "How many days of holiday entitlement do I get each year?",
+   "gold": [
+    "HR-LV-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G37",
+   "asker": "staff",
+   "q": "Can I carry forward unused holiday days, and until when?",
+   "gold": [
+    "HR-LV-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G38",
+   "asker": "staff",
+   "q": "How many remote work days per week can I take?",
+   "gold": [
+    "HR-WFH-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "hybrid",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G39",
+   "asker": "staff",
+   "q": "How often must I change my password?",
+   "gold": [
+    "IT-ACC-1"
+   ],
+   "kind": "answerable",
+   "tier": "low",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G40",
+   "asker": "staff",
+   "q": "How long do I have to submit an expense claim?",
+   "gold": [
+    "FIN-EXP-1"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "expenses",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G41",
+   "asker": "staff",
+   "q": "What is the per diem for meals when travelling?",
+   "gold": [
+    "FIN-EXP-2"
+   ],
+   "kind": "answerable",
+   "tier": "high",
+   "topic": "expenses",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G42",
+   "asker": "staff",
+   "q": "When am I allowed to fly business class?",
+   "gold": [
+    "FIN-TRV-1"
+   ],
+   "kind": "answerable",
+   "tier": "medium",
+   "topic": "travel",
+   "thumbsAnswer": false,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G43",
+   "asker": "staff",
+   "q": "What is the salary band for grade 7?",
+   "gold": [
+    "HR-PAY-2"
+   ],
+   "kind": "restricted",
+   "tier": "high",
+   "topic": "pay",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G44",
+   "asker": "staff",
+   "q": "How do I get local admin rights on my laptop?",
+   "gold": [
+    "IT-ADM-1"
+   ],
+   "kind": "restricted",
+   "tier": "medium",
+   "topic": "access",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G45",
+   "asker": "staff",
+   "q": "What spending limit does a director have?",
+   "gold": [
+    "FIN-DOA-1"
+   ],
+   "kind": "restricted",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G46",
+   "asker": "staff",
+   "q": "How long does a performance improvement plan last?",
+   "gold": [
+    "HR-PERF-1"
+   ],
+   "kind": "restricted",
+   "tier": "high",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G47",
+   "asker": "manager",
+   "q": "When are the month-end close accruals due?",
+   "gold": [
+    "FIN-AP-2"
+   ],
+   "kind": "restricted",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G48",
+   "asker": "staff",
+   "q": "Who approves early payment of a supplier invoice?",
+   "gold": [
+    "FIN-AP-1"
+   ],
+   "kind": "restricted",
+   "tier": "medium",
+   "topic": "purchasing",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G49",
+   "asker": "staff",
+   "q": "Can I bring my dog to the office?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "low",
+   "topic": "facilities",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G50",
+   "asker": "staff",
+   "q": "Do we get a day off on our birthday?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "medium",
+   "topic": "leave",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G51",
+   "asker": "staff",
+   "q": "How do I book a meeting room for a client visit?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "low",
+   "topic": "facilities",
+   "thumbsAnswer": false,
+   "thumbsHandoff": false
+  },
+  {
+   "id": "G52",
+   "asker": "staff",
+   "q": "Is there a staff discount at the gym near the office?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "low",
+   "topic": "facilities",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G53",
+   "asker": "staff",
+   "q": "What is the dress code for client visits?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "low",
+   "topic": "conduct",
+   "thumbsAnswer": true,
+   "thumbsHandoff": true
+  },
+  {
+   "id": "G54",
+   "asker": "staff",
+   "q": "When is the annual staff party this year?",
+   "gold": [],
+   "kind": "no-policy",
+   "tier": "low",
+   "topic": "facilities",
+   "thumbsAnswer": true,
+   "thumbsHandoff": false
+  }
+ ],
+ "topics": [
+  [
+   "leave",
+   "HR",
+   "policy",
+   70,
+   6,
+   15
+  ],
+  [
+   "leave",
+   "HR",
+   "action",
+   22,
+   15,
+   40
+  ],
+  [
+   "hybrid",
+   "HR",
+   "policy",
+   24,
+   6,
+   12
+  ],
+  [
+   "pay",
+   "HR",
+   "policy",
+   30,
+   8,
+   20
+  ],
+  [
+   "pay",
+   "HR",
+   "action",
+   26,
+   20,
+   60
+  ],
+  [
+   "conduct",
+   "HR",
+   "policy",
+   14,
+   10,
+   30
+  ],
+  [
+   "recruiting",
+   "HR",
+   "policy",
+   10,
+   6,
+   15
+  ],
+  [
+   "access",
+   "IT",
+   "policy",
+   36,
+   5,
+   12
+  ],
+  [
+   "access",
+   "IT",
+   "action",
+   64,
+   10,
+   25
+  ],
+  [
+   "devices",
+   "IT",
+   "policy",
+   18,
+   5,
+   12
+  ],
+  [
+   "devices",
+   "IT",
+   "action",
+   46,
+   30,
+   120
+  ],
+  [
+   "software",
+   "IT",
+   "policy",
+   22,
+   6,
+   15
+  ],
+  [
+   "software",
+   "IT",
+   "action",
+   30,
+   20,
+   60
+  ],
+  [
+   "security",
+   "IT",
+   "policy",
+   12,
+   10,
+   25
+  ],
+  [
+   "expenses",
+   "Finance",
+   "policy",
+   48,
+   6,
+   15
+  ],
+  [
+   "expenses",
+   "Finance",
+   "action",
+   20,
+   15,
+   45
+  ],
+  [
+   "travel",
+   "Finance",
+   "policy",
+   26,
+   6,
+   15
+  ],
+  [
+   "purchasing",
+   "Finance",
+   "policy",
+   24,
+   8,
+   20
+  ],
+  [
+   "purchasing",
+   "Finance",
+   "action",
+   12,
+   20,
+   60
+  ],
+  [
+   "facilities",
+   "HR",
+   "no-policy",
+   26,
+   5,
+   20
+  ],
+  [
+   "leave",
+   "HR",
+   "no-policy",
+   8,
+   10,
+   25
+  ],
+  [
+   "conduct",
+   "HR",
+   "no-policy",
+   6,
+   10,
+   30
+  ],
+  [
+   "software",
+   "IT",
+   "no-policy",
+   6,
+   10,
+   30
+  ]
+ ],
+ "tickets": [
+  [
+   0,
+   2,
+   13
+  ],
+  [
+   2,
+   0,
+   12
+  ],
+  [
+   8,
+   2,
+   11
+  ],
+  [
+   14,
+   1,
+   6
+  ],
+  [
+   6,
+   1,
+   12
+  ],
+  [
+   6,
+   1,
+   8
+  ],
+  [
+   17,
+   0,
+   17
+  ],
+  [
+   10,
+   0,
+   37
+  ],
+  [
+   8,
+   0,
+   22
+  ],
+  [
+   16,
+   2,
+   11
+  ],
+  [
+   1,
+   0,
+   38
+  ],
+  [
+   12,
+   1,
+   57
+  ],
+  [
+   2,
+   2,
+   6
+  ],
+  [
+   9,
+   1,
+   6
+  ],
+  [
+   5,
+   0,
+   14
+  ],
+  [
+   13,
+   2,
+   13
+  ],
+  [
+   16,
+   0,
+   11
+  ],
+  [
+   0,
+   2,
+   6
+  ],
+  [
+   3,
+   2,
+   14
+  ],
+  [
+   14,
+   1,
+   15
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   0,
+   1,
+   15
+  ],
+  [
+   7,
+   2,
+   8
+  ],
+  [
+   19,
+   2,
+   13
+  ],
+  [
+   17,
+   0,
+   20
+  ],
+  [
+   10,
+   1,
+   107
+  ],
+  [
+   3,
+   1,
+   15
+  ],
+  [
+   14,
+   2,
+   15
+  ],
+  [
+   19,
+   0,
+   8
+  ],
+  [
+   8,
+   2,
+   10
+  ],
+  [
+   14,
+   2,
+   6
+  ],
+  [
+   17,
+   1,
+   18
+  ],
+  [
+   11,
+   2,
+   11
+  ],
+  [
+   12,
+   2,
+   22
+  ],
+  [
+   15,
+   2,
+   42
+  ],
+  [
+   2,
+   2,
+   11
+  ],
+  [
+   17,
+   0,
+   19
+  ],
+  [
+   4,
+   2,
+   34
+  ],
+  [
+   4,
+   0,
+   36
+  ],
+  [
+   12,
+   2,
+   60
+  ],
+  [
+   3,
+   2,
+   19
+  ],
+  [
+   10,
+   2,
+   59
+  ],
+  [
+   1,
+   1,
+   35
+  ],
+  [
+   2,
+   1,
+   10
+  ],
+  [
+   12,
+   2,
+   31
+  ],
+  [
+   16,
+   0,
+   14
+  ],
+  [
+   9,
+   0,
+   12
+  ],
+  [
+   10,
+   1,
+   82
+  ],
+  [
+   20,
+   2,
+   18
+  ],
+  [
+   3,
+   1,
+   8
+  ],
+  [
+   19,
+   1,
+   13
+  ],
+  [
+   9,
+   1,
+   8
+  ],
+  [
+   11,
+   2,
+   13
+  ],
+  [
+   19,
+   0,
+   7
+  ],
+  [
+   0,
+   0,
+   14
+  ],
+  [
+   8,
+   1,
+   11
+  ],
+  [
+   17,
+   1,
+   15
+  ],
+  [
+   10,
+   1,
+   57
+  ],
+  [
+   10,
+   0,
+   87
+  ],
+  [
+   14,
+   0,
+   15
+  ],
+  [
+   4,
+   2,
+   50
+  ],
+  [
+   14,
+   0,
+   13
+  ],
+  [
+   0,
+   0,
+   9
+  ],
+  [
+   14,
+   0,
+   6
+  ],
+  [
+   12,
+   1,
+   22
+  ],
+  [
+   8,
+   0,
+   19
+  ],
+  [
+   10,
+   2,
+   70
+  ],
+  [
+   0,
+   2,
+   15
+  ],
+  [
+   1,
+   2,
+   35
+  ],
+  [
+   7,
+   1,
+   6
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   3,
+   2,
+   11
+  ],
+  [
+   16,
+   1,
+   13
+  ],
+  [
+   20,
+   1,
+   15
+  ],
+  [
+   8,
+   2,
+   22
+  ],
+  [
+   14,
+   2,
+   10
+  ],
+  [
+   0,
+   1,
+   11
+  ],
+  [
+   16,
+   0,
+   13
+  ],
+  [
+   16,
+   1,
+   8
+  ],
+  [
+   10,
+   0,
+   81
+  ],
+  [
+   17,
+   1,
+   13
+  ],
+  [
+   2,
+   2,
+   7
+  ],
+  [
+   5,
+   1,
+   15
+  ],
+  [
+   0,
+   0,
+   14
+  ],
+  [
+   18,
+   0,
+   26
+  ],
+  [
+   10,
+   2,
+   71
+  ],
+  [
+   5,
+   1,
+   29
+  ],
+  [
+   7,
+   2,
+   6
+  ],
+  [
+   16,
+   0,
+   9
+  ],
+  [
+   12,
+   0,
+   26
+  ],
+  [
+   2,
+   0,
+   7
+  ],
+  [
+   1,
+   1,
+   32
+  ],
+  [
+   5,
+   1,
+   17
+  ],
+  [
+   15,
+   1,
+   34
+  ],
+  [
+   8,
+   0,
+   14
+  ],
+  [
+   7,
+   1,
+   12
+  ],
+  [
+   11,
+   0,
+   8
+  ],
+  [
+   0,
+   1,
+   9
+  ],
+  [
+   9,
+   0,
+   6
+  ],
+  [
+   10,
+   1,
+   85
+  ],
+  [
+   20,
+   0,
+   14
+  ],
+  [
+   19,
+   0,
+   7
+  ],
+  [
+   1,
+   2,
+   24
+  ],
+  [
+   4,
+   0,
+   44
+  ],
+  [
+   12,
+   0,
+   20
+  ],
+  [
+   6,
+   0,
+   6
+  ],
+  [
+   19,
+   0,
+   19
+  ],
+  [
+   9,
+   2,
+   7
+  ],
+  [
+   22,
+   2,
+   19
+  ],
+  [
+   8,
+   1,
+   20
+  ],
+  [
+   11,
+   2,
+   8
+  ],
+  [
+   6,
+   1,
+   6
+  ],
+  [
+   11,
+   0,
+   9
+  ],
+  [
+   7,
+   0,
+   8
+  ],
+  [
+   8,
+   2,
+   24
+  ],
+  [
+   10,
+   0,
+   67
+  ],
+  [
+   9,
+   2,
+   7
+  ],
+  [
+   10,
+   0,
+   98
+  ],
+  [
+   8,
+   2,
+   21
+  ],
+  [
+   2,
+   1,
+   8
+  ],
+  [
+   12,
+   0,
+   44
+  ],
+  [
+   9,
+   2,
+   5
+  ],
+  [
+   14,
+   0,
+   11
+  ],
+  [
+   6,
+   2,
+   8
+  ],
+  [
+   14,
+   0,
+   9
+  ],
+  [
+   16,
+   2,
+   14
+  ],
+  [
+   8,
+   2,
+   25
+  ],
+  [
+   1,
+   1,
+   22
+  ],
+  [
+   2,
+   1,
+   10
+  ],
+  [
+   14,
+   1,
+   14
+  ],
+  [
+   12,
+   2,
+   35
+  ],
+  [
+   12,
+   1,
+   34
+  ],
+  [
+   16,
+   2,
+   11
+  ],
+  [
+   0,
+   2,
+   12
+  ],
+  [
+   1,
+   2,
+   36
+  ],
+  [
+   1,
+   0,
+   21
+  ],
+  [
+   19,
+   1,
+   11
+  ],
+  [
+   14,
+   0,
+   10
+  ],
+  [
+   15,
+   0,
+   31
+  ],
+  [
+   21,
+   2,
+   24
+  ],
+  [
+   7,
+   1,
+   11
+  ],
+  [
+   0,
+   2,
+   6
+  ],
+  [
+   19,
+   1,
+   12
+  ],
+  [
+   8,
+   0,
+   24
+  ],
+  [
+   4,
+   2,
+   25
+  ],
+  [
+   4,
+   1,
+   41
+  ],
+  [
+   17,
+   2,
+   15
+  ],
+  [
+   19,
+   1,
+   12
+  ],
+  [
+   14,
+   2,
+   7
+  ],
+  [
+   20,
+   0,
+   20
+  ],
+  [
+   14,
+   0,
+   9
+  ],
+  [
+   16,
+   0,
+   14
+  ],
+  [
+   0,
+   1,
+   14
+  ],
+  [
+   10,
+   1,
+   48
+  ],
+  [
+   16,
+   0,
+   7
+  ],
+  [
+   22,
+   1,
+   11
+  ],
+  [
+   10,
+   1,
+   95
+  ],
+  [
+   12,
+   1,
+   47
+  ],
+  [
+   16,
+   1,
+   6
+  ],
+  [
+   0,
+   1,
+   7
+  ],
+  [
+   7,
+   1,
+   5
+  ],
+  [
+   2,
+   1,
+   7
+  ],
+  [
+   7,
+   1,
+   11
+  ],
+  [
+   9,
+   2,
+   10
+  ],
+  [
+   14,
+   0,
+   12
+  ],
+  [
+   3,
+   1,
+   11
+  ],
+  [
+   14,
+   1,
+   9
+  ],
+  [
+   11,
+   0,
+   10
+  ],
+  [
+   14,
+   2,
+   14
+  ],
+  [
+   13,
+   1,
+   18
+  ],
+  [
+   0,
+   1,
+   15
+  ],
+  [
+   9,
+   2,
+   11
+  ],
+  [
+   0,
+   1,
+   8
+  ],
+  [
+   7,
+   2,
+   6
+  ],
+  [
+   14,
+   2,
+   12
+  ],
+  [
+   8,
+   0,
+   11
+  ],
+  [
+   14,
+   0,
+   6
+  ],
+  [
+   8,
+   0,
+   20
+  ],
+  [
+   8,
+   0,
+   24
+  ],
+  [
+   14,
+   0,
+   8
+  ],
+  [
+   7,
+   1,
+   9
+  ],
+  [
+   8,
+   0,
+   18
+  ],
+  [
+   11,
+   0,
+   11
+  ],
+  [
+   7,
+   1,
+   5
+  ],
+  [
+   7,
+   1,
+   5
+  ],
+  [
+   8,
+   0,
+   14
+  ],
+  [
+   14,
+   0,
+   9
+  ],
+  [
+   10,
+   0,
+   73
+  ],
+  [
+   12,
+   1,
+   54
+  ],
+  [
+   11,
+   1,
+   13
+  ],
+  [
+   8,
+   2,
+   12
+  ],
+  [
+   7,
+   0,
+   8
+  ],
+  [
+   10,
+   0,
+   72
+  ],
+  [
+   12,
+   0,
+   35
+  ],
+  [
+   2,
+   2,
+   9
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   8,
+   2,
+   11
+  ],
+  [
+   10,
+   0,
+   80
+  ],
+  [
+   9,
+   0,
+   11
+  ],
+  [
+   12,
+   0,
+   36
+  ],
+  [
+   13,
+   0,
+   18
+  ],
+  [
+   14,
+   1,
+   13
+  ],
+  [
+   14,
+   1,
+   13
+  ],
+  [
+   19,
+   2,
+   10
+  ],
+  [
+   15,
+   1,
+   36
+  ],
+  [
+   0,
+   1,
+   14
+  ],
+  [
+   8,
+   0,
+   23
+  ],
+  [
+   11,
+   0,
+   11
+  ],
+  [
+   0,
+   0,
+   11
+  ],
+  [
+   14,
+   1,
+   9
+  ],
+  [
+   1,
+   1,
+   28
+  ],
+  [
+   5,
+   0,
+   20
+  ],
+  [
+   8,
+   0,
+   23
+  ],
+  [
+   7,
+   2,
+   10
+  ],
+  [
+   8,
+   0,
+   15
+  ],
+  [
+   11,
+   0,
+   7
+  ],
+  [
+   1,
+   0,
+   35
+  ],
+  [
+   9,
+   2,
+   6
+  ],
+  [
+   1,
+   1,
+   22
+  ],
+  [
+   5,
+   1,
+   11
+  ],
+  [
+   4,
+   0,
+   23
+  ],
+  [
+   11,
+   2,
+   13
+  ],
+  [
+   16,
+   2,
+   15
+  ],
+  [
+   7,
+   1,
+   5
+  ],
+  [
+   15,
+   0,
+   32
+  ],
+  [
+   0,
+   1,
+   13
+  ],
+  [
+   5,
+   2,
+   14
+  ],
+  [
+   2,
+   0,
+   12
+  ],
+  [
+   14,
+   2,
+   12
+  ],
+  [
+   10,
+   2,
+   110
+  ],
+  [
+   7,
+   0,
+   10
+  ],
+  [
+   17,
+   2,
+   11
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   4,
+   0,
+   48
+  ],
+  [
+   8,
+   0,
+   13
+  ],
+  [
+   8,
+   0,
+   22
+  ],
+  [
+   19,
+   0,
+   15
+  ],
+  [
+   10,
+   1,
+   53
+  ],
+  [
+   3,
+   2,
+   16
+  ],
+  [
+   8,
+   0,
+   12
+  ],
+  [
+   1,
+   1,
+   23
+  ],
+  [
+   17,
+   1,
+   20
+  ],
+  [
+   16,
+   2,
+   12
+  ],
+  [
+   17,
+   2,
+   11
+  ],
+  [
+   11,
+   2,
+   6
+  ],
+  [
+   8,
+   2,
+   20
+  ],
+  [
+   2,
+   2,
+   12
+  ],
+  [
+   6,
+   0,
+   14
+  ],
+  [
+   7,
+   0,
+   12
+  ],
+  [
+   6,
+   1,
+   9
+  ],
+  [
+   10,
+   2,
+   35
+  ],
+  [
+   3,
+   0,
+   8
+  ],
+  [
+   4,
+   0,
+   42
+  ],
+  [
+   11,
+   0,
+   14
+  ],
+  [
+   8,
+   2,
+   14
+  ],
+  [
+   19,
+   0,
+   19
+  ],
+  [
+   7,
+   0,
+   6
+  ],
+  [
+   10,
+   0,
+   107
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   6,
+   1,
+   14
+  ],
+  [
+   4,
+   0,
+   22
+  ],
+  [
+   14,
+   1,
+   9
+  ],
+  [
+   3,
+   2,
+   11
+  ],
+  [
+   19,
+   0,
+   20
+  ],
+  [
+   15,
+   2,
+   44
+  ],
+  [
+   0,
+   1,
+   8
+  ],
+  [
+   17,
+   2,
+   19
+  ],
+  [
+   10,
+   2,
+   61
+  ],
+  [
+   10,
+   0,
+   108
+  ],
+  [
+   22,
+   0,
+   15
+  ],
+  [
+   12,
+   0,
+   42
+  ],
+  [
+   0,
+   0,
+   9
+  ],
+  [
+   0,
+   1,
+   13
+  ],
+  [
+   8,
+   1,
+   23
+  ],
+  [
+   10,
+   1,
+   41
+  ],
+  [
+   12,
+   1,
+   32
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   17,
+   0,
+   15
+  ],
+  [
+   4,
+   1,
+   55
+  ],
+  [
+   12,
+   0,
+   25
+  ],
+  [
+   14,
+   0,
+   7
+  ],
+  [
+   14,
+   0,
+   12
+  ],
+  [
+   12,
+   2,
+   44
+  ],
+  [
+   16,
+   0,
+   12
+  ],
+  [
+   18,
+   2,
+   23
+  ],
+  [
+   3,
+   0,
+   9
+  ],
+  [
+   14,
+   1,
+   14
+  ],
+  [
+   8,
+   1,
+   12
+  ],
+  [
+   18,
+   1,
+   45
+  ],
+  [
+   7,
+   0,
+   11
+  ],
+  [
+   13,
+   2,
+   16
+  ],
+  [
+   4,
+   1,
+   24
+  ],
+  [
+   16,
+   2,
+   12
+  ],
+  [
+   8,
+   2,
+   21
+  ],
+  [
+   7,
+   0,
+   8
+  ],
+  [
+   8,
+   2,
+   17
+  ],
+  [
+   10,
+   0,
+   93
+  ],
+  [
+   0,
+   2,
+   11
+  ],
+  [
+   0,
+   2,
+   6
+  ],
+  [
+   2,
+   1,
+   9
+  ],
+  [
+   17,
+   2,
+   13
+  ],
+  [
+   5,
+   2,
+   20
+  ],
+  [
+   10,
+   1,
+   38
+  ],
+  [
+   10,
+   2,
+   88
+  ],
+  [
+   9,
+   2,
+   10
+  ],
+  [
+   16,
+   2,
+   6
+  ],
+  [
+   8,
+   1,
+   24
+  ],
+  [
+   11,
+   1,
+   13
+  ],
+  [
+   0,
+   1,
+   6
+  ],
+  [
+   7,
+   1,
+   8
+  ],
+  [
+   16,
+   0,
+   13
+  ],
+  [
+   0,
+   0,
+   12
+  ],
+  [
+   14,
+   1,
+   10
+  ],
+  [
+   10,
+   0,
+   119
+  ],
+  [
+   14,
+   1,
+   13
+  ],
+  [
+   3,
+   0,
+   11
+  ],
+  [
+   22,
+   2,
+   14
+  ],
+  [
+   3,
+   0,
+   13
+  ],
+  [
+   5,
+   2,
+   26
+  ],
+  [
+   20,
+   0,
+   24
+  ],
+  [
+   7,
+   0,
+   11
+  ],
+  [
+   15,
+   0,
+   26
+  ],
+  [
+   12,
+   2,
+   45
+  ],
+  [
+   10,
+   0,
+   97
+  ],
+  [
+   8,
+   2,
+   18
+  ],
+  [
+   19,
+   2,
+   9
+  ],
+  [
+   15,
+   2,
+   34
+  ],
+  [
+   12,
+   0,
+   49
+  ],
+  [
+   9,
+   1,
+   10
+  ],
+  [
+   16,
+   0,
+   13
+  ],
+  [
+   8,
+   0,
+   25
+  ],
+  [
+   8,
+   2,
+   17
+  ],
+  [
+   13,
+   0,
+   14
+  ],
+  [
+   8,
+   1,
+   23
+  ],
+  [
+   0,
+   0,
+   10
+  ],
+  [
+   15,
+   1,
+   32
+  ],
+  [
+   15,
+   1,
+   31
+  ],
+  [
+   17,
+   0,
+   13
+  ],
+  [
+   4,
+   1,
+   31
+  ],
+  [
+   10,
+   0,
+   79
+  ],
+  [
+   0,
+   1,
+   8
+  ],
+  [
+   0,
+   0,
+   8
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   2,
+   1,
+   8
+  ],
+  [
+   5,
+   0,
+   20
+  ],
+  [
+   21,
+   2,
+   26
+  ],
+  [
+   16,
+   1,
+   10
+  ],
+  [
+   10,
+   2,
+   59
+  ],
+  [
+   1,
+   2,
+   34
+  ],
+  [
+   0,
+   1,
+   7
+  ],
+  [
+   10,
+   0,
+   61
+  ],
+  [
+   4,
+   2,
+   28
+  ],
+  [
+   10,
+   1,
+   111
+  ],
+  [
+   4,
+   2,
+   44
+  ],
+  [
+   17,
+   0,
+   12
+  ],
+  [
+   13,
+   1,
+   15
+  ],
+  [
+   2,
+   2,
+   11
+  ],
+  [
+   10,
+   0,
+   47
+  ],
+  [
+   0,
+   2,
+   13
+  ],
+  [
+   16,
+   1,
+   14
+  ],
+  [
+   22,
+   0,
+   19
+  ],
+  [
+   7,
+   1,
+   11
+  ],
+  [
+   8,
+   1,
+   13
+  ],
+  [
+   0,
+   1,
+   14
+  ],
+  [
+   14,
+   1,
+   14
+  ],
+  [
+   1,
+   2,
+   21
+  ],
+  [
+   10,
+   0,
+   107
+  ],
+  [
+   8,
+   0,
+   23
+  ],
+  [
+   7,
+   1,
+   10
+  ],
+  [
+   12,
+   2,
+   55
+  ],
+  [
+   14,
+   1,
+   10
+  ],
+  [
+   14,
+   0,
+   8
+  ],
+  [
+   0,
+   1,
+   11
+  ],
+  [
+   12,
+   1,
+   37
+  ],
+  [
+   16,
+   2,
+   10
+  ],
+  [
+   0,
+   1,
+   14
+  ],
+  [
+   20,
+   1,
+   19
+  ],
+  [
+   19,
+   1,
+   17
+  ],
+  [
+   12,
+   0,
+   51
+  ],
+  [
+   19,
+   2,
+   7
+  ],
+  [
+   13,
+   0,
+   21
+  ],
+  [
+   8,
+   2,
+   18
+  ],
+  [
+   14,
+   0,
+   14
+  ],
+  [
+   5,
+   1,
+   25
+  ],
+  [
+   8,
+   1,
+   25
+  ],
+  [
+   7,
+   1,
+   8
+  ],
+  [
+   4,
+   1,
+   59
+  ],
+  [
+   2,
+   0,
+   11
+  ],
+  [
+   8,
+   1,
+   11
+  ],
+  [
+   16,
+   0,
+   10
+  ],
+  [
+   13,
+   2,
+   13
+  ],
+  [
+   19,
+   0,
+   19
+  ],
+  [
+   11,
+   1,
+   9
+  ],
+  [
+   9,
+   0,
+   11
+  ],
+  [
+   10,
+   2,
+   76
+  ],
+  [
+   14,
+   1,
+   12
+  ],
+  [
+   19,
+   1,
+   11
+  ],
+  [
+   2,
+   1,
+   8
+  ],
+  [
+   14,
+   2,
+   9
+  ],
+  [
+   14,
+   0,
+   14
+  ],
+  [
+   7,
+   1,
+   11
+  ],
+  [
+   4,
+   1,
+   56
+  ],
+  [
+   10,
+   0,
+   116
+  ],
+  [
+   10,
+   1,
+   106
+  ],
+  [
+   11,
+   0,
+   9
+  ],
+  [
+   14,
+   2,
+   11
+  ],
+  [
+   11,
+   2,
+   15
+  ],
+  [
+   19,
+   1,
+   12
+  ],
+  [
+   1,
+   0,
+   15
+  ],
+  [
+   11,
+   2,
+   15
+  ],
+  [
+   3,
+   2,
+   13
+  ],
+  [
+   10,
+   1,
+   40
+  ],
+  [
+   15,
+   0,
+   35
+  ],
+  [
+   12,
+   1,
+   42
+  ],
+  [
+   5,
+   0,
+   28
+  ],
+  [
+   8,
+   2,
+   18
+  ],
+  [
+   18,
+   1,
+   53
+  ],
+  [
+   15,
+   0,
+   45
+  ],
+  [
+   0,
+   1,
+   12
+  ],
+  [
+   12,
+   0,
+   37
+  ],
+  [
+   5,
+   1,
+   29
+  ],
+  [
+   7,
+   0,
+   5
+  ],
+  [
+   19,
+   1,
+   13
+  ],
+  [
+   10,
+   2,
+   98
+  ],
+  [
+   0,
+   1,
+   7
+  ],
+  [
+   12,
+   0,
+   59
+  ],
+  [
+   7,
+   2,
+   7
+  ],
+  [
+   19,
+   2,
+   11
+  ],
+  [
+   11,
+   0,
+   11
+  ],
+  [
+   18,
+   2,
+   41
+  ],
+  [
+   0,
+   1,
+   8
+  ],
+  [
+   0,
+   0,
+   13
+  ],
+  [
+   3,
+   1,
+   15
+  ],
+  [
+   12,
+   1,
+   56
+  ],
+  [
+   18,
+   2,
+   20
+  ],
+  [
+   1,
+   2,
+   18
+  ],
+  [
+   8,
+   1,
+   21
+  ],
+  [
+   0,
+   2,
+   9
+  ],
+  [
+   16,
+   1,
+   6
+  ],
+  [
+   1,
+   2,
+   29
+  ],
+  [
+   9,
+   1,
+   12
+  ],
+  [
+   3,
+   1,
+   13
+  ],
+  [
+   19,
+   2,
+   17
+  ],
+  [
+   19,
+   1,
+   8
+  ],
+  [
+   12,
+   0,
+   38
+  ],
+  [
+   3,
+   0,
+   14
+  ],
+  [
+   0,
+   2,
+   12
+  ],
+  [
+   4,
+   1,
+   45
+  ],
+  [
+   4,
+   1,
+   45
+  ],
+  [
+   4,
+   1,
+   54
+  ],
+  [
+   8,
+   2,
+   13
+  ],
+  [
+   12,
+   0,
+   21
+  ],
+  [
+   0,
+   0,
+   7
+  ],
+  [
+   0,
+   1,
+   15
+  ],
+  [
+   8,
+   2,
+   19
+  ],
+  [
+   8,
+   1,
+   12
+  ],
+  [
+   14,
+   0,
+   9
+  ],
+  [
+   9,
+   0,
+   7
+  ],
+  [
+   9,
+   2,
+   5
+  ],
+  [
+   1,
+   0,
+   29
+  ],
+  [
+   6,
+   1,
+   13
+  ],
+  [
+   14,
+   0,
+   8
+  ],
+  [
+   14,
+   2,
+   6
+  ],
+  [
+   7,
+   0,
+   8
+  ],
+  [
+   9,
+   1,
+   10
+  ],
+  [
+   7,
+   2,
+   5
+  ],
+  [
+   7,
+   0,
+   5
+  ],
+  [
+   0,
+   1,
+   8
+  ],
+  [
+   7,
+   2,
+   10
+  ],
+  [
+   1,
+   1,
+   34
+  ],
+  [
+   12,
+   0,
+   26
+  ],
+  [
+   10,
+   2,
+   89
+  ],
+  [
+   10,
+   2,
+   72
+  ],
+  [
+   4,
+   2,
+   36
+  ],
+  [
+   1,
+   1,
+   39
+  ],
+  [
+   14,
+   2,
+   8
+  ],
+  [
+   4,
+   1,
+   33
+  ],
+  [
+   0,
+   0,
+   9
+  ],
+  [
+   0,
+   1,
+   7
+  ],
+  [
+   12,
+   1,
+   48
+  ],
+  [
+   8,
+   1,
+   24
+  ],
+  [
+   11,
+   0,
+   10
+  ],
+  [
+   11,
+   2,
+   13
+  ],
+  [
+   0,
+   1,
+   13
+  ],
+  [
+   9,
+   1,
+   12
+  ],
+  [
+   12,
+   0,
+   26
+  ],
+  [
+   8,
+   1,
+   15
+  ],
+  [
+   3,
+   2,
+   16
+  ],
+  [
+   0,
+   2,
+   6
+  ],
+  [
+   8,
+   2,
+   25
+  ],
+  [
+   6,
+   0,
+   9
+  ],
+  [
+   20,
+   1,
+   11
+  ],
+  [
+   7,
+   2,
+   9
+  ],
+  [
+   2,
+   0,
+   8
+  ],
+  [
+   15,
+   2,
+   27
+  ],
+  [
+   4,
+   1,
+   60
+  ],
+  [
+   16,
+   2,
+   6
+  ],
+  [
+   8,
+   0,
+   25
+  ],
+  [
+   10,
+   0,
+   52
+  ],
+  [
+   0,
+   0,
+   7
+  ],
+  [
+   7,
+   0,
+   9
+  ],
+  [
+   14,
+   0,
+   8
+  ],
+  [
+   15,
+   0,
+   26
+  ],
+  [
+   18,
+   1,
+   58
+  ],
+  [
+   2,
+   0,
+   10
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   19,
+   2,
+   14
+  ],
+  [
+   10,
+   2,
+   55
+  ],
+  [
+   8,
+   0,
+   21
+  ],
+  [
+   0,
+   2,
+   8
+  ],
+  [
+   2,
+   0,
+   7
+  ],
+  [
+   9,
+   2,
+   6
+  ],
+  [
+   3,
+   1,
+   20
+  ],
+  [
+   9,
+   2,
+   8
+  ],
+  [
+   10,
+   1,
+   42
+  ],
+  [
+   10,
+   1,
+   46
+  ],
+  [
+   9,
+   0,
+   9
+  ],
+  [
+   19,
+   2,
+   5
+  ],
+  [
+   0,
+   0,
+   6
+  ],
+  [
+   12,
+   1,
+   23
+  ],
+  [
+   7,
+   0,
+   11
+  ],
+  [
+   8,
+   1,
+   16
+  ],
+  [
+   0,
+   1,
+   6
+  ],
+  [
+   10,
+   0,
+   74
+  ],
+  [
+   14,
+   0,
+   10
+  ],
+  [
+   15,
+   2,
+   40
+  ],
+  [
+   0,
+   2,
+   15
+  ],
+  [
+   17,
+   1,
+   9
+  ],
+  [
+   0,
+   2,
+   11
+  ],
+  [
+   3,
+   2,
+   8
+  ],
+  [
+   1,
+   2,
+   21
+  ],
+  [
+   4,
+   2,
+   48
+  ],
+  [
+   8,
+   1,
+   17
+  ],
+  [
+   2,
+   0,
+   12
+  ],
+  [
+   20,
+   1,
+   25
+  ],
+  [
+   7,
+   1,
+   10
+  ],
+  [
+   12,
+   0,
+   53
+  ],
+  [
+   3,
+   2,
+   18
+  ],
+  [
+   16,
+   2,
+   13
+  ],
+  [
+   0,
+   0,
+   7
+  ],
+  [
+   2,
+   1,
+   10
+  ],
+  [
+   8,
+   2,
+   18
+  ],
+  [
+   14,
+   2,
+   12
+  ],
+  [
+   15,
+   0,
+   38
+  ],
+  [
+   4,
+   1,
+   38
+  ],
+  [
+   15,
+   1,
+   40
+  ],
+  [
+   11,
+   1,
+   8
+  ],
+  [
+   0,
+   0,
+   10
+  ],
+  [
+   0,
+   1,
+   12
+  ],
+  [
+   1,
+   0,
+   27
+  ],
+  [
+   15,
+   1,
+   39
+  ],
+  [
+   7,
+   0,
+   10
+  ],
+  [
+   3,
+   1,
+   12
+  ],
+  [
+   19,
+   0,
+   18
+  ],
+  [
+   7,
+   2,
+   12
+  ],
+  [
+   16,
+   2,
+   7
+  ],
+  [
+   11,
+   0,
+   10
+  ],
+  [
+   7,
+   1,
+   10
+  ],
+  [
+   4,
+   1,
+   31
+  ],
+  [
+   12,
+   2,
+   54
+  ],
+  [
+   6,
+   0,
+   9
+  ],
+  [
+   4,
+   1,
+   32
+  ],
+  [
+   15,
+   0,
+   34
+  ],
+  [
+   14,
+   2,
+   10
+  ],
+  [
+   9,
+   2,
+   6
+  ],
+  [
+   8,
+   2,
+   24
+  ],
+  [
+   7,
+   1,
+   10
+  ],
+  [
+   10,
+   2,
+   52
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   3,
+   1,
+   12
+  ],
+  [
+   2,
+   0,
+   8
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   0,
+   1,
+   10
+  ],
+  [
+   0,
+   0,
+   13
+  ],
+  [
+   13,
+   2,
+   19
+  ],
+  [
+   0,
+   1,
+   15
+  ],
+  [
+   2,
+   0,
+   10
+  ],
+  [
+   19,
+   2,
+   20
+  ],
+  [
+   10,
+   2,
+   52
+  ],
+  [
+   5,
+   2,
+   20
+  ],
+  [
+   8,
+   2,
+   17
+  ],
+  [
+   15,
+   0,
+   39
+  ],
+  [
+   13,
+   0,
+   19
+  ],
+  [
+   0,
+   0,
+   15
+  ],
+  [
+   8,
+   1,
+   11
+  ],
+  [
+   14,
+   1,
+   11
+  ],
+  [
+   0,
+   2,
+   13
+  ],
+  [
+   14,
+   1,
+   6
+  ],
+  [
+   15,
+   1,
+   39
+  ],
+  [
+   21,
+   0,
+   28
+  ],
+  [
+   11,
+   2,
+   15
+  ],
+  [
+   19,
+   2,
+   17
+  ],
+  [
+   12,
+   2,
+   32
+  ],
+  [
+   10,
+   2,
+   61
+  ],
+  [
+   4,
+   0,
+   28
+  ],
+  [
+   4,
+   2,
+   53
+  ],
+  [
+   13,
+   2,
+   16
+  ],
+  [
+   10,
+   1,
+   98
+  ],
+  [
+   16,
+   2,
+   10
+  ],
+  [
+   7,
+   0,
+   12
+  ]
+ ],
+ "settings": {
+  "bm25": {
+   "k1": 1.2,
+   "b": 0.75
+  },
+  "k": 3,
+  "abstainBelow": 3.0,
+  "access": {
+   "all": [
+    "staff",
+    "manager",
+    "hr",
+    "finance",
+    "it"
+   ],
+   "managers": [
+    "manager",
+    "hr"
+   ],
+   "hr": [
+    "hr"
+   ],
+   "finance": [
+    "finance"
+   ],
+   "it": [
+    "it"
+   ]
+  },
+  "rungs": [
+   {
+    "id": "r1",
+    "label": "1 \u00b7 No permission filter",
+    "perm": false,
+    "version": false,
+    "abstain": false
+   },
+   {
+    "id": "r2",
+    "label": "2 \u00b7 + permission filter",
+    "perm": true,
+    "version": false,
+    "abstain": false
+   },
+   {
+    "id": "r3",
+    "label": "3 \u00b7 + current-version filter",
+    "perm": true,
+    "version": true,
+    "abstain": false
+   },
+   {
+    "id": "r4",
+    "label": "4 \u00b7 + abstain and hand off",
+    "perm": true,
+    "version": true,
+    "abstain": true
+   }
+  ],
+  "gate": {
+   "maxLeaks": 0,
+   "maxStale": 0,
+   "maxWrongRate": {
+    "high": 0.05,
+    "medium": 0.1,
+    "low": 0.2
+   },
+   "minCoverage": 0.7,
+   "minHandoffRight": 0.8
+  },
+  "thumbsGate": 0.75,
+  "breakDoc": "FIN-EXP",
+  "breakVersion": "v4",
+  "cost": {
+   "systemTokens": 350,
+   "outputTokens": 150,
+   "tokensPerWord": 1.3,
+   "inPerM": [
+    0.1,
+    3.0
+   ],
+   "outPerM": [
+    0.4,
+    15.0
+   ],
+   "usdToSgd": 1.35,
+   "questionsPerMonth": 2400,
+   "ticketMinutes": 12,
+   "ticketSgdPerHour": 45
+  },
+  "staff": 1200
+ }
+}

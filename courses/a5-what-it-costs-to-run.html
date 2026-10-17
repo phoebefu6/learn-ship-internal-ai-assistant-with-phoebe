@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Leader session 5 of 6. Price an internal AI assistant as a range with every input labelled. Model tokens are the small line; the hand-off tickets are the big one; and the cheapest configuration is the one you must not ship.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="What it costs to run - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Leader session 5 of 6. SGD 0.25 to 8.53 a month in model cost, SGD 6,000 in hand-off tickets. Price the ticket, not the token.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/a5-what-it-costs-to-run.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What it costs to run - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Leader session 5 of 6. A run-cost sheet where every input carries its label, and cost is counted per right answer.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Leader session 5 · What it costs to run - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Leader session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Leader session 5 of 6</div>
+    <h1>What it costs <span class="accent">to run</span></h1>
+    <p class="sub">The first question a finance director asks about an internal assistant is what the model will cost. For Tidewell Freight, a constructed 1,200-person freight forwarder, the honest answer is a range: SGD 0.25 to 8.53 a month on an assumed 2,400 questions. That is the small line. The big line is the hand-off tickets the assistant opens when it should not answer, SGD 6,000 a month on the same assumptions. Tonight you price both, label every input, and learn why the cheapest version of the assistant is the one the go/no-go board rejects.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Finance and operations leaders</span>
+      <span class="chip audience">Anyone signing the assistant's budget</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Tokens, tickets, right answers</span>
+      <span class="a3" style="flex:4">20-40 · Build-along: the run-cost sheet</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where the leader track stands</h2>
+    </div>
+    <p class="lede">Four sessions in, the <strong>one-page launch decision</strong> has a scope sentence (session 1), a buy, build or wait verdict per layer (session 2), an access matrix (session 3) and a hand-off message with a threshold note (session 4). Tonight adds the cost line. It is the section of the page most likely to be quoted out of context, so every number on it carries a label: <strong>measured</strong> on the bench, <strong>assumed</strong> by Tidewell, or <strong>constructed</strong> for these pages. Tidewell Freight, its staff, its tickets and its prices are all constructed. Session 6 stitches the page together.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A run-cost sheet for one month of your assistant: model cost as a range, hand-off tickets priced at what a ticket really costs your helpdesk, the all-ticket ceiling beside them, and a label on every input. Plus one sentence for the business case that compares configurations by cost per right answer, not cost per question.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers model cost per answer, built from tokens and an assumed price range</span>
+      <h2>Tokens as a range</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">A hosted model API charges by the token, separately for what you send in and what comes back. Every answer Tidewell's assistant gives sends the same three things in: a block of system instructions, the staff member's question, and the three clauses retrieval chose. Count those, multiply by a price, and you have the cost of one answer. Each step in that sentence hides an assumption, so the result is a range, never a number.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One answer travelling through a hosted model API. System instructions, assumed at 350 tokens, and the question plus three retrieved clauses, counted as words times 1.3 rounded up, make an average of 465 input tokens per answer on rung 4, measured on the bench. The model API prices input at an assumed USD 0.10 to 3.00 per million tokens and 150 output tokens at USD 0.40 to 15.00 per million. One answer costs USD 0.00011 to 0.0036.">
+        <defs>
+          <filter id="a5aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="29" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a5aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a5aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a5aB { font: 800 11px Inter, sans-serif; fill: #6B4A00; }
+          .a5aV { font: 800 20px Inter, sans-serif; fill: #0A5A60; }
+          .a5aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5aA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a5aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a5aH" x="30" y="26">ONE ANSWER, PRICED</text>
+        <text class="a5aS" x="200" y="26">rung 4 of the bench · 465 is measured · every other number here is an assumption</text>
+
+        <g filter="url(#a5aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="58" width="190" height="72" rx="8" transform="rotate(-1.5 125 94)" fill="#FFFFFF"/>
+          <rect x="30" y="146" width="190" height="72" rx="8" transform="rotate(1.2 125 182)" fill="url(#a5aHc)"/>
+          <path d="M224 98 L266 126" marker-end="url(#a5aAr)"/>
+          <path d="M224 180 L266 152" marker-end="url(#a5aAr)"/>
+          <rect x="272" y="90" width="170" height="96" rx="10" transform="rotate(-0.6 357 138)" fill="#0A5A60" stroke="#0A5A60"/>
+          <path d="M446 138 L486 138" marker-end="url(#a5aAr)"/>
+          <rect x="492" y="90" width="170" height="96" rx="10" transform="rotate(0.5 577 138)" fill="#E8F6F6" stroke="#0E8086"/>
+          <path d="M577 190 L577 216" marker-end="url(#a5aAr)"/>
+          <rect x="492" y="222" width="170" height="56" rx="8" transform="rotate(-0.7 577 250)" fill="#FFFFFF"/>
+          <path d="M666 138 L706 138" marker-end="url(#a5aAr)"/>
+          <path d="M666 246 C700 246 728 230 740 206" marker-end="url(#a5aAr)"/>
+          <rect x="712" y="90" width="148" height="110" rx="10" transform="rotate(0.8 786 145)" fill="#F4B63F"/>
+          <ellipse cx="800" cy="262" rx="22" ry="7"/>
+          <ellipse cx="800" cy="252" rx="22" ry="7" fill="#FFFFFF"/>
+          <ellipse cx="800" cy="242" rx="22" ry="7" fill="#FFFFFF"/>
+        </g>
+
+        <text class="a5aH" x="44" y="84">SYSTEM INSTRUCTIONS</text>
+        <text class="a5aL" x="44" y="104">350 tokens</text>
+        <text class="a5aB" x="44" y="121">assumption</text>
+        <text class="a5aH" x="44" y="172">QUESTION + 3 CLAUSES</text>
+        <text class="a5aL" x="44" y="192">words x 1.3, rounded up</text>
+        <text class="a5aB" x="44" y="209">assumed token rule</text>
+
+        <text class="a5aW" x="288" y="118">AVERAGE INPUT</text>
+        <text class="a5aW" x="288" y="148" style="font-size:20px">465 tokens</text>
+        <text class="a5aW" x="288" y="172">measured, rung 4</text>
+
+        <text class="a5aH" x="506" y="116">A HOSTED MODEL API</text>
+        <text class="a5aL" x="506" y="140">USD 0.10 to 3.00</text>
+        <text class="a5aS" x="506" y="158">per million input tokens</text>
+        <text class="a5aB" x="506" y="175">assumption</text>
+
+        <text class="a5aH" x="506" y="244">150 OUTPUT TOKENS</text>
+        <text class="a5aS" x="506" y="262">USD 0.40 to 15.00 per million</text>
+
+        <text class="a5aH" x="726" y="116">PER ANSWER</text>
+        <text class="a5aL" x="726" y="142">USD 0.00011</text>
+        <text class="a5aL" x="726" y="162">to USD 0.0036</text>
+        <text class="a5aL" x="726" y="186">a range, not a price</text>
+
+        <text class="a5aA" x="740" y="294">small change</text>
+
+        <text class="a5aN" x="30" y="316">The token rule, the 350, the 150 and both price ranges are assumptions. Only the 465 is measured.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one answer is a fraction of a cent, and the honest way to say so is a range</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The four inputs to one answer, and which ones you control<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Input</th><th>Tidewell's value</th><th>Label</th><th>Who moves it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Input tokens per answer</strong></td><td>465 on average at rung 4</td><td>Measured on the bench, using an assumed token rule (words x 1.3, rounded up)</td><td>The builder: system prompt length, how many clauses retrieval sends, how long the clauses are</td></tr>
+            <tr><td><strong>Output tokens per answer</strong></td><td>150</td><td>Assumption</td><td>The prompt and the answer style: a cited two-sentence answer is short</td></tr>
+            <tr><td><strong>Price per million tokens</strong></td><td>USD 0.10 to 3.00 in, USD 0.40 to 15.00 out</td><td>Assumption, a range not a price list</td><td>Procurement, and the choice of model tier</td></tr>
+            <tr><td><strong>Exchange rate</strong></td><td>1 USD = 1.35 SGD</td><td>Assumption</td><td>Nobody you employ</td></tr>
+          </tbody>
+        </table>
+        <p>Put together: one answer costs USD 0.00011 to USD 0.0036. The range is wide on purpose. Prices change faster than a business case is read, and the right model tier for a policy assistant is a decision you have not made yet. A single number would look precise and be wrong by the time it reached the board.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the system prompt is most of the bill<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Of the 465 average input tokens, 350 are the system instructions, by assumption: the rules about citing the clause, answering only from what was retrieved and handing off when nothing fits. They are sent with every single answer. The question and the three short clauses Tidewell's store holds are the smaller part, because Tidewell wrote its policies one short rule to a clause.</p>
+        <p>So the levers that move model cost are dull ones: a tighter system prompt, fewer clauses per answer, shorter clauses. None of them should be pulled before the go/no-go board has been re-run, because each one also changes what the assistant can answer. Part 3 shows why a saving that moves the verdict is not a saving.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The cost slide that quoted one price (constructed).</strong> In Tidewell's constructed history, the first business case for the assistant priced it at the cheapest per-token rate the project team had seen, and called the model cost "negligible". Both parts were defensible, and neither survived the first question from the finance director: which model tier, and at whose price next year? The second version of the slide carried the range, USD 0.00011 to 0.0036 per answer, with the word "assumption" next to every input. It was approved faster, because nobody had to trust a number they could not check.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the monthly model cost against the cost of hand-off tickets</span>
+      <h2>The ticket line</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Multiply one answer by a month and the model cost is still small: SGD 0.25 to 8.53 at rung 4, on an assumed 2,400 questions. Session 4 made the assistant hand off when it should not answer, and every hand-off is a helpdesk ticket that a person closes. Price the ticket and the picture turns over.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 304" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three hand-drawn bars for one month of 2,400 assumed questions at Tidewell. Model cost at rung 4 is SGD 0.25 to 8.53, a bar too thin to see at this scale and circled. Hand-off tickets at rung 4 cost SGD 6,000: 15 of 54 golden questions handed off, at an assumed SGD 9 a ticket. If every question were a ticket, the month would cost SGD 21,600.">
+        <defs>
+          <filter id="a5bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a5bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a5bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a5bV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .a5bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a5bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a5bH" x="30" y="26">ONE MONTH, 2,400 QUESTIONS, THREE LINES</text>
+        <text class="a5bS" x="370" y="26">bar length = SGD · SGD 21,600 = 480px · all inputs labelled below</text>
+
+        <g filter="url(#a5bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M260 56 L260 228"/>
+          <rect x="260" y="70" width="3" height="30" fill="#0A5A60" stroke="#0A5A60"/>
+          <circle cx="262" cy="85" r="19" stroke="#0E8086"/>
+          <path d="M276 99 L290 113" stroke="#0E8086"/>
+          <rect x="260" y="130" width="133" height="30" rx="4" fill="#F4B63F"/>
+          <rect x="260" y="190" width="480" height="30" rx="4" fill="url(#a5bHc)"/>
+        </g>
+
+        <text class="a5bL" x="236" y="84" text-anchor="end">model cost · rung 4</text>
+        <text class="a5bS" x="236" y="100" text-anchor="end">hosted model API, price range</text>
+        <text class="a5bL" x="236" y="144" text-anchor="end">hand-off tickets · rung 4</text>
+        <text class="a5bS" x="236" y="160" text-anchor="end">15 of 54 handed off, SGD 9 each</text>
+        <text class="a5bL" x="236" y="204" text-anchor="end">every question a ticket</text>
+        <text class="a5bS" x="236" y="220" text-anchor="end">2,400 x SGD 9, the ceiling</text>
+
+        <text class="a5bV" x="300" y="91">SGD 0.25 to 8.53</text>
+        <text class="a5bA" x="300" y="112">drawn 3px wide; to scale it is under 1px</text>
+        <text class="a5bV" x="406" y="151">SGD 6,000</text>
+        <text class="a5bV" x="752" y="211">SGD 21,600</text>
+
+        <text class="a5bS" x="30" y="256">Assumptions: 2,400 questions a month · a ticket is 12 minutes at SGD 45 an hour, SGD 9 · 1 USD = 1.35 SGD</text>
+        <text class="a5bN" x="30" y="284">The model is the small line; the hand-off is the big one. Budget for the ticket queue, not the token bill.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the line finance asks about is the one you can barely draw</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Where the SGD 6,000 comes from<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Three inputs, each labelled. <strong>Measured:</strong> at rung 4 the assistant hands off 15 of the 54 golden questions, 11 rightly and 4 as safe misses. <strong>Assumed:</strong> that share holds for 2,400 real questions a month. <strong>Assumed:</strong> a ticket takes 12 minutes of helpdesk time at SGD 45 an hour, SGD 9 a ticket. Together that is SGD 6,000 a month in hand-off tickets, against SGD 0.25 to 8.53 in model cost.</p>
+        <p>The four safe misses (G07 pay day, G17 laptop refresh, G37 carry forward, G38 remote days) are questions the assistant could have answered and handed off instead. Each is a ticket the queue absorbs. Session 4's threshold note is therefore also a budget line: raising the hand-off line makes the model bill smaller and the ticket bill bigger.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>SGD 21,600 is a ceiling, not a saving<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The third bar prices every one of the 2,400 questions as a ticket. It is tempting to subtract the hand-off line from it and call the gap a saving. Do not, for two reasons. First, the gap assumes every answered question would otherwise have become a ticket. Tidewell's constructed log held 600 tickets in a whole quarter; 2,400 questions a month is an assumption about how often staff ask once asking is easy, and a question asked because it is easy was never a ticket. Second, the gap counts every answer as right. Part 3 deals with that.</p>
+        <p>Put your own helpdesk's real monthly ticket volume next to the hand-off line before anyone writes the word saving. If the assistant opens more tickets than the helpdesk closes today, the business case is about speed and consistency for staff, not about cost, and it should say so.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What the published evidence will not tell you about the saving<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The two most-cited field studies measure different things and point in different directions. Brynjolfsson, Li and Raymond (NBER Working Paper 31161) studied 5,179 customer support agents with an AI assistant and found issues resolved per hour rose 14% on average, 34% for novice and low-skilled workers, with minimal impact on the most experienced. Humlum and Vestergaard (BFI Working Paper 2025-56) followed 25,000 Danish workers in exposed occupations and found average time savings of 3%, with effects on earnings and recorded hours larger than 1% ruled out.</p>
+        <p>One is a task-level speed gain in one contact centre; the other is the absence of a measurable labour-market effect. Different outcomes, settings and horizons. Neither is a deflection rate, and no credible public benchmark for helpdesk deflection was found; the figures in circulation are vendor-reported. Keep productivity percentages off the run-cost sheet. Session 6 takes the disagreement apart.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Two studies, two answers, one tempting slide.</strong> A business case that wants a big saving can quote the 34% gain for novice agents from Brynjolfsson, Li and Raymond. One that wants caution can quote the 3% average time savings from Humlum and Vestergaard. Both are real and read at source; neither was measured on an internal policy helpdesk. The professional move is to show the ticket line you can price from your own log and leave the productivity percentage out of the cost sheet.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers why cost belongs next to the go/no-go verdict, not apart from it</span>
+      <h2>Cost per right answer</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Lay the bench's rungs side by side with their run cost and the cheapest month is obvious: rung 1, no filters and no hand-offs, so no ticket line at all. It is also the assistant that leaks restricted clauses to 18 questions. Cost per question rewards it. Cost per right answer does not.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three hand-drawn panels comparing rungs of the bench for one month. Rung 1, no permission filter: model cost SGD 0.34 to 11.78, no ticket cost, 18 leaks and 6 stale citations, thumbs-up 90.7 percent, NO-GO; tagged cheapest. Rung 2, with the permission filter: the same model cost, no ticket cost, 0 leaks and 7 stale citations, thumbs-up 90.7 percent, NO-GO. Rung 4, with abstain and hand off: model cost SGD 0.25 to 8.53, hand-off tickets SGD 6,000, 0 leaks and 0 stale, thumbs-up 81.5 percent, GO.">
+        <defs>
+          <filter id="a5cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="37" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a5cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a5cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a5cB { font: 800 11px Inter, sans-serif; fill: #6B4A00; }
+          .a5cW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5cR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .a5cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a5cH" x="30" y="26">COST PER RIGHT ANSWER, NOT PER QUESTION</text>
+        <text class="a5cS" x="370" y="26">one month · leaks, stale and verdicts measured on the bench</text>
+
+        <g filter="url(#a5cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M186 44 L262 44 L276 54 L262 64 L186 64 Z" fill="#FEF5E0"/>
+          <circle cx="268" cy="54" r="3"/>
+          <rect x="30" y="72" width="260" height="180" rx="10" transform="rotate(-0.5 160 162)" fill="#FEF2F2" stroke="#991B1B"/>
+          <rect x="310" y="72" width="260" height="180" rx="10" transform="rotate(0.4 440 162)" fill="#FFFFFF" stroke="#991B1B"/>
+          <rect x="590" y="72" width="260" height="180" rx="10" transform="rotate(-0.4 720 162)" fill="#F4B63F"/>
+          <rect x="44" y="208" width="96" height="30" rx="6" fill="#FFFFFF" stroke="#991B1B"/>
+          <rect x="324" y="208" width="96" height="30" rx="6" fill="#FFFFFF" stroke="#991B1B"/>
+          <rect x="604" y="208" width="96" height="30" rx="6" fill="#0A5A60" stroke="#0A5A60"/>
+        </g>
+
+        <text class="a5cB" x="196" y="58">cheapest</text>
+
+        <text class="a5cH" x="44" y="96">RUNG 1 · NO FILTER</text>
+        <text class="a5cL" x="44" y="122">model SGD 0.34 to 11.78</text>
+        <text class="a5cL" x="44" y="142">tickets SGD 0</text>
+        <text class="a5cR" x="44" y="162">18 leaks · 6 stale citations</text>
+        <text class="a5cS" x="44" y="182">thumbs-up 90.7%</text>
+        <text class="a5cR" x="68" y="227">NO-GO</text>
+
+        <text class="a5cH" x="324" y="96">RUNG 2 · + PERMISSION FILTER</text>
+        <text class="a5cL" x="324" y="122">model SGD 0.34 to 11.78</text>
+        <text class="a5cL" x="324" y="142">tickets SGD 0</text>
+        <text class="a5cR" x="324" y="162">0 leaks · 7 stale citations</text>
+        <text class="a5cS" x="324" y="182">thumbs-up 90.7%</text>
+        <text class="a5cR" x="348" y="227">NO-GO</text>
+
+        <text class="a5cH" x="604" y="96">RUNG 4 · + HAND-OFF</text>
+        <text class="a5cL" x="604" y="122">model SGD 0.25 to 8.53</text>
+        <text class="a5cH" x="604" y="142">tickets SGD 6,000</text>
+        <text class="a5cL" x="604" y="162">0 leaks · 0 stale citations</text>
+        <text class="a5cL" x="604" y="182">thumbs-up 81.5%</text>
+        <text class="a5cW" x="636" y="227">GO</text>
+
+        <text class="a5cS" x="30" y="274">Rung 3 is also NO-GO and is left out: the bench does not print its run cost.</text>
+        <text class="a5cN" x="30" y="298">The cheapest month has no hand-offs, and it leaks 18 answers. Price only what you would ship.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the cheapest rung is the one you must not ship</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the cheap rungs are cheap<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Rungs 1 and 2 never hand off. Every question gets an answer, so there is no ticket line and the model cost is a little higher, SGD 0.34 to 11.78 a month, because every question is sent to the model. Rung 4 sends fewer questions to the model, SGD 0.25 to 8.53, and opens SGD 6,000 of tickets. On a cost-per-question slide rung 1 wins by a wide margin.</p>
+        <p>Now read the board. Rung 1 answers 18 questions from clauses the asker may not read, 7 of them straight from the forbidden clause, and cites 6 superseded policies. Rung 2 stops the leaks and cites 7 stale versions. Both are NO-GO under Tidewell's gate. The cost of a leaked HR clause or a wrong expense limit is not on the run-cost sheet at all, which is exactly why it cannot be the only sheet on the table.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The sentence for the business case<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Compare configurations only among the ones that pass the go/no-go board, then compare them by cost per right outcome: a correct cited answer, or a right hand-off. On Tidewell's bench only rung 4 passes, with 38 of 42 answerable questions correct and 11 of 12 right hand-offs. Its run cost is the model range plus the ticket line. A cheaper rung that fails the board has no cost per right answer worth quoting.</p>
+        <p>Thumbs are no shortcut either. Rung 1 scores a 90.7% thumbs-up rate, above Tidewell's 75% bar, with 18 leaks. Staff thumb down hand-offs, so the safe rung grades lower, 81.5%. A satisfaction score per pound spent would pick the wrong assistant twice over.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Estimating before launch vs measuring after<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>This page takes the pre-launch side: an estimate from the bench with every input labelled, good enough to sign a budget. Measuring real token use per request, cost per conversation and drift once staff are using it belongs to the <a href="https://phoebefu6.github.io/learn-ai-observability-with-phoebe/courses/a4-what-ai-costs-you.html">AI observability course's session on what AI costs you</a>. Plan to replace every "assumption" on your sheet with a measured value in the first month after launch, starting with questions per month and the hand-off share.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The risk that has no line on the invoice.</strong> OWASP's Top 10 for LLM Applications 2025 lists Sensitive Information Disclosure as LLM02 and asks teams to limit access to sensitive data "based on the principle of least privilege". Rung 1 breaks that principle on 18 questions and is still the cheapest month on the bench. A cost sheet cannot price a disclosure, so it must never be read without the board beside it.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>A run-cost sheet with every input labelled</h2>
+      <span class="tag demo">★ 20 min · everyone builds</span>
+    </div>
+    <p class="lede">A spreadsheet or a sheet of paper is enough. Use your own helpdesk's volumes and ticket cost if you have them; otherwise build Tidewell's sheet from the numbers on this page. Tidewell is constructed, and your numbers will differ. The rule for the whole sheet: no input without a label saying measured, assumed or constructed.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 306" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The run-cost sheet as a hand-drawn page. Six input cards on the left, each tagged: 2,400 questions a month, assumed; 465 input tokens per answer, measured; 150 output and 350 system tokens, assumed; USD 0.10 to 3.00 in and 0.40 to 15.00 out per million, assumed; 15 of 54 handed off, measured; SGD 9 a ticket, assumed. They feed the arithmetic, which produces three lines: model SGD 0.25 to 8.53, hand-offs SGD 6,000, ceiling SGD 21,600, each a month at rung 4.">
+        <defs>
+          <filter id="a5dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .a5dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .a5dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .a5dB { font: 800 11px Inter, sans-serif; fill: #6B4A00; }
+          .a5dA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .a5dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="a5dH" x="30" y="26">THE RUN-COST SHEET · SIX LABELLED INPUTS, THREE LINES OUT</text>
+
+        <g filter="url(#a5dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="46" width="380" height="28" rx="6" transform="rotate(-0.6 220 60)" fill="#FFFFFF"/>
+          <rect x="30" y="82" width="380" height="28" rx="6" transform="rotate(0.5 220 96)" fill="#E8F6F6"/>
+          <rect x="30" y="118" width="380" height="28" rx="6" transform="rotate(-0.4 220 132)" fill="#FFFFFF"/>
+          <rect x="30" y="154" width="380" height="28" rx="6" transform="rotate(0.6 220 168)" fill="#FFFFFF"/>
+          <rect x="30" y="190" width="380" height="28" rx="6" transform="rotate(-0.5 220 204)" fill="#E8F6F6"/>
+          <rect x="30" y="226" width="380" height="28" rx="6" transform="rotate(0.4 220 240)" fill="#FFFFFF"/>
+          <path d="M416 150 L446 150" marker-end="url(#a5dAr)"/>
+          <rect x="452" y="104" width="150" height="92" rx="10" transform="rotate(-1 527 150)" fill="url(#a5dHc)"/>
+          <path d="M508 214 L546 214 L552 208 L546 202 L508 202 Z"/>
+          <path d="M606 132 L638 92" marker-end="url(#a5dAr)"/>
+          <path d="M606 150 L638 150" marker-end="url(#a5dAr)"/>
+          <path d="M606 168 L638 210" marker-end="url(#a5dAr)"/>
+          <rect x="644" y="56" width="210" height="52" rx="8" transform="rotate(0.6 749 82)" fill="#FFFFFF"/>
+          <rect x="644" y="124" width="210" height="52" rx="8" transform="rotate(-0.5 749 150)" fill="#F4B63F"/>
+          <rect x="644" y="192" width="210" height="52" rx="8" transform="rotate(0.5 749 218)" fill="#FFFFFF"/>
+        </g>
+
+        <text class="a5dL" x="44" y="65">2,400 questions a month</text>
+        <text class="a5dB" x="398" y="65" text-anchor="end">ASSUMED</text>
+        <text class="a5dL" x="44" y="101">465 input tokens per answer</text>
+        <text class="a5dA" x="398" y="101" text-anchor="end">MEASURED</text>
+        <text class="a5dL" x="44" y="137">150 output, 350 system tokens</text>
+        <text class="a5dB" x="398" y="137" text-anchor="end">ASSUMED</text>
+        <text class="a5dL" x="44" y="173">USD 0.10-3.00 in, 0.40-15.00 out</text>
+        <text class="a5dB" x="398" y="173" text-anchor="end">ASSUMED</text>
+        <text class="a5dL" x="44" y="209">15 of 54 handed off, rung 4</text>
+        <text class="a5dA" x="398" y="209" text-anchor="end">MEASURED</text>
+        <text class="a5dL" x="44" y="245">SGD 9 a ticket, 12 min at SGD 45/h</text>
+        <text class="a5dB" x="398" y="245" text-anchor="end">ASSUMED</text>
+
+        <text class="a5dH" x="466" y="138">THE ARITHMETIC</text>
+        <text class="a5dL" x="466" y="158">multiply, add,</text>
+        <text class="a5dL" x="466" y="176">x 1.35 to SGD</text>
+
+        <text class="a5dH" x="658" y="78">MODEL · SGD 0.25 to 8.53</text>
+        <text class="a5dS" x="658" y="96">a month, rung 4</text>
+        <text class="a5dH" x="658" y="146">HAND-OFFS · SGD 6,000</text>
+        <text class="a5dL" x="658" y="164">a month, rung 4</text>
+        <text class="a5dH" x="658" y="214">CEILING · SGD 21,600</text>
+        <text class="a5dS" x="658" y="232">all 2,400 as tickets</text>
+
+        <text class="a5dN" x="30" y="290">Every input carries its label. The unlabelled number is the one somebody quotes in a board paper.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - six inputs, six labels, and the ticket line is the one to argue about</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Set the volume and label it.</strong> Questions per month is the input everything else multiplies. If you have no pilot, it is an assumption; write it down as one. Note next to it how many tickets your helpdesk closes in a month today, so nobody confuses the two.</p>
+        <div class="prompt-box good"><span class="label">★ Block 1 · volume</span>Questions a month ............ 2,400        ASSUMED (no pilot yet)
+Tickets a month today ........ [yours]      MEASURED (from the ticket log)</div>
+      </div>
+      <div class="step">
+        <p><strong>Price one answer as a range.</strong> Input tokens from a pilot or a bench, output tokens and prices as assumptions. Write the low and the high, never the middle.</p>
+        <div class="prompt-box good"><span class="label">★ Block 2 · one answer</span>Input tokens per answer ...... 465                      MEASURED (bench, rung 4)
+Output tokens per answer ..... 150                      ASSUMED
+Price in, per million ........ USD 0.10 to 3.00         ASSUMED (a range, no price list)
+Price out, per million ....... USD 0.40 to 15.00        ASSUMED
+One answer ................... USD 0.00011 to 0.0036</div>
+      </div>
+      <div class="step">
+        <p><strong>Price the ticket.</strong> Ask the helpdesk lead from session 4's build-along how long a hand-off ticket takes to close and what an hour of their team costs. That pair is the most important input on the sheet and the one most often skipped.</p>
+        <div class="prompt-box good"><span class="label">★ Block 3 · the ticket</span>Minutes per hand-off ticket .. 12           ASSUMED (helpdesk lead to confirm)
+Cost per helpdesk hour ....... SGD 45       ASSUMED
+Cost per ticket .............. SGD 9
+Hand-off share ............... 15 of 54     MEASURED (bench, rung 4)</div>
+      </div>
+      <div class="step">
+        <p><strong>Write the three lines for one month.</strong> Model cost as a range, hand-off tickets, and the all-ticket ceiling. Put them in that order so the reader meets the small line first and the big one second.</p>
+        <div class="prompt-box good"><span class="label">★ Block 4 · the month, Tidewell (constructed)</span>Model cost ................... SGD 0.25 to 8.53
+Hand-off tickets ............. SGD 6,000
+Ceiling, every question a ticket  SGD 21,600   (a ceiling, not a saving)</div>
+      </div>
+      <div class="step">
+        <p><strong>Add the sentence that ties cost to the board.</strong> One line that stops anyone choosing a configuration on cost alone.</p>
+        <div class="prompt-box good"><span class="label">★ The cost sentence</span>We compare run cost only between configurations that pass the go/no-go board.
+At Tidewell only rung 4 passes; its month is SGD 0.25 to 8.53 in model cost
+and SGD 6,000 in hand-off tickets, on the assumptions labelled above.</div>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The cost line that gets an assistant approved and then cancelled</span>
+The AI costs a fraction of a cent per question, so at 2,400 questions a month
+it pays for itself many times over by deflecting helpdesk tickets.
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 6</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li>Finish your run-cost sheet and bring it with a label on every input. Circle the two inputs you trust least.</li>
+      <li>Get the real minutes per hand-off ticket and the real cost of a helpdesk hour from the person who runs the queue. Replace those two assumptions, and note how far the ticket line moved.</li>
+      <li>Put your helpdesk's real monthly ticket volume beside the hand-off line. Write one sentence on whether the business case is about cost or about speed and consistency for staff.</li>
+      <li>Find any cost figure already circulating about your assistant. Write down which of the three lines it is, whether it was a range, and whether it named the configuration that passes the go/no-go board.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Leader session 5 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · On Tidewell's bench at rung 4, which line dominates one month's run cost?</p>
+      <button class="qopt" type="button">A · Model input tokens, because the system instructions are sent with every answer</button>
+      <button class="qopt" type="button">B · Model output tokens, because output is priced higher per million</button>
+      <button class="qopt" type="button">C · Hand-off tickets: SGD 6,000 against SGD 0.25 to 8.53 in model cost</button>
+      <button class="qopt" type="button">D · The ceiling of SGD 21,600, because every question costs a ticket</button>
+      <p class="qwhy">A and B are true statements about the model bill, and the whole model bill is still the small line. D is a ceiling for comparison, not a cost the assistant incurs. The hand-off tickets a person has to close are the big line.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Rung 1 is the cheapest month on the bench. Why is it not the configuration to cost the business case on?</p>
+      <button class="qopt" type="button">A · It fails the go/no-go board: 18 leaks and 6 stale citations, so it has no cost per right answer worth quoting</button>
+      <button class="qopt" type="button">B · Its model cost is higher than rung 4's, so it is actually more expensive</button>
+      <button class="qopt" type="button">C · Its thumbs-up rate is below Tidewell's 75% bar</button>
+      <button class="qopt" type="button">D · It opens more hand-off tickets than rung 4</button>
+      <p class="qwhy">B is true by a few dollars and beside the point: with no ticket line, rung 1 is far cheaper overall. C is backwards: rung 1 scores 90.7% thumbs-up, which is the anti-lever. D is backwards too: rung 1 hands off nothing. It is cheap because it never says "I don't know".</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · A colleague subtracts the hand-off line from the SGD 21,600 ceiling and calls the gap the monthly saving. What is wrong with that?</p>
+      <button class="qopt" type="button">A · Nothing; it is the standard way to compute deflection savings</button>
+      <button class="qopt" type="button">B · The model cost should be subtracted as well, and then it is correct</button>
+      <button class="qopt" type="button">C · The ceiling should use the 34% productivity gain from the NBER study</button>
+      <button class="qopt" type="button">D · It assumes every answered question would otherwise have been a ticket, and that every answer was right</button>
+      <p class="qwhy">2,400 questions a month is an assumption about how often staff ask once asking is easy; Tidewell's own log held 600 tickets in a quarter. And a confident wrong answer saves nothing. B fixes a rounding error and keeps both mistakes. C imports a number measured on a different job.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Model cost per answer and per month, as a range</span><span class="note">Bench cost panel; 465 input tokens measured, the token rule, token counts, prices and exchange rate are assumptions</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Hand-off tickets as the dominant run cost</span><span class="note">Hand-off share measured on the bench; ticket minutes, hourly cost and monthly volume are Tidewell assumptions, constructed</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Cost read next to the go/no-go verdict</span><span class="note">Leaks, stale citations, thumbs-up rates and verdicts per rung, measured on the bench in Builder session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Least privilege for sensitive information</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM02 Sensitive Information Disclosure, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Field evidence on AI help for support work, as a disagreement</span><span class="note">Brynjolfsson, Li and Raymond, NBER WP 31161, and Humlum and Vestergaard, BFI WP 2025-56; both read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Model prices</span><span class="note">Not claimed. The sheet uses an assumed range, not any provider's price list</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Measuring cost in production</span><span class="note">Out of scope; the AI observability course owns tracing and cost monitoring after launch</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Leader session 5 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Price as a range</b><span>One answer: USD 0.00011 to 0.0036. Never quote the middle.</span></div>
+      <div class="cheat-item"><b>Label every input</b><span>Measured, assumed or constructed. The unlabelled number gets quoted.</span></div>
+      <div class="cheat-item"><b>The ticket is the big line</b><span>Tidewell rung 4: model SGD 0.25 to 8.53 a month, hand-offs SGD 6,000.</span></div>
+      <div class="cheat-item"><b>A ceiling is not a saving</b><span>SGD 21,600 assumes every question was a ticket and every answer right.</span></div>
+      <div class="cheat-item"><b>Cost per right answer</b><span>Compare only configurations that pass the board. The cheapest rung leaks 18.</span></div>
+      <div class="cheat-item"><b>Productivity is contested</b><span>14% and 3% measure different things. Keep them off the cost sheet.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You have the scope, the build verdict, the access matrix, the hand-off and the cost line. Session 6 puts them on one page as the go/no-go decision, names who owns each policy after launch, and takes apart the productivity evidence that every launch deck is tempted to quote.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Leader session 5 of 6 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a4-when-it-does-not-know.html">← Prev: What it says when it doesn't know</a> &nbsp;·&nbsp; <a href="a6-launch-then-keep-it-true.html">Next: Launch, then keep it true →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 2 of 8. One clause per chunk, BM25 computed by hand from the two equations in Robertson and Zaragoza (2009), top-3 retrieval scored by hit rate and MRR, and a forty-line BM25 in plain Python you run tonight.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Chunk, index, retrieve - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 2 of 8. One clause, one chunk. BM25 by hand on three clauses. Why the old per diem clause outscores the current one, and what MRR sees that hit rate does not.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b2-chunk-index-retrieve.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chunk, index, retrieve - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 2 of 8. Clause-level chunks, BM25 by hand and top-3 retrieval in plain Python.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 2 · Chunk, index, retrieve - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 2 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 2 of 8</div>
+    <h1>Chunk, index, <span class="accent">retrieve</span></h1>
+    <p class="sub">Session 1 left you a clean store of clauses. Tonight you index it and ask it questions. Tidewell Freight, a constructed 1,200-person freight forwarder, keeps 49 clause versions; you score three of them by hand with BM25 for one real staff question, watch an old clause beat the current one on the old word, and then write the whole retriever in about forty lines of plain Python. Every score on this page can be checked with a calculator.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Core</span>
+      <span class="chip audience">Builders, data and platform engineers</span>
+      <span class="chip audience">Search and knowledge engineers</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Chunk, BM25, top-3</span>
+      <span class="a3" style="flex:7">20-42 · Build-along: BM25 in Python</span>
+      <span class="a4" style="flex:1">42-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where retrieval sits in the build</h2>
+    </div>
+    <p class="lede">Every answer the assistant gives starts here: a question goes in, a ranked list of clauses comes out, and everything later in the pipeline, the permission filter, the version filter, the citation check and the hand-off, works on that list. If the right clause is not in it, no amount of careful generation brings it back. So tonight is about one retriever you can read line by line. Tidewell Freight and every clause, question and score shown are constructed; the formula is the published one.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> The rule for cutting policy text into chunks (the clause, with its metadata riding along), the two BM25 equations computed by hand on three clauses until the numbers match the bench, a working top-3 retriever in plain Python, and the two numbers that say whether it finds the right clause: top-3 hit rate and MRR.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers clause-level chunks and the metadata they carry</span>
+      <h2>One clause, one chunk</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">A chunk is whatever the retriever ranks and the answer cites. For policy text the authors have already chosen it for you: the numbered clause. Cut anywhere else and you get chunks with no single key to cite, no single owner to fix them and no single access group to filter on.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 334" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn expenses policy document with three current clauses, FIN-EXP-1 submitting claims, FIN-EXP-2 meals when travelling and FIN-EXP-3 client entertainment. A fixed-size window cut across the clause boundary is shown failing: it ends FIN-EXP-1 and starts FIN-EXP-2, so it has no single key, owner or access group. A clause-level chunk, FIN-EXP-2 version 5, is highlighted carrying key, version, owner, access and superseded flag into an index of 49 clause versions where every version is kept.">
+        <defs>
+          <filter id="b2aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b2aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b2aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b2aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b2aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b2aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b2aA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b2aR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b2aN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b2aH" x="30" y="26">ONE POLICY DOCUMENT, TWO WAYS TO CUT IT</text>
+        <text class="b2aS" x="340" y="26">constructed Tidewell expenses policy · only one cut can be cited</text>
+
+        <g filter="url(#b2aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="50" width="250" height="230" rx="10" transform="rotate(-0.6 155 165)" fill="#FFFFFF"/>
+          <path d="M42 124 L268 124 M42 208 L268 208" stroke="#C5DADB" stroke-width="1.5"/>
+          <path d="M40 116 L270 116 L270 158 L40 158" stroke="#991B1B" stroke-width="1.6" stroke-dasharray="6 5"/>
+          <rect x="330" y="50" width="230" height="96" rx="10" transform="rotate(0.6 445 98)" fill="#FEF2F2" stroke="#FCA5A5"/>
+          <rect x="330" y="172" width="230" height="108" rx="10" transform="rotate(-0.6 445 226)" fill="#F4B63F"/>
+          <path d="M274 126 L322 100" stroke-dasharray="5 5" marker-end="url(#b2aAr)"/>
+          <path d="M274 160 L322 210" marker-end="url(#b2aAr)"/>
+          <path d="M566 226 L606 226" marker-end="url(#b2aAr)"/>
+          <rect x="612" y="60" width="232" height="44" rx="7" transform="rotate(-2 728 82)" fill="url(#b2aHc)"/>
+          <rect x="612" y="124" width="232" height="44" rx="7" transform="rotate(1.5 728 146)" fill="#FFFFFF"/>
+          <rect x="612" y="204" width="232" height="44" rx="7" transform="rotate(-1 728 226)" fill="#E8F6F6"/>
+        </g>
+
+        <text class="b2aA" x="44" y="72">Expenses policy</text>
+        <text class="b2aL" x="44" y="92">FIN-EXP-1</text>
+        <text class="b2aS" x="44" y="107">Submitting expense claims</text>
+        <text class="b2aL" x="44" y="176">FIN-EXP-2</text>
+        <text class="b2aS" x="44" y="192">Meals when travelling</text>
+        <text class="b2aL" x="44" y="238">FIN-EXP-3</text>
+        <text class="b2aS" x="44" y="254">Client entertainment</text>
+
+        <text class="b2aR" x="344" y="74">FIXED-SIZE WINDOW</text>
+        <text class="b2aS" x="344" y="94">ends FIN-EXP-1, starts FIN-EXP-2</text>
+        <text class="b2aR" x="344" y="116">no single key to cite,</text>
+        <text class="b2aR" x="344" y="132">owner or access group</text>
+
+        <text class="b2aH" x="344" y="196">ONE CLAUSE, ONE CHUNK</text>
+        <text class="b2aL" x="344" y="218">FIN-EXP-2 @ v5</text>
+        <text class="b2aL" x="344" y="238">key · version · owner</text>
+        <text class="b2aL" x="344" y="256">access · superseded flag</text>
+        <text class="b2aL" x="344" y="273">one answer, one citation</text>
+
+        <text class="b2aL" x="626" y="87">FIN-EXP-1 @ v5</text>
+        <text class="b2aL" x="626" y="151">FIN-EXP-2 @ v4 · superseded</text>
+        <text class="b2aL" x="626" y="231">FIN-EXP-2 @ v5 · current</text>
+        <text class="b2aA" x="612" y="276">THE INDEX: 49 CLAUSE VERSIONS</text>
+        <text class="b2aS" x="612" y="292">every version kept, flag and all</text>
+
+        <text class="b2aN" x="30" y="320">Policy authors already chunked the text: the numbered clause is the unit to index, rank, cite and permission.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the clause carries its key, version, owner and access into the index, so filters can run before anything is ranked</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Cut on the clause boundary<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's 16 documents become 49 chunks, one per clause version, averaging 21.76 tokens once stopwords are removed. No overlap, no sliding window, no clause split across two chunks. Three reasons, each one a later session:</p>
+        <ul>
+          <li><strong>Citation.</strong> Session 4 checks that the cited key is in the retrieved set and current. A chunk that straddles two clauses has two keys and cannot pass or fail that check honestly.</li>
+          <li><strong>Permission.</strong> Session 5 filters on the clause's access group. A window that joins an all-staff clause to a managers-only clause has no single group to filter on.</li>
+          <li><strong>Version.</strong> Session 7 drops superseded versions. A clause that changed carries its own flag; half of a clause does not.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What travels into the index with the text<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>BM25 ranks only the title and text: <code>tokenize(title + " " + text)</code>. But every indexed chunk keeps a pointer back to its full clause record, with all eight fields from session 1. That is what lets the permission and version filters run on the candidate list before the top three are chosen, instead of after an answer has already been written from the wrong clause.</p>
+        <p>Superseded versions are indexed too. That is deliberate: the index mirrors the store, and the version filter, not deletion, keeps old rules out of answers. You will see in Part 2 what that costs when the filter is missing.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>When the documents are not written in clauses<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Meeting notes, wiki pages and long procedures have no numbered clauses, and then chunk size, overlap and structure-aware splitting become real design choices with measurable trade-offs. Which side this track takes: clause-level chunks and one lexical retriever, BM25, because every score can be checked by hand. Chunking strategies, embeddings and vector databases belong to the <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/courses/b2-chunking.html">RAG course's chunking session</a>; start there when your corpus is not policy text.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The index is the part you can change on a Tuesday.</strong> Lewis and colleagues (2020), the paper that named retrieval-augmented generation, showed that the knowledge in such a system "can be easily updated at test time" by replacing the retrieved index, without retraining the model. At clause granularity that becomes routine work: when finance changes the meals allowance, one chunk is added, one is flagged, and the next question retrieves the new rule.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers BM25 term weights and IDF, eq. 3.15 and eq. 3.3</span>
+      <h2>BM25 by hand</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">BM25 gives each clause a score for a question by adding one weight per query word the clause contains. Each weight grows with how often the word appears in the clause, shrinks if the clause is long, and is multiplied by how rare the word is across the whole store. Two equations, both from Robertson and Zaragoza (2009). Here they are on a real Tidewell question.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 318" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hand-drawn stacked bars for golden question G41, what is the per diem for meals when travelling, scored by BM25 over Tidewell's 49 clause versions. The superseded FIN-EXP-2 version 4 scores 7.41: per adds 2.11, diem adds 2.53, meal 1.38, travelling 1.38. The current FIN-EXP-2 version 5 scores 3.72: meal 1.86 and travelling 1.86. The superseded remote work clause HR-WFH-1 version 1 scores 1.22 from the word per. The diem segment is highlighted.">
+        <defs>
+          <filter id="b2bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="59" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b2bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b2bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b2bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b2bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b2bT { font: 600 11px Inter, sans-serif; fill: #13292C; }
+          .b2bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b2bV { font: 800 18px Inter, sans-serif; fill: #0A5A60; }
+          .b2bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b2bH" x="30" y="26">G41 · "WHAT IS THE PER DIEM FOR MEALS WHEN TRAVELLING?"</text>
+        <text class="b2bS" x="30" y="44">query tokens after stopwords: per · diem · meal · travelling · one bar segment per matched term</text>
+
+        <g filter="url(#b2bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="220" y="66" width="169" height="34" rx="4" fill="#AEDCDE"/>
+          <rect x="389" y="66" width="202" height="34" rx="4" fill="#F4B63F"/>
+          <rect x="591" y="66" width="110" height="34" rx="4" fill="#4FA9AD"/>
+          <rect x="701" y="66" width="110" height="34" rx="4" fill="#E8F6F6"/>
+          <rect x="220" y="136" width="149" height="34" rx="4" fill="#4FA9AD"/>
+          <rect x="369" y="136" width="149" height="34" rx="4" fill="#E8F6F6"/>
+          <rect x="220" y="206" width="98" height="34" rx="4" fill="#AEDCDE"/>
+          <path d="M220 56 L220 250" stroke="#4D6466" stroke-width="1.4"/>
+        </g>
+
+        <text class="b2bL" x="30" y="80">FIN-EXP-2 v4</text>
+        <text class="b2bS" x="30" y="96">superseded · "Per diem"</text>
+        <text class="b2bV" x="206" y="88" text-anchor="end">7.41</text>
+        <text class="b2bT" x="228" y="88">per 2.11</text>
+        <text class="b2bL" x="398" y="88">diem 2.53</text>
+        <text class="b2bT" x="599" y="88">meal 1.38</text>
+        <text class="b2bT" x="707" y="88">travelling 1.38</text>
+
+        <text class="b2bL" x="30" y="150">FIN-EXP-2 v5</text>
+        <text class="b2bS" x="30" y="166">current · "Meals when..."</text>
+        <text class="b2bV" x="206" y="158" text-anchor="end">3.72</text>
+        <text class="b2bT" x="228" y="158">meal 1.86</text>
+        <text class="b2bT" x="377" y="158">travelling 1.86</text>
+
+        <text class="b2bL" x="30" y="220">HR-WFH-1 v1</text>
+        <text class="b2bS" x="30" y="236">superseded · "Remote work"</text>
+        <text class="b2bV" x="206" y="228" text-anchor="end">1.22</text>
+        <text class="b2bT" x="228" y="228">per 1.22</text>
+
+        <text class="b2bS" x="30" y="274">idf (eq. 3.3): per 2.59 · diem 3.48 · meal 2.94 · travelling 2.94 · N = 49, avdl = 21.76, k1 = 1.2, b = 0.75</text>
+        <text class="b2bN" x="30" y="300">The old clause wins on the old word: "diem" alone adds 2.53, and the current v5 never uses it.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - BM25 is a sum you can read: the superseded clause is ahead before the version filter has had its say</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The two equations, in words<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The rarity weight, eq. 3.3 (p.349).</strong> With no relevance information, the weight of a term is <code>log((N - n + 0.5) / (n + 0.5))</code>, where N is the number of clauses and n the number that contain the term. The paper calls it "a close approximation to classical idf". "diem" appears in 1 of Tidewell's 49 clause versions, so it weighs 3.48; "per" appears in 3, so it weighs 2.59.</p>
+        <p><strong>The term weight, eq. 3.15 (p.360).</strong> <code>tf / (k1 x ((1 - b) + b x dl/avdl) + tf) x idf</code>. tf is how often the term appears in this clause, dl the clause's length, avdl the average length. The fraction saturates: the fifth "per" adds far less than the first. b controls how hard long clauses are pulled down: b = 1 is full length normalisation, b = 0 switches it off. A clause's score is the sum over the query's distinct terms.</p>
+        <p>The bench uses exactly these two, with k1 = 1.2 and b = 0.75. Many library variants multiply by (k1 + 1) on top; the paper notes that factor "does not affect the ranking", so it is left out.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Compute three clauses in plain Python, and run it<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The inputs are counted from Tidewell's constructed store: N and avdl for the whole index, how many clauses contain each query term, and each clause's length and term counts. Save as <code>by_hand.py</code> in an empty folder.</p>
+        <div class="prompt-box good"><span class="label">★ by_hand.py · three clauses, one question</span>import math
+
+K1, B = 1.2, 0.75
+N, AVDL = 49, 21.76           # Tidewell's store: 49 clause versions, average length in tokens
+DF = {"per": 3, "diem": 1, "meal": 2, "travelling": 2}   # clauses containing each term
+query = ["per", "diem", "meal", "travelling"]
+
+clauses = {                   # dl = clause length in tokens, tf = term counts
+    "FIN-EXP-2@v4 Per diem (superseded)": (20, {"per": 5, "diem": 3, "meal": 1, "travelling": 1}),
+    "FIN-EXP-2@v5 Meals when travelling": (21, {"meal": 2, "travelling": 2}),
+    "HR-WFH-1@v1 Remote work (superseded)": (20, {"per": 1}),
+}
+
+def idf(t):                   # eq. 3.3
+    n = DF[t]
+    return math.log((N - n + 0.5) / (n + 0.5))
+
+def weight(tf, dl, t):        # eq. 3.15
+    return tf / (K1 * ((1 - B) + B * dl / AVDL) + tf) * idf(t)
+
+for name, (dl, tf) in clauses.items():
+    parts = {t: weight(tf[t], dl, t) for t in query if tf.get(t)}
+    total = sum(parts.values())
+    print(f"{total:5.2f}  {name}")
+    for t, w in parts.items():
+        print(f"         {t:&lt;11} tf={tf[t]}  idf={idf(t):.2f}  adds {w:.2f}")</div>
+        <p><code>python3 by_hand.py</code> prints exactly this, and the three totals match what the bench in session 8 ranks for G41:</p>
+        <div class="prompt-box good"><span class="label">★ Output</span> 7.41  FIN-EXP-2@v4 Per diem (superseded)
+         per         tf=5  idf=2.59  adds 2.11
+         diem        tf=3  idf=3.48  adds 2.53
+         meal        tf=1  idf=2.94  adds 1.38
+         travelling  tf=1  idf=2.94  adds 1.38
+ 3.72  FIN-EXP-2@v5 Meals when travelling
+         meal        tf=2  idf=2.94  adds 1.86
+         travelling  tf=2  idf=2.94  adds 1.86
+ 1.22  HR-WFH-1@v1 Remote work (superseded)
+         per         tf=1  idf=2.59  adds 1.22</div>
+        <p>Read the first block slowly. Five "per"s add only 2.11, less than three "diem"s: that is saturation. And the clause that wins is the one HR replaced. BM25 is doing its job; it has no idea what superseded means. That is session 7's filter.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Choosing k1 and b<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Robertson and Zaragoza write that "values such as 0.5 &lt; b &lt; 0.8 and 1.2 &lt; k1 &lt; 2 are reasonably good in many circumstances", and add that the optimal values depend on the documents and the queries; the model itself gives no guidance on setting them. Tidewell's k1 = 1.2 and b = 0.75 sit inside that range. Treat them as a starting point you tune against your own golden questions from session 3, never as a law.</p>
+        <p>Try it: change <code>B</code> to 0 in <code>by_hand.py</code> and rerun. Length stops mattering. Then try 1. Write down which clause's score moved most, and why its length explains it.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>A formula with no right answer for its own knobs.</strong> The 2009 survey that set out BM25 in this form, Robertson and Zaragoza in Foundations and Trends in Information Retrieval, is candid that the parameters must be tuned on the collection in hand. That is a feature for a policy assistant: when a score surprises you, every input is a count you can check, and every knob is a number you chose and can defend.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers top-k retrieval, hit rate, MRR and lexical gaps</span>
+      <h2>Top-3 retrieval</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The retriever hands the top three clauses to the rest of the pipeline. Two numbers say how well it does that across the 42 answerable golden questions: top-3 hit rate, the share where the right current clause is somewhere in the three, and MRR, which also cares whether it came first.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 334" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Golden question G07, which day is salary paid this month, asked by a staff member. Its tokens are day, salary, paid and month. The overtime clause HR-PAY-3 ranks first with 2.77 because it contains month's. The pay day clause HR-PAY-1, the right answer, ranks second with 2.77 because it says monthly, which does not match month. Reciprocal rank one half. Below, MRR by bench rung: 0.913 at rungs 1 and 2, 0.988 at rungs 3 and 4, with top-3 hit rate 100.0 percent at every rung.">
+        <defs>
+          <filter id="b2cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="61" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b2cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b2cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b2cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b2cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b2cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b2cV { font: 800 18px Inter, sans-serif; fill: #0A5A60; }
+          .b2cW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .b2cA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b2cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b2cH" x="30" y="26">G07 AT RUNG 3 · THE RIGHT CLAUSE COMES SECOND</text>
+        <text class="b2cS" x="380" y="26">constructed question · scores computed by the bench's BM25</text>
+
+        <g filter="url(#b2cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="230" height="110" rx="10" transform="rotate(-1 145 111)" fill="#FFFFFF"/>
+          <path d="M266 100 L304 84" marker-end="url(#b2cAr)"/>
+          <path d="M266 124 L304 196" marker-end="url(#b2cAr)"/>
+          <rect x="310" y="50" width="310" height="86" rx="10" transform="rotate(0.6 465 93)" fill="#FFFFFF"/>
+          <rect x="310" y="160" width="310" height="86" rx="10" transform="rotate(-0.6 465 203)" fill="#F4B63F"/>
+          <path d="M626 203 L668 203" marker-end="url(#b2cAr)"/>
+          <rect x="674" y="168" width="176" height="70" rx="10" transform="rotate(1 762 203)" fill="#E8F6F6"/>
+          <rect x="30" y="266" width="196" height="30" rx="6" fill="url(#b2cHc)"/>
+          <rect x="236" y="266" width="196" height="30" rx="6" fill="url(#b2cHc)"/>
+          <rect x="442" y="266" width="196" height="30" rx="6" fill="#0A5A60"/>
+          <rect x="648" y="266" width="196" height="30" rx="6" fill="#0A5A60"/>
+        </g>
+
+        <text class="b2cA" x="44" y="78">STAFF ASKS</text>
+        <text class="b2cL" x="44" y="100">Which day is salary paid</text>
+        <text class="b2cL" x="44" y="118">this month?</text>
+        <text class="b2cS" x="44" y="146">tokens: day · salary · paid · month</text>
+
+        <text class="b2cH" x="324" y="74">1 · HR-PAY-3 Overtime</text>
+        <text class="b2cV" x="606" y="76" text-anchor="end">2.77</text>
+        <text class="b2cS" x="324" y="98">salary 1 · paid 2 · month 1</text>
+        <text class="b2cS" x="324" y="118">"month" from "next month's salary"</text>
+
+        <text class="b2cH" x="324" y="184">2 · HR-PAY-1 Pay day</text>
+        <text class="b2cH" x="606" y="186" text-anchor="end">2.77</text>
+        <text class="b2cL" x="324" y="208">day 2 · salary 2 · paid 2 · month 0</text>
+        <text class="b2cL" x="324" y="228">it says "monthly", which is not "month"</text>
+
+        <text class="b2cA" x="688" y="190">RECIPROCAL RANK</text>
+        <text class="b2cV" x="688" y="220">1/2 = 0.5</text>
+
+        <text class="b2cA" x="30" y="256">MRR ACROSS 42 ANSWERABLE QUESTIONS, BY BENCH RUNG</text>
+        <text class="b2cL" x="44" y="286">rung 1 · MRR 0.913</text>
+        <text class="b2cL" x="250" y="286">rung 2 · MRR 0.913</text>
+        <text class="b2cW" x="456" y="286">rung 3 · MRR 0.988</text>
+        <text class="b2cW" x="662" y="286">rung 4 · MRR 0.988</text>
+
+        <text class="b2cN" x="30" y="322">Top-3 hit rate is 100.0% on every rung; MRR moves only when the right clause climbs to first.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one missing letter pattern costs first place: "monthly" never matches "month" without stemming</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Hit rate and MRR, computed<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>For each answerable question, find the rank of the right current clause in the top three: 1, 2, 3 or absent. Hit rate counts how often it is present. MRR averages 1/rank, scoring an absence as 0. On the bench, hit rate is 100.0% on every rung: the right clause is always somewhere in the three. MRR is not:</p>
+        <table class="clean">
+          <thead><tr><th>Bench rung</th><th>Ranked 1st / 2nd / 3rd</th><th>Sum of 1/rank</th><th>MRR (of 42)</th></tr></thead>
+          <tbody>
+            <tr><td>1 and 2, no version filter</td><td>35 / 6 / 1</td><td>35 + 3 + 0.333</td><td>0.913</td></tr>
+            <tr><td>3 and 4, version filter on</td><td>41 / 1 / 0</td><td>41 + 0.5</td><td>0.988</td></tr>
+          </tbody>
+        </table>
+        <p>The seven questions that drop below first at rungs 1 and 2 are the ones from Part 2's story: six lose first place to a superseded clause worded the way staff still ask, and one, G07, loses to the overtime clause. The version filter fixes the six. It cannot fix G07, because G07's problem is a word, not a version.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Lexical gaps: when the words do not meet<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>BM25 matches tokens, not meanings. Tidewell's tokenizer lower-cases, drops stopwords and a trailing "s", and does no stemming, so "month's" becomes "month" but "monthly" stays "monthly". The pay day clause answers G07 perfectly and loses first place to overtime by a margin you cannot see at two decimals. The same gap shows up whenever staff and policy authors use different words for one thing: "grandmother" against "immediate family member", "per diem" against "daily allowance".</p>
+        <p>Top-3 hides most of this, because the right clause is still in the list. It stops hiding when session 6 adds a confidence threshold on the top score, and when session 4 cites only the first clause: on the bench's rung 4, G07 is one of the four questions handed off that a person did not need to see.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What closes a lexical gap, and whose job it is<span class="mini">1 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Three levers, cheapest first. Fix the text: Tidewell's current leave clause opens "Annual leave, formerly called holiday entitlement", which bridges the vocabulary inside the store. Fix the tokens: stemming or a synonym list, measured against your golden set. Fix the retriever: add dense retrieval alongside BM25, or a reranker after it. The last two are the RAG course's ground, in <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/courses/b5-metadata-hybrid.html">hybrid search with metadata</a> and <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/courses/b6-reranking.html">reranking</a>; metric design beyond hit rate and MRR is the AI evals course's, in <a href="https://phoebefu6.github.io/learn-ai-evals-with-phoebe/courses/b3-retrieval-metrics.html">retrieval metrics</a>. This track stays with one lexical retriever so every later failure can be traced to a count.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Retrieval only helps if it retrieves the right thing.</strong> Singapore's Model AI Governance Framework for Generative AI (IMDA and AI Verify Foundation, 2024) names RAG among techniques "commonly used to reduce hallucinations and improve accuracy". The mechanism is the ranked list you built tonight. When an old clause ranks first, as the per diem one does without a version filter, retrieval supplies a confident, well-cited, out-of-date answer, which is why the list is measured before anything is generated from it.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>A forty-line BM25 over six clauses</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Plain Python 3, standard library only. Six constructed Tidewell clauses, shortened from the store: two versions of the leave rule, two of the meals rule, pay day and overtime. You build the tokenizer, the index and the scorer, ask three questions, and meet one trap that a small index sets and a big one hides. Run it from an empty scratch folder.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 272" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn five-step retrieval pipeline. Six constructed clauses go into tokenize, which lower-cases, drops stopwords and a trailing s. The index records N equals 6, average length 11.00 and 44 terms with their document frequencies. Score applies eq. 3.15 times the eq. 3.3 idf. Top-3 sorts and keeps three positive scores. A red warning under the index shows that day appears in 4 of the 6 clauses, so its idf is minus 0.59 and it subtracts from any clause that contains it.">
+        <defs>
+          <filter id="b2dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="67" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b2dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b2dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b2dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b2dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b2dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b2dR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b2dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b2dH" x="30" y="26">FIVE STEPS FROM SIX CLAUSES TO A RANKED LIST</text>
+        <text class="b2dS" x="380" y="26">bm25.py · constructed clauses · your numbers will differ on your text</text>
+
+        <g filter="url(#b2dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="140" height="96" rx="9" transform="rotate(-1.5 100 104)" fill="url(#b2dHc)"/>
+          <path d="M174 104 L194 104" marker-end="url(#b2dAr)"/>
+          <rect x="200" y="56" width="140" height="96" rx="9" transform="rotate(0.8 270 104)" fill="#FFFFFF"/>
+          <path d="M344 104 L364 104" marker-end="url(#b2dAr)"/>
+          <rect x="370" y="56" width="140" height="96" rx="9" transform="rotate(-0.8 440 104)" fill="#E8F6F6"/>
+          <path d="M514 104 L534 104" marker-end="url(#b2dAr)"/>
+          <rect x="540" y="56" width="140" height="96" rx="9" transform="rotate(0.8 610 104)" fill="#F4B63F"/>
+          <path d="M684 104 L704 104" marker-end="url(#b2dAr)"/>
+          <rect x="710" y="56" width="140" height="96" rx="9" transform="rotate(-0.8 780 104)" fill="#FFFFFF"/>
+          <path d="M440 156 L440 176" stroke="#991B1B" stroke-width="1.6"/>
+          <rect x="290" y="180" width="300" height="52" rx="8" transform="rotate(-0.4 440 206)" fill="#FEF2F2" stroke="#FCA5A5"/>
+        </g>
+
+        <text class="b2dH" x="36" y="176">6 CLAUSES</text>
+        <text class="b2dS" x="36" y="192">leave, meals, pay</text>
+
+        <text class="b2dH" x="212" y="80">TOKENIZE</text>
+        <text class="b2dS" x="212" y="100">lower case</text>
+        <text class="b2dS" x="212" y="116">drop stopwords</text>
+        <text class="b2dS" x="212" y="132">drop a trailing "s"</text>
+
+        <text class="b2dH" x="382" y="80">INDEX</text>
+        <text class="b2dL" x="382" y="100">N = 6</text>
+        <text class="b2dL" x="382" y="116">avdl = 11.00</text>
+        <text class="b2dL" x="382" y="132">44 terms, DF</text>
+
+        <text class="b2dH" x="552" y="80">SCORE</text>
+        <text class="b2dL" x="552" y="100">eq. 3.15</text>
+        <text class="b2dL" x="552" y="116">x eq. 3.3 idf</text>
+        <text class="b2dL" x="552" y="132">k1 1.2, b 0.75</text>
+
+        <text class="b2dH" x="722" y="80">TOP-3</text>
+        <text class="b2dS" x="722" y="100">sort high to low</text>
+        <text class="b2dS" x="722" y="116">keep 3</text>
+        <text class="b2dS" x="722" y="132">only scores over 0</text>
+
+        <text class="b2dR" x="304" y="202">"day" is in 4 of 6 clauses: idf -0.59</text>
+        <text class="b2dS" x="304" y="220">over half the store: it now subtracts</text>
+
+        <text class="b2dN" x="30" y="260">Tidewell's 49 clauses have no such term; a six-clause toy does. Check the idf of common words first.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the scorer is a dozen lines; the trap is in the index, where a common word's idf can go below zero</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Write the stopwords and six clauses.</strong> The texts are shortened from Tidewell's constructed store; keep the old versions in, exactly as the real index does.</p>
+        <div class="prompt-box good"><span class="label">★ bm25.py · part 1, the clauses (constructed)</span>import math, re
+
+STOP = set("a an the and or of to in on for is are be by with at as it from i my do does how what when which can many".split())
+CLAUSES = [
+    ("HR-LV-1@v3", "Annual leave. Full-time staff earn 20 days of annual leave each calendar year."),
+    ("HR-LV-1@v2", "Holiday entitlement. Every employee receives 18 days holiday entitlement each year."),
+    ("HR-PAY-1@v4", "Pay day. Salary is paid monthly on the 25th, or the previous working day."),
+    ("HR-PAY-3@v4", "Overtime. Overtime is paid at 1.5 times the hourly rate with next month's salary."),
+    ("FIN-EXP-2@v5", "Meals when travelling. A daily allowance of SGD 60 in Singapore, SGD 90 abroad."),
+    ("FIN-EXP-2@v4", "Per diem. Per diem for meals when travelling: SGD 50 per day in Singapore."),
+]</div>
+      </div>
+      <div class="step">
+        <p><strong>Tokenize and build the index.</strong> The same rules as the bench: lower case, split on anything not a letter or digit, drop stopwords, drop a trailing "s" from words over three letters unless it ends "ss". Then count each clause's length and, for every term, how many clauses contain it.</p>
+        <div class="prompt-box good"><span class="label">★ bm25.py · part 2, tokenizer and index</span>def tokenize(text):
+    out = []
+    for t in re.split(r"[^a-z0-9]+", text.lower()):
+        if t and t not in STOP:
+            out.append(t[:-1] if len(t) &gt; 3 and t.endswith("s") and not t.endswith("ss") else t)
+    return out
+
+docs = [tokenize(text) for _, text in CLAUSES]
+N = len(docs)
+AVDL = sum(len(d) for d in docs) / N
+DF = {}
+for d in docs:
+    for t in set(d):
+        DF[t] = DF.get(t, 0) + 1</div>
+      </div>
+      <div class="step">
+        <p><strong>Score and rank.</strong> One loop over the question's distinct terms, eq. 3.3 for the rarity weight, eq. 3.15 for the term weight. Keep the top three with a score above zero.</p>
+        <div class="prompt-box good"><span class="label">★ bm25.py · part 3, BM25 and top-3</span>def bm25(query, d, k1=1.2, b=0.75):
+    score = 0.0
+    for t in set(tokenize(query)):
+        tf = d.count(t)
+        if tf:
+            idf = math.log((N - DF[t] + 0.5) / (DF[t] + 0.5))
+            score += tf / (k1 * ((1 - b) + b * len(d) / AVDL) + tf) * idf
+    return score
+
+def top3(query):
+    ranked = sorted(((bm25(query, d), key) for d, (key, _) in zip(docs, CLAUSES)), reverse=True)
+    return [(key, round(s, 2)) for s, key in ranked[:3] if s &gt; 0]
+
+print(f"N={N}  avdl={AVDL:.2f}  vocabulary={len(DF)}")
+for q in ["What is the per diem for meals when travelling?",
+          "How many days of annual leave do I get?",
+          "Which day is salary paid this month?"]:
+    print(q, "-&gt;", top3(q))</div>
+      </div>
+      <div class="step">
+        <p><strong>Run it and read the three lines.</strong> <code>python3 bm25.py</code> prints exactly this. The per diem question picks the superseded clause again, as in Part 2. The salary question puts overtime first again, as on the bench. And the leave question returns only one clause: where did the old holiday version go?</p>
+        <div class="prompt-box good"><span class="label">★ Output</span>N=6  avdl=11.00  vocabulary=44
+What is the per diem for meals when travelling? -&gt; [('FIN-EXP-2@v4', 2.27), ('FIN-EXP-2@v5', 0.55)]
+How many days of annual leave do I get? -&gt; [('HR-LV-1@v3', 1.3)]
+Which day is salary paid this month? -&gt; [('HR-PAY-3@v4', 1.08), ('HR-PAY-1@v4', 0.19)]</div>
+      </div>
+      <div class="step">
+        <p><strong>Find the trap.</strong> Append three lines that print each term's clause count and idf. "day" is in four of the six clauses, more than half, so eq. 3.3 goes negative and every "day" subtracts from the score. The old holiday clause matched only "day", so it scored below zero and was dropped; the pay day clause fell to 0.19 for the same reason. This is our own arithmetic, not a claim from the paper. In Tidewell's 49 clauses no term is in more than half, so the bench never meets it; a small or repetitive index will.</p>
+        <div class="prompt-box good"><span class="label">★ bm25.py · append, then run again</span>for t in ["day", "salary", "diem"]:
+    print(t, DF[t], round(math.log((N - DF[t] + 0.5) / (DF[t] + 0.5)), 2))
+
+# prints (after the three lines above):
+# day 4 -0.59
+# salary 2 0.59
+# diem 1 1.3</div>
+      </div>
+      <div class="step">
+        <p><strong>Point it at your own text.</strong> Replace the six clauses with twenty from your own policies, one per clause, and ask five questions your staff really ask. Your numbers will differ. Note every question where the right clause is not first, and whether the cause is an old version, a common word or a gap between the asker's words and the author's.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The retriever you cannot inspect</span>
+results = search(question, k=3)   # scores from somewhere, no per-term weights, no idf, no way to ask why the old clause won
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 3</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Run <code>by_hand.py</code> with b set to 0 and then 1. For each clause, explain in one sentence why its score moved the way it did.</li>
+      <li>Add a version filter to <code>bm25.py</code>: give each clause a superseded flag (True for the two old versions) and skip flagged clauses before scoring. Rerun the per diem question and record the new top clause and score.</li>
+      <li>Compute hit rate and MRR for your own five questions from the last build step. Write down the one question with the lowest reciprocal rank and its cause.</li>
+      <li>Find one lexical gap in your own policies: a word staff use that no clause contains. Decide which lever you would pull first (text, tokens or retriever) and why.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 2 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · For "What is the per diem for meals when travelling?", the superseded FIN-EXP-2 v4 scores 7.41 and the current v5 scores 3.72. Why?</p>
+      <button class="qopt" type="button">A · BM25 prefers older clauses because they have been in the index longer</button>
+      <button class="qopt" type="button">B · v4 contains the question's words, including the rare "diem", and v5 never uses "per" or "diem"; BM25 knows nothing about versions</button>
+      <button class="qopt" type="button">C · v5 is much longer, so length normalisation crushes it</button>
+      <button class="qopt" type="button">D · k1 is set too low, so repeated terms count too much</button>
+      <p class="qwhy">The per-term breakdown shows it: "diem" alone adds 2.53 to v4 and nothing to v5. The two clauses are 20 and 21 tokens, so length is not the story. Keeping old versions out of the answer is the version filter's job in session 7.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · On the bench, top-3 hit rate is 100.0% at rung 1 but MRR is 0.913. What does that combination tell you?</p>
+      <button class="qopt" type="button">A · The retriever misses the right clause on about 9% of questions</button>
+      <button class="qopt" type="button">B · The golden set is too small to measure anything</button>
+      <button class="qopt" type="button">C · Hit rate and MRR disagree, so one of them is computed wrongly</button>
+      <button class="qopt" type="button">D · The right current clause is always among the three, but on some questions it is not first</button>
+      <p class="qwhy">35 questions rank it first, 6 second and 1 third: (35 + 3 + 0.333) / 42 = 0.913. Nothing is missed, so hit rate stays at 100.0%; MRR sees the order. The version filter lifts it to 0.988.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · In the six-clause build-along, "day" gets an idf of -0.59 and the old holiday clause disappears from the leave question's results. What happened?</p>
+      <button class="qopt" type="button">A · "day" is in 4 of the 6 clauses, more than half, so log((N - n + 0.5) / (n + 0.5)) goes below zero and the term subtracts from every clause that has it</button>
+      <button class="qopt" type="button">B · The tokenizer dropped "days" as a stopword</button>
+      <button class="qopt" type="button">C · The version filter removed the superseded clause</button>
+      <button class="qopt" type="button">D · b = 0.75 penalised the holiday clause for being short</button>
+      <p class="qwhy">With N = 6 and n = 4 the ratio is 2.5 / 4.5, and its log is negative. The build-along has no version filter, and "days" became "day", not a stopword. In Tidewell's 49 clauses no term is that common, so the bench never meets it.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">BM25 term weight (eq. 3.15) and the no-relevance idf (eq. 3.3)</span><span class="note">Robertson and Zaragoza (2009), The Probabilistic Relevance Framework: BM25 and Beyond, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Choosing k1 and b, and the (k1 + 1) factor that does not change the ranking</span><span class="note">Robertson and Zaragoza (2009), pp.359-361, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Clause-level chunks over Tidewell's 49 clause versions; top-3 hit rate and MRR by rung</span><span class="note">Constructed store; hit rate and MRR measured by the bench in session 8</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Updating knowledge by replacing the index; RAG as a technique to improve accuracy</span><span class="note">Lewis et al. (2020), read at source; IMDA and AI Verify Foundation (2024), read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">BM25 by hand and a forty-line retriever in Python</span><span class="note">Run from a scratch folder; the printed output is shown exactly; the negative idf note is our own arithmetic</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Chunking strategies, embeddings, hybrid search and reranking</span><span class="note">Not taught here; the RAG course owns them</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Retrieval metric design beyond hit rate and MRR</span><span class="note">Not taught here; the AI evals course owns it</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>One clause, one chunk</b><span>Index, rank, cite and permission the numbered clause, metadata attached.</span></div>
+      <div class="cheat-item"><b>Rarity, eq. 3.3</b><span>log((N - n + 0.5) / (n + 0.5)). Goes negative for a term in over half the clauses.</span></div>
+      <div class="cheat-item"><b>Term weight, eq. 3.15</b><span>tf / (k1 x ((1 - b) + b x dl/avdl) + tf) x idf, summed over distinct query terms.</span></div>
+      <div class="cheat-item"><b>Starting knobs</b><span>k1 = 1.2, b = 0.75. Tune on your golden set; the paper gives no rule.</span></div>
+      <div class="cheat-item"><b>Hit rate vs MRR</b><span>Hit rate: is it in the top 3. MRR: average of 1/rank. 0.913 to 0.988 on the bench.</span></div>
+      <div class="cheat-item"><b>BM25 does not know versions</b><span>Old words find old clauses. The version filter, not the scorer, keeps them out.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You have a retriever and two numbers that judge it, but only against questions someone wrote down. Session 3 draws those questions from Tidewell's 600-ticket log: answerable, restricted and no-policy, each with the asker's group and a risk tier.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 2 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b1-the-corpus-is-the-product.html">← Prev: The corpus is the product</a> &nbsp;·&nbsp; <a href="b3-golden-questions.html">Next: Golden questions from the ticket log →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

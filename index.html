@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Fourteen sessions on shipping one internal AI assistant end to end: a policy and ops helpdesk that answers staff from HR, IT and finance policy, cites the clause, and opens a ticket when it cannot. Scope from the ticket log, permissions inside retrieval, hand-offs, run cost, versions, and a go/no-go bench computed in your browser. Free, by Phoebe Fu.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Ship It: Internal AI Assistant - Learn with Phoebe">
+<meta property="og:description" content="One internal assistant, every decision in order: what staff ask, who may see what, what it says when it does not know, what it costs, and the go/no-go.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ship It: Internal AI Assistant - Learn with Phoebe">
+<meta name="twitter:description" content="18 leaks to GO in four rungs, and two ways to get a GO you should not believe.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Ship It: Internal AI Assistant - Learn with Phoebe</title>
+<link rel="stylesheet" href="assets/style.css?v=2">
+<style>
+
+  .stats-row { display: flex; gap: 2.4rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 2.1rem; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .72rem; opacity: 1; text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
+
+  .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .course-card {
+    border: 1px solid var(--hairline);
+    border-top: 4px solid var(--diff, var(--indigo));
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+    position: relative;
+  }
+  .course-card:hover { border-color: var(--indigo-soft); border-top-color: var(--diff, var(--indigo)); box-shadow: 0 8px 28px rgba(var(--shadow-rgb),.16); transform: translateY(-3px); }
+  .course-card .cicon { font-size: 1.7rem; line-height: 1; }
+  .course-card .cnum { font-size: .72rem; font-weight: 700; color: var(--indigo-deep); text-transform: uppercase; letter-spacing: .1em; }
+  .course-card h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
+  .course-card p { font-size: .85rem; color: var(--muted); flex: 1; }
+  .course-card .meta { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+  .diff-legend { display: flex; gap: 1rem; margin-top: 1.6rem; font-size: .74rem; color: var(--muted); font-weight: 600; flex-wrap: wrap; }
+  .diff-legend i { display: inline-block; width: .85rem; height: .35rem; border-radius: 999px; margin-right: .35rem; vertical-align: middle; }
+
+  .paths { margin-top: 2.6rem; }
+  .paths h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .3rem; }
+  .paths .plede { color: var(--muted); font-size: .92rem; margin-bottom: .8rem; }
+  .path { display: flex; gap: .55rem; align-items: center; padding: .75rem 0; border-bottom: .5px solid var(--hairline); flex-wrap: wrap; }
+  .path:last-child { border-bottom: none; }
+  .path b { min-width: 15.5rem; font-size: .9rem; }
+  .path .pstep { background: var(--indigo-50); color: var(--indigo-deep); border-radius: 999px; padding: .16rem .68rem; font-weight: 700; font-size: .8rem; text-decoration: none; transition: all .12s ease; }
+  .path .pstep:hover { background: var(--indigo-deep); color: #fff; }
+  .path .parr { color: var(--muted); font-weight: 700; }
+
+  .mm-section { margin-top: 1.6rem; }
+  .mm-section h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .2rem; }
+  .mm-section .mm-lede { color: var(--muted); font-size: .92rem; margin-bottom: .4rem; }
+  .mm-wrap { border: 1px solid var(--hairline); border-radius: var(--radius); background: linear-gradient(180deg, #fff, var(--indigo-50)); padding: .6rem; overflow-x: auto; }
+  .mm-svg { width: 100%; height: auto; display: block; max-width: 60rem; margin: 0 auto; min-width: 34rem; }
+  .mm-link { cursor: pointer; text-decoration: none; }
+  .mm-node rect { transition: opacity .15s ease, filter .15s ease; }
+  .mm-node text { pointer-events: none; }
+  .mm-link:hover .mm-node rect { filter: brightness(1.06); }
+  .mm-edge { transition: opacity .15s ease; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn with Phoebe · Let's Ship It End to End</div>
+    <h1>Ship It: <span class="accent">Internal AI Assistant</span></h1>
+    <p class="sub">One internal assistant, shipped end to end, with every decision in the order you meet it. Tidewell Freight, a constructed 1,200-person freight forwarder, wants a policy and ops helpdesk that answers staff from HR, IT and finance policy, cites the clause it used, and opens a ticket when it cannot answer. Six leader sessions take it from the ticket log to a launch decision: what staff actually ask, buy or build, who may see what, what it says when it does not know, what it costs, and how to keep it true after launch. Eight builder sessions build it: the clause store, BM25 retrieval, golden questions from the tickets, grounded citations, permissions inside retrieval, one tool that opens the ticket, superseded versions, and a go/no-go bench computed in your browser.</p>
+    <div class="stats-row">
+      <div class="stat"><b data-count="14">14</b><span>sessions, two tracks</span></div>
+      <div class="stat"><b data-count="49">49</b><span>policy clause versions</span></div>
+      <div class="stat"><b data-count="54">54</b><span>golden questions</span></div>
+      <div class="stat"><b data-count="18">18</b><span>leaks before the filter</span></div>
+      <div class="stat"><b data-count="45">45</b><span>min per session</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>Leader track 🧭 <span style="font-size:.85rem;font-weight:600;color:var(--muted)">· six sessions, no code</span></h2>
+      <p class="plede">For whoever owns, funds or signs off an internal assistant. Scope it from the tickets, decide what it may see and what it says when it does not know, price it, and sign the go/no-go.</p>
+    </div>
+
+    <div class="course-grid">
+      <a class="course-card" href="courses/a1-what-staff-actually-ask.html" style="--diff:#34D399">
+        <span class="cicon">🎟️</span>
+        <span class="cnum">Leader session 1 · start here</span>
+        <h3>What staff actually ask</h3>
+        <p>Read the tickets before the model. Policy lookups, actions and questions nobody wrote down, three bins that each need a different behaviour, and the scope sentence that follows.</p>
+        <span class="meta"><span class="pill amber">▶ Start here</span></span>
+      </a>
+      <a class="course-card" href="courses/a2-buy-build-or-wait.html" style="--diff:#FBBF24">
+        <span class="cicon">⚖️</span>
+        <span class="cnum">Leader session 2</span>
+        <h3>Buy, build or wait</h3>
+        <p>What a bought assistant brings and what it cannot: your documents, their owners and who may read what. When waiting is the right answer.</p>
+      </a>
+      <a class="course-card" href="courses/a3-who-may-see-what.html" style="--diff:#FBBF24">
+        <span class="cicon">🔐</span>
+        <span class="cnum">Leader session 3</span>
+        <h3>Who may see what</h3>
+        <p>Permission-aware retrieval as a leadership decision: filter before the model sees anything, never after. Eighteen leaking questions become none.</p>
+      </a>
+      <a class="course-card" href="courses/a4-when-it-does-not-know.html" style="--diff:#FB923C">
+        <span class="cicon">🙋</span>
+        <span class="cnum">Leader session 4</span>
+        <h3>What it says when it doesn't know</h3>
+        <p>The hand-off as a product. Why answering less turns a NO-GO into a GO, and the threshold you have to choose with a price on both sides.</p>
+      </a>
+      <a class="course-card" href="courses/a5-what-it-costs-to-run.html" style="--diff:#FB923C">
+        <span class="cicon">🧮</span>
+        <span class="cnum">Leader session 5</span>
+        <h3>What it costs to run</h3>
+        <p>Model tokens as a range, labelled as assumptions, next to the cost of every hand-off ticket. The small line and the big line are not the ones people expect.</p>
+      </a>
+      <a class="course-card" href="courses/a6-launch-then-keep-it-true.html" style="--diff:#FB923C">
+        <span class="cicon">🚦</span>
+        <span class="cnum">Leader session 6</span>
+        <h3>Launch, then keep it true</h3>
+        <p>The go/no-go stitched together, document owners and versions after launch, and what the evidence on AI help for support work does and does not say.</p>
+        <span class="meta"><span class="pill amber">the decision</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>Builder track 🔧 <span style="font-size:.85rem;font-weight:600;color:var(--muted)">· eight sessions, Python and the browser</span></h2>
+      <p class="plede">Tidewell's assistant built part by part in the order the data flows, from the clause store to a go/no-go bench that runs every part at once.</p>
+    </div>
+
+    <div class="course-grid">
+      <a class="course-card" href="courses/b1-the-corpus-is-the-product.html" style="--diff:#34D399">
+        <span class="cicon">🗂️</span>
+        <span class="cnum">Builder session 1 · start here</span>
+        <h3>The corpus is the product</h3>
+        <p>The clause as the unit of retrieval and citation, eight fields per clause, old versions kept and flagged, and a validator that refuses a bad store.</p>
+        <span class="meta"><span class="pill amber">▶ Start here</span></span>
+      </a>
+      <a class="course-card" href="courses/b2-chunk-index-retrieve.html" style="--diff:#FBBF24">
+        <span class="cicon">🔎</span>
+        <span class="cnum">Builder session 2</span>
+        <h3>Chunk, index, retrieve</h3>
+        <p>One clause per chunk, BM25 computed by hand, top-3 retrieval, and why the best match is not always a good one.</p>
+      </a>
+      <a class="course-card" href="courses/b3-golden-questions.html" style="--diff:#FBBF24">
+        <span class="cicon">🥇</span>
+        <span class="cnum">Builder session 3</span>
+        <h3>Golden questions from the ticket log</h3>
+        <p>Fifty-four questions drawn from real ticket topics, each with the asker's group, the gold clause, a risk tier, and the ones that should get no answer at all.</p>
+      </a>
+      <a class="course-card" href="courses/b4-grounded-answers.html" style="--diff:#FB923C">
+        <span class="cicon">📎</span>
+        <span class="cnum">Builder session 4</span>
+        <h3>Grounded answers with citations</h3>
+        <p>Answer only from what was retrieved, cite the clause, and check that the citation is in the retrieved set and is the current version.</p>
+      </a>
+      <a class="course-card" href="courses/b5-permissions-inside-retrieval.html" style="--diff:#FB923C">
+        <span class="cicon">🛡️</span>
+        <span class="cnum">Builder session 5</span>
+        <h3>Permissions inside retrieval</h3>
+        <p>The permission filter as code, applied before ranking, and the leak count that proves it works.</p>
+      </a>
+      <a class="course-card" href="courses/b6-open-the-ticket.html" style="--diff:#FB923C">
+        <span class="cicon">🎫</span>
+        <span class="cnum">Builder session 6</span>
+        <h3>One tool: open the ticket</h3>
+        <p>The abstain threshold and the single tool call: a ticket that carries the question, the asker's group, the clauses looked at and why it handed off.</p>
+      </a>
+      <a class="course-card" href="courses/b7-versions-and-superseded.html" style="--diff:#FB923C">
+        <span class="cicon">🗓️</span>
+        <span class="cnum">Builder session 7</span>
+        <h3>Versions and superseded policies</h3>
+        <p>The owner's version register against the index's flag, the current-version filter, and the nightly diff that catches a re-imported old policy.</p>
+      </a>
+      <a class="course-card" href="courses/b8-the-go-no-go-bench.html" style="--diff:#F87171">
+        <span class="cicon">🎛️</span>
+        <span class="cnum">Builder session 8</span>
+        <h3>The go/no-go bench</h3>
+        <p>Four rungs from 18 leaks to GO, a thumbs-up grade that passes the unsafe assistant, and a break button that produces a GO the register contradicts.</p>
+        <span class="meta"><span class="pill amber">the capstone</span></span>
+      </a>
+    </div>
+
+    <div class="diff-legend">
+      <span><i style="background:#34D399"></i>start here</span>
+      <span><i style="background:#FBBF24"></i>foundations</span>
+      <span><i style="background:#FB923C"></i>hands-on</span>
+      <span><i style="background:#F87171"></i>capstone</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths">
+      <h2>Choose your path 🗺️</h2>
+      <p class="plede">Three doors into the same assistant. Both tracks start at their own session 1, because the ticket log and the clause store are what make the rest arguable.</p>
+      <div class="path"><b>💼 I own or fund the assistant</b>
+        <a class="pstep" href="courses/a1-what-staff-actually-ask.html">L1</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/a2-buy-build-or-wait.html">L2</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/a5-what-it-costs-to-run.html">L5</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/a6-launch-then-keep-it-true.html">L6</a>
+        <span style="font-size:.82rem;color:var(--muted)">scope, buy or build, run cost, the decision</span>
+      </div>
+      <div class="path"><b>🛡️ I answer for risk and privacy</b>
+        <a class="pstep" href="courses/a3-who-may-see-what.html">L3</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/a4-when-it-does-not-know.html">L4</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b5-permissions-inside-retrieval.html">B5</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b8-the-go-no-go-bench.html">B8</a>
+        <span style="font-size:.82rem;color:var(--muted)">leaks, hand-offs, the filter as code, the board</span>
+      </div>
+      <div class="path"><b>🔧 I build it</b>
+        <a class="pstep" href="courses/b1-the-corpus-is-the-product.html">B1</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b2-chunk-index-retrieve.html">B2</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b4-grounded-answers.html">B4</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b7-versions-and-superseded.html">B7</a>
+        <span class="parr">→</span>
+        <a class="pstep" href="courses/b8-the-go-no-go-bench.html">B8</a>
+        <span style="font-size:.82rem;color:var(--muted)">the store, retrieval, citations, versions, then measure it</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>Your passport 🎫</h2>
+      <p class="plede">Clear all three quiz questions in a session and it gets stamped. Fourteen stamps across both tracks, and they live in this browser only.</p>
+    </div>
+    <div class="pp-strip"></div>
+  </section>
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>What is real here 🧾</h2>
+      <p class="plede">An assistant that must cite its sources should be exact about which of its own numbers are measured.</p>
+    </div>
+    <table class="clean">
+      <tr><th>Claim</th><th>Status</th></tr>
+      <tr><td>Tidewell Freight, its policies, tickets and golden questions</td><td>Constructed. A 1,200-person freight forwarder invented for these pages; every clause, ticket and question is labelled constructed where it appears. No real company's policy is shown</td></tr>
+      <tr><td>Retrieval, filters and every score on the bench</td><td>Computed live in your browser: BM25 over 49 clause versions, the permission and version filters, hit rate, MRR, leaks, stale citations, wrong answers by risk tier and hand-offs. An independent Python reference matches every number</td></tr>
+      <tr><td>The assistant's answer text</td><td>Pre-written, one constructed sentence per clause, because a browser cannot run a language model. Which clause answers is computed</td></tr>
+      <tr><td>Token counts and model prices</td><td>Assumptions, shown as a range and labelled on the widget. No provider's price list is used</td></tr>
+      <tr><td>The go/no-go thresholds</td><td>Tidewell's own policy choice by risk tier, not a standard</td></tr>
+      <tr><td>BM25, retrieval-augmented generation, NIST, OWASP and Singapore's GenAI framework</td><td>Read at source: Robertson and Zaragoza (2009), Lewis et al. (2020), NIST AI 100-1 and AI 600-1, the OWASP Top 10 for LLM Applications 2025, and the Model AI Governance Framework for Generative AI (2024)</td></tr>
+      <tr><td>What AI help does for support work</td><td>Contested, and taught as a disagreement between two studies read at source. No helpdesk deflection rate is quoted, because no credible public benchmark was found</td></tr>
+    </table>
+  </section>
+
+  <section class="section mm-section">
+    <h2>The knowledge map 🧠</h2>
+    <p class="mm-lede">Both tracks at a glance - hover a session to spotlight its concepts, click any node to jump in.</p>
+    <div class="mm-wrap"><div id="mindmap"></div></div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span>Pairs with <a href="https://phoebefu6.github.io/learn-rag-with-phoebe/">RAG ↗</a> and <a href="https://phoebefu6.github.io/learn-agent-launch-with-phoebe/">Agent Launch ↗</a></span>
+  </footer>
+
+</main>
+
+<script>
+window.MINDMAP_DATA = {
+  "title": "Internal AI\nAssistant",
+  "centerColor": "#0A5A60",
+  "sessions": [
+    {
+      "label": "What staff ask",
+      "href": "courses/a1-what-staff-actually-ask.html",
+      "color": "#34D399",
+      "concepts": [
+        {
+          "label": "Three bins of tickets",
+          "href": "courses/a1-what-staff-actually-ask.html"
+        },
+        {
+          "label": "A ranking has a winner",
+          "href": "courses/a1-what-staff-actually-ask.html"
+        },
+        {
+          "label": "Minutes, not tickets",
+          "href": "courses/a1-what-staff-actually-ask.html"
+        }
+      ]
+    },
+    {
+      "label": "Buy, build or wait",
+      "href": "courses/a2-buy-build-or-wait.html",
+      "color": "#FBBF24",
+      "concepts": [
+        {
+          "label": "What you cannot buy",
+          "href": "courses/a2-buy-build-or-wait.html"
+        },
+        {
+          "label": "Build what is yours",
+          "href": "courses/a2-buy-build-or-wait.html"
+        },
+        {
+          "label": "When to wait",
+          "href": "courses/a2-buy-build-or-wait.html"
+        }
+      ]
+    },
+    {
+      "label": "Who may see what",
+      "href": "courses/a3-who-may-see-what.html",
+      "color": "#FBBF24",
+      "concepts": [
+        {
+          "label": "Leaks, counted",
+          "href": "courses/a3-who-may-see-what.html"
+        },
+        {
+          "label": "Filter before ranking",
+          "href": "courses/a3-who-may-see-what.html"
+        },
+        {
+          "label": "Who sets access",
+          "href": "courses/a3-who-may-see-what.html"
+        }
+      ]
+    },
+    {
+      "label": "When it doesn't know",
+      "href": "courses/a4-when-it-does-not-know.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "Confident and wrong",
+          "href": "courses/a4-when-it-does-not-know.html"
+        },
+        {
+          "label": "The hand-off",
+          "href": "courses/a4-when-it-does-not-know.html"
+        },
+        {
+          "label": "Pick a threshold",
+          "href": "courses/a4-when-it-does-not-know.html"
+        }
+      ]
+    },
+    {
+      "label": "What it costs",
+      "href": "courses/a5-what-it-costs-to-run.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "Tokens as a range",
+          "href": "courses/a5-what-it-costs-to-run.html"
+        },
+        {
+          "label": "The ticket line",
+          "href": "courses/a5-what-it-costs-to-run.html"
+        },
+        {
+          "label": "Cost per right answer",
+          "href": "courses/a5-what-it-costs-to-run.html"
+        }
+      ]
+    },
+    {
+      "label": "Launch, keep it true",
+      "href": "courses/a6-launch-then-keep-it-true.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "The go/no-go",
+          "href": "courses/a6-launch-then-keep-it-true.html"
+        },
+        {
+          "label": "Owners and versions",
+          "href": "courses/a6-launch-then-keep-it-true.html"
+        },
+        {
+          "label": "Contested evidence",
+          "href": "courses/a6-launch-then-keep-it-true.html"
+        }
+      ]
+    },
+    {
+      "label": "The corpus",
+      "href": "courses/b1-the-corpus-is-the-product.html",
+      "color": "#34D399",
+      "concepts": [
+        {
+          "label": "A clause, not a document",
+          "href": "courses/b1-the-corpus-is-the-product.html"
+        },
+        {
+          "label": "Old rules stay",
+          "href": "courses/b1-the-corpus-is-the-product.html"
+        },
+        {
+          "label": "Access on the clause",
+          "href": "courses/b1-the-corpus-is-the-product.html"
+        }
+      ]
+    },
+    {
+      "label": "Chunk, index, retrieve",
+      "href": "courses/b2-chunk-index-retrieve.html",
+      "color": "#FBBF24",
+      "concepts": [
+        {
+          "label": "BM25 by hand",
+          "href": "courses/b2-chunk-index-retrieve.html"
+        },
+        {
+          "label": "Top-3 retrieval",
+          "href": "courses/b2-chunk-index-retrieve.html"
+        }
+      ]
+    },
+    {
+      "label": "Golden questions",
+      "href": "courses/b3-golden-questions.html",
+      "color": "#FBBF24",
+      "concepts": [
+        {
+          "label": "From the ticket log",
+          "href": "courses/b3-golden-questions.html"
+        },
+        {
+          "label": "Should not answer",
+          "href": "courses/b3-golden-questions.html"
+        }
+      ]
+    },
+    {
+      "label": "Grounded answers",
+      "href": "courses/b4-grounded-answers.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "Answer from retrieved",
+          "href": "courses/b4-grounded-answers.html"
+        },
+        {
+          "label": "The citation check",
+          "href": "courses/b4-grounded-answers.html"
+        }
+      ]
+    },
+    {
+      "label": "Permissions inside",
+      "href": "courses/b5-permissions-inside-retrieval.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "The filter as code",
+          "href": "courses/b5-permissions-inside-retrieval.html"
+        },
+        {
+          "label": "Counting leaks",
+          "href": "courses/b5-permissions-inside-retrieval.html"
+        }
+      ]
+    },
+    {
+      "label": "Open the ticket",
+      "href": "courses/b6-open-the-ticket.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "Abstain threshold",
+          "href": "courses/b6-open-the-ticket.html"
+        },
+        {
+          "label": "The ticket payload",
+          "href": "courses/b6-open-the-ticket.html"
+        }
+      ]
+    },
+    {
+      "label": "Versions",
+      "href": "courses/b7-versions-and-superseded.html",
+      "color": "#FB923C",
+      "concepts": [
+        {
+          "label": "Register vs index",
+          "href": "courses/b7-versions-and-superseded.html"
+        },
+        {
+          "label": "The nightly diff",
+          "href": "courses/b7-versions-and-superseded.html"
+        }
+      ]
+    },
+    {
+      "label": "The bench",
+      "href": "courses/b8-the-go-no-go-bench.html",
+      "color": "#F87171",
+      "concepts": [
+        {
+          "label": "Four rungs",
+          "href": "courses/b8-the-go-no-go-bench.html"
+        },
+        {
+          "label": "Thumbs-up trap",
+          "href": "courses/b8-the-go-no-go-bench.html"
+        },
+        {
+          "label": "The break button",
+          "href": "courses/b8-the-go-no-go-bench.html"
+        }
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/mindmap.js?v=1"></script>
+<script src="assets/app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Builder session 6 of 8. The one tool an internal policy assistant needs: an abstain rule in code that reads the top retrieval score, and a ticket that carries the question, the asker group, the top clauses, their scores and why it handed off. One call, decided by code, never an agent loop.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="One tool: open the ticket - learn ship internal ai assistant with phoebe">
+<meta property="og:description" content="Builder session 6 of 8. An abstain threshold at 3.0, a five-field ticket payload, and one tool call decided by code. Rung 3 answers everything; rung 4 hands off and passes the go/no-go.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/courses/b6-open-the-ticket.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One tool: open the ticket - learn ship internal ai assistant with phoebe">
+<meta name="twitter:description" content="Builder session 6 of 8. The abstain rule, the ticket payload and one tool call, run on four questions.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-ship-internal-ai-assistant-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Builder session 6 · One tool: open the ticket - learn ship internal ai assistant with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-ship-internal-ai-assistant-with-phoebe</a> / Builder session 6 of 8</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Ship It: Internal AI Assistant · Builder session 6 of 8</div>
+    <h1>One tool: <span class="accent">open the ticket</span></h1>
+    <p class="sub">By session 5, Tidewell Freight's assistant (a constructed 1,200-person freight forwarder) leaks nothing, and the version filter in session 7 will keep it current. It still answers every question that retrieves anything at all, including the dog question and the staff party question, which no policy covers. Tonight you give it the one thing it is allowed to do besides answer: hand the question to a person. A rule in code reads the top retrieval score, and below 3.0 it calls a single tool that opens a ticket carrying the question, the asker group, the top clauses, their scores and the reason. One call, decided by code, never by the model.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Advanced</span>
+      <span class="chip audience">Builders, data and platform engineers</span>
+      <span class="chip audience">Helpdesk and service owners</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:5">3-20 · Threshold, ticket, one tool</span>
+      <span class="a3" style="flex:5">20-42 · Build-along: rule and ticket</span>
+      <span class="a4" style="flex:1">42-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where tonight sits in the build</h2>
+    </div>
+    <p class="lede">The pipeline so far: a clause store with eight fields (session 1), BM25 retrieval (session 2), golden questions from the ticket log (session 3), grounded answers with a citation check (session 4) and the permission filter inside retrieval (session 5). Every one of those steps assumes the assistant should answer. Tonight adds the step that decides it should not, and the one action it takes instead. Every score on this page is measured on the bench in session 8; Tidewell Freight, its clauses and its tickets are constructed.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">🔍 Every diagram zooms</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> An abstain rule of three lines that reads the top retrieval score, a ticket payload with five fields and the reader of each, and an <code>open_ticket</code> function that is called at most once per question and returns the same ticket on a retry. You run all three on four golden questions and get two answers, two tickets and one confident wrong answer that the rule cannot catch, which is exactly the trade the go/no-go accepts at rung 4.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the rule that decides when not to answer</span>
+      <h2>Abstain threshold</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Rung 3 on the bench retrieves the right clause for every answerable question and answers 41 of 42 of them correctly, and the board still says NO-GO. It hands off 1 of the 12 questions it should not answer. The fix is not a better retriever. It is a line: when the best clause scores under 3.0, the assistant does not answer, it opens a ticket.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn decision. Question G07 from a staff asker, which day is salary paid, retrieves three clauses after the permission and version filters: overtime at 2.77, pay day at 2.77 and parental leave at 1.78. A rule in code asks whether the top score is under 3.0. It is, so the assistant hands off and calls open_ticket once. Otherwise it would answer from the top clause and cite it. Below, rung 3 against rung 4 on the same 54 questions: right hand-offs go from 1 to 11 of 12, correct answers from 41 to 38 of 42, high-risk confident wrong answers from 4.8 percent to 0.0 percent, and the board from NO-GO to GO.">
+        <defs>
+          <filter id="b6aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="61" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b6aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b6aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b6aH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b6aL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b6aS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b6aA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b6aV { font: 800 18px Inter, sans-serif; fill: #0A5A60; }
+          .b6aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+        </style>
+
+        <text class="b6aH" x="30" y="26">ONE RULE IN CODE DECIDES: ANSWER, OR OPEN A TICKET</text>
+        <text class="b6aS" x="470" y="26">measured on the bench · G07, a staff asker · rung 4</text>
+
+        <g filter="url(#b6aSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="50" width="230" height="150" rx="10" transform="rotate(-0.6 145 125)" fill="#FFFFFF"/>
+          <path d="M44 116 L246 116 M44 146 L246 146" stroke="#E2EEEE" stroke-width="1.5"/>
+          <path d="M266 125 L314 125" marker-end="url(#b6aAr)"/>
+          <path d="M430 55 L540 125 L430 195 L320 125 Z" fill="#F4B63F"/>
+          <path d="M540 125 L602 86" marker-end="url(#b6aAr)"/>
+          <path d="M540 125 L602 184" marker-end="url(#b6aAr)"/>
+          <rect x="610" y="50" width="240" height="70" rx="10" transform="rotate(0.5 730 85)" fill="#0A5A60" stroke="#0A5A60"/>
+          <rect x="610" y="150" width="240" height="70" rx="10" transform="rotate(-0.5 730 185)" fill="#FFFFFF"/>
+          <!-- doodle: a ticket stub -->
+          <path d="M800 64 L836 64 L836 74 C830 76 830 82 836 84 L836 94 L800 94 Z" stroke="#FFFFFF" stroke-width="1.6"/>
+          <path d="M30 240 L850 240" stroke="#C5DADB" stroke-width="1.5"/>
+        </g>
+
+        <text class="b6aH" x="44" y="76">G07 · TOP 3 AFTER FILTERS</text>
+        <text class="b6aL" x="44" y="104">HR-PAY-3 overtime</text>
+        <text class="b6aA" x="246" y="104" text-anchor="end">2.77</text>
+        <text class="b6aL" x="44" y="134">HR-PAY-1 pay day</text>
+        <text class="b6aA" x="246" y="134" text-anchor="end">2.77</text>
+        <text class="b6aL" x="44" y="164">HR-LV-4 parental</text>
+        <text class="b6aA" x="246" y="164" text-anchor="end">1.78</text>
+        <text class="b6aS" x="44" y="188">right clause 2nd, by a hair</text>
+
+        <text class="b6aH" x="430" y="118" text-anchor="middle">TOP SCORE</text>
+        <text class="b6aL" x="430" y="136" text-anchor="middle">under 3.0?</text>
+        <text class="b6aA" x="552" y="96">yes</text>
+        <text class="b6aA" x="552" y="170">no</text>
+
+        <text class="b6aW" x="624" y="80">HAND OFF</text>
+        <text class="b6aW" x="624" y="102">open_ticket(), once</text>
+        <text class="b6aL" x="624" y="180">ANSWER from the top clause</text>
+        <text class="b6aS" x="624" y="200">and cite it, as in session 4</text>
+
+        <text class="b6aH" x="30" y="266">RUNG 3 → RUNG 4, SAME 54 QUESTIONS</text>
+        <text class="b6aV" x="30" y="294">1 → 11</text>
+        <text class="b6aS" x="30" y="312">right hand-offs, of 12</text>
+        <text class="b6aV" x="250" y="294">41 → 38</text>
+        <text class="b6aS" x="250" y="312">correct, of 42 answerable</text>
+        <text class="b6aV" x="470" y="294">4.8% → 0.0%</text>
+        <text class="b6aS" x="470" y="312">confident wrong, high risk</text>
+        <text class="b6aV" x="690" y="294">NO-GO → GO</text>
+        <text class="b6aS" x="690" y="312">the board</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the rule reads one number, the top score, and answering less is what turns the board to GO</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The rule, and why it lives in code<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Two conditions, checked after the permission and version filters and before any answer is written. If nothing the asker may read matched, hand off. If the top clause scores under 3.0, hand off. Otherwise answer from the top clause and cite it. That is all of it.</p>
+        <p>The rule reads the retrieval score, not the model's opinion of itself. Asking a model "are you sure?" gets you a fluent sentence, and NIST's word for the failure is confabulation: content that is confidently stated and wrong. A comparison in code gives the same result every time, can be tested on 54 golden questions, and can be moved by a person who signs for it.</p>
+        <table class="clean">
+          <thead><tr><th>On the bench</th><th>Rung 3, no abstain</th><th>Rung 4, abstain below 3.0</th></tr></thead>
+          <tbody>
+            <tr><td>Right hand-offs (of 12)</td><td>1 (8.3%)</td><td>11 (91.7%)</td></tr>
+            <tr><td>Correct answers (of 42)</td><td>41 (97.6%)</td><td>38 (90.5%)</td></tr>
+            <tr><td>Confident wrong, high / medium / low</td><td>4.8% / 31.6% / 35.7%</td><td>0.0% / 0.0% / 7.1%</td></tr>
+            <tr><td>Verdict</td><td>NO-GO</td><td>GO</td></tr>
+          </tbody>
+        </table>
+        <p>Rung 3's single hand-off is G46, a staff member asking how long a performance improvement plan lasts: the managers-only clause is filtered out and nothing else matches, so there is nothing to answer from. Every other question gets whatever scored highest.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What a BM25 score is, and is not<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A BM25 score is a sum of term weights from session 2: how often each question word appears in the clause, damped by length, times how rare the word is across the 49 clause versions. It is not a probability, and it has no fixed scale. Long questions with rare words score high; short questions with common words score low. So 3.0 means something only for this store and these questions, and the threshold has to be re-checked on the golden set whenever the store changes. That last point is our own reasoning, not a claim from the BM25 literature.</p>
+        <p>The rule reads the top score only. G07 shows what that costs: the pay day clause is in the top three, both it and the overtime clause print 2.77, with overtime a hair ahead, and the question still hands off. The answer was retrieved; the score was too low to trust it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Four safe misses, one slip, and what the line is not<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>At 3.0, rung 4 hands off 15 questions: 11 rightly and 4 that a policy does answer. The four safe misses are G07 pay day (2.77), G17 laptop refresh, G37 carry forward and G38 remote days. G37 and G38 are asked in the old policy's words, "carry forward" and "remote work"; the version filter removed the superseded clauses that contained those words, so the current clause is left scoring low. The two filters and the threshold interact, which is why the golden set has to be rerun on the whole pipeline, not one step at a time.</p>
+        <p>The slip is G54, the staff party question. No policy covers it, the annual leave clause scores 3.71, and rung 4 answers it confidently and wrongly. It is low risk, the low-risk limit is 20%, and 7.1% passes. No single line hands off G54 and answers G07, because 3.71 sits above 2.77.</p>
+        <p>The line is not a permission control. On rung 1, with no permission filter, a staff member asking for the grade 7 salary band retrieves the HR-only salary band clause at 7.02, far above any threshold. Only the filter from session 5 stops that. Choosing where the line sits is a product decision with a price on both sides; the leader-side version is <a href="a4-when-it-does-not-know.html">Leader session 4</a>, and the slider is on the <a href="b8-the-go-no-go-bench.html">bench</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Why a confident wrong answer is the failure to design against.</strong> NIST's Generative AI Profile (NIST AI 600-1, 2024) defines confabulation as "the production of confidently stated but erroneous or false content", and says the risk arises when users believe it "often due to the confident nature of the response". OWASP's Top 10 for LLM applications (2025) asks, under LLM09, for human oversight "especially for critical or sensitive information". The hand-off is that oversight, built into the product: below the line, a person answers.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers what the hand-off carries, and who reads it</span>
+      <h2>The ticket payload</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">A hand-off that says "I don't know" and stops is an error message. A hand-off that opens a ticket the right team can act on without asking the person again is a product. The difference is five fields, each written for one reader.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn ticket for question G49, can I bring my dog to the office, from a staff asker. Fields: ref G49; the question as asked; asker group staff; top clauses HR-PERF-2 version 2 at 1.70 and HR-WFH-1 version 2 at 1.46; why, top score 1.70 is under 3.0, highlighted; route to HR. Labels show the reader of each field: the person answering reads the question as asked; the asker group says what they may be told; the top clauses say where to start reading; why says which failure it was; route to names whose queue. Every clause on the ticket is one the asker may read.">
+        <defs>
+          <filter id="b6bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="67" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b6bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b6bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b6bH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b6bL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b6bS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b6bA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b6bN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b6bH" x="30" y="26">THE TICKET CARRIES FIVE THINGS, AND EACH HAS A READER</text>
+        <text class="b6bS" x="30" y="44">G49 measured on the bench · field names are a constructed Tidewell design</text>
+
+        <g filter="url(#b6bSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="230" y="62" width="380" height="236" rx="12" transform="rotate(-0.4 420 180)" fill="#FFFFFF"/>
+          <!-- doodle: ticket perforation -->
+          <path d="M240 70 L240 290" stroke="#C5DADB" stroke-width="1.6" stroke-dasharray="3 6"/>
+          <path d="M248 100 L598 100 M248 132 L598 132 M248 164 L598 164 M248 212 L598 212 M248 250 L598 250" stroke="#E2EEEE" stroke-width="1.5"/>
+          <rect x="252" y="219" width="342" height="24" rx="5" fill="#F4B63F"/>
+          <path d="M226 116 L206 116" marker-end="url(#b6bAr)"/>
+          <path d="M226 150 L206 150" marker-end="url(#b6bAr)"/>
+          <path d="M614 188 L634 188" marker-end="url(#b6bAr)"/>
+          <path d="M614 231 L634 231" marker-end="url(#b6bAr)"/>
+          <path d="M614 267 L634 267" marker-end="url(#b6bAr)"/>
+        </g>
+
+        <text class="b6bA" x="252" y="88">ref</text>
+        <text class="b6bL" x="360" y="88">G49</text>
+        <text class="b6bA" x="252" y="120">question</text>
+        <text class="b6bS" x="360" y="120">Can I bring my dog to the office?</text>
+        <text class="b6bA" x="252" y="152">asker_group</text>
+        <text class="b6bL" x="360" y="152">staff</text>
+        <text class="b6bA" x="252" y="184">top_clauses</text>
+        <text class="b6bL" x="360" y="184">HR-PERF-2@v2 1.70</text>
+        <text class="b6bL" x="360" y="202">HR-WFH-1@v2 1.46</text>
+        <text class="b6bA" x="260" y="236">why</text>
+        <text class="b6bL" x="360" y="236">top score 1.70 is under 3.0</text>
+        <text class="b6bA" x="252" y="272">route_to</text>
+        <text class="b6bL" x="360" y="272">HR</text>
+
+        <text class="b6bL" x="200" y="112" text-anchor="end">the person answering</text>
+        <text class="b6bS" x="200" y="128" text-anchor="end">reads the words as asked</text>
+        <text class="b6bL" x="200" y="154" text-anchor="end">what they may be told</text>
+        <text class="b6bS" x="200" y="170" text-anchor="end">the asker's group, not theirs</text>
+
+        <text class="b6bL" x="640" y="192">where to start reading</text>
+        <text class="b6bS" x="640" y="208">and whether the line is right</text>
+        <text class="b6bL" x="640" y="235">which failure it was</text>
+        <text class="b6bS" x="640" y="251">low score, or nothing found</text>
+        <text class="b6bL" x="640" y="271">whose queue</text>
+        <text class="b6bS" x="640" y="287">the top clause's domain</text>
+
+        <text class="b6bN" x="30" y="322">Built after the permission filter: every clause named on the ticket is one the asker may read.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the "why" line is the field that turns a pile of tickets into evidence for moving the threshold</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Five fields and the person who reads each<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <table class="clean">
+          <thead><tr><th>Field</th><th>G49 example</th><th>Read by</th><th>If it is missing</th></tr></thead>
+          <tbody>
+            <tr><td><strong>question</strong></td><td>Can I bring my dog to the office?</td><td>The person who answers</td><td>They ask the asker again, and the hand-off saved nothing</td></tr>
+            <tr><td><strong>asker_group</strong></td><td>staff</td><td>The person who answers</td><td>They answer from a clause the asker may not read</td></tr>
+            <tr><td><strong>top_clauses</strong> with scores</td><td>HR-PERF-2@v2 1.70, HR-WFH-1@v2 1.46</td><td>The answerer; the threshold owner</td><td>Nobody can tell a safe miss from a real gap</td></tr>
+            <tr><td><strong>why</strong></td><td>top score 1.70 is under 3.0</td><td>The threshold owner</td><td>Low-score hand-offs and empty retrievals blur together</td></tr>
+            <tr><td><strong>route_to</strong></td><td>HR</td><td>The ticketing system</td><td>Every hand-off lands in one general queue</td></tr>
+          </tbody>
+        </table>
+        <p>Plus a <strong>ref</strong>, the question's id, which the tool uses to make sure one question opens at most one ticket. Route by the top clause's domain and let the receiving team re-route; a best guess beats a general queue. G49's best match is the disciplinary hearing clause, which says nothing about dogs, and that is still the right building to send it to.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Build it from the filtered set<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The staff member sees part of the ticket in the hand-off message: what the assistant looked at, and who has the question now. If <code>top_clauses</code> were taken from retrieval before the permission filter, the hand-off itself would name the salary bands clause to a staff member who asked for a salary band. So the payload is built from exactly the list the answer would have used: after the permission filter, after the version filter. The ticket can never show the asker more than an answer could.</p>
+        <p>Clause ids and scores, not clause text. The person answering can open the clause; the ticket stays short and stays inside the asker's permissions.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>The tickets are your next golden set<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every ticket with its top clauses and scores is a labelled example once a person answers it. If they answered from a clause that was already in the top three, it was a safe miss, like G07, and the line may be too high. If no policy answered it, it was a right hand-off, like G49. If they had to write a new rule, it is a gap for the policy owner. Count those three each month and the threshold decision has evidence instead of opinion.</p>
+        <p>Tickets also carry the run cost. Tidewell assumes a hand-off ticket takes 12 minutes at SGD 45 an hour, so SGD 9 each; at rung 4 the hand-off tickets come to SGD 6,000 a month on an assumed 2,400 questions, against SGD 0.25 to 8.53 in model cost. Every move of the line is a budget line too. Tracing and monitoring the tickets in production belong to the <a href="https://phoebefu6.github.io/learn-ai-observability-with-phoebe/">AI observability course</a>.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers why the hand-off is one call, decided in code</span>
+      <h2>One tool, not an agent</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">This page takes the narrow side on purpose: one tool, called by code, at most once per question. Multi-step agents, planning and tool chains belong to the <a href="https://phoebefu6.github.io/learn-ai-agents-with-phoebe/">AI agents course</a>. A policy helpdesk needs to answer or hand off, and both can be decided without letting the model choose what to do next.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two hand-drawn panels. Left, what Tidewell ships: a rule in code calls open_ticket once and gets one ticket id back; no loop, no retries, no second tool, and the model only writes the answer text. Right, a multi-step agent: a loop of plan, search again, rewrite the question and pick a tool and act, which belongs to the AI agents course. Each extra step is another place a poisoned clause or a wrong score can act.">
+        <defs>
+          <filter id="b6cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="71" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b6cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b6cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b6cH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b6cL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b6cS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b6cN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b6cH" x="30" y="26">ONE CALL, DECIDED BY CODE, VERSUS AN AGENT LOOP</text>
+
+        <g filter="url(#b6cSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="46" width="400" height="220" rx="12" transform="rotate(-0.4 230 156)" fill="#E8F6F6"/>
+          <rect x="54" y="88" width="160" height="40" rx="8" transform="rotate(-1 134 108)" fill="#FFFFFF"/>
+          <path d="M218 108 L250 108" marker-end="url(#b6cAr)"/>
+          <rect x="256" y="88" width="150" height="40" rx="8" transform="rotate(1 331 108)" fill="#F4B63F"/>
+          <path d="M331 132 L331 158" marker-end="url(#b6cAr)"/>
+          <rect x="256" y="164" width="150" height="40" rx="8" transform="rotate(-1 331 184)" fill="#FFFFFF"/>
+          <rect x="450" y="46" width="400" height="220" rx="12" transform="rotate(0.4 650 156)" fill="#FFFFFF" stroke="#4D6466"/>
+          <circle cx="650" cy="160" r="58" stroke="#4D6466"/>
+          <path d="M700 132 L706 142" stroke="#4D6466" marker-end="url(#b6cAr)"/>
+          <path d="M622 210 L612 204" stroke="#4D6466" marker-end="url(#b6cAr)"/>
+        </g>
+
+        <text class="b6cH" x="46" y="72">WHAT TIDEWELL SHIPS</text>
+        <text class="b6cL" x="68" y="113">rule in code</text>
+        <text class="b6cL" x="270" y="113">open_ticket()</text>
+        <text class="b6cL" x="270" y="189">1 ticket id back</text>
+        <text class="b6cS" x="54" y="160">no loop, no retries,</text>
+        <text class="b6cS" x="54" y="177">no second tool</text>
+        <text class="b6cS" x="54" y="230">the model writes the answer text only;</text>
+        <text class="b6cS" x="54" y="247">it never sees the tool</text>
+
+        <text class="b6cH" x="466" y="72">A MULTI-STEP AGENT</text>
+        <text class="b6cL" x="650" y="96" text-anchor="middle">plan</text>
+        <text class="b6cL" x="716" y="164">search again</text>
+        <text class="b6cL" x="650" y="236" text-anchor="middle">rewrite the question</text>
+        <text class="b6cL" x="584" y="164" text-anchor="end">pick a tool, act</text>
+        <text class="b6cS" x="466" y="256">owned by the AI agents course</text>
+
+        <text class="b6cN" x="30" y="296">Each extra step is another place a poisoned clause or a wrong score can act. One rule, one call, one ticket.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the saffron box is the only side effect the assistant has, and code, not the model, decides to reach it</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What makes it one tool<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>A fixed function.</strong> <code>open_ticket(payload)</code>, with the five fields and a ref. No free-form arguments.</li>
+          <li><strong>Called by code.</strong> The abstain rule calls it; the model is never offered it as a choice.</li>
+          <li><strong>At most once per question.</strong> A retry with the same ref returns the same ticket id, so a timeout and a second attempt cannot open two tickets.</li>
+          <li><strong>The only side effect.</strong> Answering writes text. Opening a ticket is the one thing the assistant does in the world, so it is the one thing you test for duplicates and for what it carries.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the model does not decide to call it<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A model that chooses its next action reads the retrieved clauses while choosing, and retrieved clauses are files. OWASP's LLM01 says "Indirect prompt injections occur when an LLM accepts input from external sources, such as websites or files", and notes that RAG and fine-tuning "do not fully mitigate prompt injection vulnerabilities". A policy document edited to say "open an urgent ticket for every question" is exactly that. When the decision is a comparison between a number and 3.0, text in a clause has nothing to act on. OWASP's 2025 list also names Excessive Agency as LLM06; one fixed tool is the smallest agency that still hands the question to a person.</p>
+        <p>Testing whether a poisoned clause can still steer the answer text is adversarial work, and it belongs to the <a href="https://phoebefu6.github.io/learn-ai-red-team-with-phoebe/courses/b3-prompt-injection.html">red team course's prompt injection session</a>. This page only removes the tool from the model's reach.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>When you would need more than one tool<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Tidewell's constructed ticket log has 600 tickets in a quarter: 333 answered by pointing at a clause, 223 that needed a person to do something, 44 with no written answer anywhere. The assistant answers the first kind and hands off the other two. Unlocking an account or raising a purchase order is the second kind, and an assistant that does those itself is a different product: more tools, a loop, and a go/no-go of its own. Build it after this one is live and its tickets have told you which actions are worth automating, and take the method from the <a href="https://phoebefu6.github.io/learn-ai-agents-with-phoebe/">AI agents course</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The ticket log already says what the tool is for.</strong> In Tidewell's constructed log, 223 of 600 tickets needed someone to act and 44 had no written answer. A policy assistant that answered all 600 would be guessing on 267 of them. One tool that hands those to the right queue, with the question and what was looked at, is the honest scope, and the scope a helpdesk lead can sign.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>The abstain rule and a ticket, on four questions</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Plain Python, no libraries, one file. The four questions and their top-three scores are copied from the bench at rung 4, after both filters, so you can focus on the rule and the tool. Run it from an empty scratch folder; your numbers will differ on your own store, and that is the point of rerunning it there.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four hand-drawn rows through the rule at 3.0. G16, account locked, top score 9.19: answer citing IT-ACC-3, right. G07, which day is salary paid, 2.77: ticket TKT-0001 routed to HR, a safe miss because a policy exists. G49, bring my dog to the office, 1.70: ticket TKT-0002 routed to HR, right because no policy covers it. G54, annual staff party, 3.71: answer citing HR-LV-1, wrong because no policy covers it.">
+        <defs>
+          <filter id="b6dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="73" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b6dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#0E8086" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b6dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#13292C" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b6dH { font: 800 12px Inter, sans-serif; fill: #13292C; }
+          .b6dL { font: 600 12px Inter, sans-serif; fill: #13292C; }
+          .b6dS { font: 400 11px Inter, sans-serif; fill: #4D6466; }
+          .b6dA { font: 700 11px Inter, sans-serif; fill: #0A5A60; }
+          .b6dV { font: 800 16px Inter, sans-serif; fill: #0A5A60; }
+          .b6dR { font: 800 11px Inter, sans-serif; fill: #991B1B; }
+          .b6dN { font: 400 12px Inter, sans-serif; fill: #4D6466; }
+        </style>
+
+        <text class="b6dH" x="30" y="26">FOUR QUESTIONS THROUGH THE RULE</text>
+        <text class="b6dS" x="330" y="26">top scores measured on the bench · rung 4 · line at 3.0</text>
+
+        <text class="b6dA" x="30" y="52">question</text>
+        <text class="b6dA" x="330" y="52">top score</text>
+        <text class="b6dA" x="430" y="52">what the rule does</text>
+        <text class="b6dA" x="660" y="52">graded against gold</text>
+
+        <g filter="url(#b6dSk)" fill="none" stroke="#13292C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M380 76 L420 76" marker-end="url(#b6dAr)"/>
+          <path d="M380 122 L420 122" marker-end="url(#b6dAr)"/>
+          <path d="M380 168 L420 168" marker-end="url(#b6dAr)"/>
+          <path d="M380 214 L420 214" marker-end="url(#b6dAr)"/>
+          <rect x="428" y="60" width="210" height="32" rx="7" transform="rotate(-0.8 533 76)" fill="#FFFFFF"/>
+          <rect x="428" y="106" width="210" height="32" rx="7" transform="rotate(0.8 533 122)" fill="#F4B63F"/>
+          <rect x="428" y="152" width="210" height="32" rx="7" transform="rotate(-0.6 533 168)" fill="#F4B63F"/>
+          <rect x="428" y="198" width="210" height="32" rx="7" transform="rotate(0.6 533 214)" fill="#FFFFFF"/>
+        </g>
+
+        <text class="b6dL" x="30" y="80">G16</text>
+        <text class="b6dS" x="70" y="80">account locked, how to reset</text>
+        <text class="b6dV" x="330" y="82">9.19</text>
+        <text class="b6dL" x="442" y="81">answer, cite IT-ACC-3</text>
+        <text class="b6dA" x="660" y="80">right</text>
+
+        <text class="b6dL" x="30" y="126">G07</text>
+        <text class="b6dS" x="70" y="126">which day is salary paid</text>
+        <text class="b6dV" x="330" y="128">2.77</text>
+        <text class="b6dL" x="442" y="127">TKT-0001, route to HR</text>
+        <text class="b6dA" x="660" y="126">safe miss: a policy exists</text>
+
+        <text class="b6dL" x="30" y="172">G49</text>
+        <text class="b6dS" x="70" y="172">bring my dog to the office</text>
+        <text class="b6dV" x="330" y="174">1.70</text>
+        <text class="b6dL" x="442" y="173">TKT-0002, route to HR</text>
+        <text class="b6dA" x="660" y="172">right: no policy covers it</text>
+
+        <text class="b6dL" x="30" y="218">G54</text>
+        <text class="b6dS" x="70" y="218">annual staff party</text>
+        <text class="b6dV" x="330" y="220">3.71</text>
+        <text class="b6dL" x="442" y="219">answer, cite HR-LV-1</text>
+        <text class="b6dR" x="660" y="218">wrong: no policy covers it</text>
+
+        <text class="b6dN" x="30" y="264">Two right, one safe miss, one confident wrong answer: the rung 4 trade, in four lines.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the two saffron rows are the tool firing; G54 is why the go/no-go has a low-risk limit</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Write the threshold and the four questions.</strong> Each carries its id, the asker's group, the question and the top three clauses with their scores, exactly as the bench prints them at rung 4. In your own build these come straight from the retriever of session 5.</p>
+        <div class="prompt-box good"><span class="label">★ handoff.py · part 1, the inputs (scores measured on the bench)</span>import json
+
+THRESHOLD = 3.0  # Tidewell's choice, measured on the bench
+
+# Top 3 after the permission and version filters, scores as the bench prints them
+asked = [
+    {"id": "G16", "asker": "staff", "q": "My account is locked after failed sign-in attempts. How do I reset it?",
+     "top": [("IT-ACC-3@v4", 9.19), ("IT-DEV-2@v2", 1.70), ("IT-DEV-3@v2", 0.93)]},
+    {"id": "G07", "asker": "staff", "q": "Which day is salary paid this month?",
+     "top": [("HR-PAY-3@v4", 2.77), ("HR-PAY-1@v4", 2.77), ("HR-LV-4@v3", 1.78)]},
+    {"id": "G49", "asker": "staff", "q": "Can I bring my dog to the office?",
+     "top": [("HR-PERF-2@v2", 1.70), ("HR-WFH-1@v2", 1.46)]},
+    {"id": "G54", "asker": "staff", "q": "When is the annual staff party this year?",
+     "top": [("HR-LV-1@v3", 3.71), ("HR-LV-2@v3", 1.76), ("HR-LV-3@v3", 1.66)]},
+]</div>
+      </div>
+      <div class="step">
+        <p><strong>The abstain rule.</strong> Two hand-off conditions, checked in order, each with its own reason string. The reason goes on the ticket, so it must say which condition fired.</p>
+        <div class="prompt-box good"><span class="label">★ handoff.py · part 2, the rule</span>def decide(top):
+    if not top:
+        return "hand_off", "nothing the asker may read matched"
+    if top[0][1] &lt; THRESHOLD:
+        return "hand_off", f"top score {top[0][1]:.2f} is under {THRESHOLD}"
+    return "answer", f"top score {top[0][1]:.2f} clears {THRESHOLD}"</div>
+      </div>
+      <div class="step">
+        <p><strong>The one tool.</strong> It takes a payload, opens at most one ticket per question ref and returns the ticket id. Here "opening" prints the JSON; in production it is one call to your ticketing system's create endpoint, with the ref as its duplicate key.</p>
+        <div class="prompt-box good"><span class="label">★ handoff.py · part 3, open_ticket</span>opened = {}
+
+def open_ticket(payload):
+    # The one tool. One question, at most one ticket.
+    if payload["ref"] in opened:
+        return opened[payload["ref"]]
+    ticket_id = f"TKT-{len(opened) + 1:04d}"
+    opened[payload["ref"]] = ticket_id
+    print(json.dumps({"ticket": ticket_id, **payload}, indent=2))
+    return ticket_id</div>
+      </div>
+      <div class="step">
+        <p><strong>Wire them together.</strong> Answer or hand off for each question, route by the top clause's domain, then retry G07 on purpose to prove the tool does not open a second ticket.</p>
+        <div class="prompt-box good"><span class="label">★ handoff.py · part 4, the loop</span>for a in asked:
+    action, why = decide(a["top"])
+    if action == "answer":
+        print(f"{a['id']}: answer, cite {a['top'][0][0]} ({why})")
+        continue
+    route = a["top"][0][0].split("-")[0] if a["top"] else "HELPDESK"
+    ticket = open_ticket({
+        "ref": a["id"],
+        "question": a["q"],
+        "asker_group": a["asker"],
+        "top_clauses": [f"{c} {s:.2f}" for c, s in a["top"]],
+        "why": why,
+        "route_to": route,
+    })
+    print(f"{a['id']}: hand off, {ticket} ({why})")
+
+print("retry G07 -&gt;", open_ticket({"ref": "G07"}))
+print(len(opened), "tickets opened for", len(asked), "questions")</div>
+      </div>
+      <div class="step">
+        <p><strong>Run it.</strong> <code>python3 handoff.py</code> prints exactly this. Two answers, two tickets, and the retry returns TKT-0001 instead of opening a third.</p>
+        <div class="prompt-box good"><span class="label">★ Output</span>G16: answer, cite IT-ACC-3@v4 (top score 9.19 clears 3.0)
+{
+  "ticket": "TKT-0001",
+  "ref": "G07",
+  "question": "Which day is salary paid this month?",
+  "asker_group": "staff",
+  "top_clauses": [
+    "HR-PAY-3@v4 2.77",
+    "HR-PAY-1@v4 2.77",
+    "HR-LV-4@v3 1.78"
+  ],
+  "why": "top score 2.77 is under 3.0",
+  "route_to": "HR"
+}
+G07: hand off, TKT-0001 (top score 2.77 is under 3.0)
+{
+  "ticket": "TKT-0002",
+  "ref": "G49",
+  "question": "Can I bring my dog to the office?",
+  "asker_group": "staff",
+  "top_clauses": [
+    "HR-PERF-2@v2 1.70",
+    "HR-WFH-1@v2 1.46"
+  ],
+  "why": "top score 1.70 is under 3.0",
+  "route_to": "HR"
+}
+G49: hand off, TKT-0002 (top score 1.70 is under 3.0)
+G54: answer, cite HR-LV-1@v3 (top score 3.71 clears 3.0)
+retry G07 -&gt; TKT-0001
+2 tickets opened for 4 questions</div>
+      </div>
+      <div class="step">
+        <p><strong>Move the line both ways and read what changes.</strong> Set <code>THRESHOLD = 3.8</code>: G54 now hands off as TKT-0003 and the last line reads <code>3 tickets opened for 4 questions</code>. Set it to <code>2.5</code>: G07 is answered, and the line reads <code>G07: answer, cite HR-PAY-3@v4 (top score 2.77 clears 2.5)</code>. HR-PAY-3 is the overtime clause. Lowering the line did not recover the pay day answer; it produced a confidently wrong one, because the overtime clause scores a hair above the pay day clause at the second decimal. Grade every move against the golden set, never by eye.</p>
+      </div>
+    </div>
+
+    <div class="prompt-box bad">
+      <span class="label">✗ The hand-off that hands the decision, and the tools, to the model</span>
+tools = [search_policies, open_ticket, send_email, update_record]
+while not done:
+    step = model.next_action(question, retrieved_text, tools)   # model chooses, in a loop, after reading the clauses
+    done = run(step)                                            # no ref, no limit: a retry opens a second ticket
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 7</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li>Add the empty-retrieval case to the build-along: a fifth question with <code>"top": []</code>, like G46 after the permission filter. Check that its ticket says "nothing the asker may read matched" and routes to HELPDESK.</li>
+      <li>Take ten tickets from your own helpdesk that a person answered. For each, write whether the answer came from a written policy clause. That is your first estimate of which hand-offs would have been safe misses.</li>
+      <li>Write the hand-off message staff will read for G49: what the assistant looked at, who has the question now and the ticket number. Keep it under 40 words and name no clause the asker may not read.</li>
+      <li>On the <a href="b8-the-go-no-go-bench.html">bench</a>, drag "Abstain below" until the board fails, once going down and once going up. Note both values and which check failed first.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Builder session 6 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Rung 3 answers 41 of 42 answerable questions correctly. Why is it still NO-GO?</p>
+      <button class="qopt" type="button">A · Its top-3 hit rate is too low</button>
+      <button class="qopt" type="button">B · It answers questions it should hand off: right hand-offs are 8.3%, and medium- and low-risk confident wrong answers are over their limits</button>
+      <button class="qopt" type="button">C · It still leaks restricted clauses</button>
+      <button class="qopt" type="button">D · Its thumbs-up rate is under the bar</button>
+      <p class="qwhy">Rung 3 has no abstain step, so the dog, birthday and staff party questions get whatever scored highest. Hit rate is 100.0% on every rung, leaks are 0 from rung 2, and thumbs-up is 90.7%. Adding the threshold makes it rung 4: right hand-offs 91.7%, GO.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · Why are the ticket's top clauses taken from the list after the permission filter?</p>
+      <button class="qopt" type="button">A · Because the unfiltered list scores lower</button>
+      <button class="qopt" type="button">B · Because the ticketing system rejects long payloads</button>
+      <button class="qopt" type="button">C · Because the threshold only works on filtered scores</button>
+      <button class="qopt" type="button">D · Because the asker sees part of the hand-off, and a ticket built before the filter could name the salary bands clause to a staff member</button>
+      <p class="qwhy">The hand-off message tells the asker what was looked at. Built from the filtered list, it can never show more than an answer could. The threshold is not a permission control: on rung 1 the salary band clause scores 7.02, far above any line.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why does code, not the model, decide to call open_ticket?</p>
+      <button class="qopt" type="button">A · A model choosing actions reads the retrieved clauses while choosing, so an edited policy file could steer it; a comparison with 3.0 gives clause text nothing to act on</button>
+      <button class="qopt" type="button">B · Because models cannot produce JSON</button>
+      <button class="qopt" type="button">C · Because an agent loop is always slower</button>
+      <button class="qopt" type="button">D · Because one tool is enough for every helpdesk product</button>
+      <p class="qwhy">OWASP's LLM01 names indirect prompt injection from files, and RAG does not fully mitigate it. Keeping the decision in code removes the tool from the model's reach. D overreaches: actions like unlocking accounts need more tools, and that is a different product with its own go/no-go.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The abstain threshold and its measured trade</span><span class="note">Rung 3 against rung 4 at 3.0, and the per-question scores, measured on the bench in session 8 over constructed Tidewell data</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The ticket payload and the reader of each field</span><span class="note">Taught as a design; the field names and routing are a constructed Tidewell choice</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Confabulation and why a confident wrong answer does harm</span><span class="note">NIST (2024), AI 600-1 Generative AI Profile, read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Human oversight, indirect prompt injection, excessive agency</span><span class="note">OWASP Top 10 for LLM Applications 2025, LLM09 and LLM01 read at source; LLM06 named by title only</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">An abstain rule and a one-call ticket tool, run on four questions</span><span class="note">Run from a scratch folder; the printed output is shown exactly</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Multi-step agents, planning and tool chains</span><span class="note">Not taught here; the AI agents course owns them</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Prompt injection testing in depth</span><span class="note">Not taught here; the red team course owns adversarial testing</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Builder session 6 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>The rule</b><span>Nothing readable matched, or top score under 3.0: hand off. Otherwise answer and cite.</span></div>
+      <div class="cheat-item"><b>Answering less is the fix</b><span>Rung 3 to rung 4: right hand-offs 8.3% to 91.7%, correct 97.6% to 90.5%, NO-GO to GO.</span></div>
+      <div class="cheat-item"><b>A score, not a probability</b><span>BM25 has no fixed scale. Re-check the line on the golden set whenever the store changes.</span></div>
+      <div class="cheat-item"><b>Five fields</b><span>question, asker_group, top_clauses with scores, why, route_to. Plus a ref.</span></div>
+      <div class="cheat-item"><b>Build from the filtered set</b><span>The ticket never shows the asker more than an answer could.</span></div>
+      <div class="cheat-item"><b>One tool, called by code</b><span>At most once per question, same id on retry, never offered to the model.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>The assistant now answers or hands off. Session 7 makes sure what it answers from is current: the version register against the index flag, the stale citations on rungs 1 and 2, and the nightly diff that would have caught the expenses policy losing its superseded flag.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Builder session 6 of 8 · learn-ship-internal-ai-assistant-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b5-permissions-inside-retrieval.html">← Prev: Permissions inside retrieval</a> &nbsp;·&nbsp; <a href="b7-versions-and-superseded.html">Next: Versions and superseded policies →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>
