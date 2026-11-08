@@ -312,7 +312,7 @@ table.clean td:first-child { font-weight: 600; }
   width: 1.7rem; height: 1.7rem;
   border-radius: 999px;
   background: var(--indigo-50);
-  color: var(--indigo);
+  color: var(--indigo-deep);
   font-weight: 700;
   font-size: .85rem;
   display: inline-flex;
@@ -1346,7 +1346,7 @@ span.mono {
 .hb-findings li:last-child { border-bottom: 0; }
 .hb-sev { font-size: .68rem; font-weight: 800; border-radius: 999px; padding: .1rem .45rem; white-space: nowrap; }
 .hb-s4 { background: #991B1B; color: #fff; }
-.hb-s3 { background: #F4B63F; color: #fff; }
+.hb-s3 { background: #F4B63F; color: var(--ink); }
 .hb-s2 { background: var(--amber-50); color: var(--amber-ink); }
 .hb-s1 { background: var(--indigo-50); color: var(--indigo-deep); }
 .hb-findings .hb-src { font-size: .72rem; color: var(--muted); white-space: nowrap; }
